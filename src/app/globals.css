@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f2ea;
+  --foreground: #1d2821;
+  --muted: #666b65;
+  --accent: #17634a;
+  --line: #d5d1c8;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--background); scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+
+@theme inline {
+  --color-accent: var(--accent);
+  --color-page: var(--background);
+}
+
+.site-shell { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+.site-header { border-bottom: 1px solid var(--line); background: rgb(245 242 234 / 94%); }
+.eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+.nav-link:hover, .nav-link:focus-visible { color: var(--foreground); }
+.focus-ring:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.section-space { margin-top: 5rem; }
+
+.mountain-placeholder {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background-color: #cdd7d0;
+  background-image:
+    linear-gradient(145deg, transparent 47%, rgb(245 242 234 / 72%) 47.2%, rgb(245 242 234 / 72%) 55%, transparent 55.2%),
+    linear-gradient(35deg, transparent 55%, rgb(106 129 114 / 36%) 55.2%, rgb(106 129 114 / 36%) 67%, transparent 67.2%);
+}
+.mountain-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(23 50 40 / 34%), transparent 42%);
+}
+.media-note { position: relative; z-index: 1; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: white; }
+.primary-link { display: inline-flex; min-height: 2.75rem; align-items: center; gap: 0.65rem; border-bottom: 1px solid var(--accent); color: var(--accent); font-size: 0.85rem; font-weight: 700; }
+
+.action-button, .direction-button {
+  display: inline-flex; min-height: 2.75rem; align-items: center; justify-content: center;
+  border: 1px solid #aaa79f; padding: 0.65rem 1rem; background: transparent; color: var(--foreground); font-size: 0.8rem; font-weight: 700;
+}
+.action-button:hover, .direction-button:hover { border-color: var(--accent); color: var(--accent); }
+.action-button--primary { border-color: var(--foreground); background: var(--foreground); color: white; }
+.action-button:disabled { cursor: not-allowed; opacity: 0.52; }
+
+.signature-panel { margin-top: 3rem; border: 1px solid var(--line); padding: 1.5rem; }
+.direction-button { width: fit-content; }
+
+.route-marker, .landmark-marker {
+  cursor: pointer; border: 2px solid var(--background); border-radius: 9999px; background: var(--accent); box-shadow: 0 1px 6px rgb(23 35 28 / 35%);
+}
+.route-marker { width: 0.72rem; height: 0.72rem; padding: 0; }
+.route-marker--endpoint { width: 1rem; height: 1rem; background: var(--foreground); }
+.landmark-marker { width: 1.15rem; height: 1.15rem; padding: 0; border-width: 3px; transition: transform 160ms ease, background-color 160ms ease; }
+.landmark-marker:hover, .landmark-marker:focus-visible, .landmark-marker--selected { transform: scale(1.35); background: #bd6f42; }
+.landmark-popup strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 1rem; }
+.landmark-popup p { margin: 0.45rem 0; color: #5f625e; font-size: 0.8rem; line-height: 1.45; }
+.landmark-popup span { color: var(--accent); font-size: 0.72rem; font-weight: 700; }
+
+.timeline { position: relative; max-width: 46rem; }
+.timeline::before { content: ""; position: absolute; left: 0.38rem; top: 0.5rem; bottom: 1rem; width: 1px; background: var(--line); }
+.timeline-item { position: relative; padding: 0 0 1rem 2rem; }
+.timeline-dot { position: absolute; left: 0; top: 1.3rem; width: 0.8rem; height: 0.8rem; border: 3px solid var(--background); border-radius: 9999px; background: #aaa79f; box-shadow: 0 0 0 1px #aaa79f; }
+.timeline-dot--selected { background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.timeline-content { display: block; width: 100%; border: 0; padding: 1rem; text-align: left; background: transparent; color: inherit; }
+button.timeline-content { cursor: pointer; border-bottom: 1px solid var(--line); }
+button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1; }
+.timeline-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #767972; }
+
+@media (min-width: 640px) {
+  .site-shell { width: min(100% - 4rem, 76rem); }
+  .section-space { margin-top: 7rem; }
+  .signature-panel { margin-top: 4rem; padding: 2.5rem; }
+  .timeline-item { padding-left: 2.75rem; }
+  .timeline-content { padding: 1.35rem 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
