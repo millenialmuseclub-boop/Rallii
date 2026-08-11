@@ -61,4 +61,5 @@ export const berninaExpressRoute = {
     { id: "bernina-rallii", label: "Rallii guidance", category: "editorial", note: "Curated journey order and deliberately cautious seat-view guidance." },
   ],
   geoJsonPath: "/data/routes/bernina-express.geojson",
+  relatedRouteSlugs: ["glacier-express", "west-highland-line"],
 } satisfies RailRoute;

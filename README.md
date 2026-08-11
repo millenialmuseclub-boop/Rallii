@@ -35,13 +35,13 @@ The public prototype reads prepared route data at build time and does not requir
 
 ## Current MVP milestone
 
-Rallii is now a three-route early product covering the Glacier Express, Bernina Express, and GoldenPass Express. The home and filterable Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
+Rallii is now a four-route early product covering the Glacier Express, Bernina Express, GoldenPass Express, and Scotland’s West Highland Line. The fourth journey proves the shared experience works for an ordinary scheduled regional train as well as branded panoramic services. The home and country-aware Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
 
 Saved journeys are stored locally in the browser as a small list of route slugs. They require no account, never duplicate route content, and are resolved against the central route repository on `/saved`.
 
 Run `npm run db:seed` to copy the prototype's structured route data into local libSQL. This creates `local.db`; hosted Turso credentials are not required.
 
-Railway geometry is prepared before publication rather than calculated by the consumer app. GeoJSON stores the route shape while route metadata and editorial journey intelligence remain separate. The Bernina geometry is prepared from OpenStreetMap relation 89842 and carries ODbL attribution in the file metadata. See [`docs/prepared-route-architecture.md`](docs/prepared-route-architecture.md) for the sourcing approach.
+Railway geometry is prepared before publication rather than calculated by the consumer app. GeoJSON stores the route shape while route metadata and editorial journey intelligence remain separate. The Bernina geometry is prepared from OpenStreetMap relation 89842; the West Highland geometry uses the ScotRail Glasgow Queen Street–Mallaig relation 3224918. Both carry ODbL attribution in file metadata. See [`docs/prepared-route-architecture.md`](docs/prepared-route-architecture.md) for the sourcing approach.
 
 Product constraints and direction are recorded in [`docs/product-principles.md`](docs/product-principles.md).
 

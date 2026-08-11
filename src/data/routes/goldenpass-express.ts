@@ -49,4 +49,5 @@ export const goldenPassExpressRoute = {
     { id: "gpx-rallii", label: "Rallii guidance", category: "editorial", note: "Curated timeline and cautious seat-view guidance derived from route geography." },
   ],
   geoJsonPath: "/data/routes/goldenpass-express.geojson",
+  relatedRouteSlugs: ["glacier-express", "west-highland-line"],
 } satisfies RailRoute;

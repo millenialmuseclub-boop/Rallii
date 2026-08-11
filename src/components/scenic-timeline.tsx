@@ -60,7 +60,7 @@ export function ScenicTimeline({ entries, summary, stops, selectedLandmarkId, on
 function buildMoments(entries: ScenicTimelineEntry[], stops: RouteStop[]): JourneyMoment[] {
   const first = stops[0];
   const last = stops.at(-1);
-  const majorStop = stops.find((stop, index) => index > 0 && index < stops.length - 1 && stop.shortDescription);
+  const majorStop = stops.find((stop, index) => index > 0 && index < stops.length - 1 && stop.shortDescription && !entries.some((entry) => Math.abs(entry.distanceAlongRouteKm - stop.distanceAlongRouteKm) < 0.2));
   const moments: JourneyMoment[] = entries.map((entry) => ({
     id: entry.id,
     distance: entry.distanceAlongRouteKm,
