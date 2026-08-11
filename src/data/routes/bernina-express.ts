@@ -8,6 +8,8 @@ export const berninaExpressRoute = {
     origin: "St. Moritz",
     destination: "Tirano",
     country: "Switzerland → Italy",
+    countries: ["Switzerland", "Italy"],
+    journeyTypes: ["panoramic", "alpine", "cross-border", "unesco", "scenic"],
     operator: "Rhätische Bahn / Rhaetian Railway",
     durationMinutes: 135,
     distanceKm: 61,

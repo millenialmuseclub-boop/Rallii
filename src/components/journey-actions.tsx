@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useSavedRoutes } from "@/hooks/use-saved-routes";
 
 interface JourneyActionsProps {
   routeName: string;
+  routeSlug: string;
 }
 
-export function JourneyActions({ routeName }: JourneyActionsProps) {
-  const [saved, setSaved] = useState(false);
+export function JourneyActions({ routeName, routeSlug }: JourneyActionsProps) {
+  const { isSaved, setSaved } = useSavedRoutes();
+  const saved = isSaved(routeSlug);
   const [shareStatus, setShareStatus] = useState<string>();
 
   async function shareJourney() {
@@ -37,9 +40,9 @@ export function JourneyActions({ routeName }: JourneyActionsProps) {
         className="action-button focus-ring"
         type="button"
         aria-pressed={saved}
-        onClick={() => setSaved((current) => !current)}
+        onClick={() => setSaved(routeSlug, !saved)}
       >
-        {saved ? "Saved for this visit" : "Save"}
+        {saved ? "Saved" : "Save"}
       </button>
       <button className="action-button focus-ring" type="button" onClick={shareJourney}>
         Share

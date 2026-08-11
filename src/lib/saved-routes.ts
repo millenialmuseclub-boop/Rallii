@@ -1,0 +1,7 @@
+const STORAGE_KEY = "rallii:saved-routes";
+const CHANGE_EVENT = "rallii:saved-routes-change";
+let cachedRaw: string | null | undefined;
+let cachedSlugs: string[] = [];
+export function getSavedRouteSlugs(): string[] { if (typeof window === "undefined") return []; const raw = window.localStorage.getItem(STORAGE_KEY); if (raw === cachedRaw) return cachedSlugs; cachedRaw = raw; try { const value: unknown = raw ? JSON.parse(raw) : []; cachedSlugs = Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : []; } catch { cachedSlugs = []; } return cachedSlugs; }
+export function setRouteSaved(slug: string, saved: boolean): void { if (typeof window === "undefined") return; const current = getSavedRouteSlugs(); const next = saved ? Array.from(new Set([...current, slug])) : current.filter((item) => item !== slug); window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); cachedRaw = undefined; window.dispatchEvent(new Event(CHANGE_EVENT)); }
+export function subscribeToSavedRoutes(onChange: () => void): () => void { if (typeof window === "undefined") return () => undefined; const storage = (event: StorageEvent) => { if (event.key === STORAGE_KEY) { cachedRaw = undefined; onChange(); } }; window.addEventListener("storage", storage); window.addEventListener(CHANGE_EVENT, onChange); return () => { window.removeEventListener("storage", storage); window.removeEventListener(CHANGE_EVENT, onChange); }; }

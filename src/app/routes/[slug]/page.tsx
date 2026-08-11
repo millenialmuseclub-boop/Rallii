@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const route = getRouteBySlug((await params).slug);
   if (!route) return {};
   const { summary } = route;
-  const title = `${summary.name}: ${summary.origin} to ${summary.destination}`;
+  const title = `${summary.name}: ${summary.origin} to ${summary.metadataDestination ?? summary.destination}`;
   const description = `Know where to sit, what to see, and when to look on the ${summary.name} from ${summary.origin} to ${summary.destination}.`;
   return { title, description, openGraph: { title: `${title} | Rallii`, description, siteName: "Rallii", type: "article" } };
 }
@@ -18,6 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const route = getRouteBySlug((await params).slug);
   if (!route) notFound();
-  const nextRoute = getAllRoutes().find((item) => item.summary.slug !== route.summary.slug);
-  return <RoutePage route={route} nextRoute={nextRoute} />;
+  const nextRoutes = getAllRoutes().filter((item) => item.summary.slug !== route.summary.slug).slice(0, 2);
+  return <RoutePage route={route} nextRoutes={nextRoutes} />;
 }

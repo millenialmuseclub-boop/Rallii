@@ -35,7 +35,9 @@ The public prototype reads prepared route data at build time and does not requir
 
 ## Current MVP milestone
 
-Rallii is now a two-route discovery prototype covering the Glacier Express and Bernina Express. The home and Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
+Rallii is now a three-route early product covering the Glacier Express, Bernina Express, and GoldenPass Express. The home and filterable Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
+
+Saved journeys are stored locally in the browser as a small list of route slugs. They require no account, never duplicate route content, and are resolved against the central route repository on `/saved`.
 
 Run `npm run db:seed` to copy the prototype's structured route data into local libSQL. This creates `local.db`; hosted Turso credentials are not required.
 

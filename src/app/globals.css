@@ -55,6 +55,9 @@ button { font: inherit; }
 .route-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(23 50 40 / 38%), transparent 46%); }
 .highlight-card { border: 0; padding: 1.5rem; background: var(--background); color: inherit; text-align: left; cursor: pointer; }
 .highlight-card:hover { background: #ebe9e1; }
+.filter-button { min-height: 2.75rem; border: 1px solid var(--line); padding: 0.6rem 1rem; color: var(--muted); background: transparent; font-size: 0.78rem; font-weight: 700; }
+.filter-button:hover, .filter-button--active { border-color: var(--foreground); color: var(--foreground); background: #ebe9e1; }
+.route-visual--goldenpass-express { background-color: #d8ccb9; background-image: linear-gradient(150deg, transparent 44%, rgb(247 240 225 / 75%) 44.2%, rgb(247 240 225 / 75%) 57%, transparent 57.2%), linear-gradient(30deg, transparent 56%, rgb(134 102 68 / 28%) 56.2%, rgb(134 102 68 / 28%) 71%, transparent 71.2%); }
 .mountain-placeholder::after {
   content: "";
   position: absolute;

@@ -4,12 +4,12 @@ import { RouteExperience } from "@/components/route-experience";
 import { SiteHeader } from "@/components/site-header";
 import type { RailRoute } from "@/types/route";
 
-export function RoutePage({ route, nextRoute }: { route: RailRoute; nextRoute?: RailRoute }) {
+export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes: RailRoute[] }) {
   const { summary } = route;
   return <><SiteHeader /><main><article>
     <header className="site-shell py-10 sm:py-16">
       <div className="grid items-end gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} /></div>
+        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} /></div>
         <div className={`route-visual route-visual--hero route-visual--${summary.slug}`} role="img" aria-label={summary.heroImageAlt}><span className="media-note">Across the Alps · Photography coming soon</span></div>
       </div>
       <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>
@@ -18,8 +18,8 @@ export function RoutePage({ route, nextRoute }: { route: RailRoute; nextRoute?: 
       <RouteExperience route={route} />
       <section className="section-space border-t border-stone-300 pt-14 sm:pt-20" aria-labelledby="expect-title"><p className="eyebrow">Journey overview</p><h2 id="expect-title" className="mt-2 font-serif text-4xl sm:text-5xl">What to Expect</h2><dl className="mt-9 grid gap-px bg-stone-300 sm:grid-cols-3"><OverviewItem term="Reservations" detail={`${formatReservation(summary.reservationStatus)} for this panoramic service.`} /><OverviewItem term="Train" detail={summary.trainType} /><OverviewItem term="Operated by" detail={summary.operator} /></dl></section>
       <section className="section-space" aria-labelledby="practical-title"><p className="eyebrow">Plan the journey</p><h2 id="practical-title" className="mt-2 font-serif text-4xl sm:text-5xl">Practical Information</h2><dl className="mt-8 grid gap-px bg-stone-300 sm:grid-cols-2">{route.journeyInformation.map((item) => <OverviewItem key={item.id} term={item.label} detail={item.detail} />)}</dl></section>
+      {nextRoutes.length ? <section className="section-space" aria-labelledby="continue-title"><p className="eyebrow">More journeys</p><h2 id="continue-title" className="mt-2 mb-8 font-serif text-4xl sm:text-5xl">Continue Exploring</h2><div className="grid max-w-5xl gap-7 lg:grid-cols-2">{nextRoutes.map((item) => <RouteCard key={item.summary.slug} route={item} />)}</div></section> : null}
       <section className="section-space border-t border-stone-300 pt-10" aria-labelledby="sources-title"><h2 id="sources-title" className="text-sm font-semibold">Route & data sources</h2><ul className="mt-4 grid gap-4 text-xs leading-5 text-stone-600 sm:grid-cols-3">{route.sources.map((source) => <li key={source.id}><span className="block uppercase tracking-[0.12em] text-stone-500">{source.category === "railway-map" ? "Railway / map data" : source.category === "operator" ? "Operator information" : "Rallii guidance"}</span>{source.url ? <a className="mt-1 inline-block underline decoration-stone-400 underline-offset-4" href={source.url} rel="noreferrer" target="_blank">{source.label}</a> : <span className="mt-1 block font-medium">{source.label}</span>}<p className="mt-1">{source.note}</p></li>)}</ul></section>
-      {nextRoute ? <section className="section-space" aria-labelledby="continue-title"><p className="eyebrow">Another great journey</p><h2 id="continue-title" className="mt-2 mb-8 font-serif text-4xl sm:text-5xl">Continue Exploring</h2><div className="max-w-2xl"><RouteCard route={nextRoute} /></div></section> : null}
     </div>
   </article></main></>;
 }

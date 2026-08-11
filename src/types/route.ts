@@ -23,6 +23,7 @@ export type LandmarkType =
 export type TimelineEntryType = LandmarkType | "journey-note";
 
 export type ConfidenceType = "editorial" | "community" | "limited-data";
+export type JourneyType = "panoramic" | "alpine" | "cross-border" | "unesco" | "scenic";
 
 export interface RouteSummary {
   id: string;
@@ -31,6 +32,8 @@ export interface RouteSummary {
   origin: string;
   destination: string;
   country: string;
+  countries: string[];
+  journeyTypes: JourneyType[];
   operator: string;
   durationMinutes: number;
   distanceKm: number;
@@ -42,6 +45,7 @@ export interface RouteSummary {
   heroImageAlt: string;
   heroImageCredit?: string;
   heroImageSourceUrl?: string;
+  metadataDestination?: string;
 }
 
 export interface JourneyInformationItem {

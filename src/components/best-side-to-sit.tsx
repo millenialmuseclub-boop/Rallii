@@ -73,7 +73,7 @@ function deriveRecommendation(segments: BestSideSegment[], reversed: boolean): {
     totals[side] += segment.endDistanceKm - segment.startDistanceKm;
   }
   const side = (Object.entries(totals) as Array<[ViewSide, number]>)
-    .filter(([candidate]) => candidate === "left" || candidate === "right")
+    .filter(([candidate]) => candidate !== "unknown")
     .sort((a, b) => b[1] - a[1])[0]?.[0] ?? (totals.both > 0 ? "both" : totals.varies > 0 ? "varies" : "unknown");
 
   if (side === "both" || side === "varies" || side === "unknown") {

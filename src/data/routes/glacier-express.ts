@@ -8,6 +8,8 @@ export const glacierExpressRoute = {
     origin: "Zermatt",
     destination: "St. Moritz",
     country: "Switzerland",
+    countries: ["Switzerland"],
+    journeyTypes: ["panoramic", "alpine", "unesco", "scenic"],
     operator: "Matterhorn Gotthard Bahn / Rhätische Bahn",
     durationMinutes: 480,
     distanceKm: 291,

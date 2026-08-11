@@ -10,6 +10,7 @@ export function SiteHeader() {
         <nav aria-label="Primary navigation">
           <ul className="flex items-center gap-5 text-sm text-stone-600 sm:gap-7">
             <li><Link className="nav-link focus-ring" href="/discover">Discover</Link></li>
+            <li><Link className="nav-link focus-ring" href="/saved">Saved</Link></li>
           </ul>
         </nav>
       </div>
