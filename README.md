@@ -35,11 +35,11 @@ The public prototype reads prepared route data at build time and does not requir
 
 ## Current MVP milestone
 
-Rallii currently uses the Glacier Express as its reference route. The prototype includes a reusable route model, prepared railway-aligned GeoJSON, structured journey data, directional seat guidance, a responsive MapLibre route map, and an editorial Scenic Journey Timeline.
+Rallii is now a two-route discovery prototype covering the Glacier Express and Bernina Express. The home and Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
 
 Run `npm run db:seed` to copy the prototype's structured route data into local libSQL. This creates `local.db`; hosted Turso credentials are not required.
 
-Railway geometry is prepared before publication rather than calculated by the consumer app. GeoJSON stores the route shape while route metadata and editorial journey intelligence remain separate. See [`docs/prepared-route-architecture.md`](docs/prepared-route-architecture.md) for sourcing and instructions for adding a future route.
+Railway geometry is prepared before publication rather than calculated by the consumer app. GeoJSON stores the route shape while route metadata and editorial journey intelligence remain separate. The Bernina geometry is prepared from OpenStreetMap relation 89842 and carries ODbL attribution in the file metadata. See [`docs/prepared-route-architecture.md`](docs/prepared-route-architecture.md) for the sourcing approach.
 
 Product constraints and direction are recorded in [`docs/product-principles.md`](docs/product-principles.md).
 
@@ -51,4 +51,4 @@ Product constraints and direction are recorded in [`docs/product-principles.md`]
 4. No environment variables are required for the current prepared-data prototype. Add `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` only when intentionally connecting the deployment to hosted Turso.
 5. Select **Deploy**, then use the generated `vercel.app` URL to preview and share Rallii.
 
-With Vercel Git integration enabled, future pushes and pull requests create updated deployments automatically. Do not upload `.env.local`, `local.db`, or Turso secrets to GitHub.
+With Vercel Git integration enabled, pushes to `main` create updated production deployments automatically. The current Vercel project uses the Next.js framework preset and does not require deployment protection for the public site. Do not upload `.env.local`, `local.db`, or Turso secrets to GitHub.

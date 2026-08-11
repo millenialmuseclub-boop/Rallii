@@ -1,9 +1,10 @@
 "use client";
 
-import type { RouteStop, ScenicTimelineEntry } from "@/types/route";
+import type { RouteStop, RouteSummary, ScenicTimelineEntry } from "@/types/route";
 
 interface ScenicTimelineProps {
   entries: ScenicTimelineEntry[];
+  summary: RouteSummary;
   stops: RouteStop[];
   selectedLandmarkId?: string;
   onSelectLandmark: (landmarkId: string) => void;
@@ -13,7 +14,7 @@ type JourneyMoment =
   | { id: string; distance: number; kind: "endpoint" | "stop"; title: string; label: string }
   | { id: string; distance: number; kind: "landmark"; title: string; label: string; description: string; landmarkId: string; bestSide?: string };
 
-export function ScenicTimeline({ entries, stops, selectedLandmarkId, onSelectLandmark }: ScenicTimelineProps) {
+export function ScenicTimeline({ entries, summary, stops, selectedLandmarkId, onSelectLandmark }: ScenicTimelineProps) {
   const moments = buildMoments(entries, stops);
 
   return (
@@ -21,7 +22,7 @@ export function ScenicTimeline({ entries, stops, selectedLandmarkId, onSelectLan
       <p className="eyebrow">Scenic journey timeline</p>
       <h2 id="timeline-title" className="mt-2 font-serif text-4xl sm:text-5xl">Along the Journey</h2>
       <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
-        A calm guide to the moments worth looking up for, arranged from Zermatt to St. Moritz.
+        A calm guide to the moments worth looking up for, arranged from {summary.origin} to {summary.destination}.
       </p>
 
       <ol className="timeline mt-9">
@@ -59,7 +60,7 @@ export function ScenicTimeline({ entries, stops, selectedLandmarkId, onSelectLan
 function buildMoments(entries: ScenicTimelineEntry[], stops: RouteStop[]): JourneyMoment[] {
   const first = stops[0];
   const last = stops.at(-1);
-  const andermatt = stops.find((stop) => stop.id === "andermatt");
+  const majorStop = stops.find((stop, index) => index > 0 && index < stops.length - 1 && stop.shortDescription);
   const moments: JourneyMoment[] = entries.map((entry) => ({
     id: entry.id,
     distance: entry.distanceAlongRouteKm,
@@ -67,12 +68,12 @@ function buildMoments(entries: ScenicTimelineEntry[], stops: RouteStop[]): Journ
     title: entry.subtitle ?? entry.title,
     label: entry.importance === "dont-miss" ? "Don’t miss" : "Scenic section",
     description: entry.shortDescription,
-    landmarkId: entry.relatedLandmarkId ?? entry.id,
+    landmarkId: entry.relatedLandmarkId ?? "",
     bestSide: entry.bestSide && entry.bestSide !== "unknown" ? entry.bestSide : undefined,
   }));
 
   if (first) moments.push({ id: first.id, distance: first.distanceAlongRouteKm, kind: "endpoint", title: first.name, label: "Departure" });
-  if (andermatt) moments.push({ id: andermatt.id, distance: andermatt.distanceAlongRouteKm, kind: "stop", title: andermatt.name, label: "Major stop" });
+  if (majorStop) moments.push({ id: majorStop.id, distance: majorStop.distanceAlongRouteKm, kind: "stop", title: majorStop.name, label: "Major stop" });
   if (last) moments.push({ id: last.id, distance: last.distanceAlongRouteKm, kind: "endpoint", title: last.name, label: "Arrival" });
   return moments.sort((a, b) => a.distance - b.distance);
 }

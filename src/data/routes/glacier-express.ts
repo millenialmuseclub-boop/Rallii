@@ -16,6 +16,7 @@ export const glacierExpressRoute = {
     shortDescription:
       "A full-day journey across the Swiss Alps, linking Zermatt with St. Moritz through high passes, deep gorges, and landmark railway engineering.",
     status: "published",
+    heroImageAlt: "Glacier Express crossing the Swiss Alps",
   },
   stops: [
     {
@@ -212,6 +213,16 @@ export const glacierExpressRoute = {
       reason: "This side offers the clearest view along the train as it curves onto the viaduct.",
       confidenceType: "limited-data",
     },
+  ],
+  journeyInformation: [
+    { id: "reservation", label: "Seat reservation", detail: "Required on the panoramic Glacier Express service." },
+    { id: "service", label: "On board", detail: "Panoramic cars are designed around the Alpine views." },
+    { id: "planning", label: "Before you travel", detail: "Check the operator for current timetables and service details." },
+  ],
+  sources: [
+    { id: "glacier-osm", label: "OpenStreetMap", category: "railway-map", url: "https://www.openstreetmap.org/relation/301629", note: "Prepared railway-aligned route geometry; © OpenStreetMap contributors, ODbL." },
+    { id: "glacier-operator", label: "Glacier Express", category: "operator", url: "https://www.glacierexpress.ch/", note: "Operator journey and service information." },
+    { id: "glacier-rallii", label: "Rallii guidance", category: "editorial", note: "Curated landmark, timeline, and seat-view guidance." },
   ],
   geoJsonPath: "/data/routes/glacier-express.geojson",
 } satisfies RailRoute;

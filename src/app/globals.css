@@ -44,6 +44,17 @@ button { font: inherit; }
     linear-gradient(145deg, transparent 47%, rgb(245 242 234 / 72%) 47.2%, rgb(245 242 234 / 72%) 55%, transparent 55.2%),
     linear-gradient(35deg, transparent 55%, rgb(106 129 114 / 36%) 55.2%, rgb(106 129 114 / 36%) 67%, transparent 67.2%);
 }
+.journey-card { overflow: hidden; border: 1px solid var(--line); background: #f7f4ed; }
+.route-visual {
+  position: relative; display: flex; min-height: 18rem; align-items: flex-end; overflow: hidden; padding: 1.5rem;
+  background-color: #cbd7d0;
+  background-image: linear-gradient(145deg, transparent 45%, rgb(245 242 234 / 70%) 45.2%, rgb(245 242 234 / 70%) 55%, transparent 55.2%), linear-gradient(35deg, transparent 56%, rgb(79 113 91 / 40%) 56.2%, rgb(79 113 91 / 40%) 70%, transparent 70.2%);
+}
+.route-visual--bernina-express { background-color: #c6d2d2; background-image: linear-gradient(155deg, transparent 45%, rgb(240 243 239 / 78%) 45.2%, rgb(240 243 239 / 78%) 57%, transparent 57.2%), linear-gradient(25deg, transparent 52%, rgb(84 116 115 / 38%) 52.2%, rgb(84 116 115 / 38%) 69%, transparent 69.2%); }
+.route-visual--hero { min-height: 20rem; }
+.route-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(23 50 40 / 38%), transparent 46%); }
+.highlight-card { border: 0; padding: 1.5rem; background: var(--background); color: inherit; text-align: left; cursor: pointer; }
+.highlight-card:hover { background: #ebe9e1; }
 .mountain-placeholder::after {
   content: "";
   position: absolute;
@@ -91,6 +102,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .signature-panel { margin-top: 4rem; padding: 2.5rem; }
   .timeline-item { padding-left: 2.75rem; }
   .timeline-content { padding: 1.35rem 1.5rem; }
+  .route-visual--hero { min-height: 30rem; padding: 2rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

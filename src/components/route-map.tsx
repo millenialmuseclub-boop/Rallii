@@ -6,6 +6,7 @@ import type { Landmark, RouteStop, ViewSide } from "@/types/route";
 
 interface RouteMapProps {
   routeName: string;
+  originName: string;
   geoJsonPath: string;
   stops: RouteStop[];
   landmarks: Landmark[];
@@ -26,6 +27,7 @@ interface RouteGeoJson {
 
 export function RouteMap({
   routeName,
+  originName,
   geoJsonPath,
   stops,
   landmarks,
@@ -121,7 +123,7 @@ export function RouteMap({
           const description = document.createElement("p");
           description.textContent = landmark.shortDescription;
           const side = document.createElement("span");
-          side.textContent = `Best side from Zermatt: ${formatSide(landmark.bestSideForward)}`;
+          side.textContent = `View from ${originName}: ${formatSide(landmark.bestSideForward)}`;
           popupContent.append(title, description, side);
 
           const mapMarker = new maplibregl.Marker({ element: markerElement })
@@ -148,7 +150,7 @@ export function RouteMap({
       mapRef.current = null;
       map.remove();
     };
-  }, [geoJsonPath, landmarks, onSelectLandmark, stops]);
+  }, [geoJsonPath, landmarks, onSelectLandmark, originName, stops]);
 
   useEffect(() => {
     if (!selectedLandmarkId) return;

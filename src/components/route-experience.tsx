@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { BestSideToSit } from "@/components/best-side-to-sit";
+import { JourneyHighlights } from "@/components/journey-highlights";
 import { RouteMap } from "@/components/route-map";
 import { ScenicTimeline } from "@/components/scenic-timeline";
 import type { RailRoute } from "@/types/route";
@@ -28,6 +29,7 @@ export function RouteExperience({ route }: RouteExperienceProps) {
         </div>
         <RouteMap
           routeName={route.summary.name}
+          originName={route.summary.origin}
           geoJsonPath={route.geoJsonPath}
           stops={route.stops}
           landmarks={route.landmarks}
@@ -39,7 +41,10 @@ export function RouteExperience({ route }: RouteExperienceProps) {
         </p>
       </section>
 
+      <JourneyHighlights landmarks={route.landmarks} onSelectLandmark={selectLandmark} />
+
       <ScenicTimeline
+        summary={route.summary}
         entries={route.timelineEntries}
         stops={route.stops}
         selectedLandmarkId={selectedLandmarkId}

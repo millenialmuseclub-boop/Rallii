@@ -1,0 +1,62 @@
+import type { RailRoute } from "../../types/route.ts";
+
+export const berninaExpressRoute = {
+  summary: {
+    id: "bernina-express",
+    slug: "bernina-express",
+    name: "Bernina Express",
+    origin: "St. Moritz",
+    destination: "Tirano",
+    country: "Switzerland → Italy",
+    operator: "Rhätische Bahn / Rhaetian Railway",
+    durationMinutes: 135,
+    distanceKm: 61,
+    trainType: "Panoramic express",
+    reservationStatus: "required",
+    shortDescription: "A high-Alpine crossing from the Engadin to northern Italy, passing glaciers, Lago Bianco, Val Poschiavo, and the Brusio Circular Viaduct.",
+    status: "published",
+    heroImageAlt: "Bernina Express descending through the Alpine landscape toward Tirano",
+  },
+  stops: [
+    { id: "st-moritz", name: "St. Moritz", latitude: 46.498021, longitude: 9.8459437, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure in the Upper Engadin." },
+    { id: "pontresina", name: "Pontresina", latitude: 46.4906964, longitude: 9.8963981, sequence: 2, distanceAlongRouteKm: 5.8, shortDescription: "The line turns south toward the Bernina massif." },
+    { id: "ospizio-bernina", name: "Ospizio Bernina", latitude: 46.4087587, longitude: 10.0198642, sequence: 3, distanceAlongRouteKm: 22.7 },
+    { id: "alp-grum", name: "Alp Grüm", latitude: 46.3745132, longitude: 10.0312223, sequence: 4, distanceAlongRouteKm: 27.2 },
+    { id: "poschiavo", name: "Poschiavo", latitude: 46.3246452, longitude: 10.0545003, sequence: 5, distanceAlongRouteKm: 43.7 },
+    { id: "brusio", name: "Brusio", latitude: 46.2591652, longitude: 10.1250624, sequence: 6, distanceAlongRouteKm: 53.9 },
+    { id: "tirano", name: "Tirano", latitude: 46.215738, longitude: 10.1666093, sequence: 7, distanceAlongRouteKm: 60.7, shortDescription: "Arrival across the border in northern Italy." },
+  ],
+  landmarks: [
+    { id: "morteratsch-landscape", name: "Morteratsch landscape", type: "scenic-section", latitude: 46.4512, longitude: 9.9401, distanceAlongRouteKm: 11.2, shortDescription: "The railway approaches the Bernina massif through an open glacier-carved valley.", importance: "highlight", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "lago-bianco", name: "Lago Bianco", type: "lake", latitude: 46.416, longitude: 10.0125, distanceAlongRouteKm: 21.5, shortDescription: "The train traces the pale turquoise reservoir near the route's highest point.", importance: "dont-miss", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "alp-grum-view", name: "Alp Grüm & Palü Glacier", type: "station", latitude: 46.3745132, longitude: 10.0312223, distanceAlongRouteKm: 27.2, shortDescription: "A celebrated high viewpoint opens toward the Palü Glacier and Val Poschiavo.", importance: "dont-miss", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "val-poschiavo", name: "Val Poschiavo", type: "scenic-section", latitude: 46.335, longitude: 10.0508, distanceAlongRouteKm: 40.7, shortDescription: "Tight curves carry the railway from high Alpine terrain into the greener valley below.", importance: "highlight", bestSideForward: "varies", bestSideReverse: "varies" },
+    { id: "brusio-viaduct", name: "Brusio Circular Viaduct", type: "viaduct", latitude: 46.2537, longitude: 10.1277, distanceAlongRouteKm: 54.7, shortDescription: "The stone spiral lets the railway lose height in one unmistakable sweep.", importance: "dont-miss", bestSideForward: "varies", bestSideReverse: "varies" },
+  ],
+  timelineEntries: [
+    { id: "timeline-morteratsch", title: "Into the Bernina landscape", subtitle: "Morteratsch", distanceAlongRouteKm: 11.2, approximateJourneyMinutes: 25, type: "scenic-section", importance: "highlight", bestSide: "both", relatedLandmarkId: "morteratsch-landscape", shortDescription: "Look outward as the valley opens toward the glaciers and high peaks." },
+    { id: "timeline-lago-bianco", title: "At the roof of the route", subtitle: "Lago Bianco", distanceAlongRouteKm: 21.5, approximateJourneyMinutes: 52, type: "lake", importance: "dont-miss", bestSide: "both", relatedLandmarkId: "lago-bianco", shortDescription: "The railway runs beside the lake near Ospizio Bernina at 2,253 metres." },
+    { id: "timeline-alp-grum", title: "Alp Grüm", subtitle: "Palü Glacier viewpoint", distanceAlongRouteKm: 27.2, approximateJourneyMinutes: 68, type: "station", importance: "dont-miss", bestSide: "both", relatedLandmarkId: "alp-grum-view", shortDescription: "A broad view reaches across the Palü Glacier and down Val Poschiavo." },
+    { id: "timeline-val-poschiavo", title: "Descending through Val Poschiavo", distanceAlongRouteKm: 40.7, approximateJourneyMinutes: 95, type: "scenic-section", importance: "highlight", bestSide: "varies", relatedLandmarkId: "val-poschiavo", shortDescription: "Repeated curves reveal the valley from changing sides of the train." },
+    { id: "timeline-brusio", title: "Brusio Circular Viaduct", distanceAlongRouteKm: 54.7, approximateJourneyMinutes: 122, type: "viaduct", importance: "dont-miss", bestSide: "varies", relatedLandmarkId: "brusio-viaduct", shortDescription: "Watch the train curl around the stone spiral shortly before the Italian border." },
+  ],
+  bestSideSegments: [
+    { id: "morteratsch-views", startDistanceKm: 8, endDistanceKm: 15, forwardDirectionSide: "both", reverseDirectionSide: "both", reason: "The glacial landscape opens across both sides as the line climbs.", confidenceType: "editorial" },
+    { id: "bernina-pass-views", startDistanceKm: 18, endDistanceKm: 28, forwardDirectionSide: "both", reverseDirectionSide: "both", reason: "Lago Bianco, the pass, and Alp Grüm create worthwhile views on both sides.", confidenceType: "editorial" },
+    { id: "val-poschiavo-curves", startDistanceKm: 30, endDistanceKm: 46, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "The twisting descent repeatedly changes which side faces the valley.", confidenceType: "limited-data" },
+    { id: "brusio-approach", startDistanceKm: 52, endDistanceKm: 56, forwardDirectionSide: "unknown", reverseDirectionSide: "unknown", reason: "The train's changing curve makes a single dependable side difficult to support.", confidenceType: "limited-data" },
+  ],
+  journeyInformation: [
+    { id: "reservation", label: "Seat reservation", detail: "Required on Bernina Express panoramic cars; a valid ticket is also needed." },
+    { id: "onboard", label: "On board", detail: "Modern panoramic cars, complimentary Wi‑Fi, and snacks and drinks served at your seat." },
+    { id: "luggage", label: "Luggage", detail: "Luggage racks are available, but storage space is limited." },
+    { id: "accessibility", label: "Accessibility", detail: "Selected wheelchair-accessible seats can be booked through RhB Railservice; boarding assistance requires advance arrangement." },
+  ],
+  sources: [
+    { id: "bernina-osm", label: "OpenStreetMap", category: "railway-map", url: "https://www.openstreetmap.org/relation/89842", note: "Prepared from the Berninabahn railway relation; © OpenStreetMap contributors, ODbL." },
+    { id: "bernina-rhb", label: "Rhaetian Railway", category: "operator", url: "https://www.rhb.ch/en/panoramic-trips/bernina-express", note: "Journey duration, service, reservations, and official route highlights." },
+    { id: "bernina-unesco", label: "UNESCO World Heritage Centre", category: "operator", url: "https://whc.unesco.org/en/list/1276", note: "World Heritage context for the Albula and Bernina railway landscapes." },
+    { id: "bernina-rallii", label: "Rallii guidance", category: "editorial", note: "Curated journey order and deliberately cautious seat-view guidance." },
+  ],
+  geoJsonPath: "/data/routes/bernina-express.geojson",
+} satisfies RailRoute;

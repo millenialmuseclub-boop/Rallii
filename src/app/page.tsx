@@ -1,49 +1,14 @@
 import Link from "next/link";
+import { RouteCard } from "@/components/route-card";
 import { SiteHeader } from "@/components/site-header";
-import { getRouteBySlug } from "@/data/routes";
+import { getAllRoutes } from "@/data/routes";
 
 export default function HomePage() {
-  const route = getRouteBySlug("glacier-express");
-
-  return (
-    <>
-      <SiteHeader />
-      <main>
-        <section className="site-shell flex min-h-[62vh] items-center py-20 sm:py-28">
-          <div className="max-w-4xl">
-            <p className="eyebrow">Curated rail journeys</p>
-            <h1 className="mt-5 font-serif text-6xl leading-[0.95] tracking-tight sm:text-8xl lg:text-9xl">Rallii</h1>
-            <p className="mt-7 max-w-3xl font-serif text-3xl leading-tight text-stone-700 sm:text-5xl">
-              Know where to sit, what to see, and when to look.
-            </p>
-            <p className="mt-7 max-w-xl text-base leading-7 text-stone-600 sm:text-lg">
-              Thoughtful guides to the world’s great train journeys, built around the view outside your window.
-            </p>
-          </div>
-        </section>
-
-        {route ? (
-          <section className="border-t border-stone-300 py-16 sm:py-24" id="featured" aria-labelledby="featured-title">
-            <div className="site-shell">
-              <p className="eyebrow">Featured journey</p>
-              <div className="mt-5 overflow-hidden bg-[#d9dfd5] lg:grid lg:grid-cols-[1.2fr_0.8fr]">
-                <div className="mountain-placeholder min-h-72 p-7 sm:min-h-96 sm:p-10" aria-label="Glacier Express photography placeholder">
-                  <span className="media-note">Swiss Alps · Photography coming soon</span>
-                </div>
-                <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-                  <p className="text-xs uppercase tracking-[0.18em] text-stone-600">{route.summary.country}</p>
-                  <h2 id="featured-title" className="mt-3 font-serif text-4xl sm:text-5xl">{route.summary.name}</h2>
-                  <p className="mt-3 font-serif text-xl text-stone-600">{route.summary.origin} → {route.summary.destination}</p>
-                  <p className="mt-6 text-sm leading-6 text-stone-600">{route.summary.shortDescription}</p>
-                  <Link className="primary-link focus-ring mt-8 self-start" href="/routes/glacier-express">
-                    Explore Journey <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : null}
-      </main>
-    </>
-  );
+  const routes = getAllRoutes();
+  return <><SiteHeader /><main>
+    <section className="site-shell flex min-h-[58vh] items-center py-20 sm:py-28"><div className="max-w-4xl"><p className="eyebrow">Curated rail journeys</p><h1 className="mt-5 font-serif text-6xl leading-[0.95] tracking-tight sm:text-8xl lg:text-9xl">Rallii</h1><p className="mt-7 max-w-3xl font-serif text-3xl leading-tight text-stone-700 sm:text-5xl">Know where to sit, what to see, and when to look.</p><p className="mt-7 max-w-xl text-base leading-7 text-stone-600 sm:text-lg">Discover extraordinary rail journeys with scenic guides built around the view outside your window.</p><Link className="primary-link focus-ring mt-8" href="/discover">Discover journeys <span aria-hidden="true">→</span></Link></div></section>
+    <section className="border-t border-stone-300 py-16 sm:py-24" id="featured" aria-labelledby="featured-title"><div className="site-shell"><p className="eyebrow">Curated for Rallii</p><h2 id="featured-title" className="mt-2 font-serif text-4xl sm:text-5xl">Featured Journeys</h2><div className="mt-9 grid gap-7 lg:grid-cols-2">{routes.map((route) => <RouteCard key={route.summary.slug} route={route} />)}</div></div></section>
+    <section className="border-t border-stone-300 py-16 sm:py-24" aria-labelledby="explore-title"><div className="site-shell"><p className="eyebrow">A growing collection</p><h2 id="explore-title" className="mt-2 font-serif text-4xl sm:text-5xl">Explore by Journey</h2><div className="mt-8 grid gap-px bg-stone-300 sm:grid-cols-3">{[ ["Across the Alps","High passes, deep valleys, and journeys shaped by mountain landscapes."], ["Panoramic Trains","Services designed to bring the landscape closer to your seat."], ["UNESCO Railways","Railways recognised for the way engineering and landscape meet."] ].map(([title,copy]) => <div className="bg-page p-6 sm:p-8" key={title}><h3 className="font-serif text-2xl">{title}</h3><p className="mt-3 text-sm leading-6 text-stone-600">{copy}</p></div>)}</div></div></section>
+    <section className="border-t border-stone-300 py-16 sm:py-24" aria-labelledby="why-title"><div className="site-shell"><p className="eyebrow">Why Rallii</p><h2 id="why-title" className="mt-2 max-w-2xl font-serif text-4xl sm:text-5xl">See more from the journey.</h2><div className="mt-10 grid gap-8 sm:grid-cols-3">{[["Know where to sit","Directional seat-view guidance that changes with the journey."],["Know what’s coming","Scenic landmarks arranged in the order you’ll meet them."],["Know when to look","A calm timeline for the moments worth your attention."]].map(([title,copy],i) => <div className="border-t border-stone-300 pt-5" key={title}><span className="text-xs text-stone-500">0{i+1}</span><h3 className="mt-3 font-serif text-2xl">{title}</h3><p className="mt-3 text-sm leading-6 text-stone-600">{copy}</p></div>)}</div></div></section>
+  </main></>;
 }

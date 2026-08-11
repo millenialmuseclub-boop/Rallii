@@ -38,6 +38,24 @@ export interface RouteSummary {
   reservationStatus: ReservationStatus;
   shortDescription: string;
   status: PublicationStatus;
+  heroImage?: string;
+  heroImageAlt: string;
+  heroImageCredit?: string;
+  heroImageSourceUrl?: string;
+}
+
+export interface JourneyInformationItem {
+  id: string;
+  label: string;
+  detail: string;
+}
+
+export interface RouteSource {
+  id: string;
+  label: string;
+  category: "railway-map" | "operator" | "editorial";
+  url?: string;
+  note: string;
 }
 
 export interface RouteStop {
@@ -92,5 +110,7 @@ export interface RailRoute {
   landmarks: Landmark[];
   timelineEntries: ScenicTimelineEntry[];
   bestSideSegments: BestSideSegment[];
+  journeyInformation: JourneyInformationItem[];
+  sources: RouteSource[];
   geoJsonPath: string;
 }

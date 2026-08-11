@@ -35,7 +35,7 @@ export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitPro
 
       <div className="mt-8 border-t border-stone-300 pt-7 sm:grid sm:grid-cols-[0.7fr_1.3fr] sm:gap-10">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-stone-500">Recommended overall</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-stone-500">Overall recommendation</p>
           <p className="mt-2 font-serif text-5xl text-accent">{formatSide(recommendation.side)}</p>
           <p className="mt-3 max-w-sm text-sm leading-6 text-stone-600">
             {recommendation.explanation}
@@ -58,7 +58,7 @@ export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitPro
             })}
           </ul>
           <p className="mt-3 text-xs text-stone-500">
-            Guidance combines {formatConfidence(segments.map((segment) => segment.confidenceType))} recommendations.
+            {formatConfidence(segments.map((segment) => segment.confidenceType))}
           </p>
         </div>
       </div>
@@ -74,7 +74,11 @@ function deriveRecommendation(segments: BestSideSegment[], reversed: boolean): {
   }
   const side = (Object.entries(totals) as Array<[ViewSide, number]>)
     .filter(([candidate]) => candidate === "left" || candidate === "right")
-    .sort((a, b) => b[1] - a[1])[0]?.[0] ?? "varies";
+    .sort((a, b) => b[1] - a[1])[0]?.[0] ?? (totals.both > 0 ? "both" : totals.varies > 0 ? "varies" : "unknown");
+
+  if (side === "both" || side === "varies" || side === "unknown") {
+    return { side, explanation: side === "both" ? "The strongest supported views are shared across both sides." : "The line curves repeatedly, so no single side is supported for the full journey." };
+  }
 
   return {
     side,
@@ -87,5 +91,5 @@ function formatSide(side: ViewSide): string {
 }
 
 function formatConfidence(values: BestSideSegment["confidenceType"][]): string {
-  return values.includes("limited-data") ? "editorial and limited-data" : values[0] ?? "editorial";
+  return values.includes("limited-data") ? "Some sections are early guidance based on limited reports." : "Prepared as Rallii editorial guidance.";
 }
