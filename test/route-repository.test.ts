@@ -9,6 +9,8 @@ import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
 import { cinqueTerreRoute } from "../src/data/routes/cinque-terre.ts";
 import { tranzAlpineRoute } from "../src/data/routes/tranzalpine.ts";
 import { kurobeGorgeRailwayRoute } from "../src/data/routes/kurobe-gorge-railway.ts";
+import { belfastDerryRoute } from "../src/data/routes/belfast-derry.ts";
+import { dublinRosslareRoute } from "../src/data/routes/dublin-rosslare.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -239,7 +241,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 8);
+  assert.equal(getAllRoutes().length, 10);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -407,7 +409,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 8);
+  assert.equal(getAllRoutes().length, 10);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -444,10 +446,37 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("homepage index includes eight routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 8);
+test("homepage index includes ten routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 10);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("Belfast–Derry is a complete Northern Irish coastal journey", async () => {
+  assert.equal(getRouteBySlug("belfast-derry"), belfastDerryRoute);
+  assert.deepEqual(validateRoute(belfastDerryRoute), []);
+  assert.deepEqual(belfastDerryRoute.stops.map((stop) => stop.name), ["Belfast Grand Central", "Antrim", "Ballymena", "Cullybackey", "Ballymoney", "Coleraine", "Castlerock", "Bellarena", "Derry~Londonderry"]);
+  assert.equal(belfastDerryRoute.capabilities.rideMode, false);
+  for (const query of ["Northern Ireland", "Causeway Coast", "Castlerock", "Downhill", "River Foyle"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "belfast-derry"));
+  const data = JSON.parse(await readFile("public/data/routes/belfast-derry.geojson", "utf8")) as { metadata: { osmWayIds: number[]; osmRelationIds: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  assert.equal(data.features[0].geometry.coordinates.length, 1885);
+  assert.equal(data.metadata.osmWayIds.length, 218);
+  assert.deepEqual(data.metadata.osmRelationIds, []);
+  assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 153.29) < 0.02);
+});
+
+test("Dublin–Rosslare is a complete Irish east-coast journey", async () => {
+  assert.equal(getRouteBySlug("dublin-rosslare"), dublinRosslareRoute);
+  assert.deepEqual(validateRoute(dublinRosslareRoute), []);
+  assert.deepEqual(dublinRosslareRoute.stops.map((stop) => stop.name), ["Dublin Connolly", "Tara Street", "Dublin Pearse", "Dún Laoghaire", "Bray", "Greystones", "Kilcoole", "Wicklow", "Rathdrum", "Arklow", "Gorey", "Enniscorthy", "Wexford", "Rosslare Strand", "Rosslare Europort"]);
+  assert.equal(dublinRosslareRoute.capabilities.rideMode, false);
+  for (const query of ["Ireland", "Dublin Bay", "Bray Head", "Wexford Harbour", "Rosslare Europort"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "dublin-rosslare"));
+  const data = JSON.parse(await readFile("public/data/routes/dublin-rosslare.geojson", "utf8")) as { metadata: { osmWayIds: number[]; osmRelationIds: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  assert.equal(data.features[0].geometry.coordinates.length, 2643);
+  assert.equal(data.metadata.osmWayIds.length, 451);
+  assert.deepEqual(data.metadata.osmRelationIds, [16753439]);
+  assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 167.86) < 0.02);
+  assert.ok(getJourneyCollection("irish-rail-journeys")?.routeSlugs.includes("dublin-rosslare"));
 });
 
 test("previous seven GeoJSON paths remain stable", () => {

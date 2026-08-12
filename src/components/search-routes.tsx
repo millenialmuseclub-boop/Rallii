@@ -8,8 +8,8 @@ import type { RailRoute } from "@/types/route";
 
 const suggestions = ["Glacier Express", "Scotland", "Panoramic", "Glenfinnan Viaduct"];
 
-export function SearchRoutes({ routes }: { routes: RailRoute[] }) {
-  const [query, setQuery] = useState("");
+export function SearchRoutes({ routes, initialQuery = "" }: { routes: RailRoute[]; initialQuery?: string }) {
+  const [query, setQuery] = useState(initialQuery);
   const results = searchRoutes(routes, query);
   const hasQuery = query.trim().length > 0;
 

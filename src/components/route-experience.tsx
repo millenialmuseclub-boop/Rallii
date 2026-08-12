@@ -11,9 +11,10 @@ import type { JourneyDirection, RailRoute } from "@/types/route";
 interface RouteExperienceProps {
   route: RailRoute;
   direction: JourneyDirection;
+  activeSurface?: string;
 }
 
-export function RouteExperience({ route, direction }: RouteExperienceProps) {
+export function RouteExperience({ route, direction, activeSurface }: RouteExperienceProps) {
   const [selectedLandmarkId, setSelectedLandmarkId] = useState<string>();
   const selectLandmark = useCallback((landmarkId: string) => setSelectedLandmarkId(landmarkId), []);
   const endpoints = useMemo(() => getDirectionalEndpoints(route, direction), [route, direction]);
@@ -23,9 +24,9 @@ export function RouteExperience({ route, direction }: RouteExperienceProps) {
 
   return (
     <>
-      <BestSideToSit route={route} direction={direction} />
+      <div className={`journey-surface${activeSurface === "best-side" ? " journey-surface--active" : ""}`}><BestSideToSit route={route} direction={direction} /></div>
 
-      <section className="section-space scroll-section" id="route" aria-labelledby="route-map-title">
+      <section className={`section-space scroll-section journey-surface${activeSurface === "map" || activeSurface === "timeline" ? " journey-surface--active" : ""}`} id="route" aria-labelledby="route-map-title">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Explore the route</p>
@@ -33,13 +34,13 @@ export function RouteExperience({ route, direction }: RouteExperienceProps) {
           </div>
           <p className="hidden text-xs text-stone-600 sm:block">Pan and zoom to explore</p>
         </div>
-        <div className="journey-explorer">
+        <div className={`journey-explorer journey-explorer--${activeSurface ?? "map"}`}>
           <div className="journey-explorer__map"><RouteMap routeName={route.summary.name} originName={endpoints.origin} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /><p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
           <ScenicTimeline origin={endpoints.origin} destination={endpoints.destination} durationMinutes={route.summary.durationMinutes} entries={timeline} stops={stops} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} />
         </div>
       </section>
 
-      <JourneyHighlights landmarks={landmarks} direction={direction} onSelectLandmark={selectLandmark} />
+      <div className="journey-desktop-support"><JourneyHighlights landmarks={landmarks} direction={direction} onSelectLandmark={selectLandmark} /></div>
     </>
   );
 }

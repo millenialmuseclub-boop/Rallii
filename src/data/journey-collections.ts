@@ -9,12 +9,13 @@ export interface JourneyCollection {
 
 export const journeyCollections: JourneyCollection[] = [
   { slug: "alpine-journeys", title: "Alpine Journeys", description: "Panoramic railways shaped by high passes, glaciers, lakes, and deep valleys.", routeSlugs: ["glacier-express", "bernina-express", "goldenpass-express"] },
-  { slug: "northern-landscapes", title: "Northern Landscapes", description: "Remote Highland and fjord-country journeys with a strong sense of place.", routeSlugs: ["west-highland-line", "flam-railway"] },
+  { slug: "northern-landscapes", title: "Northern Landscapes", description: "Remote Highland, fjord, and north-coast journeys with a strong sense of place.", routeSlugs: ["west-highland-line", "flam-railway", "belfast-derry"] },
   { slug: "cross-border-journeys", title: "Cross-Border Journeys", description: "Rail experiences whose changing geography carries you between countries.", routeSlugs: ["bernina-express"] },
   { slug: "short-scenic-escapes", title: "Short Scenic Escapes", description: "Concentrated railway experiences that fit into a wider trip.", routeSlugs: ["flam-railway", "cinque-terre", "kurobe-gorge-railway"] },
-  { slug: "coastal-journeys", title: "Coastal Journeys", description: "Railways where sea, shoreline, and dramatic terrain shape the journey.", routeSlugs: ["cinque-terre", "west-highland-line"] },
+  { slug: "coastal-journeys", title: "Coastal Journeys", description: "Railways where sea, shoreline, and dramatic terrain shape the journey.", routeSlugs: ["cinque-terre", "west-highland-line", "belfast-derry", "dublin-rosslare"] },
   { slug: "full-day-journeys", title: "Full-Day Journeys", description: "Immersive routes where the railway journey becomes the day itself.", routeSlugs: ["glacier-express", "tranzalpine"] },
   { slug: "mountain-journeys", title: "Mountain Journeys", description: "Railways shaped by high passes, steep valleys, and memorable mountain engineering.", routeSlugs: ["tranzalpine", "glacier-express", "bernina-express", "flam-railway", "kurobe-gorge-railway"] },
+  { slug: "irish-rail-journeys", title: "Irish Rail Journeys", description: "Two coastal railways across the island of Ireland, shaped by different landscapes, countries, and operators.", routeSlugs: ["belfast-derry", "dublin-rosslare"] },
 ];
 
 export function getJourneyCollection(slug: string): JourneyCollection | undefined { return journeyCollections.find((collection) => collection.slug === slug); }
