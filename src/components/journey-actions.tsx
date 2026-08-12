@@ -13,7 +13,13 @@ interface JourneyActionsProps {
 export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: JourneyActionsProps) {
   const { getStatus, setStatus } = useTravelLibrary();
   const routeStatus = getStatus(routeSlug);
-  const [shareStatus, setShareStatus] = useState<string>();
+  const [actionStatus, setActionStatus] = useState<string>();
+
+  function updateStatus(status: "want_to_go" | "been") {
+    const nextStatus = routeStatus === status ? undefined : status;
+    setStatus(routeSlug, nextStatus);
+    setActionStatus(nextStatus === "want_to_go" ? `${routeName} added to Want to Go.` : nextStatus === "been" ? `${routeName} marked Been.` : `${routeName} removed from My Journeys.`);
+  }
 
   async function shareJourney() {
     const shareData = {
@@ -25,27 +31,25 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: Jour
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        setShareStatus("Shared");
+        setActionStatus("Journey shared.");
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        setShareStatus("Link copied");
+        setActionStatus("Direction-aware link copied.");
       }
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
-      setShareStatus("Unable to share");
+      setActionStatus("Unable to share this journey.");
     }
   }
 
   return (
-    <div className="mt-7 flex flex-wrap items-center gap-2" aria-label="Journey actions">
-      <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => setStatus(routeSlug, routeStatus === "want_to_go" ? undefined : "want_to_go")}>Want to Go</button>
-      <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "been"} onClick={() => setStatus(routeSlug, routeStatus === "been" ? undefined : "been")}>Been</button>
-      <button className="action-button focus-ring" type="button" onClick={shareJourney}>
-        Share
-      </button>
-      <Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link>
-      {rideModeAvailable ? <Link className="action-button action-button--primary focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}
-      <span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span>
+    <div className="journey-actions" aria-label="Journey actions">
+      <div className="journey-actions__personal">
+        <button className="action-button action-button--primary focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => updateStatus("want_to_go")}>{routeStatus === "want_to_go" ? "Saved: Want to Go" : "Want to Go"}</button>
+        <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "been"} onClick={() => updateStatus("been")}>{routeStatus === "been" ? "Marked Been" : "Been"}</button>
+      </div>
+      <div className="journey-actions__contextual"><button className="action-button focus-ring" type="button" onClick={shareJourney}>Share</button><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}</div>
+      <p className="journey-actions__status" role="status" aria-live="polite">{actionStatus}</p>
     </div>
   );
 }

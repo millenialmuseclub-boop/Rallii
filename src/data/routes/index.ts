@@ -5,6 +5,7 @@ import { westHighlandLineRoute } from "./west-highland-line.ts";
 import { flamRailwayRoute } from "./flam-railway.ts";
 import { cinqueTerreRoute } from "./cinque-terre.ts";
 import { tranzAlpineRoute } from "./tranzalpine.ts";
+import { kurobeGorgeRailwayRoute } from "./kurobe-gorge-railway.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -15,6 +16,7 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [flamRailwayRoute.summary.slug, flamRailwayRoute],
   [cinqueTerreRoute.summary.slug, cinqueTerreRoute],
   [tranzAlpineRoute.summary.slug, tranzAlpineRoute],
+  [kurobeGorgeRailwayRoute.summary.slug, kurobeGorgeRailwayRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 

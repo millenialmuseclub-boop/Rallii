@@ -72,6 +72,14 @@ export const routeMediaBySlug: Record<string, RouteMediaAsset> = {
     originalFileUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f1/TranzAlpine_train_-_panoramio.jpg",
     licenseName: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", location: "Arthur’s Pass, New Zealand", relatedLandmarkId: "arthurs-pass", accessedAt: "2026-08-12",
   },
+  "kurobe-gorge-railway": {
+    routeSlug: "kurobe-gorge-railway", path: "/images/routes/kurobe-gorge-railway/atobiki-bridge.webp", width: 1800, height: 1260,
+    alt: "A small Kurobe Gorge Railway train crossing Atobiki Bridge above dense mountain forest",
+    caption: "Near Kuronagi, the railway crosses the high Atobiki Bridge as the forest closes around the gorge.",
+    creator: "Akihiro Matsuoka", sourcePageUrl: "https://commons.wikimedia.org/wiki/File:Kurobe_Gorge_Railway_Bridge_near_Kuronagi.jpg",
+    originalFileUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Kurobe_Gorge_Railway_Bridge_near_Kuronagi.jpg",
+    licenseName: "Public domain", licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/", location: "Atobiki Bridge near Kuronagi, Japan", relatedLandmarkId: "atobiki-bridge", accessedAt: "2026-08-12",
+  },
 };
 
 export function getRouteMedia(routeSlug: string): RouteMediaAsset | undefined { return routeMediaBySlug[routeSlug]; }

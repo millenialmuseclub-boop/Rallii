@@ -33,3 +33,9 @@ Each route record and GeoJSON `LineString` has one canonical direction. Reverse 
 - The default URL is canonical. `?direction=reverse` restores and shares reverse presentation, while invalid values fall back to the default direction. Canonical metadata remains attached to the base route URL.
 
 Want to Go, Been, Compare, My Rail Map, and Flåm Ride Mode continue to use the canonical route identity. Direction changes presentation only.
+
+## Controlled discovery taxonomy
+
+Journey types describe the broad form of a route; experience tags describe reusable landscape and infrastructure traits used by Search, Discover, and Compare. Route #8 adds the generic tags `bridges`, `forest`, and `rivers`. Open-sided equipment remains train-character copy rather than a route-specific taxonomy value.
+
+New values should be added only when they can describe more than one journey and should continue to format through the shared comparison and search helpers.

@@ -64,6 +64,7 @@ button { font: inherit; }
 .route-media--flam-railway { background: #315660; }
 .route-media--cinque-terre { background: #2f6570; }
 .route-media--tranzalpine { background: #36584d; }
+.route-media--kurobe-gorge-railway { background: #344f3f; }
 .route-media__image { object-fit: cover; }
 .route-media__credit { position: absolute; right: 1rem; bottom: 0.8rem; z-index: 2; font-size: 0.62rem; }
 .route-media__kicker { align-self: flex-start; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.82; }
@@ -153,6 +154,16 @@ button { font: inherit; }
 .action-button:hover, .direction-button:hover { border-color: var(--accent); color: var(--accent); }
 .action-button--primary { border-color: var(--foreground); background: var(--foreground); color: white; }
 .action-button:disabled { cursor: not-allowed; opacity: 0.52; }
+.action-button:active, .direction-button:active, .filter-button:active { transform: translateY(1px); }
+.route-hero-grid { display: grid; grid-template-areas: "identity" "media" "summary"; gap: 1.5rem; }
+.route-hero-identity { grid-area: identity; }
+.route-hero-grid > .route-media { grid-area: media; }
+.route-hero-summary { grid-area: summary; }
+.journey-actions { margin-top: 1.5rem; }
+.journey-actions__personal { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: .5rem; }
+.journey-actions__contextual { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.journey-actions__contextual .action-button { min-height: 2.75rem; padding-inline: .85rem; }
+.journey-actions__status { min-height: 1.25rem; margin-top: .5rem; color: var(--accent); font-size: .72rem; font-weight: 700; }
 
 .signature-panel { margin-top: 3rem; border: 1px solid var(--line); padding: 1.5rem; }
 .direction-button { width: fit-content; }
@@ -187,7 +198,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .search-field input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--foreground); font-size: 1.05rem; }
 .route-section-nav { position: sticky; top: 0; z-index: 15; display: flex; gap: 1.5rem; overflow-x: auto; border-block: 1px solid var(--line); background: rgb(245 242 234 / 96%); padding: 0 1rem; scrollbar-width: none; }
 .route-section-nav a { min-height: 3rem; display: inline-flex; flex: 0 0 auto; align-items: center; color: #656a64; font-size: 0.72rem; font-weight: 700; text-decoration: none; }
-.route-section-nav a:hover, .route-section-nav a:focus-visible { color: var(--accent); }
+.route-section-nav a:hover, .route-section-nav a:focus-visible { color: var(--accent); text-decoration: underline; text-underline-offset: .35rem; }
 .scroll-section { scroll-margin-top: 4.2rem; }
 .map-preparing { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; background: #e6e7e0; color: #6a6f68; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
 .map-preparing::before { content: ""; position: absolute; width: 45%; border-top: 2px solid rgb(23 99 74 / 38%); transform: rotate(-8deg); }
@@ -223,9 +234,17 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .library-summary { max-width: 40rem; }
   .library-summary div { padding: 1.25rem; }
   .personal-rail-map { height: 30rem; }
+  .route-hero-grid { grid-template-areas: "identity media" "summary media"; grid-template-columns: .82fr 1.18fr; align-items: end; gap: 2rem 3.5rem; }
+  .journey-actions__personal { display: flex; flex-wrap: wrap; }
 }
 
-@media (max-width: 639px) { body { padding-bottom: calc(3.8rem + env(safe-area-inset-bottom)); } }
+@media (max-width: 639px) {
+  body { padding-bottom: calc(3.8rem + env(safe-area-inset-bottom)); }
+  .route-media--hero { min-height: 17rem; margin-inline: -1rem; }
+  .route-section-nav { top: 0; gap: 1.25rem; padding-inline: 1rem; scroll-snap-type: x proximity; }
+  .route-section-nav a { min-height: 3.25rem; scroll-snap-align: start; }
+  .route-map-canvas { height: 24rem; min-height: 24rem; }
+}
 
 @media (hover: hover) { .journey-card:hover { border-color: #9ca198; transform: translateY(-2px); } .journey-card:hover .route-media__line { transform: translateX(0.2rem); } }
 

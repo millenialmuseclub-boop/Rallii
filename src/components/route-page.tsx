@@ -29,14 +29,15 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
     window.dispatchEvent(new Event(directionChangeEvent));
   }
   return <><SiteHeader /><main><article>
-    <header className="site-shell py-10 sm:py-16">
-      <div className="grid items-end gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><button className="direction-button focus-ring mt-5" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
+    <header className="site-shell scroll-section py-10 sm:py-16" id="overview">
+      <div className="route-hero-grid">
+        <div className="route-hero-identity"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><button className="direction-button focus-ring mt-5" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button></div>
         <RouteMedia summary={summary} variant="hero" />
+        <div className="route-hero-summary"><p className="max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
       </div>
       <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={summary.durationLabel ?? formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>
     </header>
-    <nav className="route-section-nav" aria-label="On this journey"><a href="#route">Route</a><a href="#highlights">Highlights</a><a href="#timeline">Timeline</a><a href="#practical">Practical</a></nav>
+    <nav className="route-section-nav" aria-label="On this journey"><a href="#overview">Overview</a><a href="#best-side">Best Side</a><a href="#route">Map</a><a href="#timeline">Timeline</a><a href="#practical">Practical</a></nav>
     <div className="site-shell pb-28 sm:pb-28">
       <RouteExperience route={route} direction={direction} />
       <section className="section-space border-t border-stone-300 pt-14 sm:pt-20" aria-labelledby="expect-title"><p className="eyebrow">Journey overview</p><h2 id="expect-title" className="mt-2 font-serif text-4xl sm:text-5xl">What to Expect</h2><dl className="mt-9 grid gap-px bg-stone-300 sm:grid-cols-3"><OverviewItem term="Reservations" detail={`${formatReservation(summary.reservationStatus)} for this journey.`} /><OverviewItem term="Train" detail={summary.trainType} /><OverviewItem term="Operated by" detail={summary.operator} /></dl></section>

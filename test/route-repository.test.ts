@@ -8,6 +8,7 @@ import { westHighlandLineRoute } from "../src/data/routes/west-highland-line.ts"
 import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
 import { cinqueTerreRoute } from "../src/data/routes/cinque-terre.ts";
 import { tranzAlpineRoute } from "../src/data/routes/tranzalpine.ts";
+import { kurobeGorgeRailwayRoute } from "../src/data/routes/kurobe-gorge-railway.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -237,7 +238,8 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("west-highland-line")?.summary.name, "West Highland Line");
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
-  assert.equal(getAllRoutes().length, 7);
+  assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
+  assert.equal(getAllRoutes().length, 8);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -321,7 +323,7 @@ test("Glacier Express satisfies route invariants", () => {
   assert.equal(glacierExpressRoute.stops.at(-1)?.name, "St. Moritz");
 });
 
-for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre", "tranzalpine"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
+for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre", "tranzalpine", "kurobe-gorge-railway"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
   const contents = await readFile(`public/data/routes/${slug}.geojson`, "utf8");
   const geoJson = JSON.parse(contents) as {
     type?: string;
@@ -397,4 +399,58 @@ test("media landmark references resolve within their canonical route", () => {
     const route = getRouteBySlug(media.routeSlug);
     assert.ok(route?.landmarks.some((landmark) => landmark.id === media.relatedLandmarkId));
   }
+});
+
+test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
+  assert.equal(getRouteBySlug("kurobe-gorge-railway"), kurobeGorgeRailwayRoute);
+  assert.deepEqual(validateRoute(kurobeGorgeRailwayRoute), []);
+  assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
+  assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
+  assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
+  assert.equal(getAllRoutes().length, 8);
+});
+
+test("Kurobe search, Discover, and collections use generic metadata", () => {
+  for (const query of ["Kurobe Gorge Railway", "Kurobe", "Unazuki", "Keyakidaira", "Japan", "Japanese Alps", "gorge", "river", "bridges", "tunnels", "open-sided train", "Atobiki Bridge"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "kurobe-gorge-railway"), `Expected Kurobe Gorge Railway for ${query}`);
+  }
+  assert.deepEqual(getAllRoutes().filter((route) => route.summary.countries.includes("Japan")).map((route) => route.summary.slug), ["kurobe-gorge-railway"]);
+  assert.ok(getJourneyCollection("short-scenic-escapes")?.routeSlugs.includes("kurobe-gorge-railway"));
+  assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("kurobe-gorge-railway"));
+});
+
+test("Kurobe geometry is continuous, canonical, and matches prepared distance", async () => {
+  const contents = await readFile("public/data/routes/kurobe-gorge-railway.geojson", "utf8");
+  const data = JSON.parse(contents) as { metadata: { osmWayIds: number[]; approximateLengthKm: number; osmRelationIds: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  const geometry = data.features[0].geometry.coordinates;
+  assert.equal(geometry.length, 1085);
+  assert.equal(data.metadata.osmWayIds.length, 99);
+  assert.deepEqual(data.metadata.osmRelationIds, []);
+  assert.ok(Math.abs(routeLengthKm(geometry) - 19.91) < 0.02);
+  assert.ok(projectCoordinateOntoRoute([kurobeGorgeRailwayRoute.stops[0].longitude, kurobeGorgeRailwayRoute.stops[0].latitude], geometry).distanceFromRouteMeters < 5);
+  assert.ok(projectCoordinateOntoRoute([kurobeGorgeRailwayRoute.stops.at(-1)!.longitude, kurobeGorgeRailwayRoute.stops.at(-1)!.latitude], geometry).distanceFromRouteMeters < 5);
+  assert.ok(geometry.slice(1).every((coordinate, index) => projectCoordinateOntoRoute(coordinate, [geometry[index], coordinate]).distanceFromRouteMeters < 1));
+});
+
+test("Kurobe timeline, reverse guidance, relationships, and library remain generic", () => {
+  assert.equal(kurobeGorgeRailwayRoute.timelineEntries.length, 8);
+  assert.ok(kurobeGorgeRailwayRoute.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.ok(kurobeGorgeRailwayRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+  const forward = kurobeGorgeRailwayRoute.bestSideSegments.find((segment) => segment.id === "unazuki-lake-side");
+  assert.equal(forward?.forwardDirectionSide, "right");
+  assert.equal(forward?.reverseDirectionSide, "left");
+  assert.equal(getRouteRelationships("kurobe-gorge-railway").length, 2);
+  assert.equal(getJourneyDurationCategory(kurobeGorgeRailwayRoute.summary.durationMinutes), "Quick Escape");
+  assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
+});
+
+test("homepage index includes eight routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 8);
+  assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
+  assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("previous seven GeoJSON paths remain stable", () => {
+  const expected = ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre", "tranzalpine"];
+  assert.deepEqual(expected.map((slug) => getRouteBySlug(slug)?.geoJsonPath), expected.map((slug) => `/data/routes/${slug}.geojson`));
 });

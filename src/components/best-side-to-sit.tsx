@@ -12,7 +12,7 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
   const recommendation = deriveRecommendation(segments, direction);
 
   return (
-    <section className="signature-panel" aria-labelledby="best-side-title">
+    <section className="signature-panel scroll-section" id="best-side" aria-labelledby="best-side-title">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="eyebrow">Seat view guide</p>
