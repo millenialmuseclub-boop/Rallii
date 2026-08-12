@@ -292,6 +292,18 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .best-side-segment b { display: block; font-size: .86rem; }
 .best-side-segment small { display: block; margin-top: .25rem; color: #777b75; font-size: .68rem; }
 .best-side-segment strong { flex: 0 0 auto; color: var(--accent); font-size: .82rem; }
+.route-media:has(.route-media__image)::before, .route-media:has(.route-media__image)::after { display: none; }
+.route-media__image { z-index: 0; }
+.route-media__credit { right: 0; bottom: 0; left: 0; display: grid; gap: .4rem; padding: 3rem 1rem .85rem; background: linear-gradient(to top, rgb(14 24 19 / 78%), transparent); color: white; line-height: 1.4; text-align: left; }
+.route-media__credit span { max-width: 34rem; font-family: Georgia, "Times New Roman", serif; font-size: .88rem; }
+.route-media__credit small { font-size: .62rem; opacity: .9; }
+.route-media__credit a { color: inherit; text-decoration: underline; text-decoration-color: rgb(255 255 255 / 55%); text-underline-offset: .18rem; }
+.route-media--bernina-express .route-media__image { object-position: center 42%; }
+.route-media--goldenpass-express .route-media__image { object-position: 58% center; }
+.route-media--west-highland-line .route-media__image { object-position: center 45%; }
+.route-media--flam-railway .route-media__image { object-position: center 48%; }
+.route-media--cinque-terre .route-media__image { object-position: center 46%; }
+.route-media--tranzalpine .route-media__image { object-position: center 45%; }
 
 @media (min-width: 640px) {
   .desktop-nav ul { display: flex; align-items: center; gap: 1.8rem; }

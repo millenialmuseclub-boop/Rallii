@@ -16,6 +16,7 @@ import { getCollectionRoutes, getCollectionsForRoute, getJourneyCollection, jour
 import { featuredRouteSlugs } from "../src/data/featured-routes.ts";
 import { isNavigationItemActive, primaryNavigation } from "../src/data/navigation.ts";
 import { buildComparePath, getRouteRelationships } from "../src/data/route-relationships.ts";
+import { getRouteMedia, routeMediaBySlug } from "../src/data/route-media.ts";
 import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
 import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
@@ -363,5 +364,37 @@ test("route-to-collection links derive from centralized collection membership", 
     const collections = getCollectionsForRoute(route.summary.slug);
     assert.ok(collections.length > 0);
     assert.ok(collections.every((collection) => collection.routeSlugs.includes(route.summary.slug)));
+  }
+});
+
+test("every route has complete, locally prepared, licensed hero photography", async () => {
+  for (const route of getAllRoutes()) {
+    const media = getRouteMedia(route.summary.slug);
+    assert.ok(media);
+    assert.equal(media.routeSlug, route.summary.slug);
+    assert.ok(media.alt.length > 30 && media.alt !== route.summary.name);
+    assert.ok(media.caption.length > 40);
+    assert.match(media.sourcePageUrl, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+    assert.match(media.originalFileUrl, /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//);
+    assert.match(media.licenseName, /Public domain|CC BY/);
+    assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
+    assert.equal(media.accessedAt, "2026-08-12");
+    assert.ok(media.width >= 1400 && media.height >= 800);
+    const file = await readFile(`public${media.path}`);
+    assert.ok(file.length > 150_000);
+  }
+});
+
+test("featured routes use prepared photography and unknown routes retain fallback eligibility", () => {
+  assert.ok(featuredRouteSlugs.every((slug) => Boolean(getRouteMedia(slug))));
+  assert.equal(getRouteMedia("unprepared-route"), undefined);
+  assert.equal(Object.keys(routeMediaBySlug).length, getAllRoutes().length);
+});
+
+test("media landmark references resolve within their canonical route", () => {
+  for (const media of Object.values(routeMediaBySlug)) {
+    if (!media.relatedLandmarkId) continue;
+    const route = getRouteBySlug(media.routeSlug);
+    assert.ok(route?.landmarks.some((landmark) => landmark.id === media.relatedLandmarkId));
   }
 });
