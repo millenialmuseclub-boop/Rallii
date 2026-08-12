@@ -1,7 +1,7 @@
 "use client";
 
 import * as maplibregl from "maplibre-gl";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getViewSide } from "@/lib/route-direction";
 import type { JourneyDirection, Landmark, RouteStop, ViewSide } from "@/types/route";
 
@@ -40,8 +40,16 @@ export function RouteMap({
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map>(null);
   const landmarkMarkersRef = useRef(new Map<string, maplibregl.Marker>());
+  const stopMarkersRef = useRef<maplibregl.Marker[]>([]);
+  const routeBoundsRef = useRef<maplibregl.LngLatBounds | undefined>(undefined);
   const [error, setError] = useState<string>();
   const [ready, setReady] = useState(false);
+  const [showStations, setShowStations] = useState(true);
+  const [showLandmarks, setShowLandmarks] = useState(true);
+
+  const fitRoute = useCallback(() => {
+    if (mapRef.current && routeBoundsRef.current) mapRef.current.fitBounds(routeBoundsRef.current, { padding: 46, maxZoom: 11, duration: 500 });
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -95,6 +103,7 @@ export function RouteMap({
           (routeBounds, coordinate) => routeBounds.extend(coordinate),
           new maplibregl.LngLatBounds(coordinates[0], coordinates[0]),
         );
+        routeBoundsRef.current = bounds;
         map.fitBounds(bounds, { padding: 42, maxZoom: 11, duration: 0 });
 
         if (markersAdded) return;
@@ -107,10 +116,11 @@ export function RouteMap({
           marker.className = endpoint ? `route-marker route-marker--endpoint route-marker--${index === 0 ? "departure" : "arrival"}` : "route-marker";
           marker.setAttribute("aria-label", stop.name);
           marker.title = stop.name;
-          new maplibregl.Marker({ element: marker })
+          const stopMarker = new maplibregl.Marker({ element: marker })
             .setLngLat([stop.longitude, stop.latitude])
             .setPopup(new maplibregl.Popup({ offset: 12 }).setText(stop.name))
             .addTo(map);
+          stopMarkersRef.current.push(stopMarker);
         });
 
         landmarks.forEach((landmark) => {
@@ -128,7 +138,9 @@ export function RouteMap({
           description.textContent = landmark.shortDescription;
           const side = document.createElement("span");
           side.textContent = `View from ${originName}: ${formatSide(getViewSide(landmark.bestSideForward, landmark.bestSideReverse, direction))}`;
-          popupContent.append(title, description, side);
+          const distance = document.createElement("small");
+          distance.textContent = `${Math.round(landmark.distanceAlongRouteKm)} km from ${originName} · Select the matching timeline moment below`;
+          popupContent.append(title, description, distance, side);
 
           const mapMarker = new maplibregl.Marker({ element: markerElement })
             .setLngLat([landmark.longitude, landmark.latitude])
@@ -152,10 +164,15 @@ export function RouteMap({
     return () => {
       disposed = true;
       landmarkMarkers.clear();
+      stopMarkersRef.current = [];
+      routeBoundsRef.current = undefined;
       mapRef.current = null;
       map.remove();
     };
   }, [direction, geoJsonPath, landmarks, onSelectLandmark, originName, stops]);
+
+  useEffect(() => { stopMarkersRef.current.forEach((marker) => { marker.getElement().hidden = !showStations; }); }, [ready, showStations]);
+  useEffect(() => { landmarkMarkersRef.current.forEach((marker) => { marker.getElement().hidden = !showLandmarks; }); }, [ready, showLandmarks]);
 
   useEffect(() => {
     if (!selectedLandmarkId) return;
@@ -173,13 +190,14 @@ export function RouteMap({
   }, [landmarks, selectedLandmarkId]);
 
   return (
-    <div className="relative">
+    <div className={`route-map-frame${showStations ? "" : " route-map-frame--hide-stations"}${showLandmarks ? "" : " route-map-frame--hide-landmarks"}`}>
       <div
         ref={containerRef}
         role="region"
         aria-label={`Interactive map of the ${routeName} route`}
-        className="h-[26rem] w-full overflow-hidden bg-stone-200 sm:h-[34rem]"
+        className="route-map-canvas"
       />
+      {ready ? <div className="map-tools" aria-label="Map display controls"><button type="button" onClick={fitRoute}>Fit route</button><button type="button" aria-pressed={showStations} onClick={() => setShowStations((value) => !value)}>Stations</button><button type="button" aria-pressed={showLandmarks} onClick={() => setShowLandmarks((value) => !value)}>Landmarks</button></div> : null}
       {!ready && !error ? <div className="map-preparing" role="status"><span>Preparing the route</span></div> : null}
       {error ? (
         <p className="absolute bottom-3 left-3 right-3 bg-stone-950/85 px-3 py-2 text-sm text-white" role="status">

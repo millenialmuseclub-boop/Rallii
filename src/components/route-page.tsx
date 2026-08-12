@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { JourneyActions } from "@/components/journey-actions";
 import { RouteCard } from "@/components/route-card";
@@ -8,13 +9,16 @@ import { SiteHeader } from "@/components/site-header";
 import { RouteMedia } from "@/components/route-media";
 import type { JourneyDirection, RailRoute } from "@/types/route";
 import { getDirectionalEndpoints, parseJourneyDirection } from "@/lib/route-direction";
+import { getCollectionsForRoute } from "@/data/journey-collections";
+import { buildComparePath } from "@/data/route-relationships";
 
 const directionChangeEvent = "rallii:direction-change";
 
-export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes: RailRoute[] }) {
+export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes: Array<{ route: RailRoute; reason: string }> }) {
   const { summary } = route;
   const direction = useSyncExternalStore<JourneyDirection>(subscribeToDirection, getDirectionSnapshot, () => "forward");
   const endpoints = getDirectionalEndpoints(route, direction);
+  const collections = getCollectionsForRoute(summary.slug);
 
   function toggleDirection() {
     const nextDirection = direction === "forward" ? "reverse" : "forward";
@@ -37,7 +41,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
       <RouteExperience route={route} direction={direction} />
       <section className="section-space border-t border-stone-300 pt-14 sm:pt-20" aria-labelledby="expect-title"><p className="eyebrow">Journey overview</p><h2 id="expect-title" className="mt-2 font-serif text-4xl sm:text-5xl">What to Expect</h2><dl className="mt-9 grid gap-px bg-stone-300 sm:grid-cols-3"><OverviewItem term="Reservations" detail={`${formatReservation(summary.reservationStatus)} for this journey.`} /><OverviewItem term="Train" detail={summary.trainType} /><OverviewItem term="Operated by" detail={summary.operator} /></dl></section>
       <section className="section-space scroll-section" id="practical" aria-labelledby="practical-title"><p className="eyebrow">Plan the journey</p><h2 id="practical-title" className="mt-2 font-serif text-4xl sm:text-5xl">Practical Information</h2><dl className="mt-8 grid gap-px bg-stone-300 sm:grid-cols-2">{route.journeyInformation.map((item) => <OverviewItem key={item.id} term={item.label} detail={item.detail} />)}</dl></section>
-      {nextRoutes.length ? <section className="section-space" aria-labelledby="continue-title"><p className="eyebrow">More journeys</p><h2 id="continue-title" className="mt-2 mb-8 font-serif text-4xl sm:text-5xl">Continue Exploring</h2><div className="grid max-w-5xl gap-7 lg:grid-cols-2">{nextRoutes.map((item) => <RouteCard key={item.summary.slug} route={item} />)}</div></section> : null}
+      {nextRoutes.length ? <section className="section-space route-connections" aria-labelledby="continue-title"><div className="section-heading"><div><p className="eyebrow">Continue the story</p><h2 id="continue-title" className="mt-2 font-serif text-4xl sm:text-5xl">Related journeys</h2></div><Link className="secondary-link focus-ring" href="/discover">Browse all journeys →</Link></div><div className="mt-8 grid gap-7 lg:grid-cols-2">{nextRoutes.map((item) => <RouteCard key={item.route.summary.slug} route={item.route} relationshipReason={item.reason} variant="compact" />)}</div><div className="connection-links"><div><p className="eyebrow">Found in</p><div className="mt-3 flex flex-wrap gap-2">{collections.map((collection) => <Link className="context-link focus-ring" key={collection.slug} href={`/discover/${collection.slug}`}>{collection.title}</Link>)}</div></div><Link className="cta-button focus-ring" href={buildComparePath(summary.slug, nextRoutes[0]?.route.summary.slug)}>Compare with {nextRoutes[0]?.route.summary.name}</Link></div></section> : null}
       <section className="section-space border-t border-stone-300 pt-10" aria-labelledby="sources-title"><h2 id="sources-title" className="text-sm font-semibold">Route & data sources</h2><ul className="mt-4 grid gap-4 text-xs leading-5 text-stone-600 sm:grid-cols-3">{route.sources.map((source) => <li key={source.id}><span className="block uppercase tracking-[0.12em] text-stone-500">{source.category === "railway-map" ? "Railway / map data" : source.category === "operator" ? "Operator information" : source.category === "infrastructure" ? "Infrastructure information" : source.category === "tourism" ? "Scenic context" : "Rallii guidance"}</span>{source.url ? <a className="mt-1 inline-block underline decoration-stone-400 underline-offset-4" href={source.url} rel="noreferrer" target="_blank">{source.label}</a> : <span className="mt-1 block font-medium">{source.label}</span>}<p className="mt-1">{source.note}</p></li>)}</ul></section>
     </div>
   </article></main></>;

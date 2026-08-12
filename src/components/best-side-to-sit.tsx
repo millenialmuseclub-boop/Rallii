@@ -40,9 +40,9 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
               );
               const side = direction === "reverse" ? segment.reverseDirectionSide : segment.forwardDirectionSide;
               return (
-                <li className="flex min-h-11 items-center justify-between gap-4 py-2 text-sm" key={segment.id}>
-                  <span>{landmark?.name ?? segment.reason}</span>
-                  <span className="font-semibold text-accent">{formatSide(side)}</span>
+                <li className="best-side-segment" key={segment.id}>
+                  <span><b>{landmark?.name ?? segment.reason}</b><small>{Math.round(segment.startDistanceKm)}–{Math.round(segment.endDistanceKm)} km · {formatConfidenceLabel(segment.confidenceType)}</small></span>
+                  <strong>{formatSide(side)}</strong>
                 </li>
               );
             })}
@@ -83,3 +83,4 @@ function formatSide(side: ViewSide): string {
 function formatConfidence(values: BestSideSegment["confidenceType"][]): string {
   return values.includes("limited-data") ? "Some sections are early guidance based on limited reports." : "Prepared as Rallii editorial guidance.";
 }
+function formatConfidenceLabel(value: BestSideSegment["confidenceType"]): string { return value === "limited-data" ? "Limited data" : value === "community" ? "Community guidance" : "Editorial guidance"; }

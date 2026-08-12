@@ -19,3 +19,9 @@ export const journeyCollections: JourneyCollection[] = [
 
 export function getJourneyCollection(slug: string): JourneyCollection | undefined { return journeyCollections.find((collection) => collection.slug === slug); }
 export function getCollectionRoutes(collection: JourneyCollection, routes: RailRoute[]): RailRoute[] { return collection.routeSlugs.map((slug) => routes.find((route) => route.summary.slug === slug)).filter((route): route is RailRoute => Boolean(route)); }
+export function getCollectionsForRoute(routeSlug: string): JourneyCollection[] { return journeyCollections.filter((collection) => collection.routeSlugs.includes(routeSlug)); }
+export function getRelatedCollections(collection: JourneyCollection): JourneyCollection[] {
+  return journeyCollections
+    .filter((candidate) => candidate.slug !== collection.slug && candidate.routeSlugs.some((slug) => collection.routeSlugs.includes(slug)))
+    .slice(0, 2);
+}

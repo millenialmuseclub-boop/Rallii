@@ -12,7 +12,10 @@ import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
 import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "../src/lib/journey-comparison.ts";
-import { getCollectionRoutes, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
+import { getCollectionRoutes, getCollectionsForRoute, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
+import { featuredRouteSlugs } from "../src/data/featured-routes.ts";
+import { isNavigationItemActive, primaryNavigation } from "../src/data/navigation.ts";
+import { buildComparePath, getRouteRelationships } from "../src/data/route-relationships.ts";
 import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
 import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
@@ -333,4 +336,32 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
   const source = feature?.properties?.source ?? (geoJson as { metadata?: { source?: string } }).metadata?.source ?? "";
   assert.match(source, /OpenStreetMap/);
   assert.ok((feature?.geometry?.coordinates?.length ?? 0) > 250);
+});
+
+test("primary navigation is focused, consistent, and supports active nested pages", () => {
+  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Discover", "Search", "My Journeys"]);
+  assert.equal(isNavigationItemActive("/discover/alpine-journeys", "/discover"), true);
+  assert.equal(isNavigationItemActive("/compare", "/discover"), false);
+});
+
+test("homepage keeps exactly three valid featured journeys", () => {
+  assert.equal(featuredRouteSlugs.length, 3);
+  assert.ok(featuredRouteSlugs.every((slug) => Boolean(getRouteBySlug(slug))));
+});
+
+test("every route has exactly two reviewable relationships and a valid compare path", () => {
+  for (const route of getAllRoutes()) {
+    const relationships = getRouteRelationships(route.summary.slug);
+    assert.equal(relationships.length, 2);
+    assert.ok(relationships.every((item) => item.reason.length > 10 && Boolean(getRouteBySlug(item.slug))));
+    assert.equal(buildComparePath(route.summary.slug, relationships[0].slug), `/compare?routes=${route.summary.slug},${relationships[0].slug}`);
+  }
+});
+
+test("route-to-collection links derive from centralized collection membership", () => {
+  for (const route of getAllRoutes()) {
+    const collections = getCollectionsForRoute(route.summary.slug);
+    assert.ok(collections.length > 0);
+    assert.ok(collections.every((collection) => collection.routeSlugs.includes(route.summary.slug)));
+  }
 });
