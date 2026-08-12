@@ -23,7 +23,7 @@ export type LandmarkType =
 export type TimelineEntryType = LandmarkType | "journey-note";
 
 export type ConfidenceType = "editorial" | "community" | "limited-data";
-export type JourneyType = "panoramic" | "alpine" | "cross-border" | "unesco" | "scenic" | "regional" | "highlands" | "coastal";
+export type JourneyType = "panoramic" | "alpine" | "cross-border" | "unesco" | "scenic" | "regional" | "highlands" | "coastal" | "mountain";
 
 export interface RouteSummary {
   id: string;
@@ -47,6 +47,7 @@ export interface RouteSummary {
   heroImageSourceUrl?: string;
   metadataDestination?: string;
   metadataDescription?: string;
+  searchAliases?: string[];
 }
 
 export interface JourneyInformationItem {
@@ -58,7 +59,7 @@ export interface JourneyInformationItem {
 export interface RouteSource {
   id: string;
   label: string;
-  category: "railway-map" | "operator" | "infrastructure" | "editorial";
+  category: "railway-map" | "operator" | "infrastructure" | "tourism" | "editorial";
   url?: string;
   note: string;
 }

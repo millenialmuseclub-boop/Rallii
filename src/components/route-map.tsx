@@ -92,7 +92,7 @@ export function RouteMap({
           (routeBounds, coordinate) => routeBounds.extend(coordinate),
           new maplibregl.LngLatBounds(coordinates[0], coordinates[0]),
         );
-        map.fitBounds(bounds, { padding: 42, duration: 0 });
+        map.fitBounds(bounds, { padding: 42, maxZoom: 11, duration: 0 });
 
         if (markersAdded) return;
         markersAdded = true;

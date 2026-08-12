@@ -66,7 +66,7 @@ function buildMoments(entries: ScenicTimelineEntry[], stops: RouteStop[]): Journ
     distance: entry.distanceAlongRouteKm,
     kind: "landmark",
     title: entry.subtitle ?? entry.title,
-    label: entry.importance === "dont-miss" ? "Don’t miss" : "Scenic section",
+    label: entry.importance === "dont-miss" ? "Don’t miss" : entry.type === "station" ? "Major stop" : entry.importance === "highlight" ? "Journey highlight" : "Scenic section",
     description: entry.shortDescription,
     landmarkId: entry.relatedLandmarkId ?? "",
     bestSide: entry.bestSide && entry.bestSide !== "unknown" ? entry.bestSide : undefined,

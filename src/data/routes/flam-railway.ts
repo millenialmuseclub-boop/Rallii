@@ -1,0 +1,60 @@
+import type { RailRoute } from "../../types/route.ts";
+
+export const flamRailwayRoute = {
+  summary: {
+    id: "flam-railway", slug: "flam-railway", name: "Flåm Railway", origin: "Flåm", destination: "Myrdal", country: "Norway",
+    countries: ["Norway"], journeyTypes: ["scenic", "mountain"], operator: "Vy Tog AS", durationMinutes: 60, distanceKm: 20.2,
+    trainType: "Mountain scenic railway", reservationStatus: "recommended",
+    shortDescription: "A concentrated climb from the Aurlandsfjord through Flåmsdalen, passing waterfalls and tunnels on the ascent to mountain-level Myrdal.",
+    status: "published", heroImageAlt: "Flåm Railway climbing through the steep mountain valley between Flåm and Myrdal", metadataDestination: "Myrdal",
+    metadataDescription: "A curated guide to the one-hour Flåm Railway journey from the Aurlandsfjord to mountain-level Myrdal.",
+    searchAliases: ["Flåmsbana", "Flamsbana", "Flam Railway", "R45 Myrdal Flåm"],
+  },
+  stops: [
+    { id: "flam", name: "Flåm", latitude: 60.8628877, longitude: 7.1132143, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure near sea level at the head of Aurlandsfjord." },
+    { id: "lunden", name: "Lunden", latitude: 60.850874, longitude: 7.1138539, sequence: 2, distanceAlongRouteKm: 1.6 },
+    { id: "hareina", name: "Håreina", latitude: 60.839759, longitude: 7.1228353, sequence: 3, distanceAlongRouteKm: 2.98 },
+    { id: "berekvam", name: "Berekvam", latitude: 60.7882013, longitude: 7.0957802, sequence: 4, distanceAlongRouteKm: 9.67 },
+    { id: "blomheller", name: "Blomheller", latitude: 60.7717222, longitude: 7.1019039, sequence: 5, distanceAlongRouteKm: 11.77 },
+    { id: "kjosfossen", name: "Kjosfossen", latitude: 60.7470893, longitude: 7.1356987, sequence: 6, distanceAlongRouteKm: 16.05, shortDescription: "A seasonal railway stop beside the route’s signature waterfall." },
+    { id: "reinunga", name: "Reinunga", latitude: 60.7438637, longitude: 7.1391692, sequence: 7, distanceAlongRouteKm: 17.97 },
+    { id: "vatnahalsen", name: "Vatnahalsen", latitude: 60.7437911, longitude: 7.1293259, sequence: 8, distanceAlongRouteKm: 19.03 },
+    { id: "myrdal", name: "Myrdal", latitude: 60.7352607, longitude: 7.1225469, sequence: 9, distanceAlongRouteKm: 20.14, shortDescription: "Arrival at 867 metres on the Bergen Line." },
+  ],
+  landmarks: [
+    { id: "lower-flamsdalen", name: "Lower Flåmsdalen", type: "scenic-section", latitude: 60.8271468, longitude: 7.1202617, distanceAlongRouteKm: 4.5, shortDescription: "The railway leaves the fjord-level village and begins threading through the cultivated lower valley beneath steep mountainsides.", importance: "highlight", bestSideForward: "varies", bestSideReverse: "varies" },
+    { id: "rjoandefossen", name: "Rjoandefossen", type: "other", latitude: 60.8247109, longitude: 7.1073033, distanceAlongRouteKm: 4.9, shortDescription: "A tall two-drop waterfall visible across the valley from the railway during the lower climb.", importance: "highlight", bestSideForward: "right", bestSideReverse: "left" },
+    { id: "kjosfossen-waterfall", name: "Kjosfossen", type: "other", latitude: 60.7456648, longitude: 7.1389268, distanceAlongRouteKm: 16.05, shortDescription: "The train makes a scheduled photo stop beside this powerful waterfall when the seasonal halt is open.", importance: "dont-miss", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "myrdalsberget-ascent", name: "Myrdalsberget ascent", type: "scenic-section", latitude: 60.7448344, longitude: 7.1318144, distanceAlongRouteKm: 17.5, shortDescription: "Tunnels and tight curves carry the railway through the steep upper mountainside toward Vatnahalsen and Myrdal.", importance: "dont-miss", bestSideForward: "varies", bestSideReverse: "varies" },
+  ],
+  timelineEntries: [
+    { id: "timeline-lower-valley", title: "Lower Flåmsdalen", subtitle: "Leaving the fjord", distanceAlongRouteKm: 3.5, type: "scenic-section", importance: "highlight", bestSide: "varies", relatedLandmarkId: "lower-flamsdalen", shortDescription: "The railway quickly exchanges Flåm’s fjord-level setting for farms, river, and steep valley walls." },
+    { id: "timeline-rjoandefossen", title: "Rjoandefossen", distanceAlongRouteKm: 4.9, type: "other", importance: "highlight", bestSide: "right", relatedLandmarkId: "rjoandefossen", shortDescription: "Look across the valley for the high, tiered waterfall during the early climb." },
+    { id: "timeline-berekvam", title: "Berekvam", subtitle: "Middle valley", distanceAlongRouteKm: 9.67, type: "station", importance: "normal", shortDescription: "Near the route’s midpoint, the valley narrows and the climb becomes more pronounced." },
+    { id: "timeline-kjosfossen", title: "Kjosfossen", distanceAlongRouteKm: 16.05, type: "other", importance: "dont-miss", bestSide: "both", relatedLandmarkId: "kjosfossen-waterfall", shortDescription: "The signature waterfall is paired with a railway photo stop when the seasonal halt is open." },
+    { id: "timeline-upper-ascent", title: "Upper mountain ascent", subtitle: "Vatnahalsen & Myrdalsberget", distanceAlongRouteKm: 17.5, type: "scenic-section", importance: "dont-miss", bestSide: "varies", relatedLandmarkId: "myrdalsberget-ascent", shortDescription: "The final kilometres compress tunnels, sharp curves, and mountain terrain before Myrdal." },
+  ],
+  bestSideSegments: [
+    { id: "lower-valley", startDistanceKm: 1.5, endDistanceKm: 4.7, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "The valley and river change orientation as the railway climbs.", confidenceType: "limited-data" },
+    { id: "rjoandefossen-view", startDistanceKm: 4.7, endDistanceKm: 6, forwardDirectionSide: "right", reverseDirectionSide: "left", reason: "Rjoandefossen stands across the valley on this side of the train.", confidenceType: "editorial" },
+    { id: "upper-curves", startDistanceKm: 16.5, endDistanceKm: 20, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "Tunnels and tight curves repeatedly change the strongest viewing angle.", confidenceType: "limited-data" },
+  ],
+  journeyInformation: [
+    { id: "fjord-to-mountain", label: "From fjord to mountain", detail: "Vy places Flåm at 2 metres above sea level and Myrdal at 867 metres—a dramatic climb in roughly one hour." },
+    { id: "tickets", label: "Tickets", detail: "Book a specific Flåm Railway departure in advance, particularly in busy periods. Current times and ticket conditions vary by date." },
+    { id: "on-board", label: "On board", detail: "Vy lists comfortable seating, large windows, overhead luggage racks, wooden interiors, and toilets." },
+    { id: "food", label: "Food & drink", detail: "There is no onboard catering. Refreshments are available at Flåm and Myrdal stations." },
+    { id: "connections", label: "At Myrdal", detail: "Myrdal connects the Flåm Railway with Bergen Line services toward Bergen and Oslo." },
+    { id: "accessibility", label: "Accessibility", detail: "Vy identifies Flåm, Vatnahalsen, and Myrdal for wheelchair boarding and alighting; check current assistance details before travel." },
+  ],
+  sources: [
+    { id: "flam-osm", label: "OpenStreetMap", category: "railway-map", url: "https://www.openstreetmap.org/relation/18611528", note: "Prepared from R45 Flåm–Myrdal relation 18611528 and 72 railway ways; © OpenStreetMap contributors, ODbL." },
+    { id: "flam-bane-nor", label: "Bane NOR — R45 Myrdal–Flåm", category: "infrastructure", url: "https://www.banenor.no/en/traffic-and-travel/train-lines/myrdal-flam/", note: "Official line identity, operator, and station sequence." },
+    { id: "flam-kjosfossen", label: "Bane NOR — Kjosfossen", category: "infrastructure", url: "https://www.banenor.no/en/traffic-and-travel/railway-stations/-k-/kjosfossen/", note: "Official waterfall-stop, accessibility, elevation, and seasonal-opening context." },
+    { id: "flam-vy", label: "Vy — The Flåm Railway", category: "operator", url: "https://www.vy.no/en/traffic-and-routes/stations-and-network-maps/the-flam-railway", note: "Official operations, elevation, tunnel, onboard facility, food, ticket, and accessibility information." },
+    { id: "flam-visit-norway", label: "Visit Norway — The Flåm Railway", category: "tourism", url: "https://www.visitnorway.com/listings/the-fl%C3%A5m-railway/4202/", note: "Official tourism context for duration, landscape, waterfalls, and tunnels." },
+    { id: "flam-rallii", label: "Rallii guidance", category: "editorial", note: "Curated short-route sequence and cautious directional viewing guidance derived from the prepared railway geometry." },
+  ],
+  geoJsonPath: "/data/routes/flam-railway.geojson",
+  relatedRouteSlugs: ["west-highland-line", "glacier-express"],
+} satisfies RailRoute;

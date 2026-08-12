@@ -27,5 +27,5 @@ function formatJourneyType(value: string): string { return value.split("-").map(
 function formatDuration(minutes: number): string {
   const hours = Math.floor(minutes / 60);
   const remainder = minutes % 60;
-  return remainder ? `${hours} hr ${remainder} min` : `${hours} hours`;
+  return remainder ? `${hours} hr ${remainder} min` : hours === 1 ? "1 hour" : `${hours} hours`;
 }

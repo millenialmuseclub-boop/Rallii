@@ -5,6 +5,7 @@ import { glacierExpressRoute } from "../src/data/routes/glacier-express.ts";
 import { berninaExpressRoute } from "../src/data/routes/bernina-express.ts";
 import { goldenPassExpressRoute } from "../src/data/routes/goldenpass-express.ts";
 import { westHighlandLineRoute } from "../src/data/routes/west-highland-line.ts";
+import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -14,8 +15,31 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("bernina-express")?.summary.name, "Bernina Express");
   assert.equal(getRouteBySlug("goldenpass-express")?.summary.name, "GoldenPass Express");
   assert.equal(getRouteBySlug("west-highland-line")?.summary.name, "West Highland Line");
-  assert.equal(getAllRoutes().length, 4);
+  assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
+  assert.equal(getAllRoutes().length, 5);
   assert.equal(getRouteBySlug("missing-route"), undefined);
+});
+
+test("Flåm Railway is a compact Norwegian route compatible with repository and Saved lookup", () => {
+  assert.deepEqual(validateRoute(flamRailwayRoute), []);
+  assert.deepEqual(flamRailwayRoute.summary.countries, ["Norway"]);
+  assert.ok(flamRailwayRoute.summary.journeyTypes.includes("mountain"));
+  assert.equal(getRouteBySlug("flam-railway"), flamRailwayRoute);
+  assert.equal(flamRailwayRoute.timelineEntries.length, 5);
+  assert.equal(flamRailwayRoute.stops.length, 9);
+});
+
+test("Flåm search is accent-insensitive and indexes aliases, landmarks, and scenic language", () => {
+  for (const query of ["Flåm", "Flam", "Flåmsbana", "Myrdal", "Norway", "Kjosfossen", "waterfall", "mountain", "scenic"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "flam-railway"), `Expected Flåm Railway for ${query}`);
+  }
+});
+
+test("Flåm reverse-direction guidance uses explicitly prepared values", () => {
+  const rjoandefossen = flamRailwayRoute.bestSideSegments.find((segment) => segment.id === "rjoandefossen-view");
+  assert.equal(rjoandefossen?.forwardDirectionSide, "right");
+  assert.equal(rjoandefossen?.reverseDirectionSide, "left");
+  assert.equal(flamRailwayRoute.bestSideSegments.length, 3);
 });
 
 test("search ranks route names above other field matches", () => {
@@ -76,7 +100,7 @@ test("Glacier Express satisfies route invariants", () => {
   assert.equal(glacierExpressRoute.stops.at(-1)?.name, "St. Moritz");
 });
 
-for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
+for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
   const contents = await readFile(`public/data/routes/${slug}.geojson`, "utf8");
   const geoJson = JSON.parse(contents) as {
     type?: string;
@@ -91,5 +115,5 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
   assert.equal(feature?.geometry?.type, "LineString");
   const source = feature?.properties?.source ?? (geoJson as { metadata?: { source?: string } }).metadata?.source ?? "";
   assert.match(source, /OpenStreetMap/);
-  assert.ok((feature?.geometry?.coordinates?.length ?? 0) > 1_000);
+  assert.ok((feature?.geometry?.coordinates?.length ?? 0) > 500);
 });

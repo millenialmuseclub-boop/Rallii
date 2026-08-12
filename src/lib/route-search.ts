@@ -36,12 +36,16 @@ function searchableFields(route: RailRoute): SearchField[] {
   const { summary } = route;
   return [
     { value: summary.name, type: "route", priority: 700 },
+    ...(summary.searchAliases ?? []).map((alias) => ({ value: alias, type: "route" as const, priority: 680, label: summary.name })),
     { value: summary.origin, type: "endpoint", priority: 600, label: `From ${summary.origin}` },
     { value: summary.destination, type: "endpoint", priority: 600, label: `To ${summary.destination}` },
     { value: summary.country, type: "geography", priority: 500, label: summary.country },
     ...summary.countries.map((country) => ({ value: country, type: "geography" as const, priority: 500, label: country })),
     ...route.stops.map((stop) => ({ value: stop.name, type: "stop" as const, priority: 400, label: `Via ${stop.name}` })),
-    ...route.landmarks.map((landmark) => ({ value: landmark.name, type: "landmark" as const, priority: 300, label: `Landmark: ${landmark.name}` })),
+    ...route.landmarks.flatMap((landmark) => [
+      { value: landmark.name, type: "landmark" as const, priority: 300, label: `Landmark: ${landmark.name}` },
+      { value: landmark.shortDescription, type: "landmark" as const, priority: 280, label: `Landmark: ${landmark.name}` },
+    ]),
     { value: summary.operator, type: "operator", priority: 200, label: `Operated by ${summary.operator}` },
     ...summary.journeyTypes.map((type) => ({ value: type, type: "journey-type" as const, priority: 100, label: `${titleCase(type)} journey` })),
   ];
