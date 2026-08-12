@@ -48,7 +48,7 @@ export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; sel
         <CompareRow label="Best side guidance" routes={selected} render={getBestSideSummary} />
       </dl>
       <div className="comparison-grid mt-8">{selected.map((route) => <section className="compare-best-for" key={route.summary.slug}><p className="eyebrow">{route.summary.name}</p><h2 className="mt-2 font-serif text-2xl">Choose this if you want</h2><ul>{route.summary.bestFor.map((item) => <li key={item}>{item}</li>)}</ul></section>)}</div>
-      <div className="mt-8 flex flex-wrap items-center gap-3"><button className="action-button" type="button" onClick={shareComparison}>Share comparison</button><button className="action-button" type="button" onClick={() => router.push(buildComparisonPath([slugs[1], slugs[0]]))}>Swap journeys</button><span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span></div>
+      <div className="mt-8 flex flex-wrap items-center gap-3"><button className="action-button" type="button" onClick={shareComparison}>Share comparison</button><button className="action-button" type="button" onClick={() => router.push(buildComparisonPath([slugs[1], slugs[0]]))}>Swap journeys</button><Link className="cta-button" href="/plan">Continue planning</Link><span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span></div>
     </>}
   </div>;
 }

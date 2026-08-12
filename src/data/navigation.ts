@@ -1,9 +1,10 @@
 export const primaryNavigation = [
+  { href: "/", label: "Home" },
   { href: "/discover", label: "Discover" },
   { href: "/search", label: "Search" },
-  { href: "/saved", label: "My Journeys" },
+  { href: "/plan", label: "Plan" },
 ] as const;
 
 export function isNavigationItemActive(pathname: string, href: string): boolean {
-  return pathname === href || pathname.startsWith(`${href}/`);
+  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }

@@ -52,6 +52,10 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "tranzalpine", reason: "Another panoramic mountain crossing across two coasts" },
     { slug: "glacier-express", reason: "A classic long-form mountain journey on a different scale" },
   ],
+  "settle-carlisle": [
+    { slug: "west-highland-line", reason: "Another scheduled British journey through remote northern landscapes" },
+    { slug: "douro-line", reason: "Another ordinary railway shaped by a celebrated valley landscape" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { RouteMedia } from "@/components/route-media";
+import { SaveRouteButton } from "@/components/save-route-button";
 import type { RailRoute } from "@/types/route";
 
 export type RouteCardVariant = "standard" | "featured" | "compact";
@@ -27,7 +28,7 @@ export function RouteCard({ route, matchContext, relationshipReason, variant = "
         {variant !== "compact" ? <p className="route-card-reason">{summary.bestFor[0]}</p> : null}
         <div className="route-card__footer">
           <span className="route-card-meta">{summary.durationLabel ?? formatDuration(summary.durationMinutes)} <i aria-hidden="true" /> {formatLabel(summary.journeyTypes[0])}</span>
-          <span className="route-card__links"><Link className="text-link focus-ring" href={`/compare?routes=${summary.slug}`}>Compare</Link><Link className="primary-link focus-ring" href={`/routes/${summary.slug}`}>Explore <span aria-hidden="true">→</span></Link></span>
+          <span className="route-card__links"><SaveRouteButton slug={summary.slug} compact /><Link className="text-link focus-ring" href={`/compare?routes=${summary.slug}`}>Compare</Link><Link className="primary-link focus-ring" href={`/routes/${summary.slug}`}>Explore <span aria-hidden="true">→</span></Link></span>
         </div>
       </div>
     </article>

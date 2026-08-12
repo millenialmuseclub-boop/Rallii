@@ -18,7 +18,7 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: Jour
   function updateStatus(status: "want_to_go" | "been") {
     const nextStatus = routeStatus === status ? undefined : status;
     setStatus(routeSlug, nextStatus);
-    setActionStatus(nextStatus === "want_to_go" ? `${routeName} added to Want to Go.` : nextStatus === "been" ? `${routeName} marked Been.` : `${routeName} removed from My Journeys.`);
+    setActionStatus(nextStatus === "want_to_go" ? `${routeName} added to Want to Go.` : nextStatus === "been" ? `${routeName} marked Been.` : `${routeName} removed from Plan Journey.`);
   }
 
   async function shareJourney() {
@@ -48,7 +48,7 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: Jour
         <button className="action-button action-button--primary focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => updateStatus("want_to_go")}>{routeStatus === "want_to_go" ? "Saved: Want to Go" : "Want to Go"}</button>
         <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "been"} onClick={() => updateStatus("been")}>{routeStatus === "been" ? "Marked Been" : "Been"}</button>
       </div>
-      <div className="journey-actions__contextual"><button className="action-button focus-ring" type="button" onClick={shareJourney}>Share</button><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}</div>
+      <div className="journey-actions__contextual"><button className="action-button focus-ring" type="button" onClick={shareJourney}>Share</button><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link><Link className="action-button focus-ring" href="/plan">Plan</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}</div>
       <p className="journey-actions__status" role="status" aria-live="polite">{actionStatus}</p>
     </div>
   );

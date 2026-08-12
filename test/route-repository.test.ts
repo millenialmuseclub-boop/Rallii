@@ -13,6 +13,7 @@ import { belfastDerryRoute } from "../src/data/routes/belfast-derry.ts";
 import { dublinRosslareRoute } from "../src/data/routes/dublin-rosslare.ts";
 import { douroLineRoute } from "../src/data/routes/douro-line.ts";
 import { firstPassageWestRoute } from "../src/data/routes/first-passage-west.ts";
+import { settleCarlisleRoute } from "../src/data/routes/settle-carlisle.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -243,7 +244,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 12);
+  assert.equal(getAllRoutes().length, 13);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -346,7 +347,10 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
 });
 
 test("primary navigation is focused, consistent, and supports active nested pages", () => {
-  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Discover", "Search", "My Journeys"]);
+  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Home", "Discover", "Search", "Plan"]);
+  assert.equal(isNavigationItemActive("/", "/"), true);
+  assert.equal(isNavigationItemActive("/discover", "/"), false);
+  assert.equal(isNavigationItemActive("/plan", "/plan"), true);
   assert.equal(isNavigationItemActive("/discover/alpine-journeys", "/discover"), true);
   assert.equal(isNavigationItemActive("/compare", "/discover"), false);
 });
@@ -411,7 +415,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 12);
+  assert.equal(getAllRoutes().length, 13);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -448,10 +452,42 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("homepage index includes twelve routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 12);
+test("repository includes thirteen routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 13);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("Settle–Carlisle is a complete scheduled northern England journey", async () => {
+  assert.equal(getRouteBySlug("settle-carlisle"), settleCarlisleRoute);
+  assert.deepEqual(validateRoute(settleCarlisleRoute), []);
+  assert.deepEqual(settleCarlisleRoute.stops.map((stop) => stop.name), ["Leeds", "Skipton", "Settle", "Ribblehead", "Dent", "Garsdale", "Kirkby Stephen", "Appleby", "Carlisle"]);
+  assert.deepEqual(settleCarlisleRoute.summary.countries, ["United Kingdom"]);
+  for (const query of ["Settle Carlisle", "Ribblehead", "Yorkshire Dales", "Pennines", "Eden Valley", "Northern Rail"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "settle-carlisle"));
+  const data = JSON.parse(await readFile("public/data/routes/settle-carlisle.geojson", "utf8")) as { metadata: { relationIds: number[]; contributingWayIds: number[]; calculatedLengthKm: number }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  assert.equal(data.features[0].geometry.coordinates.length, 2904);
+  assert.equal(data.metadata.contributingWayIds.length, 526);
+  assert.deepEqual(data.metadata.relationIds, [9902815]);
+  assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 181.13) < 0.02);
+  assert.equal(getRouteRelationships("settle-carlisle").length, 2);
+  assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("settle-carlisle"));
+  assert.equal(settleCarlisleRoute.capabilities.rideMode, false);
+});
+
+test("mobile planning architecture removes the route rail and keeps integrations inert", async () => {
+  const [home, saved, plan, navigation, tool] = await Promise.all([
+    readFile("src/app/page.tsx", "utf8"),
+    readFile("src/app/saved/page.tsx", "utf8"),
+    readFile("src/app/plan/page.tsx", "utf8"),
+    readFile("src/data/navigation.ts", "utf8"),
+    readFile("src/components/travel-planning-tool.tsx", "utf8"),
+  ]);
+  assert.doesNotMatch(home, /Choose a window|home-route-rail|overflow-x-auto/);
+  assert.match(saved, /redirect\("\/plan"\)/);
+  assert.match(plan, /Plan Your Journey/);
+  assert.doesNotMatch(navigation, /My Journeys|\/saved/);
+  assert.match(tool, /Planning tool coming soon/);
+  assert.doesNotMatch(tool, /<script|travelpayouts|marker=/i);
 });
 
 test("Belfast–Derry is a complete Northern Irish coastal journey", async () => {
