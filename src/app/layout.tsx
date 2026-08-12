@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title: "Rallii — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
 };
 
-export const viewport: Viewport = { themeColor: "#173f32" };
+export const viewport: Viewport = { themeColor: "#f4f0e8", viewportFit: "cover" };
 
 export default function RootLayout({
   children,
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body><div className="pwa-frame">{children}</div></body>
     </html>
   );
 }
