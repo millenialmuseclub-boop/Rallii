@@ -10,7 +10,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
   return <><SiteHeader /><main><article>
     <header className="site-shell py-10 sm:py-16">
       <div className="grid items-end gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} /></div>
+        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
         <RouteMedia summary={summary} variant="hero" />
       </div>
       <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>

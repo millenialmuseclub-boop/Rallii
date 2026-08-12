@@ -1,6 +1,7 @@
 import type { RailRoute } from "../../types/route.ts";
 
 export const glacierExpressRoute = {
+  capabilities: { rideMode: false },
   summary: {
     id: "glacier-express",
     slug: "glacier-express",

@@ -7,9 +7,10 @@ import { useSavedRoutes } from "@/hooks/use-saved-routes";
 interface JourneyActionsProps {
   routeName: string;
   routeSlug: string;
+  rideModeAvailable: boolean;
 }
 
-export function JourneyActions({ routeName, routeSlug }: JourneyActionsProps) {
+export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: JourneyActionsProps) {
   const { isSaved, setSaved } = useSavedRoutes();
   const saved = isSaved(routeSlug);
   const [shareStatus, setShareStatus] = useState<string>();
@@ -49,6 +50,7 @@ export function JourneyActions({ routeName, routeSlug }: JourneyActionsProps) {
         Share
       </button>
       <Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link>
+      {rideModeAvailable ? <Link className="action-button action-button--primary focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}
       <span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span>
     </div>
   );

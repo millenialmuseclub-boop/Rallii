@@ -1,6 +1,7 @@
 import type { RailRoute } from "../../types/route.ts";
 
 export const flamRailwayRoute = {
+  capabilities: { rideMode: true },
   summary: {
     id: "flam-railway", slug: "flam-railway", name: "Flåm Railway", origin: "Flåm", destination: "Myrdal", country: "Norway",
     countries: ["Norway"], journeyTypes: ["scenic", "mountain"], operator: "Vy Tog AS", durationMinutes: 60, distanceKm: 20.2,

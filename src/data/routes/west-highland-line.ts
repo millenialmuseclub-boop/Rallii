@@ -1,6 +1,7 @@
 import type { RailRoute } from "../../types/route.ts";
 
 export const westHighlandLineRoute = {
+  capabilities: { rideMode: false },
   summary: {
     id: "west-highland-line", slug: "west-highland-line", name: "West Highland Line", origin: "Glasgow Queen Street", destination: "Mallaig", country: "Scotland · United Kingdom",
     countries: ["United Kingdom"], journeyTypes: ["scenic", "regional", "highlands", "coastal"], operator: "ScotRail",

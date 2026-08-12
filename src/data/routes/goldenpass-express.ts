@@ -1,6 +1,7 @@
 import type { RailRoute } from "../../types/route.ts";
 
 export const goldenPassExpressRoute = {
+  capabilities: { rideMode: false },
   summary: {
     id: "goldenpass-express", slug: "goldenpass-express", name: "GoldenPass Express", origin: "Montreux", destination: "Interlaken Ost", country: "Switzerland",
     countries: ["Switzerland"], journeyTypes: ["panoramic", "alpine", "scenic"], operator: "Montreux Oberland Bernois (MOB) / BLS",

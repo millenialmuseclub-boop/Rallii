@@ -114,6 +114,7 @@ export interface BestSideSegment {
 }
 
 export interface RailRoute {
+  capabilities: { rideMode: boolean };
   summary: RouteSummary;
   stops: RouteStop[];
   landmarks: Landmark[];

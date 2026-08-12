@@ -11,6 +11,37 @@ import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
 import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "../src/lib/journey-comparison.ts";
 import { getCollectionRoutes, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
+import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
+import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
+
+async function getFlamGeometry(): Promise<RouteCoordinate[]> { const contents = await readFile("public/data/routes/flam-railway.geojson", "utf8"); const data = JSON.parse(contents) as { features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> }; return data.features[0].geometry.coordinates; }
+
+test("Ride Mode capability is enabled only for Flåm Railway", () => {
+  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug), ["flam-railway"]);
+});
+
+test("route projection respects Flåm to Myrdal geometry direction", async () => {
+  const geometry = await getFlamGeometry(); const length = routeLengthKm(geometry);
+  const start = projectCoordinateOntoRoute(geometry[0], geometry); const end = projectCoordinateOntoRoute(geometry.at(-1)!, geometry); const midpoint = projectCoordinateOntoRoute(interpolateRouteCoordinate(geometry, 0.5), geometry);
+  assert.ok(start.distanceAlongRouteKm < 0.01); assert.ok(start.progress < 0.001);
+  assert.ok(Math.abs(end.distanceAlongRouteKm - length) < 0.01); assert.ok(end.progress > 0.999);
+  assert.ok(midpoint.progress > 0.49 && midpoint.progress < 0.51);
+});
+
+test("off-route projection reports a large distance and centralized confidence", async () => {
+  const geometry = await getFlamGeometry(); const projection = projectCoordinateOntoRoute([10.75, 59.91], geometry);
+  assert.ok(projection.distanceFromRouteMeters > 100_000); assert.equal(getMatchConfidence(projection.distanceFromRouteMeters), "unmatched"); assert.equal(getMatchConfidence(50), "on-route"); assert.equal(getMatchConfidence(500), "near-route");
+});
+
+test("demo interpolation follows the LineString and progresses monotonically", async () => {
+  const geometry = await getFlamGeometry(); const projections = [0, 0.25, 0.5, 0.75, 1].map((value) => projectCoordinateOntoRoute(interpolateRouteCoordinate(geometry, value), geometry));
+  assert.ok(projections.every((projection, index) => index === 0 || projection.distanceAlongRouteKm > projections[index - 1].distanceAlongRouteKm));
+  const endpointMidpoint: RouteCoordinate = [(geometry[0][0] + geometry.at(-1)![0]) / 2, (geometry[0][1] + geometry.at(-1)![1]) / 2]; assert.ok(projectCoordinateOntoRoute(interpolateRouteCoordinate(geometry, 0.5), geometry).distanceFromRouteMeters < 1); assert.ok(projectCoordinateOntoRoute(endpointMidpoint, geometry).distanceFromRouteMeters > 50);
+});
+
+test("Ride Mode advances upcoming highlights and excludes passed highlights", () => {
+  assert.equal(getNextHighlight(flamRailwayRoute, 0)?.id, "timeline-lower-valley"); assert.equal(getNextHighlight(flamRailwayRoute, 5)?.id, "timeline-kjosfossen"); assert.equal(getNextHighlight(flamRailwayRoute, 16.1)?.id, "timeline-upper-ascent"); assert.equal(getNextHighlight(flamRailwayRoute, 20.2), undefined); assert.equal(getPreviousHighlight(flamRailwayRoute, 16.1)?.id, "timeline-kjosfossen");
+});
 
 test("comparison parsing accepts valid routes and handles partial, duplicate, and invalid input", () => {
   const routes = getAllRoutes();

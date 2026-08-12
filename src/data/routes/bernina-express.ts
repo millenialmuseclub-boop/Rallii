@@ -1,6 +1,7 @@
 import type { RailRoute } from "../../types/route.ts";
 
 export const berninaExpressRoute = {
+  capabilities: { rideMode: false },
   summary: {
     id: "bernina-express",
     slug: "bernina-express",
