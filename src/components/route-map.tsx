@@ -2,7 +2,8 @@
 
 import * as maplibregl from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
-import type { Landmark, RouteStop, ViewSide } from "@/types/route";
+import { getViewSide } from "@/lib/route-direction";
+import type { JourneyDirection, Landmark, RouteStop, ViewSide } from "@/types/route";
 
 interface RouteMapProps {
   routeName: string;
@@ -10,6 +11,7 @@ interface RouteMapProps {
   geoJsonPath: string;
   stops: RouteStop[];
   landmarks: Landmark[];
+  direction: JourneyDirection;
   selectedLandmarkId?: string;
   onSelectLandmark: (landmarkId: string) => void;
 }
@@ -31,6 +33,7 @@ export function RouteMap({
   geoJsonPath,
   stops,
   landmarks,
+  direction,
   selectedLandmarkId,
   onSelectLandmark,
 }: RouteMapProps) {
@@ -101,7 +104,7 @@ export function RouteMap({
           const endpoint = index === 0 || index === stops.length - 1;
           const marker = document.createElement("button");
           marker.type = "button";
-          marker.className = endpoint ? "route-marker route-marker--endpoint" : "route-marker";
+          marker.className = endpoint ? `route-marker route-marker--endpoint route-marker--${index === 0 ? "departure" : "arrival"}` : "route-marker";
           marker.setAttribute("aria-label", stop.name);
           marker.title = stop.name;
           new maplibregl.Marker({ element: marker })
@@ -124,7 +127,7 @@ export function RouteMap({
           const description = document.createElement("p");
           description.textContent = landmark.shortDescription;
           const side = document.createElement("span");
-          side.textContent = `View from ${originName}: ${formatSide(landmark.bestSideForward)}`;
+          side.textContent = `View from ${originName}: ${formatSide(getViewSide(landmark.bestSideForward, landmark.bestSideReverse, direction))}`;
           popupContent.append(title, description, side);
 
           const mapMarker = new maplibregl.Marker({ element: markerElement })
@@ -152,7 +155,7 @@ export function RouteMap({
       mapRef.current = null;
       map.remove();
     };
-  }, [geoJsonPath, landmarks, onSelectLandmark, originName, stops]);
+  }, [direction, geoJsonPath, landmarks, onSelectLandmark, originName, stops]);
 
   useEffect(() => {
     if (!selectedLandmarkId) return;

@@ -162,6 +162,8 @@ button { font: inherit; }
 }
 .route-marker { width: 0.72rem; height: 0.72rem; padding: 0; }
 .route-marker--endpoint { width: 1rem; height: 1rem; background: var(--foreground); }
+.route-marker--departure { box-shadow: 0 0 0 3px #d8eadf; }
+.route-marker--arrival { border-width: 3px; background: var(--background); }
 .landmark-marker { width: 1.15rem; height: 1.15rem; padding: 0; border-width: 3px; transition: transform 160ms ease, background-color 160ms ease; }
 .landmark-marker:hover, .landmark-marker:focus-visible, .landmark-marker--selected { transform: scale(1.35); background: #bd6f42; }
 .landmark-popup strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 1rem; }

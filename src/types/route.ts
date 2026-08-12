@@ -3,6 +3,7 @@ export type PublicationStatus = "draft" | "published";
 export type ReservationStatus = "required" | "recommended" | "not-required" | "unknown";
 
 export type ViewSide = "left" | "right" | "both" | "varies" | "unknown";
+export type JourneyDirection = "forward" | "reverse";
 
 export type Importance = "normal" | "highlight" | "dont-miss";
 
@@ -86,6 +87,7 @@ export interface Landmark {
   longitude: number;
   distanceAlongRouteKm: number;
   shortDescription: string;
+  reverseShortDescription?: string;
   importance: Importance;
   bestSideForward: ViewSide;
   bestSideReverse: ViewSide;
@@ -95,13 +97,17 @@ export interface ScenicTimelineEntry {
   id: string;
   title: string;
   subtitle?: string;
+  reverseTitle?: string;
+  reverseSubtitle?: string;
   distanceAlongRouteKm: number;
   approximateJourneyMinutes?: number;
   type: TimelineEntryType;
   importance: Importance;
   bestSide?: ViewSide;
+  bestSideReverse?: ViewSide;
   relatedLandmarkId?: string;
   shortDescription: string;
+  reverseShortDescription?: string;
 }
 
 export interface BestSideSegment {

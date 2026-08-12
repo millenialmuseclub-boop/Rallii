@@ -17,6 +17,54 @@ import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../s
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
 import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
 import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
+import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments, getDirectionalStops, getDirectionalTimeline, parseJourneyDirection, transformRouteDistance } from "../src/lib/route-direction.ts";
+
+test("direction parsing is strict and safely defaults forward", () => {
+  assert.equal(parseJourneyDirection("reverse"), "reverse");
+  for (const value of [undefined, null, "", "forward", "backward", ["reverse", "forward"]]) assert.equal(parseJourneyDirection(value), Array.isArray(value) ? "reverse" : "forward");
+});
+
+test("direction helpers swap endpoints, stops, and exact endpoint distances", () => {
+  assert.deepEqual(getDirectionalEndpoints(tranzAlpineRoute, "reverse"), { origin: "Greymouth", destination: "Christchurch" });
+  const stops = getDirectionalStops(tranzAlpineRoute, "reverse");
+  assert.deepEqual(stops.map((stop) => stop.name), ["Greymouth", "Moana", "Arthur's Pass", "Springfield", "Darfield", "Rolleston", "Christchurch"]);
+  assert.deepEqual(stops.map((stop) => stop.sequence), [1, 2, 3, 4, 5, 6, 7]);
+  assert.equal(stops[0].distanceAlongRouteKm, 0); assert.equal(stops.at(-1)?.distanceAlongRouteKm, 230.98);
+  assert.equal(transformRouteDistance(0, 21.41, "reverse"), 21.41); assert.equal(transformRouteDistance(21.41, 21.41, "reverse"), 0);
+});
+
+test("reverse timelines transform order, distance, time, side, and editorial copy", () => {
+  const timeline = getDirectionalTimeline(tranzAlpineRoute, "reverse");
+  assert.equal(timeline[0].id, "timeline-lake-brunner"); assert.equal(timeline.at(-1)?.id, "timeline-plains");
+  assert.equal(timeline[0].distanceAlongRouteKm, 37.24); assert.equal(timeline[0].approximateJourneyMinutes, 55); assert.equal(timeline[0].bestSide, "right");
+  assert.match(timeline[0].shortDescription, /Look right from Greymouth/);
+  assert.ok(timeline.every((entry, index) => index === 0 || entry.distanceAlongRouteKm > timeline[index - 1].distanceAlongRouteKm));
+  assert.ok(timeline.every((entry, index) => index === 0 || entry.approximateJourneyMinutes === undefined || timeline[index - 1].approximateJourneyMinutes === undefined || entry.approximateJourneyMinutes > timeline[index - 1].approximateJourneyMinutes!));
+  assert.ok(getDirectionalTimeline(cinqueTerreRoute, "reverse").every((entry) => entry.approximateJourneyMinutes === undefined));
+});
+
+test("reverse landmarks and segments retain explicit prepared sides", () => {
+  const landmarks = getDirectionalLandmarks(cinqueTerreRoute, "reverse");
+  assert.equal(landmarks[0].id, "monterosso-coast"); assert.equal(landmarks[0].distanceAlongRouteKm, 5.31); assert.equal(landmarks[0].bestSideReverse, "right");
+  const segments = getDirectionalSegments(flamRailwayRoute, "reverse");
+  assert.ok(segments.every((segment, index) => index === 0 || segment.startDistanceKm >= segments[index - 1].startDistanceKm));
+  assert.equal(segments.find((segment) => segment.id === "rjoandefossen-view")?.reverseDirectionSide, "left");
+  for (const route of [tranzAlpineRoute, cinqueTerreRoute, flamRailwayRoute, westHighlandLineRoute, glacierExpressRoute]) {
+    for (const landmark of route.landmarks.filter((item) => ["both", "varies", "unknown"].includes(item.bestSideForward))) assert.equal(landmark.bestSideReverse, landmark.bestSideForward);
+  }
+});
+
+test("all routes satisfy generic direction invariants without changing canonical data", () => {
+  for (const route of getAllRoutes()) {
+    const canonicalStops = route.stops.map((stop) => ({ ...stop }));
+    const reverseStops = getDirectionalStops(route, "reverse"); const reverseTimeline = getDirectionalTimeline(route, "reverse");
+    assert.equal(reverseStops[0].name, route.summary.destination); assert.equal(reverseStops.at(-1)?.name, route.summary.origin);
+    assert.ok(reverseStops.every((stop, index) => index === 0 || stop.distanceAlongRouteKm > reverseStops[index - 1].distanceAlongRouteKm));
+    assert.ok(reverseTimeline.every((entry, index) => index === 0 || entry.distanceAlongRouteKm > reverseTimeline[index - 1].distanceAlongRouteKm));
+    assert.deepEqual(route.stops, canonicalStops);
+  }
+  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug), ["flam-railway"]);
+});
 
 test("TranzAlpine is a complete New Zealand coast-to-coast route", () => {
   assert.equal(getRouteBySlug("tranzalpine"), tranzAlpineRoute);

@@ -137,6 +137,7 @@ export const glacierExpressRoute = {
     {
       id: "timeline-matter-valley",
       title: "Leaving Zermatt",
+      reverseTitle: "Approaching Zermatt",
       subtitle: "Matter Valley",
       distanceAlongRouteKm: 11,
       approximateJourneyMinutes: 18,
@@ -145,6 +146,7 @@ export const glacierExpressRoute = {
       bestSide: "left",
       relatedLandmarkId: "matter-valley",
       shortDescription: "Look back into the high valley as the train begins its long Alpine crossing.",
+      reverseShortDescription: "Look ahead into the high valley as the train completes its long Alpine crossing.",
     },
     {
       id: "timeline-oberalp-pass",

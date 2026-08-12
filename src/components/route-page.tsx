@@ -1,29 +1,59 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import { JourneyActions } from "@/components/journey-actions";
 import { RouteCard } from "@/components/route-card";
 import { RouteExperience } from "@/components/route-experience";
 import { SiteHeader } from "@/components/site-header";
 import { RouteMedia } from "@/components/route-media";
-import type { RailRoute } from "@/types/route";
+import type { JourneyDirection, RailRoute } from "@/types/route";
+import { getDirectionalEndpoints, parseJourneyDirection } from "@/lib/route-direction";
+
+const directionChangeEvent = "rallii:direction-change";
 
 export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes: RailRoute[] }) {
   const { summary } = route;
+  const direction = useSyncExternalStore<JourneyDirection>(subscribeToDirection, getDirectionSnapshot, () => "forward");
+  const endpoints = getDirectionalEndpoints(route, direction);
+
+  function toggleDirection() {
+    const nextDirection = direction === "forward" ? "reverse" : "forward";
+    const url = new URL(window.location.href);
+    if (nextDirection === "reverse") url.searchParams.set("direction", "reverse");
+    else url.searchParams.delete("direction");
+    window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+    window.dispatchEvent(new Event(directionChangeEvent));
+  }
   return <><SiteHeader /><main><article>
     <header className="site-shell py-10 sm:py-16">
       <div className="grid items-end gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
-        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
+        <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><button className="direction-button focus-ring mt-5" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
         <RouteMedia summary={summary} variant="hero" />
       </div>
       <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={summary.durationLabel ?? formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>
     </header>
     <nav className="route-section-nav" aria-label="On this journey"><a href="#route">Route</a><a href="#highlights">Highlights</a><a href="#timeline">Timeline</a><a href="#practical">Practical</a></nav>
     <div className="site-shell pb-28 sm:pb-28">
-      <RouteExperience route={route} />
+      <RouteExperience route={route} direction={direction} />
       <section className="section-space border-t border-stone-300 pt-14 sm:pt-20" aria-labelledby="expect-title"><p className="eyebrow">Journey overview</p><h2 id="expect-title" className="mt-2 font-serif text-4xl sm:text-5xl">What to Expect</h2><dl className="mt-9 grid gap-px bg-stone-300 sm:grid-cols-3"><OverviewItem term="Reservations" detail={`${formatReservation(summary.reservationStatus)} for this journey.`} /><OverviewItem term="Train" detail={summary.trainType} /><OverviewItem term="Operated by" detail={summary.operator} /></dl></section>
       <section className="section-space scroll-section" id="practical" aria-labelledby="practical-title"><p className="eyebrow">Plan the journey</p><h2 id="practical-title" className="mt-2 font-serif text-4xl sm:text-5xl">Practical Information</h2><dl className="mt-8 grid gap-px bg-stone-300 sm:grid-cols-2">{route.journeyInformation.map((item) => <OverviewItem key={item.id} term={item.label} detail={item.detail} />)}</dl></section>
       {nextRoutes.length ? <section className="section-space" aria-labelledby="continue-title"><p className="eyebrow">More journeys</p><h2 id="continue-title" className="mt-2 mb-8 font-serif text-4xl sm:text-5xl">Continue Exploring</h2><div className="grid max-w-5xl gap-7 lg:grid-cols-2">{nextRoutes.map((item) => <RouteCard key={item.summary.slug} route={item} />)}</div></section> : null}
       <section className="section-space border-t border-stone-300 pt-10" aria-labelledby="sources-title"><h2 id="sources-title" className="text-sm font-semibold">Route & data sources</h2><ul className="mt-4 grid gap-4 text-xs leading-5 text-stone-600 sm:grid-cols-3">{route.sources.map((source) => <li key={source.id}><span className="block uppercase tracking-[0.12em] text-stone-500">{source.category === "railway-map" ? "Railway / map data" : source.category === "operator" ? "Operator information" : source.category === "infrastructure" ? "Infrastructure information" : source.category === "tourism" ? "Scenic context" : "Rallii guidance"}</span>{source.url ? <a className="mt-1 inline-block underline decoration-stone-400 underline-offset-4" href={source.url} rel="noreferrer" target="_blank">{source.label}</a> : <span className="mt-1 block font-medium">{source.label}</span>}<p className="mt-1">{source.note}</p></li>)}</ul></section>
     </div>
   </article></main></>;
+}
+
+function subscribeToDirection(onStoreChange: () => void): () => void {
+  window.addEventListener("popstate", onStoreChange);
+  window.addEventListener(directionChangeEvent, onStoreChange);
+  return () => {
+    window.removeEventListener("popstate", onStoreChange);
+    window.removeEventListener(directionChangeEvent, onStoreChange);
+  };
+}
+
+function getDirectionSnapshot(): JourneyDirection {
+  return parseJourneyDirection(new URLSearchParams(window.location.search).get("direction"));
 }
 
 function Essential({ label, value }: { label: string; value: string }) { return <div className="min-h-24 border-stone-300 px-3 py-5 even:border-l sm:min-h-28 sm:border-l sm:first:border-l-0 sm:px-5"><dt className="text-[0.68rem] uppercase tracking-[0.16em] text-stone-500">{label}</dt><dd className="mt-2 text-sm font-semibold sm:text-base">{value}</dd></div>; }

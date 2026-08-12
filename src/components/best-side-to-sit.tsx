@@ -1,17 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import type { BestSideSegment, Landmark, RouteSummary, ViewSide } from "@/types/route";
+import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments } from "@/lib/route-direction";
+import type { BestSideSegment, JourneyDirection, RailRoute, ViewSide } from "@/types/route";
 
-interface BestSideToSitProps {
-  summary: RouteSummary;
-  segments: BestSideSegment[];
-  landmarks: Landmark[];
-}
+interface BestSideToSitProps { route: RailRoute; direction: JourneyDirection; }
 
-export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitProps) {
-  const [reversed, setReversed] = useState(false);
-  const recommendation = useMemo(() => deriveRecommendation(segments, reversed), [segments, reversed]);
+export function BestSideToSit({ route, direction }: BestSideToSitProps) {
+  const segments = getDirectionalSegments(route, direction);
+  const landmarks = getDirectionalLandmarks(route, direction);
+  const endpoints = getDirectionalEndpoints(route, direction);
+  const recommendation = deriveRecommendation(segments, direction);
 
   return (
     <section className="signature-panel" aria-labelledby="best-side-title">
@@ -20,17 +18,9 @@ export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitPro
           <p className="eyebrow">Seat view guide</p>
           <h2 id="best-side-title" className="mt-2 font-serif text-3xl sm:text-4xl">Best Side to Sit</h2>
           <p className="mt-2 text-sm text-stone-600">
-            {reversed ? summary.destination : summary.origin} → {reversed ? summary.origin : summary.destination}
+            {endpoints.origin} → {endpoints.destination}
           </p>
         </div>
-        <button
-          className="direction-button focus-ring"
-          type="button"
-          aria-pressed={reversed}
-          onClick={() => setReversed((current) => !current)}
-        >
-          Reverse direction
-        </button>
       </div>
 
       <div className="mt-8 border-t border-stone-300 pt-7 sm:grid sm:grid-cols-[0.7fr_1.3fr] sm:gap-10">
@@ -48,7 +38,7 @@ export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitPro
               const landmark = landmarks.find(
                 (item) => item.distanceAlongRouteKm >= segment.startDistanceKm && item.distanceAlongRouteKm <= segment.endDistanceKm,
               );
-              const side = reversed ? segment.reverseDirectionSide : segment.forwardDirectionSide;
+              const side = direction === "reverse" ? segment.reverseDirectionSide : segment.forwardDirectionSide;
               return (
                 <li className="flex min-h-11 items-center justify-between gap-4 py-2 text-sm" key={segment.id}>
                   <span>{landmark?.name ?? segment.reason}</span>
@@ -66,10 +56,10 @@ export function BestSideToSit({ summary, segments, landmarks }: BestSideToSitPro
   );
 }
 
-function deriveRecommendation(segments: BestSideSegment[], reversed: boolean): { side: ViewSide; explanation: string } {
+function deriveRecommendation(segments: BestSideSegment[], direction: JourneyDirection): { side: ViewSide; explanation: string } {
   const totals: Record<ViewSide, number> = { left: 0, right: 0, both: 0, varies: 0, unknown: 0 };
   for (const segment of segments) {
-    const side = reversed ? segment.reverseDirectionSide : segment.forwardDirectionSide;
+    const side = direction === "reverse" ? segment.reverseDirectionSide : segment.forwardDirectionSide;
     totals[side] += segment.endDistanceKm - segment.startDistanceKm;
   }
   const side = (Object.entries(totals) as Array<[ViewSide, number]>)
