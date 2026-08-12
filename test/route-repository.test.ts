@@ -11,6 +11,8 @@ import { tranzAlpineRoute } from "../src/data/routes/tranzalpine.ts";
 import { kurobeGorgeRailwayRoute } from "../src/data/routes/kurobe-gorge-railway.ts";
 import { belfastDerryRoute } from "../src/data/routes/belfast-derry.ts";
 import { dublinRosslareRoute } from "../src/data/routes/dublin-rosslare.ts";
+import { douroLineRoute } from "../src/data/routes/douro-line.ts";
+import { firstPassageWestRoute } from "../src/data/routes/first-passage-west.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -241,7 +243,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 10);
+  assert.equal(getAllRoutes().length, 12);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -409,7 +411,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 10);
+  assert.equal(getAllRoutes().length, 12);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -446,8 +448,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("homepage index includes ten routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 10);
+test("homepage index includes twelve routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 12);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -477,6 +479,37 @@ test("Dublin–Rosslare is a complete Irish east-coast journey", async () => {
   assert.deepEqual(data.metadata.osmRelationIds, [16753439]);
   assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 167.86) < 0.02);
   assert.ok(getJourneyCollection("irish-rail-journeys")?.routeSlugs.includes("dublin-rosslare"));
+});
+
+test("Douro Line is a complete Portuguese river journey", async () => {
+  assert.equal(getRouteBySlug("douro-line"), douroLineRoute);
+  assert.deepEqual(validateRoute(douroLineRoute), []);
+  assert.deepEqual(douroLineRoute.summary.countries, ["Portugal"]);
+  assert.deepEqual(douroLineRoute.stops.map((stop) => stop.name), ["Porto Campanhã", "Ermesinde", "Penafiel", "Caíde", "Marco de Canaveses", "Mosteirô", "Aregos", "Régua", "Pinhão", "Tua", "Ferradosa", "Pocinho"]);
+  for (const query of ["Linha do Douro", "Porto Campanhã", "Régua", "Pinhão", "vineyards", "Portugal"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "douro-line"));
+  const data = JSON.parse(await readFile("public/data/routes/douro-line.geojson", "utf8")) as { metadata: { osmWayIds: number[]; osmRelationIds: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  assert.equal(data.features[0].geometry.coordinates.length, 2805);
+  assert.equal(data.metadata.osmWayIds.length, 380);
+  assert.deepEqual(data.metadata.osmRelationIds, [4508126, 1724300]);
+  assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 169.91) < 0.02);
+  assert.equal(getRouteRelationships("douro-line").length, 2);
+});
+
+test("First Passage to the West models a two-day Canadian tourism journey", async () => {
+  assert.equal(getRouteBySlug("first-passage-west"), firstPassageWestRoute);
+  assert.deepEqual(validateRoute(firstPassageWestRoute), []);
+  assert.equal(firstPassageWestRoute.summary.journeyDays, 2);
+  assert.deepEqual(firstPassageWestRoute.summary.overnightStops, ["Kamloops"]);
+  assert.deepEqual(firstPassageWestRoute.stops.map((stop) => stop.name), ["Vancouver", "Kamloops", "Banff"]);
+  assert.match(firstPassageWestRoute.journeyInformation.find((item) => item.id === "overnight")?.detail ?? "", /not a sleeper train/i);
+  for (const query of ["Rocky Mountaineer", "Fraser Canyon", "Kamloops", "Spiral Tunnels", "Canadian Rockies", "multi-day train"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "first-passage-west"));
+  const data = JSON.parse(await readFile("public/data/routes/first-passage-west.geojson", "utf8")) as { metadata: { osmWayIds: number[]; osmRelationIds: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  assert.equal(data.features[0].geometry.coordinates.length, 12247);
+  assert.equal(data.metadata.osmWayIds.length, 606);
+  assert.deepEqual(data.metadata.osmRelationIds, [7449835, 19430310, 7449764, 7449700, 8106956, 7449396]);
+  assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 899.37) < 0.02);
+  assert.equal(getRouteRelationships("first-passage-west").length, 2);
+  assert.equal(firstPassageWestRoute.capabilities.rideMode, false);
 });
 
 test("previous seven GeoJSON paths remain stable", () => {

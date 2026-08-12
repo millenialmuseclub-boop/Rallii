@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { RouteCard } from "@/components/route-card";
 import type { RailRoute } from "@/types/route";
-const filters = ["all", "switzerland", "italy", "ireland", "northern-ireland", "united-kingdom", "norway", "new-zealand", "japan", "cross-border"] as const;
+const filters = ["all", "switzerland", "italy", "ireland", "northern-ireland", "united-kingdom", "norway", "portugal", "canada", "new-zealand", "japan", "cross-border"] as const;
 export type DiscoverFilter = (typeof filters)[number];
 export function isDiscoverFilter(value: string | undefined): value is DiscoverFilter { return filters.includes(value as DiscoverFilter); }
 export function filterRoutes(routes: RailRoute[], filter: DiscoverFilter): RailRoute[] { if (filter === "all") return routes; if (filter === "cross-border") return routes.filter((route) => route.summary.journeyTypes.includes("cross-border")); if (filter === "northern-ireland") return routes.filter((route) => route.summary.slug === "belfast-derry"); const country = filter === "united-kingdom" ? "United Kingdom" : filter === "new-zealand" ? "New Zealand" : filter.charAt(0).toUpperCase() + filter.slice(1); return routes.filter((route) => route.summary.countries.includes(country)); }

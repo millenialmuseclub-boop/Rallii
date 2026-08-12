@@ -8,6 +8,8 @@ import { tranzAlpineRoute } from "./tranzalpine.ts";
 import { kurobeGorgeRailwayRoute } from "./kurobe-gorge-railway.ts";
 import { belfastDerryRoute } from "./belfast-derry.ts";
 import { dublinRosslareRoute } from "./dublin-rosslare.ts";
+import { douroLineRoute } from "./douro-line.ts";
+import { firstPassageWestRoute } from "./first-passage-west.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -21,6 +23,8 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [kurobeGorgeRailwayRoute.summary.slug, kurobeGorgeRailwayRoute],
   [belfastDerryRoute.summary.slug, belfastDerryRoute],
   [dublinRosslareRoute.summary.slug, dublinRosslareRoute],
+  [douroLineRoute.summary.slug, douroLineRoute],
+  [firstPassageWestRoute.summary.slug, firstPassageWestRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 

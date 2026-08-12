@@ -44,6 +44,14 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "belfast-derry", reason: "Another Irish journey with a memorable coastal chapter" },
     { slug: "cinque-terre", reason: "A more concentrated contrast of coast, curves, and tunnels" },
   ],
+  "douro-line": [
+    { slug: "flam-railway", reason: "Another railway shaped by a steep river valley" },
+    { slug: "cinque-terre", reason: "A concentrated southern-European landscape contrast" },
+  ],
+  "first-passage-west": [
+    { slug: "tranzalpine", reason: "Another panoramic mountain crossing across two coasts" },
+    { slug: "glacier-express", reason: "A classic long-form mountain journey on a different scale" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {
