@@ -24,7 +24,7 @@ export type TimelineEntryType = LandmarkType | "journey-note";
 
 export type ConfidenceType = "editorial" | "community" | "limited-data";
 export type JourneyType = "panoramic" | "alpine" | "cross-border" | "unesco" | "scenic" | "regional" | "highlands" | "coastal" | "mountain";
-export type ExperienceTag = "alpine-passes" | "coast" | "fjords" | "glaciers" | "gorges" | "highlands" | "lakes" | "mountain-valleys" | "moorland" | "tunnels" | "viaducts" | "villages" | "waterfalls";
+export type ExperienceTag = "alpine-passes" | "coast" | "fjords" | "glaciers" | "gorges" | "highlands" | "lakes" | "mountain-valleys" | "moorland" | "rainforest" | "tunnels" | "viaducts" | "villages" | "waterfalls";
 
 export interface RouteSummary {
   id: string;

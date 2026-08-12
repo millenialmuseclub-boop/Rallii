@@ -1,1 +1,1 @@
-export const featuredRouteSlugs = ["cinque-terre", "flam-railway", "glacier-express"] as const;
+export const featuredRouteSlugs = ["tranzalpine", "cinque-terre", "flam-railway"] as const;

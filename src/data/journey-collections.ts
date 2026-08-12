@@ -13,7 +13,8 @@ export const journeyCollections: JourneyCollection[] = [
   { slug: "cross-border-journeys", title: "Cross-Border Journeys", description: "Rail experiences whose changing geography carries you between countries.", routeSlugs: ["bernina-express"] },
   { slug: "short-scenic-escapes", title: "Short Scenic Escapes", description: "Concentrated railway experiences that fit into a wider trip.", routeSlugs: ["flam-railway", "cinque-terre"] },
   { slug: "coastal-journeys", title: "Coastal Journeys", description: "Railways where sea, shoreline, and dramatic terrain shape the journey.", routeSlugs: ["cinque-terre", "west-highland-line"] },
-  { slug: "full-day-journeys", title: "Full-Day Journeys", description: "Immersive routes where the railway journey becomes the day itself.", routeSlugs: ["glacier-express"] },
+  { slug: "full-day-journeys", title: "Full-Day Journeys", description: "Immersive routes where the railway journey becomes the day itself.", routeSlugs: ["glacier-express", "tranzalpine"] },
+  { slug: "mountain-journeys", title: "Mountain Journeys", description: "Railways shaped by high passes, steep valleys, and memorable mountain engineering.", routeSlugs: ["tranzalpine", "glacier-express", "bernina-express", "flam-railway"] },
 ];
 
 export function getJourneyCollection(slug: string): JourneyCollection | undefined { return journeyCollections.find((collection) => collection.slug === slug); }

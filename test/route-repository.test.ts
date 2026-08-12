@@ -7,6 +7,7 @@ import { goldenPassExpressRoute } from "../src/data/routes/goldenpass-express.ts
 import { westHighlandLineRoute } from "../src/data/routes/west-highland-line.ts";
 import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
 import { cinqueTerreRoute } from "../src/data/routes/cinque-terre.ts";
+import { tranzAlpineRoute } from "../src/data/routes/tranzalpine.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -16,6 +17,44 @@ import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../s
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
 import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
 import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
+
+test("TranzAlpine is a complete New Zealand coast-to-coast route", () => {
+  assert.equal(getRouteBySlug("tranzalpine"), tranzAlpineRoute);
+  assert.deepEqual(validateRoute(tranzAlpineRoute), []);
+  assert.deepEqual(tranzAlpineRoute.summary.countries, ["New Zealand"]);
+  assert.deepEqual(tranzAlpineRoute.stops.map((stop) => stop.name), ["Christchurch", "Rolleston", "Darfield", "Springfield", "Arthur's Pass", "Moana", "Greymouth"]);
+  assert.equal(tranzAlpineRoute.summary.distanceKm, 230.98);
+  assert.equal(tranzAlpineRoute.capabilities.rideMode, false);
+});
+
+test("TranzAlpine search covers aliases, geography, stops, and landmarks", () => {
+  for (const query of ["TranzAlpine", "Tranz Alpine", "Christchurch", "Greymouth", "New Zealand", "South Island", "Arthur's Pass", "Otira", "Waimakariri", "Lake Brunner", "Southern Alps", "scenic", "mountain", "rainforest"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "tranzalpine"), `Expected TranzAlpine for ${query}`);
+});
+
+test("TranzAlpine geometry is continuous, east-to-west, and matches stored metadata", async () => {
+  const contents = await readFile("public/data/routes/tranzalpine.geojson", "utf8");
+  const data = JSON.parse(contents) as { metadata: { coordinate_count: number; calculated_distance_km: number; relation_ids: number[]; way_ids: number[] }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  const coordinates = data.features[0].geometry.coordinates;
+  assert.equal(coordinates.length, 3141); assert.equal(data.metadata.coordinate_count, coordinates.length); assert.deepEqual(data.metadata.relation_ids, [1598960, 14005460]); assert.equal(data.metadata.way_ids.length, 339);
+  assert.ok(coordinates[0][0] > coordinates.at(-1)![0]); assert.ok(Math.abs(routeLengthKm(coordinates) - 230.98) < 0.02); assert.equal(data.metadata.calculated_distance_km, 230.98);
+});
+
+test("TranzAlpine timeline and reverse Best Side guidance are prepared", () => {
+  assert.equal(tranzAlpineRoute.timelineEntries.length, 8);
+  assert.ok(tranzAlpineRoute.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  const river = tranzAlpineRoute.bestSideSegments.find((segment) => segment.id === "waimakariri-ascent"); const lake = tranzAlpineRoute.bestSideSegments.find((segment) => segment.id === "lake-brunner");
+  assert.deepEqual([river?.forwardDirectionSide, river?.reverseDirectionSide], ["right", "left"]); assert.deepEqual([lake?.forwardDirectionSide, lake?.reverseDirectionSide], ["left", "right"]);
+  assert.ok(tranzAlpineRoute.bestSideSegments.slice(1).every((segment) => segment.confidenceType === "limited-data"));
+});
+
+test("TranzAlpine works with Discover, Compare, collections, and the personal library", () => {
+  assert.deepEqual(getAllRoutes().filter((route) => route.summary.countries.includes("New Zealand")).map((route) => route.summary.slug), ["tranzalpine"]);
+  assert.equal(getJourneyDurationCategory(tranzAlpineRoute.summary.durationMinutes), "Long Scenic Journey"); assert.equal(getBestSideSummary(tranzAlpineRoute), "Direction-specific, with variation by section");
+  assert.ok(getJourneyCollection("full-day-journeys")?.routeSlugs.includes("tranzalpine")); assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("tranzalpine"));
+  const statuses = { tranzalpine: "been", "glacier-express": "want_to_go" };
+  assert.deepEqual(getBeenRoutes(getAllRoutes(), statuses).map((route) => route.summary.slug), ["tranzalpine"]); assert.deepEqual(getWantToGoRoutes(getAllRoutes(), statuses).map((route) => route.summary.slug), ["glacier-express"]);
+  assert.deepEqual(getLibrarySummary([tranzAlpineRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 230.98, countries: ["New Zealand"] }); assert.equal(tranzAlpineRoute.geoJsonPath, "/data/routes/tranzalpine.geojson");
+});
 
 test("legacy Saved arrays migrate to Want to Go without losing known routes", () => {
   const known = new Set(getAllRoutes().map((route) => route.summary.slug));
@@ -145,7 +184,8 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("goldenpass-express")?.summary.name, "GoldenPass Express");
   assert.equal(getRouteBySlug("west-highland-line")?.summary.name, "West Highland Line");
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
-  assert.equal(getAllRoutes().length, 6);
+  assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
+  assert.equal(getAllRoutes().length, 7);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -229,7 +269,7 @@ test("Glacier Express satisfies route invariants", () => {
   assert.equal(glacierExpressRoute.stops.at(-1)?.name, "St. Moritz");
 });
 
-for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
+for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre", "tranzalpine"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
   const contents = await readFile(`public/data/routes/${slug}.geojson`, "utf8");
   const geoJson = JSON.parse(contents) as {
     type?: string;

@@ -1,0 +1,61 @@
+import type { RailRoute } from "../../types/route.ts";
+
+export const tranzAlpineRoute = {
+  capabilities: { rideMode: false },
+  summary: {
+    id: "tranzalpine", slug: "tranzalpine", name: "TranzAlpine", origin: "Christchurch", destination: "Greymouth", country: "New Zealand", countries: ["New Zealand"], journeyTypes: ["scenic", "mountain"], operator: "Great Journeys New Zealand (KiwiRail)", durationMinutes: 295, durationLabel: "Just under 5 hours", distanceKm: 230.98, trainType: "Dedicated scenic intercity train", reservationStatus: "required",
+    shortDescription: "A coast-to-coast South Island journey across the Canterbury Plains, through the Southern Alps, and into the rainforest of the West Coast.", status: "published", heroImageAlt: "Editorial route motif for the TranzAlpine from Christchurch to Greymouth", metadataDestination: "Greymouth", metadataDescription: "A curated guide to the TranzAlpine journey across New Zealand's South Island and Southern Alps.", searchAliases: ["Tranz Alpine", "South Island", "Southern Alps", "Otira", "Ōtira", "Waimakariri", "Arthur's Pass", "Lake Brunner"], experienceTags: ["mountain-valleys", "gorges", "lakes", "viaducts", "rainforest", "tunnels"], bestFor: ["a full-day crossing of New Zealand's Southern Alps", "dramatic river, gorge, and mountain scenery", "a dedicated scenic train experience"],
+  },
+  stops: [
+    { id: "christchurch", name: "Christchurch", latitude: -43.5393211, longitude: 172.6090279, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Morning departure from the South Island's east-coast city." },
+    { id: "rolleston", name: "Rolleston", latitude: -43.5908837, longitude: 172.3775879, sequence: 2, distanceAlongRouteKm: 20.06 },
+    { id: "darfield", name: "Darfield", latitude: -43.489023, longitude: 172.1113893, sequence: 3, distanceAlongRouteKm: 45.1 },
+    { id: "springfield", name: "Springfield", latitude: -43.3356128, longitude: 171.9321933, sequence: 4, distanceAlongRouteKm: 67.87 },
+    { id: "arthurs-pass", name: "Arthur's Pass", latitude: -42.9440246, longitude: 171.5646028, sequence: 5, distanceAlongRouteKm: 136.13 },
+    { id: "moana", name: "Moana", latitude: -42.5767763, longitude: 171.4769389, sequence: 6, distanceAlongRouteKm: 193.74 },
+    { id: "greymouth", name: "Greymouth", latitude: -42.4513417, longitude: 171.2084865, sequence: 7, distanceAlongRouteKm: 230.98, shortDescription: "West Coast arrival near the Grey River." },
+  ],
+  landmarks: [
+    { id: "canterbury-plains", name: "Canterbury Plains", type: "scenic-section", latitude: -43.5092533, longitude: 172.2304559, distanceAlongRouteKm: 35, shortDescription: "Patchwork farmland and a broad horizon introduce the east-to-west crossing.", importance: "normal", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "waimakariri-country", name: "Waimakariri River country", type: "river", latitude: -43.1442533, longitude: 171.8711429, distanceAlongRouteKm: 95, shortDescription: "The railway enters braided river country and begins its sustained alpine climb.", importance: "dont-miss", bestSideForward: "right", bestSideReverse: "left" },
+    { id: "staircase-viaduct", name: "Staircase Viaduct", type: "viaduct", latitude: -43.0108467, longitude: 171.6374764, distanceAlongRouteKm: 125, shortDescription: "A brief high crossing reveals the scale of the gorge and the railway's engineering.", importance: "dont-miss", bestSideForward: "varies", bestSideReverse: "varies" },
+    { id: "arthurs-pass", name: "Arthur's Pass", type: "mountain-pass", latitude: -42.9440246, longitude: 171.5646028, distanceAlongRouteKm: 136.13, shortDescription: "The railway reaches its highest operational station amid the Southern Alps.", importance: "dont-miss", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "otira-tunnel", name: "Ōtira Tunnel", type: "tunnel", latitude: -42.8628788, longitude: 171.5497091, distanceAlongRouteKm: 139, shortDescription: "An 8.5-kilometre tunnel carries the train beneath the Main Divide to the West Coast.", importance: "highlight", bestSideForward: "unknown", bestSideReverse: "unknown" },
+    { id: "lake-brunner", name: "Lake Brunner", type: "lake", latitude: -42.5767763, longitude: 171.4769389, distanceAlongRouteKm: 193.74, shortDescription: "The line reaches Moana at the edge of the West Coast's largest lake.", importance: "highlight", bestSideForward: "left", bestSideReverse: "right" },
+    { id: "west-coast-rainforest", name: "West Coast rainforest", type: "scenic-section", latitude: -42.4843825, longitude: 171.3756544, distanceAlongRouteKm: 210, shortDescription: "Dense, rain-fed forest and river country frame the final approach to Greymouth.", importance: "highlight", bestSideForward: "both", bestSideReverse: "both" },
+  ],
+  timelineEntries: [
+    { id: "timeline-plains", title: "Canterbury Plains", subtitle: "The long eastern horizon", distanceAlongRouteKm: 35, approximateJourneyMinutes: 45, type: "scenic-section", importance: "normal", bestSide: "both", relatedLandmarkId: "canterbury-plains", shortDescription: "Settle into the journey as fields and distant foothills remain visible on both sides." },
+    { id: "timeline-springfield", title: "Springfield", subtitle: "The mountains begin", distanceAlongRouteKm: 67.87, approximateJourneyMinutes: 65, type: "station", importance: "highlight", shortDescription: "After Springfield, be ready: the open plains give way to the sustained Southern Alps ascent." },
+    { id: "timeline-waimakariri", title: "Waimakariri River country", subtitle: "Braids, gorges, and alpine scale", distanceAlongRouteKm: 95, approximateJourneyMinutes: 105, type: "river", importance: "dont-miss", bestSide: "right", relatedLandmarkId: "waimakariri-country", shortDescription: "Look right from Christchurch for the strongest river views, but curves keep both sides rewarding." },
+    { id: "timeline-staircase", title: "Staircase Viaduct", subtitle: "A brief engineering highlight", distanceAlongRouteKm: 125, approximateJourneyMinutes: 135, type: "viaduct", importance: "dont-miss", bestSide: "varies", relatedLandmarkId: "staircase-viaduct", shortDescription: "Move early to the viewing carriage if practical; the high crossing is dramatic but short." },
+    { id: "timeline-arthurs-pass", title: "Arthur's Pass", subtitle: "At the Main Divide", distanceAlongRouteKm: 136.13, approximateJourneyMinutes: 155, type: "mountain-pass", importance: "dont-miss", bestSide: "both", relatedLandmarkId: "arthurs-pass", shortDescription: "Mountain views surround the highest station before the line enters its longest tunnel." },
+    { id: "timeline-otira", title: "Ōtira Tunnel", subtitle: "Beneath the Southern Alps", distanceAlongRouteKm: 139, approximateJourneyMinutes: 170, type: "tunnel", importance: "highlight", relatedLandmarkId: "otira-tunnel", shortDescription: "The extended darkness marks the transition from Canterbury to the wetter West Coast." },
+    { id: "timeline-west-coast", title: "Ōtira Valley and rainforest", subtitle: "The western descent", distanceAlongRouteKm: 160, approximateJourneyMinutes: 205, type: "scenic-section", importance: "highlight", bestSide: "varies", shortDescription: "After the tunnel, watch for steep valleys and increasingly lush forest through a succession of curves." },
+    { id: "timeline-lake-brunner", title: "Lake Brunner at Moana", subtitle: "A broad lake pause", distanceAlongRouteKm: 193.74, approximateJourneyMinutes: 240, type: "lake", importance: "highlight", bestSide: "left", relatedLandmarkId: "lake-brunner", shortDescription: "Look left from Christchurch as the train reaches Moana beside the lake; the opening is more sustained than the gorge glimpses." },
+  ],
+  bestSideSegments: [
+    { id: "canterbury-plains", startDistanceKm: 0, endDistanceKm: 67.87, forwardDirectionSide: "both", reverseDirectionSide: "both", reason: "The plains and distant foothills open broadly across both sides of the train.", confidenceType: "editorial" },
+    { id: "waimakariri-ascent", startDistanceKm: 67.87, endDistanceKm: 125, forwardDirectionSide: "right", reverseDirectionSide: "left", reason: "The river and gorge are often clearest on this side, though curves repeatedly change the view.", confidenceType: "limited-data" },
+    { id: "alpine-crossing", startDistanceKm: 125, endDistanceKm: 160, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "Viaducts, mountain curves, the pass, and the long tunnel make timing more useful than one fixed side.", confidenceType: "limited-data" },
+    { id: "west-coast-valleys", startDistanceKm: 160, endDistanceKm: 190, forwardDirectionSide: "both", reverseDirectionSide: "both", reason: "Valleys and forest alternate across a winding railway, with worthwhile views on both sides.", confidenceType: "limited-data" },
+    { id: "lake-brunner", startDistanceKm: 190, endDistanceKm: 200, forwardDirectionSide: "left", reverseDirectionSide: "right", reason: "The railway reaches Moana along the northern edge of Lake Brunner, placing the lake on this side.", confidenceType: "limited-data" },
+    { id: "greymouth-approach", startDistanceKm: 200, endDistanceKm: 230.98, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "Forest, settlements, and Grey River country shift sides on the final approach.", confidenceType: "limited-data" },
+  ],
+  journeyInformation: [
+    { id: "reservations", label: "Reservations", detail: "A booked seat is required. Standing is not permitted, and popular departures can sell out." },
+    { id: "onboard", label: "On board", detail: "Scenic Class includes panoramic windows, a licensed Scenic café, audio commentary, and access to the open-air viewing carriage." },
+    { id: "viewing-carriage", label: "Open-air viewing", detail: "The shared viewing carriage offers unobstructed outdoor views. Conditions can be cold, wet, or windy, so dress for changing alpine weather and follow crew safety instructions." },
+    { id: "luggage", label: "Luggage", detail: "Wheeled cabin bags, large bags, backpacks, and suitcases are checked into the luggage carriage; review current allowances before travel." },
+    { id: "accessibility", label: "Accessibility", detail: "Scenic Class carriages accommodate wheelchairs, powerchairs, and mobility scooters. Scenic Plus dining is not currently wheelchair accessible; arrange requirements with the operator in advance." },
+    { id: "service-pattern", label: "Service pattern", detail: "Frequency and stopping arrangements can change seasonally. Check the operator's current service information before booking." },
+  ],
+  sources: [
+    { id: "tranzalpine-osm", label: "OpenStreetMap", category: "railway-map", url: "https://www.openstreetmap.org/", note: "Prepared from TranzAlpine relation 1598960, Midland Line relation 14005460, and 339 connected railway ways; © OpenStreetMap contributors, ODbL." },
+    { id: "tranzalpine-operator", label: "Great Journeys New Zealand — TranzAlpine", category: "operator", url: "https://www.greatjourneysnz.com/scenic-trains/tranzalpine-train/", note: "Official route identity, current stops, duration, onboard experience, and service context." },
+    { id: "tranzalpine-accessibility", label: "Great Journeys New Zealand — Accessibility", category: "operator", url: "https://www.greatjourneysnz.com/travel-experience/accessibility/", note: "Current Scenic Class and Scenic Plus accessibility guidance." },
+    { id: "tranzalpine-tourism", label: "Tourism New Zealand — TranzAlpine itinerary", category: "tourism", url: "https://www.newzealand.com/int/feature/tranzalpine-train-itinerary/", note: "Official landscape sequence and railway relationship across the South Island." },
+    { id: "tranzalpine-rallii", label: "Rallii guidance", category: "editorial", note: "Curated scenic sequencing and deliberately cautious directional viewing guidance." },
+  ],
+  geoJsonPath: "/data/routes/tranzalpine.geojson", relatedRouteSlugs: ["glacier-express", "west-highland-line"],
+} satisfies RailRoute;
