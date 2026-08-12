@@ -5,7 +5,7 @@ import type { Landmark } from "@/types/route";
 export function JourneyHighlights({ landmarks, onSelectLandmark }: { landmarks: Landmark[]; onSelectLandmark: (id: string) => void }) {
   const highlights = landmarks.filter((item) => item.importance !== "normal").slice(0, 4);
   return (
-    <section className="section-space" aria-labelledby="highlights-title">
+    <section className="section-space scroll-section" id="highlights" aria-labelledby="highlights-title">
       <p className="eyebrow">Look out for</p>
       <h2 id="highlights-title" className="mt-2 font-serif text-4xl sm:text-5xl">Journey Highlights</h2>
       <div className="mt-8 grid gap-px bg-stone-300 sm:grid-cols-2">

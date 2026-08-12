@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { summary } = route;
   const title = `${summary.name}: ${summary.origin} to ${summary.metadataDestination ?? summary.destination}`;
   const description = summary.metadataDescription ?? `Know where to sit, what to see, and when to look on the ${summary.name} from ${summary.origin} to ${summary.destination}.`;
-  return { title, description, openGraph: { title: `${title} | Rallii`, description, siteName: "Rallii", type: "article" } };
+  return { title, description, alternates: { canonical: `/routes/${summary.slug}` }, openGraph: { title: `${title} | Rallii`, description, siteName: "Rallii", type: "article", url: `/routes/${summary.slug}` }, twitter: { card: "summary", title: `${title} | Rallii`, description } };
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {

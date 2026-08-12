@@ -19,7 +19,7 @@ export function RouteExperience({ route }: RouteExperienceProps) {
     <>
       <BestSideToSit summary={route.summary} segments={route.bestSideSegments} landmarks={route.landmarks} />
 
-      <section className="section-space" aria-labelledby="route-map-title">
+      <section className="section-space scroll-section" id="route" aria-labelledby="route-map-title">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Explore the route</p>

@@ -38,6 +38,7 @@ export function RouteMap({
   const mapRef = useRef<maplibregl.Map>(null);
   const landmarkMarkersRef = useRef(new Map<string, maplibregl.Marker>());
   const [error, setError] = useState<string>();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -132,6 +133,7 @@ export function RouteMap({
             .addTo(map);
           landmarkMarkers.set(landmark.id, mapMarker);
         });
+        setReady(true);
       } catch (caughtError) {
         setError(caughtError instanceof Error ? caughtError.message : "The route map could not load.");
       }
@@ -173,8 +175,9 @@ export function RouteMap({
         ref={containerRef}
         role="region"
         aria-label={`Interactive map of the ${routeName} route`}
-        className="h-[26rem] w-full overflow-hidden rounded-sm bg-stone-200 sm:h-[34rem]"
+        className="h-[26rem] w-full overflow-hidden bg-stone-200 sm:h-[34rem]"
       />
+      {!ready && !error ? <div className="map-preparing" role="status"><span>Preparing the route</span></div> : null}
       {error ? (
         <p className="absolute bottom-3 left-3 right-3 bg-stone-950/85 px-3 py-2 text-sm text-white" role="status">
           {error}

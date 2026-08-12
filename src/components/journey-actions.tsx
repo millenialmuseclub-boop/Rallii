@@ -47,9 +47,6 @@ export function JourneyActions({ routeName, routeSlug }: JourneyActionsProps) {
       <button className="action-button focus-ring" type="button" onClick={shareJourney}>
         Share
       </button>
-      <button className="action-button action-button--primary" type="button" disabled title="Booking links are coming later">
-        Book Journey
-      </button>
       <span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span>
     </div>
   );

@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rallii-kappa.vercel.app"),
   title: {
     default: "Rallii — Curated Rail Journeys",
     template: "%s | Rallii",
@@ -15,7 +16,10 @@ export const metadata: Metadata = {
     siteName: "Rallii",
     type: "website",
   },
+  twitter: { card: "summary", title: "Rallii — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
 };
+
+export const viewport: Viewport = { themeColor: "#173f32" };
 
 export default function RootLayout({
   children,
@@ -23,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

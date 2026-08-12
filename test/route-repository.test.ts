@@ -7,6 +7,7 @@ import { goldenPassExpressRoute } from "../src/data/routes/goldenpass-express.ts
 import { westHighlandLineRoute } from "../src/data/routes/west-highland-line.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
+import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
 
 test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("glacier-express")?.summary.name, "Glacier Express");
@@ -15,6 +16,28 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("west-highland-line")?.summary.name, "West Highland Line");
   assert.equal(getAllRoutes().length, 4);
   assert.equal(getRouteBySlug("missing-route"), undefined);
+});
+
+test("search ranks route names above other field matches", () => {
+  const results = searchRoutes(getAllRoutes(), "Glacier Express");
+  assert.equal(results[0]?.route.summary.slug, "glacier-express");
+  assert.equal(results[0]?.matchType, "route");
+});
+
+test("search finds destinations, stops, landmarks, operators, and normalized text", () => {
+  assert.equal(searchRoutes(getAllRoutes(), "Mallaig")[0]?.route.summary.slug, "west-highland-line");
+  assert.equal(searchRoutes(getAllRoutes(), "Fort William")[0]?.matchType, "stop");
+  assert.equal(searchRoutes(getAllRoutes(), "Glenfinnan Viaduct")[0]?.matchType, "landmark");
+  assert.equal(searchRoutes(getAllRoutes(), "ScotRail")[0]?.matchType, "operator");
+  assert.deepEqual(new Set(searchRoutes(getAllRoutes(), "Rhätische Bahn").map((result) => result.route.summary.slug)), new Set(["bernina-express", "glacier-express"]));
+  assert.equal(normalizeSearchText("Rhätische Bahn"), "rhatische bahn");
+});
+
+test("search finds countries and journey types without returning results for empty input", () => {
+  assert.ok(searchRoutes(getAllRoutes(), "Switzerland").length >= 3);
+  assert.ok(searchRoutes(getAllRoutes(), "panoramic").length >= 3);
+  assert.deepEqual(searchRoutes(getAllRoutes(), "   "), []);
+  assert.deepEqual(searchRoutes(getAllRoutes(), "Shinkansen"), []);
 });
 
 test("West Highland Line is a UK scheduled scenic journey compatible with the route repository", () => {

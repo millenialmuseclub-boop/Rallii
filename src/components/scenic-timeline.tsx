@@ -18,7 +18,7 @@ export function ScenicTimeline({ entries, summary, stops, selectedLandmarkId, on
   const moments = buildMoments(entries, stops);
 
   return (
-    <section className="section-space" aria-labelledby="timeline-title">
+    <section className="section-space scroll-section" id="timeline" aria-labelledby="timeline-title">
       <p className="eyebrow">Scenic journey timeline</p>
       <h2 id="timeline-title" className="mt-2 font-serif text-4xl sm:text-5xl">Along the Journey</h2>
       <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
