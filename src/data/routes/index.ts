@@ -3,6 +3,7 @@ import { glacierExpressRoute } from "./glacier-express.ts";
 import { goldenPassExpressRoute } from "./goldenpass-express.ts";
 import { westHighlandLineRoute } from "./west-highland-line.ts";
 import { flamRailwayRoute } from "./flam-railway.ts";
+import { cinqueTerreRoute } from "./cinque-terre.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -11,6 +12,7 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [goldenPassExpressRoute.summary.slug, goldenPassExpressRoute],
   [westHighlandLineRoute.summary.slug, westHighlandLineRoute],
   [flamRailwayRoute.summary.slug, flamRailwayRoute],
+  [cinqueTerreRoute.summary.slug, cinqueTerreRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 

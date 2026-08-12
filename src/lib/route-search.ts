@@ -48,6 +48,7 @@ function searchableFields(route: RailRoute): SearchField[] {
     ]),
     { value: summary.operator, type: "operator", priority: 200, label: `Operated by ${summary.operator}` },
     ...summary.journeyTypes.map((type) => ({ value: type, type: "journey-type" as const, priority: 100, label: `${titleCase(type)} journey` })),
+    ...summary.experienceTags.map((tag) => ({ value: tag, type: "journey-type" as const, priority: 90, label: `${titleCase(tag)} landscape` })),
   ];
 }
 

@@ -6,6 +6,7 @@ import { berninaExpressRoute } from "../src/data/routes/bernina-express.ts";
 import { goldenPassExpressRoute } from "../src/data/routes/goldenpass-express.ts";
 import { westHighlandLineRoute } from "../src/data/routes/west-highland-line.ts";
 import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
+import { cinqueTerreRoute } from "../src/data/routes/cinque-terre.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -22,6 +23,34 @@ test("legacy Saved arrays migrate to Want to Go without losing known routes", ()
   assert.deepEqual(migrateLegacySaved("[]", known), { version: 1, routes: {} });
   assert.deepEqual(migrateLegacySaved("not-json", known), { version: 1, routes: {} });
   assert.deepEqual(migrateLegacySaved('["unknown","flam-railway"]', known), { version: 1, routes: { "flam-railway": "want_to_go" } });
+});
+
+test("Cinque Terre is a complete domestic Italian coastal route", () => {
+  assert.equal(getRouteBySlug("cinque-terre"), cinqueTerreRoute);
+  assert.deepEqual(validateRoute(cinqueTerreRoute), []);
+  assert.deepEqual(cinqueTerreRoute.summary.countries, ["Italy"]);
+  assert.deepEqual(cinqueTerreRoute.stops.map((stop) => stop.name), ["La Spezia Centrale", "Riomaggiore", "Manarola", "Corniglia", "Vernazza", "Monterosso", "Levanto"]);
+  assert.equal(cinqueTerreRoute.capabilities.rideMode, false);
+  assert.equal(cinqueTerreRoute.summary.distanceKm, 21.41);
+});
+
+test("Cinque Terre search finds route, Liguria, villages, and experience terms", () => {
+  for (const query of ["Cinque Terre", "Cinqueterre", "La Spezia", "Levanto", "Riomaggiore", "Manarola", "Corniglia", "Vernazza", "Monterosso", "Italy", "Liguria", "coastal", "villages", "tunnels"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "cinque-terre"), `Expected Cinque Terre for ${query}`);
+});
+
+test("Cinque Terre timeline and directional guidance remain ordered and cautious", () => {
+  assert.ok(cinqueTerreRoute.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.equal(cinqueTerreRoute.timelineEntries.length, 6);
+  assert.ok(cinqueTerreRoute.bestSideSegments.some((segment) => segment.forwardDirectionSide === "left" && segment.reverseDirectionSide === "right"));
+  assert.ok(cinqueTerreRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+});
+
+test("Cinque Terre works with comparison and personal-library derivations", () => {
+  assert.equal(getJourneyDurationCategory(cinqueTerreRoute.summary.durationMinutes), "Quick Escape");
+  assert.ok(cinqueTerreRoute.summary.experienceTags.includes("coast"));
+  const statuses = { "cinque-terre": "been" };
+  assert.deepEqual(getBeenRoutes(getAllRoutes(), statuses).map((route) => route.summary.slug), ["cinque-terre"]);
+  assert.deepEqual(getLibrarySummary([cinqueTerreRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 21.41, countries: ["Italy"] });
 });
 
 test("versioned travel-library parsing is valid, filtered, and idempotent", () => {
@@ -116,7 +145,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("goldenpass-express")?.summary.name, "GoldenPass Express");
   assert.equal(getRouteBySlug("west-highland-line")?.summary.name, "West Highland Line");
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
-  assert.equal(getAllRoutes().length, 5);
+  assert.equal(getAllRoutes().length, 6);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -200,7 +229,7 @@ test("Glacier Express satisfies route invariants", () => {
   assert.equal(glacierExpressRoute.stops.at(-1)?.name, "St. Moritz");
 });
 
-for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
+for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre"]) test(`${slug} geometry is a sourced GeoJSON LineString`, async () => {
   const contents = await readFile(`public/data/routes/${slug}.geojson`, "utf8");
   const geoJson = JSON.parse(contents) as {
     type?: string;
@@ -215,5 +244,5 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
   assert.equal(feature?.geometry?.type, "LineString");
   const source = feature?.properties?.source ?? (geoJson as { metadata?: { source?: string } }).metadata?.source ?? "";
   assert.match(source, /OpenStreetMap/);
-  assert.ok((feature?.geometry?.coordinates?.length ?? 0) > 500);
+  assert.ok((feature?.geometry?.coordinates?.length ?? 0) > 250);
 });

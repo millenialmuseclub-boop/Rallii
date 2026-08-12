@@ -13,7 +13,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
         <div className="pb-1"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{summary.origin} → {summary.destination}</p><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} /></div>
         <RouteMedia summary={summary} variant="hero" />
       </div>
-      <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>
+      <dl className="mt-10 grid grid-cols-2 border-y border-stone-300 sm:grid-cols-4"><Essential label="Duration" value={summary.durationLabel ?? formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl>
     </header>
     <nav className="route-section-nav" aria-label="On this journey"><a href="#route">Route</a><a href="#highlights">Highlights</a><a href="#timeline">Timeline</a><a href="#practical">Practical</a></nav>
     <div className="site-shell pb-28 sm:pb-28">

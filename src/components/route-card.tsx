@@ -14,7 +14,7 @@ export function RouteCard({ route, matchContext }: { route: RailRoute; matchCont
         {matchContext ? <p className="match-context">{matchContext}</p> : null}
         <p className="mt-5 text-sm leading-6 text-stone-600">{summary.shortDescription}</p>
         <div className="mt-6 flex items-center justify-between gap-4">
-          <span className="route-card-meta">{formatDuration(summary.durationMinutes)} <i aria-hidden="true" /> {formatJourneyType(summary.journeyTypes[0])}</span>
+          <span className="route-card-meta">{summary.durationLabel ?? formatDuration(summary.durationMinutes)} <i aria-hidden="true" /> {formatJourneyType(summary.journeyTypes[0])}</span>
           <Link className="primary-link focus-ring" href={`/routes/${summary.slug}`}>Explore <span aria-hidden="true">→</span></Link>
         </div>
       </div>
