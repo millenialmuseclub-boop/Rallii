@@ -13,6 +13,45 @@ import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, pa
 import { getCollectionRoutes, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
 import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
+import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
+import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
+
+test("legacy Saved arrays migrate to Want to Go without losing known routes", () => {
+  const known = new Set(getAllRoutes().map((route) => route.summary.slug));
+  assert.deepEqual(migrateLegacySaved('["glacier-express","flam-railway"]', known), { version: 1, routes: { "glacier-express": "want_to_go", "flam-railway": "want_to_go" } });
+  assert.deepEqual(migrateLegacySaved("[]", known), { version: 1, routes: {} });
+  assert.deepEqual(migrateLegacySaved("not-json", known), { version: 1, routes: {} });
+  assert.deepEqual(migrateLegacySaved('["unknown","flam-railway"]', known), { version: 1, routes: { "flam-railway": "want_to_go" } });
+});
+
+test("versioned travel-library parsing is valid, filtered, and idempotent", () => {
+  const known = new Set(getAllRoutes().map((route) => route.summary.slug));
+  const raw = '{"version":1,"routes":{"glacier-express":"want_to_go","flam-railway":"been","unknown":"been","bernina-express":"invalid"}}';
+  const parsed = parseTravelLibrary(raw, known);
+  assert.deepEqual(parsed, { version: 1, routes: { "glacier-express": "want_to_go", "flam-railway": "been" } });
+  assert.deepEqual(parseTravelLibrary(JSON.stringify(parsed), known), parsed);
+  assert.deepEqual(parseTravelLibrary("invalid", known), { version: 1, routes: {} });
+});
+
+test("library status switching and removal remain mutually exclusive", () => {
+  const library = parseTravelLibrary('{"version":1,"routes":{"flam-railway":"want_to_go"}}');
+  library.routes["flam-railway"] = "been";
+  assert.equal(library.routes["flam-railway"], "been");
+  library.routes["flam-railway"] = "want_to_go";
+  assert.equal(library.routes["flam-railway"], "want_to_go");
+  delete library.routes["flam-railway"];
+  assert.equal(library.routes["flam-railway"], undefined);
+});
+
+test("personal library derives route groups, countries, distance, and map selection", () => {
+  const routes = getAllRoutes(); const statuses = { "bernina-express": "been", "flam-railway": "been", "glacier-express": "want_to_go" };
+  const been = getBeenRoutes(routes, statuses); const want = getWantToGoRoutes(routes, statuses); const summary = getLibrarySummary(been);
+  assert.deepEqual(been.map((route) => route.summary.slug), ["bernina-express", "flam-railway"]);
+  assert.deepEqual(want.map((route) => route.summary.slug), ["glacier-express"]);
+  assert.equal(summary.journeyCount, 2); assert.equal(summary.countryCount, 3); assert.equal(summary.distanceKm, 81.2);
+  assert.deepEqual(been.map((route) => route.geoJsonPath), ["/data/routes/bernina-express.geojson", "/data/routes/flam-railway.geojson"]);
+  assert.deepEqual(getBeenRoutes(routes, {}), []);
+});
 
 async function getFlamGeometry(): Promise<RouteCoordinate[]> { const contents = await readFile("public/data/routes/flam-railway.geojson", "utf8"); const data = JSON.parse(contents) as { features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> }; return data.features[0].geometry.coordinates; }
 

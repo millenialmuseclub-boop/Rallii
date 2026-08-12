@@ -13,7 +13,7 @@ export function SiteHeader() {
             <li><Link className="nav-link focus-ring" href="/discover">Discover</Link></li>
             <li><Link className="nav-link focus-ring" href="/search">Search</Link></li>
             <li><Link className="nav-link focus-ring" href="/compare">Compare</Link></li>
-            <li><Link className="nav-link focus-ring" href="/saved">Saved</Link></li>
+            <li><Link className="nav-link focus-ring" href="/saved">Journeys</Link></li>
           </ul>
         </nav>
       </div>

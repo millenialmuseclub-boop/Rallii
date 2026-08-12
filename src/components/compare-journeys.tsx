@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RouteMedia } from "@/components/route-media";
-import { useSavedRoutes } from "@/hooks/use-saved-routes";
+import { useTravelLibrary } from "@/hooks/use-travel-library";
 import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory } from "@/lib/journey-comparison";
 import type { RailRoute } from "@/types/route";
 
 export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; selected: RailRoute[] }) {
   const router = useRouter();
-  const { isSaved, setSaved } = useSavedRoutes();
+  const { getStatus, setStatus } = useTravelLibrary();
   const [shareStatus, setShareStatus] = useState("");
   const slugs = selected.map((route) => route.summary.slug);
 
@@ -36,7 +36,7 @@ export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; sel
       {[0, 1].map((index) => <label className="compare-selector" key={index}><span>Journey {index === 0 ? "A" : "B"}</span><select aria-label={`Journey ${index === 0 ? "A" : "B"}`} value={slugs[index] ?? ""} onChange={(event) => selectRoute(index, event.target.value)}><option value="">Choose a journey</option>{routes.map((route) => <option key={route.summary.slug} value={route.summary.slug} disabled={slugs.includes(route.summary.slug) && slugs[index] !== route.summary.slug}>{route.summary.name}</option>)}</select></label>)}
     </div>
     {selected.length < 2 ? <section className="empty-state mt-12"><p className="eyebrow">Compare experiences</p><h2 className="mt-2 font-serif text-3xl">{selected.length ? "Choose one more journey to compare" : "Choose two journeys to compare"}</h2><p className="mt-3 text-stone-600">Select from Rallii’s five curated journeys. No route is ranked or declared a winner.</p></section> : <>
-      <div className="comparison-grid mt-10">{selected.map((route) => <CompareHeader key={route.summary.slug} route={route} saved={isSaved(route.summary.slug)} onSave={() => setSaved(route.summary.slug, !isSaved(route.summary.slug))} />)}</div>
+      <div className="comparison-grid mt-10">{selected.map((route) => <CompareHeader key={route.summary.slug} route={route} saved={getStatus(route.summary.slug) === "want_to_go"} onSave={() => setStatus(route.summary.slug, getStatus(route.summary.slug) === "want_to_go" ? undefined : "want_to_go")} />)}</div>
       <dl className="comparison-list" aria-label={`Comparison of ${selected[0].summary.name} and ${selected[1].summary.name}`}>
         <CompareRow label="Journey time" routes={selected} render={(route) => `${formatDuration(route.summary.durationMinutes)} · ${getJourneyDurationCategory(route.summary.durationMinutes)}`} />
         <CompareRow label="Distance" routes={selected} render={(route) => `${route.summary.distanceKm} km`} />
@@ -53,5 +53,5 @@ export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; sel
   </div>;
 }
 
-function CompareHeader({ route, saved, onSave }: { route: RailRoute; saved: boolean; onSave: () => void }) { const { summary } = route; return <article className="compare-header"><RouteMedia summary={summary} variant="card" /><div><p className="eyebrow">{summary.country}</p><h2 className="mt-2 font-serif text-3xl">{summary.name}</h2><p className="mt-2 font-serif text-lg text-stone-600">{summary.origin} → {summary.destination}</p><p className="mt-4 text-xs font-bold uppercase tracking-wider text-stone-500">{getJourneyDurationCategory(summary.durationMinutes)}</p><div className="mt-5 flex flex-wrap gap-2"><Link className="action-button" href={`/routes/${summary.slug}`}>View journey</Link><button className="action-button" type="button" aria-pressed={saved} onClick={onSave}>{saved ? "Saved" : "Save"}</button></div></div></article>; }
+function CompareHeader({ route, saved, onSave }: { route: RailRoute; saved: boolean; onSave: () => void }) { const { summary } = route; return <article className="compare-header"><RouteMedia summary={summary} variant="card" /><div><p className="eyebrow">{summary.country}</p><h2 className="mt-2 font-serif text-3xl">{summary.name}</h2><p className="mt-2 font-serif text-lg text-stone-600">{summary.origin} → {summary.destination}</p><p className="mt-4 text-xs font-bold uppercase tracking-wider text-stone-500">{getJourneyDurationCategory(summary.durationMinutes)}</p><div className="mt-5 flex flex-wrap gap-2"><Link className="action-button" href={`/routes/${summary.slug}`}>View journey</Link><button className="action-button" type="button" aria-pressed={saved} onClick={onSave}>{saved ? "Want to Go" : "Add to Want to Go"}</button></div></div></article>; }
 function CompareRow({ label, routes, render }: { label: string; routes: RailRoute[]; render: (route: RailRoute) => string }) { return <div className="comparison-row"><dt>{label}</dt><dd><span>{routes[0].summary.name}</span>{render(routes[0])}</dd><dd><span>{routes[1].summary.name}</span>{render(routes[1])}</dd></div>; }

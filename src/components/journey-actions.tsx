@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useSavedRoutes } from "@/hooks/use-saved-routes";
+import { useTravelLibrary } from "@/hooks/use-travel-library";
 
 interface JourneyActionsProps {
   routeName: string;
@@ -11,8 +11,8 @@ interface JourneyActionsProps {
 }
 
 export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: JourneyActionsProps) {
-  const { isSaved, setSaved } = useSavedRoutes();
-  const saved = isSaved(routeSlug);
+  const { getStatus, setStatus } = useTravelLibrary();
+  const routeStatus = getStatus(routeSlug);
   const [shareStatus, setShareStatus] = useState<string>();
 
   async function shareJourney() {
@@ -38,14 +38,8 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: Jour
 
   return (
     <div className="mt-7 flex flex-wrap items-center gap-2" aria-label="Journey actions">
-      <button
-        className="action-button focus-ring"
-        type="button"
-        aria-pressed={saved}
-        onClick={() => setSaved(routeSlug, !saved)}
-      >
-        {saved ? "Saved" : "Save"}
-      </button>
+      <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => setStatus(routeSlug, routeStatus === "want_to_go" ? undefined : "want_to_go")}>Want to Go</button>
+      <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "been"} onClick={() => setStatus(routeSlug, routeStatus === "been" ? undefined : "been")}>Been</button>
       <button className="action-button focus-ring" type="button" onClick={shareJourney}>
         Share
       </button>

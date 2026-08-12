@@ -121,6 +121,16 @@ button { font: inherit; }
 .ride-demo-steps button { min-height: 2.5rem; border: 1px solid var(--line); border-right: 0; background: transparent; color: #626760; font-size: 0.7rem; font-weight: 700; }
 .ride-demo-steps button:last-child { border-right: 1px solid var(--line); }
 .ride-demo-steps button[aria-pressed="true"] { background: var(--accent-deep); color: white; }
+.action-button[aria-pressed="true"] { border-color: var(--accent-deep); background: var(--accent-deep); color: white; }
+.library-map-section { margin-top: 4rem; border-top: 1px solid var(--line); padding-top: 3rem; }
+.library-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 2rem 0; border-block: 1px solid var(--line); }
+.library-summary div { min-width: 0; padding: 1rem 0.5rem; border-left: 1px solid var(--line); }
+.library-summary div:first-child { border-left: 0; }
+.library-summary dt { color: #6b7069; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.library-summary dd { margin: 0.45rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; }
+.personal-rail-map { height: 22rem; overflow: hidden; border: 1px solid var(--line); background: #e6e7e0; }
+.map-error { position: absolute; right: 0.75rem; bottom: 0.75rem; left: 0.75rem; margin: 0; background: rgb(29 40 33 / 90%); padding: 0.7rem; color: white; font-size: 0.8rem; }
+.library-card-status { position: relative; z-index: 2; width: fit-content; margin: 0 0 -1px; border: 1px solid var(--line); border-bottom: 0; padding: 0.45rem 0.7rem; background: var(--surface); color: var(--accent); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
 .route-visual--goldenpass-express { background-color: #d8ccb9; background-image: linear-gradient(150deg, transparent 44%, rgb(247 240 225 / 75%) 44.2%, rgb(247 240 225 / 75%) 57%, transparent 57.2%), linear-gradient(30deg, transparent 56%, rgb(134 102 68 / 28%) 56.2%, rgb(134 102 68 / 28%) 71%, transparent 71.2%); }
 .route-visual--west-highland-line { background-color: #bac9c0; background-image: linear-gradient(162deg, transparent 43%, rgb(230 235 225 / 72%) 43.2%, rgb(230 235 225 / 72%) 56%, transparent 56.2%), linear-gradient(18deg, transparent 52%, rgb(55 91 73 / 42%) 52.2%, rgb(55 91 73 / 42%) 69%, transparent 69.2%); }
 .mountain-placeholder::after {
@@ -205,6 +215,10 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .ride-map { height: 27rem; }
   .ride-progress, .ride-up-next { padding: 2rem; }
   .ride-demo-control { bottom: 1rem; }
+  .library-map-section { margin-top: 5rem; padding-top: 4rem; }
+  .library-summary { max-width: 40rem; }
+  .library-summary div { padding: 1.25rem; }
+  .personal-rail-map { height: 30rem; }
 }
 
 @media (max-width: 639px) { body { padding-bottom: calc(3.8rem + env(safe-area-inset-bottom)); } }

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const items = [
   { href: "/discover", label: "Discover", icon: CompassIcon },
   { href: "/search", label: "Search", icon: SearchIcon },
-  { href: "/saved", label: "Saved", icon: BookmarkIcon },
+  { href: "/saved", label: "Journeys", icon: BookmarkIcon },
 ] as const;
 
 export function MobileNavigation() {
