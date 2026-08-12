@@ -12,6 +12,7 @@ export function SiteHeader() {
           <ul className="flex items-center gap-7 text-sm text-stone-600">
             <li><Link className="nav-link focus-ring" href="/discover">Discover</Link></li>
             <li><Link className="nav-link focus-ring" href="/search">Search</Link></li>
+            <li><Link className="nav-link focus-ring" href="/compare">Compare</Link></li>
             <li><Link className="nav-link focus-ring" href="/saved">Saved</Link></li>
           </ul>
         </nav>

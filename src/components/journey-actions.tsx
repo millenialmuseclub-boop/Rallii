@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useSavedRoutes } from "@/hooks/use-saved-routes";
 
 interface JourneyActionsProps {
@@ -47,6 +48,7 @@ export function JourneyActions({ routeName, routeSlug }: JourneyActionsProps) {
       <button className="action-button focus-ring" type="button" onClick={shareJourney}>
         Share
       </button>
+      <Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link>
       <span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span>
     </div>
   );

@@ -9,6 +9,36 @@ import { flamRailwayRoute } from "../src/data/routes/flam-railway.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
+import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "../src/lib/journey-comparison.ts";
+import { getCollectionRoutes, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
+
+test("comparison parsing accepts valid routes and handles partial, duplicate, and invalid input", () => {
+  const routes = getAllRoutes();
+  assert.deepEqual(parseComparisonRoutes("glacier-express,flam-railway", routes).map((route) => route.summary.slug), ["glacier-express", "flam-railway"]);
+  assert.deepEqual(parseComparisonRoutes("glacier-express", routes).map((route) => route.summary.slug), ["glacier-express"]);
+  assert.deepEqual(parseComparisonRoutes("flam-railway,flam-railway,missing", routes).map((route) => route.summary.slug), ["flam-railway"]);
+  assert.deepEqual(parseComparisonRoutes("missing", routes), []);
+  assert.equal(buildComparisonPath(["glacier-express", "flam-railway"]), "/compare?routes=glacier-express,flam-railway");
+});
+
+test("duration categories are derived at stable boundaries", () => {
+  assert.equal(getJourneyDurationCategory(60), "Quick Escape");
+  assert.equal(getJourneyDurationCategory(90), "Half-Day Journey");
+  assert.equal(getJourneyDurationCategory(240), "Long Scenic Journey");
+  assert.equal(getJourneyDurationCategory(360), "Full-Day Experience");
+});
+
+test("controlled experience metadata and comparison side summaries are available", () => {
+  assert.deepEqual(flamRailwayRoute.summary.experienceTags, ["fjords", "waterfalls", "mountain-valleys"]);
+  assert.equal(flamRailwayRoute.summary.bestFor.length, 3);
+  assert.equal(getBestSideSummary(flamRailwayRoute), "Direction-specific, with variation by section");
+  assert.equal(getBestSideSummary(westHighlandLineRoute), "Both sides, varying by section");
+});
+
+test("editorial collections resolve repository routes without empty membership", () => {
+  assert.ok(journeyCollections.every((collection) => getCollectionRoutes(collection, getAllRoutes()).length > 0));
+  assert.deepEqual(getJourneyCollection("alpine-journeys")?.routeSlugs, ["glacier-express", "bernina-express", "goldenpass-express"]);
+});
 
 test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("glacier-express")?.summary.name, "Glacier Express");

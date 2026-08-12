@@ -9,6 +9,8 @@ export const flamRailwayRoute = {
     status: "published", heroImageAlt: "Flåm Railway climbing through the steep mountain valley between Flåm and Myrdal", metadataDestination: "Myrdal",
     metadataDescription: "A curated guide to the one-hour Flåm Railway journey from the Aurlandsfjord to mountain-level Myrdal.",
     searchAliases: ["Flåmsbana", "Flamsbana", "Flam Railway", "R45 Myrdal Flåm"],
+    experienceTags: ["fjords", "waterfalls", "mountain-valleys"],
+    bestFor: ["a short, concentrated scenic railway", "waterfalls and mountain-valley scenery", "a journey that fits into a wider fjord itinerary"],
   },
   stops: [
     { id: "flam", name: "Flåm", latitude: 60.8628877, longitude: 7.1132143, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure near sea level at the head of Aurlandsfjord." },

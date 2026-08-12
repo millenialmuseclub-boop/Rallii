@@ -19,6 +19,8 @@ export const glacierExpressRoute = {
       "A full-day journey across the Swiss Alps, linking Zermatt with St. Moritz through high passes, deep gorges, and landmark railway engineering.",
     status: "published",
     heroImageAlt: "Glacier Express crossing the Swiss Alps",
+    experienceTags: ["glaciers", "alpine-passes", "gorges", "viaducts"],
+    bestFor: ["a full-day Alpine experience", "panoramic train travel", "several major scenic sections"],
   },
   stops: [
     {

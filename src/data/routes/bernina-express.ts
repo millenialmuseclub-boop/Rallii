@@ -18,6 +18,8 @@ export const berninaExpressRoute = {
     shortDescription: "A high-Alpine crossing from the Engadin to northern Italy, passing glaciers, Lago Bianco, Val Poschiavo, and the Brusio Circular Viaduct.",
     status: "published",
     heroImageAlt: "Bernina Express descending through the Alpine landscape toward Tirano",
+    experienceTags: ["glaciers", "alpine-passes", "lakes", "viaducts"],
+    bestFor: ["a compact cross-border Alpine journey", "glaciers and high mountain lakes", "landmark railway engineering"],
   },
   stops: [
     { id: "st-moritz", name: "St. Moritz", latitude: 46.498021, longitude: 9.8459437, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure in the Upper Engadin." },

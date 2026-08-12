@@ -7,6 +7,8 @@ export const goldenPassExpressRoute = {
     durationMinutes: 195, distanceKm: 115.34, trainType: "Direct panoramic express", reservationStatus: "recommended",
     shortDescription: "A direct panoramic journey from Lake Geneva through the Pays-d’Enhaut and Saanenland to Lake Thun and the Bernese Oberland.",
     status: "published", heroImageAlt: "GoldenPass Express crossing the Swiss landscape between Montreux and Interlaken", metadataDestination: "Interlaken",
+    experienceTags: ["lakes", "mountain-valleys", "villages"],
+    bestFor: ["a relaxed half-day panoramic journey", "lakeside and village scenery", "a direct crossing of western Switzerland"],
   },
   stops: [
     { id: "montreux", name: "Montreux", latitude: 46.4360985, longitude: 6.9108208, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure above Lake Geneva." },

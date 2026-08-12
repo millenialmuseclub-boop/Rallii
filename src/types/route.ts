@@ -24,6 +24,7 @@ export type TimelineEntryType = LandmarkType | "journey-note";
 
 export type ConfidenceType = "editorial" | "community" | "limited-data";
 export type JourneyType = "panoramic" | "alpine" | "cross-border" | "unesco" | "scenic" | "regional" | "highlands" | "coastal" | "mountain";
+export type ExperienceTag = "alpine-passes" | "coast" | "fjords" | "glaciers" | "gorges" | "highlands" | "lakes" | "mountain-valleys" | "moorland" | "viaducts" | "villages" | "waterfalls";
 
 export interface RouteSummary {
   id: string;
@@ -48,6 +49,8 @@ export interface RouteSummary {
   metadataDestination?: string;
   metadataDescription?: string;
   searchAliases?: string[];
+  experienceTags: ExperienceTag[];
+  bestFor: string[];
 }
 
 export interface JourneyInformationItem {

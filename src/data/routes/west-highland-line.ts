@@ -8,6 +8,8 @@ export const westHighlandLineRoute = {
     shortDescription: "An ordinary scheduled train through extraordinary Highland scenery, crossing Rannoch Moor before continuing from Fort William to the western coast at Mallaig.",
     status: "published", heroImageAlt: "West Highland Line train travelling through the Scottish Highlands", metadataDestination: "Mallaig",
     metadataDescription: "A curated guide to the scheduled ScotRail journey from Glasgow to Mallaig through Rannoch Moor, Fort William, and Glenfinnan.",
+    experienceTags: ["highlands", "moorland", "viaducts", "coast", "lakes"],
+    bestFor: ["a long regional journey through remote country", "Highland moorland and coastal scenery", "a scheduled train rather than a dedicated tourist service"],
   },
   stops: [
     { id: "glasgow-queen-street", name: "Glasgow Queen Street", latitude: 55.8625587, longitude: -4.2511172, sequence: 1, distanceAlongRouteKm: 0, shortDescription: "Departure from central Glasgow." },
