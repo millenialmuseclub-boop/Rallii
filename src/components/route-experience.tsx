@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { BestSideToSit } from "@/components/best-side-to-sit";
 import { JourneyHighlights } from "@/components/journey-highlights";
 import { RouteMap } from "@/components/route-map";
@@ -21,6 +21,8 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
   const stops = useMemo(() => getDirectionalStops(route, direction), [route, direction]);
   const landmarks = useMemo(() => getDirectionalLandmarks(route, direction), [route, direction]);
   const timeline = useMemo(() => getDirectionalTimeline(route, direction), [route, direction]);
+  const isMobile = useSyncExternalStore(subscribeToMobileViewport, getMobileViewportSnapshot, () => false);
+  const shouldRenderMap = !isMobile || activeSurface === "map";
 
   return (
     <>
@@ -35,7 +37,7 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
           <p className="hidden text-xs text-stone-600 sm:block">Pan and zoom to explore</p>
         </div>
         <div className={`journey-explorer journey-explorer--${activeSurface ?? "map"}`}>
-          <div className="journey-explorer__map"><RouteMap routeName={route.summary.name} originName={endpoints.origin} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /><p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
+          <div className="journey-explorer__map">{shouldRenderMap ? <RouteMap routeName={route.summary.name} originName={endpoints.origin} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /> : null}<p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
           <ScenicTimeline origin={endpoints.origin} destination={endpoints.destination} durationMinutes={route.summary.durationMinutes} entries={timeline} stops={stops} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} />
         </div>
       </section>
@@ -44,3 +46,6 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
     </>
   );
 }
+
+function subscribeToMobileViewport(onStoreChange: () => void): () => void { const query = window.matchMedia("(max-width: 639px)"); query.addEventListener("change", onStoreChange); return () => query.removeEventListener("change", onStoreChange); }
+function getMobileViewportSnapshot(): boolean { return window.matchMedia("(max-width: 639px)").matches; }
