@@ -36,7 +36,7 @@ function searchableFields(route: RailRoute): SearchField[] {
   const { summary } = route;
   return [
     { value: summary.name, type: "route", priority: 700 },
-    ...(summary.searchAliases ?? []).map((alias) => ({ value: alias, type: "route" as const, priority: 680, label: summary.name })),
+    ...(summary.searchAliases ?? []).map((alias) => ({ value: alias, type: "route" as const, priority: 680, label: alias })),
     { value: summary.origin, type: "endpoint", priority: 600, label: `From ${summary.origin}` },
     { value: summary.destination, type: "endpoint", priority: 600, label: `To ${summary.destination}` },
     { value: summary.country, type: "geography", priority: 500, label: summary.country },

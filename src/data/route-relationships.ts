@@ -56,6 +56,10 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "west-highland-line", reason: "Another scheduled British journey through remote northern landscapes" },
     { slug: "douro-line", reason: "Another ordinary railway shaped by a celebrated valley landscape" },
   ],
+  "california-zephyr": [
+    { slug: "first-passage-west", reason: "Another multi-day crossing of the North American West" },
+    { slug: "tranzalpine", reason: "A shorter coast-to-coast mountain journey" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

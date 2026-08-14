@@ -430,6 +430,8 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .planning-tool__status span, .planning-disclosure { color: var(--muted); font-size: .76rem; line-height: 1.55; }
 .planning-disclosure { margin: 2rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .discover-filters { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0 1.5rem; }
+.discover-filter-heading { display: flex; min-height: 2.75rem; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; color: var(--muted); font-size: .76rem; }
+.discover-filter-heading button { min-height: 2.75rem; border: 0; background: transparent; }
 .discover-catalogue { margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
 .app-screen-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
 .search-field button { margin-left: auto; border: 0; background: transparent; color: var(--accent); font-size: .72rem; font-weight: 700; }

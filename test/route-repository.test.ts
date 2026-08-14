@@ -14,6 +14,7 @@ import { dublinRosslareRoute } from "../src/data/routes/dublin-rosslare.ts";
 import { douroLineRoute } from "../src/data/routes/douro-line.ts";
 import { firstPassageWestRoute } from "../src/data/routes/first-passage-west.ts";
 import { settleCarlisleRoute } from "../src/data/routes/settle-carlisle.ts";
+import { californiaZephyrRoute } from "../src/data/routes/california-zephyr.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -244,7 +245,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 13);
+  assert.equal(getAllRoutes().length, 14);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -388,7 +389,7 @@ test("every route has complete, locally prepared, licensed hero photography", as
     assert.match(media.originalFileUrl, /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//);
     assert.match(media.licenseName, /Public domain|CC BY/);
     assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
-    assert.equal(media.accessedAt, "2026-08-12");
+    assert.match(media.accessedAt, /^2026-08-(12|14)$/);
     assert.ok(media.width >= 1400 && media.height >= 800);
     const file = await readFile(`public${media.path}`);
     assert.ok(file.length > 150_000);
@@ -415,7 +416,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 13);
+  assert.equal(getAllRoutes().length, 14);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -452,8 +453,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes thirteen routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 13);
+test("repository includes fourteen routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 14);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -546,6 +547,48 @@ test("First Passage to the West models a two-day Canadian tourism journey", asyn
   assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - 899.37) < 0.02);
   assert.equal(getRouteRelationships("first-passage-west").length, 2);
   assert.equal(firstPassageWestRoute.capabilities.rideMode, false);
+});
+
+test("California Zephyr is a complete three-day United States journey", () => {
+  assert.equal(getRouteBySlug("california-zephyr"), californiaZephyrRoute);
+  assert.deepEqual(validateRoute(californiaZephyrRoute), []);
+  assert.deepEqual(californiaZephyrRoute.summary.countries, ["United States"]);
+  assert.equal(californiaZephyrRoute.summary.journeyDays, 3);
+  assert.deepEqual(californiaZephyrRoute.stops.map((stop) => stop.name), ["Chicago", "Omaha", "Denver Union Station", "Fraser–Winter Park", "Glenwood Springs", "Grand Junction", "Salt Lake City", "Reno", "Sacramento Valley Station", "Emeryville"]);
+  assert.ok(californiaZephyrRoute.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.ok(californiaZephyrRoute.timelineEntries.some((entry) => entry.id === "timeline-first-night"));
+  assert.ok(californiaZephyrRoute.timelineEntries.some((entry) => entry.id === "timeline-second-night"));
+  assert.equal(californiaZephyrRoute.capabilities.rideMode, false);
+});
+
+test("California Zephyr search, direction, collections, comparison, and library remain generic", () => {
+  for (const query of ["California Zephyr", "Amtrak", "Chicago", "Denver", "Glenwood Springs", "Salt Lake City", "Reno", "Sacramento", "Emeryville", "San Francisco Bay Area", "Rocky Mountains", "Sierra Nevada", "Colorado River", "Donner Pass", "sleeper", "overnight", "United States"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "california-zephyr"), `Expected California Zephyr for ${query}`);
+  }
+  assert.equal(searchRoutes(getAllRoutes(), "Donner Pass")[0]?.matchLabel, "Donner Pass");
+  const reverseStops = getDirectionalStops(californiaZephyrRoute, "reverse");
+  assert.equal(reverseStops[0].name, "Emeryville");
+  assert.equal(reverseStops.at(-1)?.name, "Chicago");
+  const reverseTimeline = getDirectionalTimeline(californiaZephyrRoute, "reverse");
+  assert.equal(reverseTimeline[0].id, "timeline-bay");
+  assert.equal(reverseTimeline.at(-1)?.id, "timeline-plains");
+  assert.equal(getDirectionalSegments(californiaZephyrRoute, "reverse").find((segment) => segment.id === "sierra")?.reverseDirectionSide, "left");
+  assert.equal(getRouteRelationships("california-zephyr").length, 2);
+  assert.ok(getJourneyCollection("multi-day-journeys")?.routeSlugs.includes("california-zephyr"));
+  assert.ok(getJourneyCollection("great-rail-crossings")?.routeSlugs.includes("california-zephyr"));
+  assert.deepEqual(getLibrarySummary([californiaZephyrRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 3886.14, countries: ["United States"] });
+});
+
+test("California Zephyr geometry is continuous, canonical, and matches prepared metadata", async () => {
+  const data = JSON.parse(await readFile("public/data/routes/california-zephyr.geojson", "utf8")) as { metadata: { relationIds: number[]; contributingWayIds: number[]; coordinateCount: number; calculatedLengthKm: number }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  const coordinates = data.features[0].geometry.coordinates;
+  assert.equal(coordinates.length, 46883);
+  assert.equal(data.metadata.coordinateCount, coordinates.length);
+  assert.deepEqual(data.metadata.relationIds, [8440320]);
+  assert.equal(data.metadata.contributingWayIds.length, 2438);
+  assert.ok(coordinates[0][0] > coordinates.at(-1)![0]);
+  assert.ok(Math.abs(routeLengthKm(coordinates) - 3886.14) < 0.02);
+  assert.equal(data.metadata.calculatedLengthKm, 3886.14);
 });
 
 test("previous seven GeoJSON paths remain stable", () => {
