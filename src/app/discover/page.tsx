@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { DiscoverRoutes, type DiscoverFilter } from "@/components/discover-routes";
 import { JourneyCollections } from "@/components/journey-collections";
 import { AppScreenShell } from "@/components/app-screen-shell";
@@ -15,7 +14,6 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Pro
   const candidate = typeof value === "string" ? value : undefined;
   const filter: DiscoverFilter = validFilters.includes(candidate as DiscoverFilter) ? candidate as DiscoverFilter : "all";
   return <AppScreenShell title="Discover" context="Find a prepared journey by landscape, place, or length.">
-    <div className="app-screen-actions"><Link className="app-search-shortcut focus-ring" href="/search">Search routes and landmarks <span>⌕</span></Link><Link className="text-link focus-ring" href="/plan">Open Plan Journey</Link></div>
     <JourneyCollections routes={routes} limit={5} />
     <DiscoverRoutes routes={routes} initialFilter={filter} />
   </AppScreenShell>;

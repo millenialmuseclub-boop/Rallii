@@ -29,7 +29,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
     window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
     window.dispatchEvent(new Event(directionChangeEvent));
   }
-  return <><SiteHeader /><div className="journey-app-bar"><Link href="/discover">← Discover</Link><span>{summary.name}</span><small>{endpoints.origin} → {endpoints.destination}</small></div><main><article>
+  return <><SiteHeader /><div className="journey-app-bar"><Link href="/discover">← Discover</Link><span>{summary.name}</span><small>{endpoints.origin} → {endpoints.destination}</small><Link className="journey-app-bar__saved" href="/saved">Saved</Link></div><main><article>
     <header className={`site-shell scroll-section py-10 sm:py-16 journey-surface${surface === "overview" ? " journey-surface--active" : ""}`} id="overview">
       <div className="route-hero-grid">
         <div className="route-hero-identity"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><button className="direction-button focus-ring mt-5" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button></div>

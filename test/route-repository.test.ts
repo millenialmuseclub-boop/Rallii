@@ -348,7 +348,7 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
 });
 
 test("primary navigation is focused, consistent, and supports active nested pages", () => {
-  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Home", "Discover", "Search", "Plan", "Saved"]);
+  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Home", "Discover", "Plan", "Saved"]);
   assert.equal(isNavigationItemActive("/", "/"), true);
   assert.equal(isNavigationItemActive("/discover", "/"), false);
   assert.equal(isNavigationItemActive("/plan", "/plan"), true);

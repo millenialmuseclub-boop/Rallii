@@ -10,6 +10,6 @@ export function SiteHeader() {
         </Link>
         <PrimaryNavigation />
       </div>
-    </header><PrimaryNavigation mobile /></>
+    </header><div className="mobile-top-bar"><Link className="focus-ring" href="/">Rallii</Link><Link className="focus-ring" href="/saved">Saved</Link></div><PrimaryNavigation mobile /></>
   );
 }
