@@ -15,6 +15,7 @@ import { douroLineRoute } from "../src/data/routes/douro-line.ts";
 import { firstPassageWestRoute } from "../src/data/routes/first-passage-west.ts";
 import { settleCarlisleRoute } from "../src/data/routes/settle-carlisle.ts";
 import { californiaZephyrRoute } from "../src/data/routes/california-zephyr.ts";
+import { bergenLineRoute } from "../src/data/routes/bergen-line.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -245,7 +246,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 14);
+  assert.equal(getAllRoutes().length, 15);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -390,7 +391,7 @@ test("every route has complete, locally prepared, licensed hero photography", as
     assert.match(media.originalFileUrl, /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//);
     assert.match(media.licenseName, /Public domain|CC BY/);
     assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
-    assert.match(media.accessedAt, /^2026-08-(12|14)$/);
+    assert.match(media.accessedAt, /^2026-08-(12|14|15)$/);
     assert.ok(media.width >= 1400 && media.height >= 800);
     const file = await readFile(`public${media.path}`);
     assert.ok(file.length > 150_000);
@@ -417,7 +418,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 14);
+  assert.equal(getAllRoutes().length, 15);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -454,8 +455,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes fourteen routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 14);
+test("repository includes fifteen routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 15);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -596,4 +597,43 @@ test("California Zephyr geometry is continuous, canonical, and matches prepared 
 test("previous seven GeoJSON paths remain stable", () => {
   const expected = ["glacier-express", "bernina-express", "goldenpass-express", "west-highland-line", "flam-railway", "cinque-terre", "tranzalpine"];
   assert.deepEqual(expected.map((slug) => getRouteBySlug(slug)?.geoJsonPath), expected.map((slug) => `/data/routes/${slug}.geojson`));
+});
+
+test("Bergen Line is a complete scheduled Norwegian mountain crossing", () => {
+  assert.equal(getRouteBySlug("bergen-line"), bergenLineRoute);
+  assert.deepEqual(validateRoute(bergenLineRoute), []);
+  assert.deepEqual(bergenLineRoute.stops.map((stop) => stop.name), ["Oslo", "Hønefoss", "Nesbyen", "Gol", "Ål", "Geilo", "Ustaoset", "Finse", "Myrdal", "Voss", "Dale", "Bergen"]);
+  assert.equal(bergenLineRoute.summary.operator, "Vy");
+  assert.equal(bergenLineRoute.capabilities.rideMode, false);
+  assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("Bergen Line search, collections, relationships, and library stay generic", () => {
+  for (const query of ["Bergen Line", "Bergen Railway", "Bergensbanen", "Oslo", "Bergen", "Hallingdal", "Geilo", "Finse", "Hardangervidda", "Myrdal", "Voss", "Vy", "Norway", "mountain", "plateau"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "bergen-line"), `Expected Bergen Line for ${query}`);
+  }
+  for (const slug of ["northern-landscapes", "full-day-journeys", "mountain-journeys", "great-rail-crossings"]) assert.ok(getJourneyCollection(slug)?.routeSlugs.includes("bergen-line"));
+  assert.deepEqual(getRouteRelationships("bergen-line").map((item) => item.slug), ["flam-railway", "tranzalpine"]);
+  assert.ok(getRouteRelationships("flam-railway").some((item) => item.slug === "bergen-line"));
+  assert.match(bergenLineRoute.journeyInformation.find((item) => item.id === "myrdal-connection")?.detail ?? "", /separate Flåm Railway/);
+  assert.deepEqual(getLibrarySummary([bergenLineRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 482.01, countries: ["Norway"] });
+  assert.equal(parseComparisonRoutes("bergen-line,flam-railway", getAllRoutes()).length, 2);
+});
+
+test("Bergen Line geometry, direction, timeline, and Best Side data are prepared", async () => {
+  const data = JSON.parse(await readFile("public/data/routes/bergen-line.geojson", "utf8")) as { metadata: { relationIds: number[]; contributingWayIds: number[]; coordinateCount: number; calculatedLengthKm: number }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  const geometry = data.features[0].geometry.coordinates;
+  assert.deepEqual(data.metadata.relationIds, [950556, 9531101]);
+  assert.equal(data.metadata.contributingWayIds.length, 1075);
+  assert.equal(data.metadata.coordinateCount, 12580);
+  assert.equal(geometry.length, 12580);
+  assert.ok(Math.abs(routeLengthKm(geometry) - 482.01) < 0.02);
+  assert.ok(projectCoordinateOntoRoute([bergenLineRoute.stops[0].longitude, bergenLineRoute.stops[0].latitude], geometry).distanceFromRouteMeters < 5);
+  assert.ok(projectCoordinateOntoRoute([bergenLineRoute.stops.at(-1)!.longitude, bergenLineRoute.stops.at(-1)!.latitude], geometry).distanceFromRouteMeters < 5);
+  assert.ok(bergenLineRoute.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.ok(getDirectionalTimeline(bergenLineRoute, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.deepEqual(getDirectionalEndpoints(bergenLineRoute, "reverse"), { origin: "Bergen", destination: "Oslo" });
+  assert.ok(bergenLineRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+  assert.equal(bergenLineRoute.bestSideSegments[1].forwardDirectionSide, "right");
+  assert.equal(bergenLineRoute.bestSideSegments[1].reverseDirectionSide, "left");
 });

@@ -21,8 +21,8 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "cinque-terre", reason: "A contrasting coastal railway" },
   ],
   "flam-railway": [
+    { slug: "bergen-line", reason: "Connect at Myrdal for the separate Bergen Line journey" },
     { slug: "goldenpass-express", reason: "Another scenic journey through mountain valleys" },
-    { slug: "cinque-terre", reason: "A short coastal alternative" },
   ],
   "cinque-terre": [
     { slug: "flam-railway", reason: "Another concentrated scenic escape" },
@@ -59,6 +59,10 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
   "california-zephyr": [
     { slug: "first-passage-west", reason: "Another multi-day crossing of the North American West" },
     { slug: "tranzalpine", reason: "A shorter coast-to-coast mountain journey" },
+  ],
+  "bergen-line": [
+    { slug: "flam-railway", reason: "Connect at Myrdal for the separate descent to Flåm" },
+    { slug: "tranzalpine", reason: "Another full-day crossing from one coast toward another" },
   ],
 };
 
