@@ -3,6 +3,7 @@ export const primaryNavigation = [
   { href: "/discover", label: "Discover" },
   { href: "/search", label: "Search" },
   { href: "/plan", label: "Plan" },
+  { href: "/saved", label: "Saved" },
 ] as const;
 
 export function isNavigationItemActive(pathname: string, href: string): boolean {

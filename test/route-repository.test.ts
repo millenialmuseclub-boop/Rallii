@@ -348,10 +348,11 @@ for (const slug of ["glacier-express", "bernina-express", "goldenpass-express", 
 });
 
 test("primary navigation is focused, consistent, and supports active nested pages", () => {
-  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Home", "Discover", "Search", "Plan"]);
+  assert.deepEqual(primaryNavigation.map((item) => item.label), ["Home", "Discover", "Search", "Plan", "Saved"]);
   assert.equal(isNavigationItemActive("/", "/"), true);
   assert.equal(isNavigationItemActive("/discover", "/"), false);
   assert.equal(isNavigationItemActive("/plan", "/plan"), true);
+  assert.equal(isNavigationItemActive("/saved", "/saved"), true);
   assert.equal(isNavigationItemActive("/discover/alpine-journeys", "/discover"), true);
   assert.equal(isNavigationItemActive("/compare", "/discover"), false);
 });
@@ -475,7 +476,7 @@ test("Settle–Carlisle is a complete scheduled northern England journey", async
   assert.equal(settleCarlisleRoute.capabilities.rideMode, false);
 });
 
-test("mobile planning architecture removes the route rail and keeps integrations inert", async () => {
+test("mobile planning separates saved journeys and keeps integrations inert", async () => {
   const [home, saved, plan, navigation, tool] = await Promise.all([
     readFile("src/app/page.tsx", "utf8"),
     readFile("src/app/saved/page.tsx", "utf8"),
@@ -484,9 +485,10 @@ test("mobile planning architecture removes the route rail and keeps integrations
     readFile("src/components/travel-planning-tool.tsx", "utf8"),
   ]);
   assert.doesNotMatch(home, /Choose a window|home-route-rail|overflow-x-auto/);
-  assert.match(saved, /redirect\("\/plan"\)/);
+  assert.match(saved, /<TravelLibrary/);
   assert.match(plan, /Plan Your Journey/);
-  assert.doesNotMatch(navigation, /My Journeys|\/saved/);
+  assert.match(navigation, /\/saved/);
+  assert.doesNotMatch(navigation, /My Journeys/);
   assert.match(tool, /Planning tool coming soon/);
   assert.doesNotMatch(tool, /<script|travelpayouts|marker=/i);
 });
