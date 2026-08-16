@@ -64,6 +64,10 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "flam-railway", reason: "Connect at Myrdal for the separate descent to Flåm" },
     { slug: "tranzalpine", reason: "Another full-day crossing from one coast toward another" },
   ],
+  "the-ghan": [
+    { slug: "california-zephyr", reason: "Another landmark long-distance sleeper crossing" },
+    { slug: "first-passage-west", reason: "A contrasting multi-day rail journey built around changing landscapes" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

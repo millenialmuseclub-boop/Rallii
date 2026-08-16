@@ -16,6 +16,7 @@ import { firstPassageWestRoute } from "../src/data/routes/first-passage-west.ts"
 import { settleCarlisleRoute } from "../src/data/routes/settle-carlisle.ts";
 import { californiaZephyrRoute } from "../src/data/routes/california-zephyr.ts";
 import { bergenLineRoute } from "../src/data/routes/bergen-line.ts";
+import { theGhanRoute } from "../src/data/routes/the-ghan.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -246,7 +247,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 15);
+  assert.equal(getAllRoutes().length, 16);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -391,7 +392,7 @@ test("every route has complete, locally prepared, licensed hero photography", as
     assert.match(media.originalFileUrl, /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//);
     assert.match(media.licenseName, /Public domain|CC BY/);
     assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
-    assert.match(media.accessedAt, /^2026-08-(12|14|15)$/);
+    assert.match(media.accessedAt, /^2026-08-(12|14|15|16)$/);
     assert.ok(media.width >= 1400 && media.height >= 800);
     const file = await readFile(`public${media.path}`);
     assert.ok(file.length > 150_000);
@@ -418,7 +419,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 15);
+  assert.equal(getAllRoutes().length, 16);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -455,8 +456,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes fifteen routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 15);
+test("repository includes sixteen routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 16);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -636,4 +637,39 @@ test("Bergen Line geometry, direction, timeline, and Best Side data are prepared
   assert.ok(bergenLineRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
   assert.equal(bergenLineRoute.bestSideSegments[1].forwardDirectionSide, "right");
   assert.equal(bergenLineRoute.bestSideSegments[1].reverseDirectionSide, "left");
+});
+
+test("The Ghan is a complete Australian multi-day journey", () => {
+  assert.equal(getRouteBySlug("the-ghan"), theGhanRoute);
+  assert.deepEqual(validateRoute(theGhanRoute), []);
+  assert.deepEqual(theGhanRoute.stops.map((stop) => stop.name), ["Adelaide", "Port Augusta", "Marla", "Alice Springs", "Katherine", "Darwin"]);
+  assert.equal(theGhanRoute.summary.journeyDays, 3);
+  assert.equal(theGhanRoute.capabilities.rideMode, false);
+  assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("The Ghan uses generic search, catalogue, comparison, and library integrations", () => {
+  for (const query of ["The Ghan", "Adelaide", "Darwin", "Alice Springs", "Katherine", "Marla", "Journey Beyond", "Australia", "desert", "sleeper train"]) assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "the-ghan"), `Expected The Ghan for ${query}`);
+  assert.ok(getAllRoutes().filter((route) => route.summary.countries.includes("Australia")).some((route) => route.summary.slug === "the-ghan"));
+  assert.ok(theGhanRoute.summary.journeyTypes.includes("multi-day"));
+  assert.ok(getJourneyCollection("multi-day-journeys")?.routeSlugs.includes("the-ghan"));
+  assert.ok(getJourneyCollection("great-rail-crossings")?.routeSlugs.includes("the-ghan"));
+  assert.equal(getRouteRelationships("the-ghan").length, 2);
+  assert.equal(parseComparisonRoutes("the-ghan,california-zephyr", getAllRoutes()).length, 2);
+  assert.deepEqual(getLibrarySummary([theGhanRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 2980.57, countries: ["Australia"] });
+});
+
+test("The Ghan geometry and direction-aware experience are prepared", async () => {
+  const data = JSON.parse(await readFile("public/data/routes/the-ghan.geojson", "utf8")) as { metadata: { relationIds: number[]; contributingWayIds: number[]; coordinateCount: number; calculatedLengthKm: number }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+  const coordinates = data.features[0].geometry.coordinates;
+  assert.deepEqual(data.metadata.relationIds, [1148765]);
+  assert.equal(data.metadata.contributingWayIds.length, 471);
+  assert.equal(data.metadata.coordinateCount, coordinates.length);
+  assert.ok(coordinates.length > 6000);
+  assert.ok(Math.abs(routeLengthKm(coordinates) - 2980.57) < 0.03);
+  assert.ok(projectCoordinateOntoRoute([theGhanRoute.stops[0].longitude, theGhanRoute.stops[0].latitude], coordinates).distanceFromRouteMeters < 5);
+  assert.ok(projectCoordinateOntoRoute([theGhanRoute.stops.at(-1)!.longitude, theGhanRoute.stops.at(-1)!.latitude], coordinates).distanceFromRouteMeters < 5);
+  assert.deepEqual(getDirectionalEndpoints(theGhanRoute, "reverse"), { origin: "Darwin", destination: "Adelaide" });
+  assert.ok(getDirectionalTimeline(theGhanRoute, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+  assert.ok(theGhanRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
 });

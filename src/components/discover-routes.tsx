@@ -1,21 +1,45 @@
 "use client";
+
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { RouteCard } from "@/components/route-card";
 import type { RailRoute } from "@/types/route";
-const filters = ["all", "switzerland", "italy", "ireland", "northern-ireland", "united-kingdom", "norway", "portugal", "canada", "united-states", "new-zealand", "japan", "cross-border"] as const;
-export type DiscoverFilter = (typeof filters)[number];
-export function isDiscoverFilter(value: string | undefined): value is DiscoverFilter { return filters.includes(value as DiscoverFilter); }
-export function filterRoutes(routes: RailRoute[], filter: DiscoverFilter): RailRoute[] { if (filter === "all") return routes; if (filter === "cross-border") return routes.filter((route) => route.summary.journeyTypes.includes("cross-border")); if (filter === "northern-ireland") return routes.filter((route) => route.summary.slug === "belfast-derry"); const country = filter === "united-kingdom" ? "United Kingdom" : filter === "united-states" ? "United States" : filter === "new-zealand" ? "New Zealand" : filter.charAt(0).toUpperCase() + filter.slice(1); return routes.filter((route) => route.summary.countries.includes(country)); }
+
+const countryAliases: Record<string, string> = { "northern-ireland": "Northern Ireland", "united-kingdom": "United Kingdom", "united-states": "United States", "new-zealand": "New Zealand" };
+const durationFilters = [
+  { id: "quick", label: "Under 90 min", matches: (route: RailRoute) => route.summary.durationMinutes < 90 },
+  { id: "day", label: "A day", matches: (route: RailRoute) => route.summary.durationMinutes >= 90 && route.summary.durationMinutes < 720 },
+  { id: "multi-day", label: "Multi-day", matches: (route: RailRoute) => route.summary.durationMinutes >= 720 },
+] as const;
+const landscapeFilters = ["mountain", "coastal", "multi-day", "scenic"] as const;
+export type DiscoverFilter = string;
+
+export function isDiscoverFilter(value: string | undefined): value is DiscoverFilter { return Boolean(value); }
+export function filterRoutes(routes: RailRoute[], filter: DiscoverFilter): RailRoute[] {
+  if (filter === "all") return routes;
+  if (filter === "northern-ireland") return routes.filter((route) => route.summary.slug === "belfast-derry");
+  if (filter === "cross-border") return routes.filter((route) => route.summary.journeyTypes.includes("cross-border"));
+  const duration = durationFilters.find((item) => item.id === filter);
+  if (duration) return routes.filter(duration.matches);
+  const country = countryAliases[filter] ?? titleCase(filter);
+  return routes.filter((route) => route.summary.countries.includes(country) || route.summary.journeyTypes.includes(filter as RailRoute["summary"]["journeyTypes"][number]) || route.summary.experienceTags.includes(filter as RailRoute["summary"]["experienceTags"][number]));
+}
+
 export function DiscoverRoutes({ routes, initialFilter = "all" }: { routes: RailRoute[]; initialFilter?: DiscoverFilter }) {
   const router = useRouter();
   const [filter, setFilter] = useState<DiscoverFilter>(initialFilter);
+  const [group, setGroup] = useState<"places" | "landscapes" | "duration">("places");
+  const countries = useMemo(() => [...new Set(routes.flatMap((route) => route.summary.countries))].sort(), [routes]);
   const visible = filterRoutes(routes, filter);
   function chooseFilter(item: DiscoverFilter) { setFilter(item); router.replace(item === "all" ? "/discover" : `/discover?filter=${item}`, { scroll: false }); }
+  const options = group === "places" ? countries.map((country) => ({ id: country.toLowerCase().replaceAll(" ", "-"), label: country })) : group === "landscapes" ? landscapeFilters.map((item) => ({ id: item, label: titleCase(item) })) : durationFilters;
   return <section className="discover-catalogue" aria-labelledby="all-journeys-title">
-    <div className="screen-section-heading"><div><p className="eyebrow">Complete catalogue</p><h2 id="all-journeys-title">All journeys</h2></div><span>{visible.length} {visible.length === 1 ? "route" : "routes"}</span></div>
-    <div className="discover-filter-heading"><p>Filter by country or journey type</p>{filter !== "all" ? <button className="text-link" type="button" onClick={() => chooseFilter("all")}>Reset filters</button> : null}</div>
-    <div className="discover-filters" aria-label="Filter journeys">{filters.map((item) => <button className={`filter-button${filter === item ? " filter-button--active" : ""}`} key={item} type="button" aria-pressed={filter === item} onClick={() => chooseFilter(item)}>{item === "all" ? "All" : item.split("-").map((part) => part.charAt(0).toUpperCase()+part.slice(1)).join(" ")}</button>)}</div>
+    <div className="screen-section-heading"><div><p className="eyebrow">World rail catalogue</p><h2 id="all-journeys-title">Find your next journey</h2></div><span>{visible.length} {visible.length === 1 ? "route" : "routes"}</span></div>
+    <div className="catalogue-groups" role="tablist" aria-label="Browse journeys"><button type="button" role="tab" aria-selected={group === "places"} onClick={() => setGroup("places")}>Place</button><button type="button" role="tab" aria-selected={group === "landscapes"} onClick={() => setGroup("landscapes")}>Landscape</button><button type="button" role="tab" aria-selected={group === "duration"} onClick={() => setGroup("duration")}>Time</button></div>
+    <div className="discover-filter-heading"><p>Browse by {group === "places" ? "country" : group === "landscapes" ? "journey character" : "available time"}</p>{filter !== "all" ? <button className="text-link" type="button" onClick={() => chooseFilter("all")}>Show all</button> : null}</div>
+    <div className="discover-filters" aria-label="Filter journeys"><button className={`filter-button${filter === "all" ? " filter-button--active" : ""}`} type="button" aria-pressed={filter === "all"} onClick={() => chooseFilter("all")}>All</button>{options.map((item) => <button className={`filter-button${filter === item.id ? " filter-button--active" : ""}`} key={item.id} type="button" aria-pressed={filter === item.id} onClick={() => chooseFilter(item.id)}>{item.label}</button>)}</div>
     <div className="compact-route-grid">{visible.map((route) => <RouteCard key={route.summary.slug} route={route} variant="compact" />)}</div>
   </section>;
 }
+
+function titleCase(value: string): string { return value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" "); }

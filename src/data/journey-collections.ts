@@ -17,8 +17,8 @@ export const journeyCollections: JourneyCollection[] = [
   { slug: "mountain-journeys", title: "Mountain Journeys", description: "Railways shaped by high passes, steep valleys, and memorable mountain engineering.", routeSlugs: ["tranzalpine", "glacier-express", "bernina-express", "flam-railway", "bergen-line", "kurobe-gorge-railway", "first-passage-west", "settle-carlisle", "california-zephyr"] },
   { slug: "irish-rail-journeys", title: "Irish Rail Journeys", description: "Two coastal railways across the island of Ireland, shaped by different landscapes, countries, and operators.", routeSlugs: ["belfast-derry", "dublin-rosslare"] },
   { slug: "river-journeys", title: "River Journeys", description: "Railways whose landscapes are organized by major rivers, gorges, and valley bends.", routeSlugs: ["douro-line", "first-passage-west", "flam-railway", "belfast-derry", "california-zephyr"] },
-  { slug: "multi-day-journeys", title: "Multi-Day Journeys", description: "Long-form railway experiences that continue across one or more nights.", routeSlugs: ["first-passage-west", "california-zephyr"] },
-  { slug: "great-rail-crossings", title: "Great Rail Crossings", description: "Long-distance journeys whose changing landscapes reveal the scale of a country or continent.", routeSlugs: ["tranzalpine", "bergen-line", "first-passage-west", "california-zephyr"] },
+  { slug: "multi-day-journeys", title: "Multi-Day Journeys", description: "Long-form railway experiences that continue across one or more nights.", routeSlugs: ["the-ghan", "first-passage-west", "california-zephyr"] },
+  { slug: "great-rail-crossings", title: "Great Rail Crossings", description: "Long-distance journeys whose changing landscapes reveal the scale of a country or continent.", routeSlugs: ["tranzalpine", "bergen-line", "the-ghan", "first-passage-west", "california-zephyr"] },
 ];
 
 export function getJourneyCollection(slug: string): JourneyCollection | undefined { return journeyCollections.find((collection) => collection.slug === slug); }
