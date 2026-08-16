@@ -503,12 +503,13 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(getPlanningLocations(theCanadianRoute).some((location) => location.kind === "overnight"), false);
   assert.equal(getOfficialOperatorSource(bergenLineRoute)?.category, "operator");
   assert.equal(hasPreparedActivityContext(bergenLineRoute), true);
-  assert.equal(partnerPlanning.tripFlightsEnabled, false);
+  assert.equal(partnerPlanning.tripFlightsEnabled, true);
   assert.equal(partnerPlanning.discoverCarsEnabled, false);
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
   assert.match(panel, /useEffect/);
   assert.match(panel, /surface === "experiences"/);
+  assert.match(panel, /surface === "flights"/);
   assert.match(panel, /Stay22/);
   assert.doesNotMatch(panel, /Agoda/);
   assert.match(routePage, /\/plan\?route=/);

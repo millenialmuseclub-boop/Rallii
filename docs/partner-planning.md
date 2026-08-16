@@ -4,7 +4,7 @@ Rallii remains an editorial rail guide. Plan Journey may open optional partner s
 
 - **Stay22** is the sole accommodation search, used near a route’s departure, arrival, and any explicitly modelled overnight stop.
 - **GetYourGuide** is used only for prepared destination-city context and is loaded after interaction.
-- **Trip.com** is held back until its provided Travelpayouts creative is verified as flight-only.
+- **Trip.com** is the supplied Travelpayouts flight search, loaded only after a traveler selects Find flights.
 - **DiscoverCars** is held back until a destination-aware embed or link format is confirmed.
 - **Agoda** is configured separately but intentionally not displayed, so accommodation providers never compete in the same plan.
 

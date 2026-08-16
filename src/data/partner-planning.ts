@@ -15,8 +15,8 @@ export const partnerPlanning = {
     trs: process.env.NEXT_PUBLIC_TRAVELPAYOUTS_TRS?.trim() ?? "",
     marker: process.env.NEXT_PUBLIC_TRAVELPAYOUTS_MARKER?.trim() ?? "",
   },
-  // The supplied Trip.com creative has not been confirmed as flights-only.
-  tripFlightsEnabled: false,
+  // Supplied by the publisher as the approved Travelpayouts flight creative.
+  tripFlightsEnabled: true,
   // DiscoverCars requires a confirmed destination-aware embed or link format.
   discoverCarsEnabled: false,
 } as const;
@@ -55,6 +55,10 @@ export function isStay22Configured(): boolean {
 }
 
 export function isGetYourGuideConfigured(): boolean {
+  return isTravelpayoutsConfigured();
+}
+
+export function isTravelpayoutsConfigured(): boolean {
   return Boolean(partnerPlanning.travelpayouts.trs && partnerPlanning.travelpayouts.marker);
 }
 
