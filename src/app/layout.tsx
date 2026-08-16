@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
+import { PwaRegistration } from "@/components/pwa-registration";
+import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rallii-kappa.vercel.app"),
@@ -17,6 +19,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary", title: "Rallii — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "Rallii", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = { themeColor: "#173f32" };
@@ -28,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body>{children}<SiteFooter /><PwaRegistration /></body>
     </html>
   );
 }

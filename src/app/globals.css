@@ -544,14 +544,22 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .partner-plan__locations .action-button { width: 100%; text-align: left; }
 .partner-plan__locations .action-button[aria-pressed="true"] { border-color: var(--accent-deep); background: var(--accent-deep); color: white; }
 .partner-plan__quiet { color: var(--muted); font-size: .76rem; }
-.partner-detail { display: grid; gap: .9rem; margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); background: var(--surface); }
+.partner-detail, .partner-inline-widget { display: grid; gap: .9rem; margin-top: .35rem; padding-top: .9rem; border-top: 1px solid var(--line); }
 .partner-detail__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.partner-detail > p { color: var(--muted); font-size: .78rem; }
+.partner-detail > p, .partner-inline-widget > p { color: var(--muted); font-size: .78rem; }
 .partner-plan__embed { width: 100%; min-height: 34rem; border: 0; background: var(--page); }
 .partner-plan__widget { min-height: 5rem; }
 .partner-plan__partner-frame { width: 100%; min-height: 11rem; border: 0; background: var(--page); }
 .partner-plan__partner-frame[data-kind="stays"], .partner-plan__partner-frame[data-kind="cars"], .partner-plan__partner-frame[data-kind="activities"] { min-height: 23rem; }
 .partner-plan__widget-fallback { margin-top: .6rem; color: var(--muted); font-size: .74rem; line-height: 1.45; }
+.partner-inline-widget__header, .stay-planner__links { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .65rem; }
+.stay-planner__section { margin-top: 1.5rem; }
+.site-footer { border-top: 1px solid var(--line); background: var(--surface); }
+.site-footer__inner { min-height: 5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); color: var(--muted); font-size: .75rem; }
+.site-footer nav { display: flex; gap: 1rem; }
+.site-footer a, .legal-copy a { text-decoration: underline; text-underline-offset: .22rem; }
+.legal-copy { display: grid; gap: 1rem; max-width: 46rem; padding: 1rem 0 4rem; color: var(--muted); line-height: 1.7; }
+.legal-copy h2 { margin-top: 1.25rem; color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 1.75rem; line-height: 1.1; }
 
 @media (max-width: 639px) {
   .mobile-nav { border-top: 0; box-shadow: 0 -8px 30px rgb(29 40 33 / 10%); }

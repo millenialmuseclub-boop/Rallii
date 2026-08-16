@@ -7,5 +7,5 @@ export const metadata: Metadata = { title: "Search journeys", description: "Find
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   const value = (await searchParams).q;
-  return <AppScreenShell title="Search" context="Find a journey, place, landmark, or railway."><SearchRoutes routes={getAllRoutes()} initialQuery={typeof value === "string" ? value : ""} /></AppScreenShell>;
+  return <AppScreenShell title="Search" context="Find a journey, place, landmark, or railway." backHref="/discover" backLabel="Discover"><SearchRoutes routes={getAllRoutes()} initialQuery={typeof value === "string" ? value : ""} /></AppScreenShell>;
 }

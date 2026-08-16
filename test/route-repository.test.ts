@@ -486,12 +486,14 @@ test("Settle–Carlisle is a complete scheduled northern England journey", async
 });
 
 test("partner planning derives locations, stays opt-in, and preserves editorial route pages", async () => {
-  const [home, saved, plan, navigation, panel, routePage] = await Promise.all([
+  const [home, saved, plan, navigation, panel, widgetFrame, stayPlanner, routePage] = await Promise.all([
     readFile("src/app/page.tsx", "utf8"),
     readFile("src/app/saved/page.tsx", "utf8"),
     readFile("src/app/plan/page.tsx", "utf8"),
     readFile("src/data/navigation.ts", "utf8"),
     readFile("src/components/partner-planning-panel.tsx", "utf8"),
+    readFile("src/components/partner-widget-frame.tsx", "utf8"),
+    readFile("src/components/stay-planner.tsx", "utf8"),
     readFile("src/components/route-page.tsx", "utf8"),
   ]);
   assert.doesNotMatch(home, /Choose a window|home-route-rail|overflow-x-auto/);
@@ -507,15 +509,15 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(partnerPlanning.discoverCarsEnabled, true);
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
-  assert.match(panel, /\/partner-widget\?kind=/);
-  assert.match(panel, /allow-same-origin/);
+  assert.match(widgetFrame, /\/partner-widget\?kind=/);
+  assert.match(widgetFrame, /allow-same-origin/);
   assert.match(panel, /openSurfaces\.experiences/);
   assert.match(panel, /openSurfaces\.flights/);
   assert.match(panel, /openSurfaces\.car/);
-  assert.match(panel, /openSurfaces\.stays/);
-  assert.match(panel, /Agoda/);
+  assert.match(stayPlanner, /Partner search by Agoda/);
+  assert.match(stayPlanner, /getPlanningLocations/);
   assert.doesNotMatch(panel, /srcDoc/);
-  assert.match(panel, /partner tool does not load/);
+  assert.match(widgetFrame, /partner tool does not load/);
   assert.doesNotMatch(panel, /Stay22/);
   assert.match(routePage, /\/plan\?route=/);
   const routeCard = await readFile("src/components/route-card.tsx", "utf8");

@@ -1,36 +1,31 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { PartnerWidgetFrame } from "@/components/partner-widget-frame";
 import type { RailRoute } from "@/types/route";
 import {
   getOfficialOperatorSource,
-  getPlanningLocations,
   hasPreparedActivityContext,
   isGetYourGuideConfigured,
   isTravelpayoutsConfigured,
   partnerPlanning,
 } from "@/data/partner-planning";
 
-type PartnerSurface = "stays" | "flights" | "experiences" | "car";
-type PartnerWidgetKind = "stays" | "flights" | "cars" | "activities";
+type PartnerSurface = "flights" | "experiences" | "car";
 type OpenSurfaces = Record<PartnerSurface, boolean>;
 
-const closedSurfaces: OpenSurfaces = { stays: false, flights: false, experiences: false, car: false };
+const closedSurfaces: OpenSurfaces = { flights: false, experiences: false, car: false };
 
 export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: RailRoute[]; initialRouteSlug?: string }) {
   const initialRoute = routes.find((route) => route.summary.slug === initialRouteSlug) ?? routes[0];
   const [routeSlug, setRouteSlug] = useState(initialRoute.summary.slug);
   const [openSurfaces, setOpenSurfaces] = useState<OpenSurfaces>(closedSurfaces);
   const route = routes.find((item) => item.summary.slug === routeSlug) ?? initialRoute;
-  const locations = getPlanningLocations(route);
-  const [locationId, setLocationId] = useState(locations[0].id);
-  const location = locations.find((item) => item.id === locationId) ?? locations[0];
   const operator = getOfficialOperatorSource(route);
 
   function selectRoute(nextSlug: string) {
-    const nextRoute = routes.find((route) => route.summary.slug === nextSlug);
     setRouteSlug(nextSlug);
-    setLocationId(nextRoute ? getPlanningLocations(nextRoute)[0].id : "departure");
     setOpenSurfaces(closedSurfaces);
   }
 
@@ -48,10 +43,10 @@ export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: Rai
 
     <div className="partner-plan__sections">
       <section className="partner-plan__section"><p className="eyebrow">Continue planning</p><h3>Travel with the operator</h3><p>Rallii’s route guidance is editorial. Check the operator directly for current reservations, schedules, and service information.</p>{operator?.url ? <a className="action-button focus-ring" href={operator.url} target="_blank" rel="noreferrer">Visit {route.summary.operator}</a> : null}</section>
-      <section className="partner-plan__section"><p className="eyebrow">Stay near the journey</p><h3>Find places to stay</h3><div className="partner-plan__locations">{locations.map((item) => <button key={item.id} type="button" className="action-button focus-ring" aria-pressed={location.id === item.id} onClick={() => setLocationId(item.id)}>{item.label}: {item.place}</button>)}</div>{isTravelpayoutsConfigured() ? <><button className="action-button action-button--primary focus-ring" type="button" aria-expanded={openSurfaces.stays} onClick={() => toggleSurface("stays")}>Find places near {location.place}</button>{openSurfaces.stays ? <PartnerDetail title={`Places near ${location.place}`} onClose={() => toggleSurface("stays")}><p>Partner search by Agoda · Opens external booking options.</p><TravelPayoutsWidget kind="stays" title="Agoda accommodation search" /></PartnerDetail> : null}</> : <p className="partner-plan__quiet">Accommodation search is not configured yet.</p>}</section>
-      <section className="partner-plan__section"><p className="eyebrow">Get there</p><h3>Find flights</h3><p>Compare flight options separately from your rail journey.</p>{partnerPlanning.tripFlightsEnabled && isTravelpayoutsConfigured() ? <><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.flights} onClick={() => toggleSurface("flights")}>Find flights</button>{openSurfaces.flights ? <PartnerDetail title="Flight finder" onClose={() => toggleSurface("flights")}><p>Partner search by Trip.com · Opens external booking options.</p><TravelPayoutsWidget kind="flights" title="Trip.com flight search" /></PartnerDetail> : null}</> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
-      {hasPreparedActivityContext(route) && isGetYourGuideConfigured() ? <section className="partner-plan__section"><p className="eyebrow">Explore the destination</p><h3>Explore {route.summary.destination}</h3><p>Find experiences around the city at the end of this route.</p><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.experiences} onClick={() => toggleSurface("experiences")}>Explore journey</button>{openSurfaces.experiences ? <PartnerDetail title={`Explore ${route.summary.destination}`} onClose={() => toggleSurface("experiences")}><p>Partner search by GetYourGuide · Opens external booking options.</p><TravelPayoutsWidget kind="activities" title="GetYourGuide activity search" /></PartnerDetail> : null}</section> : null}
-      <section className="partner-plan__section"><p className="eyebrow">Continue by car</p><h3>Find cars</h3><p>Compare car-hire options separately for your arrival or onward travel.</p>{partnerPlanning.discoverCarsEnabled && isTravelpayoutsConfigured() ? <><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.car} onClick={() => toggleSurface("car")}>Find cars</button>{openSurfaces.car ? <PartnerDetail title="Car finder" onClose={() => toggleSurface("car")}><p>Partner search by DiscoverCars · Opens external booking options.</p><TravelPayoutsWidget kind="cars" title="DiscoverCars search" /></PartnerDetail> : null}</> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
+      <section className="partner-plan__section"><p className="eyebrow">Stay near the journey</p><h3>Find places to stay</h3><p>Choose from the main prepared cities along this journey on the dedicated stays screen.</p><Link className="action-button action-button--primary focus-ring" href={`/stays?route=${route.summary.slug}`}>Find stays along this journey</Link></section>
+      <section className="partner-plan__section"><p className="eyebrow">Get there</p><h3>Find flights</h3><p>Compare flight options separately from your rail journey.</p>{partnerPlanning.tripFlightsEnabled && isTravelpayoutsConfigured() ? <><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.flights} onClick={() => toggleSurface("flights")}>Find flights</button>{openSurfaces.flights ? <PartnerDetail title="Flight finder" onClose={() => toggleSurface("flights")}><p>Partner search by Trip.com · Opens external booking options.</p><PartnerWidgetFrame kind="flights" title="Trip.com flight search" /></PartnerDetail> : null}</> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
+      {hasPreparedActivityContext(route) && isGetYourGuideConfigured() ? <section className="partner-plan__section"><p className="eyebrow">Explore around the journey</p><h3>Find activities</h3><p>Browse the general GetYourGuide activity finder. Confirm the place directly with the partner.</p><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.experiences} onClick={() => toggleSurface("experiences")}>Explore activities</button>{openSurfaces.experiences ? <PartnerDetail title="Activity finder" onClose={() => toggleSurface("experiences")}><p>General partner search by GetYourGuide · Opens external booking options.</p><PartnerWidgetFrame kind="activities" title="GetYourGuide activity search" /></PartnerDetail> : null}</section> : null}
+      <section className="partner-plan__section"><p className="eyebrow">Continue by car</p><h3>Find cars</h3><p>Compare car-hire options separately for your arrival or onward travel.</p>{partnerPlanning.discoverCarsEnabled && isTravelpayoutsConfigured() ? <><button className="action-button focus-ring" type="button" aria-expanded={openSurfaces.car} onClick={() => toggleSurface("car")}>Find cars</button>{openSurfaces.car ? <PartnerDetail title="Car finder" onClose={() => toggleSurface("car")}><p>Partner search by DiscoverCars · Opens external booking options.</p><PartnerWidgetFrame kind="cars" title="DiscoverCars search" /></PartnerDetail> : null}</> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
     </div>
     <p className="planning-disclosure">Where a partner search is available, it opens external booking options with that provider. Rallii does not process reservations or show prices and availability.</p>
   </section>;
@@ -59,8 +54,4 @@ export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: Rai
 
 function PartnerDetail({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
   return <section className="partner-detail" aria-live="polite"><div className="partner-detail__header"><h3>{title}</h3><button className="action-button focus-ring" type="button" onClick={onClose}>Close</button></div>{children}</section>;
-}
-
-function TravelPayoutsWidget({ kind, title }: { kind: PartnerWidgetKind; title: string }) {
-  return <div className="partner-plan__widget"><iframe title={title} className="partner-plan__partner-frame" data-kind={kind} loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" src={`/partner-widget?kind=${kind}`} /><p className="partner-plan__widget-fallback">If the partner tool does not load, refresh the page or try again later.</p></div>;
 }
