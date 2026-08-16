@@ -37,6 +37,7 @@ import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, 
 import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
 import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
 import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments, getDirectionalStops, getDirectionalTimeline, parseJourneyDirection, transformRouteDistance } from "../src/lib/route-direction.ts";
+import { getOfficialOperatorSource, getPlanningLocations, hasPreparedActivityContext, isGetYourGuideConfigured, isStay22Configured, partnerPlanning } from "../src/data/partner-planning.ts";
 
 test("direction parsing is strict and safely defaults forward", () => {
   assert.equal(parseJourneyDirection("reverse"), "reverse");
@@ -484,21 +485,33 @@ test("Settle–Carlisle is a complete scheduled northern England journey", async
   assert.equal(settleCarlisleRoute.capabilities.rideMode, false);
 });
 
-test("mobile planning separates saved journeys and keeps integrations inert", async () => {
-  const [home, saved, plan, navigation, tool] = await Promise.all([
+test("partner planning derives locations, stays opt-in, and preserves editorial route pages", async () => {
+  const [home, saved, plan, navigation, panel, routePage] = await Promise.all([
     readFile("src/app/page.tsx", "utf8"),
     readFile("src/app/saved/page.tsx", "utf8"),
     readFile("src/app/plan/page.tsx", "utf8"),
     readFile("src/data/navigation.ts", "utf8"),
-    readFile("src/components/travel-planning-tool.tsx", "utf8"),
+    readFile("src/components/partner-planning-panel.tsx", "utf8"),
+    readFile("src/components/route-page.tsx", "utf8"),
   ]);
   assert.doesNotMatch(home, /Choose a window|home-route-rail|overflow-x-auto/);
   assert.match(saved, /<TravelLibrary/);
   assert.match(plan, /Plan Your Journey/);
   assert.match(navigation, /\/saved/);
   assert.doesNotMatch(navigation, /My Journeys/);
-  assert.match(tool, /Planning tool coming soon/);
-  assert.doesNotMatch(tool, /<script|travelpayouts|marker=/i);
+  assert.deepEqual(getPlanningLocations(firstPassageWestRoute).map((location) => location.place), ["Vancouver", "Kamloops", "Banff"]);
+  assert.equal(getPlanningLocations(theCanadianRoute).some((location) => location.kind === "overnight"), false);
+  assert.equal(getOfficialOperatorSource(bergenLineRoute)?.category, "operator");
+  assert.equal(hasPreparedActivityContext(bergenLineRoute), true);
+  assert.equal(partnerPlanning.tripFlightsEnabled, false);
+  assert.equal(partnerPlanning.discoverCarsEnabled, false);
+  assert.equal(isStay22Configured(), false);
+  assert.equal(isGetYourGuideConfigured(), false);
+  assert.match(panel, /useEffect/);
+  assert.match(panel, /surface === "experiences"/);
+  assert.match(panel, /Stay22/);
+  assert.doesNotMatch(panel, /Agoda/);
+  assert.match(routePage, /\/plan\?route=/);
 });
 
 test("Belfast–Derry is a complete Northern Irish coastal journey", async () => {

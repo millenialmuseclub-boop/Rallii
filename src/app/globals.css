@@ -532,6 +532,23 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .plan-start .cta-button { border-color: #f8f5ed; background: #f8f5ed; color: var(--accent-deep); }
 .plan-start .action-button { border-color: rgb(255 255 255 / 50%); color: white; }
 .plan-tools { margin-top: 2.75rem; }
+.partner-plan { margin-top: 2.75rem; }
+.partner-plan__route-label { display: block; margin-top: 1.25rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.partner-plan__route-select { width: 100%; min-height: 3rem; margin-top: .45rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); padding: .65rem .8rem; color: inherit; }
+.partner-plan__route-summary { display: flex; justify-content: space-between; gap: 1rem; margin-top: .7rem; color: var(--muted); font-size: .78rem; }
+.partner-plan__sections { display: grid; gap: .75rem; margin-top: 1.5rem; }
+.partner-plan__section { display: grid; gap: .7rem; padding: 1.2rem; border: 1px solid var(--line); background: var(--surface); }
+.partner-plan__section h3, .partner-detail h3 { font-family: Georgia, "Times New Roman", serif; font-size: 1.55rem; line-height: 1.05; }
+.partner-plan__section > p:not(.eyebrow) { color: var(--muted); font-size: .85rem; line-height: 1.5; }
+.partner-plan__locations { display: grid; gap: .5rem; }
+.partner-plan__locations .action-button { width: 100%; text-align: left; }
+.partner-plan__locations .action-button[aria-pressed="true"] { border-color: var(--accent-deep); background: var(--accent-deep); color: white; }
+.partner-plan__quiet { color: var(--muted); font-size: .76rem; }
+.partner-detail { display: grid; gap: .9rem; margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); background: var(--surface); }
+.partner-detail__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.partner-detail > p { color: var(--muted); font-size: .78rem; }
+.partner-plan__embed { width: 100%; min-height: 34rem; border: 0; background: var(--page); }
+.partner-plan__widget { min-height: 5rem; }
 
 @media (max-width: 639px) {
   .mobile-nav { border-top: 0; box-shadow: 0 -8px 30px rgb(29 40 33 / 10%); }

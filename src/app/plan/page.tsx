@@ -5,6 +5,8 @@ import { getAllRoutes } from "@/data/routes";
 
 export const metadata: Metadata = { title: "Plan Your Journey", description: "Keep rail ideas together and arrange the practical pieces around them." };
 
-export default function PlanPage() {
-  return <AppScreenShell title="Plan Your Journey" context="Keep your rail ideas together, then arrange the practical pieces around them."><PlanJourney routes={getAllRoutes()} /></AppScreenShell>;
+export default async function PlanPage({ searchParams }: PageProps<"/plan">) {
+  const { route } = await searchParams;
+  const initialRouteSlug = typeof route === "string" ? route : undefined;
+  return <AppScreenShell title="Plan Your Journey" context="Keep your rail ideas together, then arrange the practical pieces around them."><PlanJourney routes={getAllRoutes()} initialRouteSlug={initialRouteSlug} /></AppScreenShell>;
 }
