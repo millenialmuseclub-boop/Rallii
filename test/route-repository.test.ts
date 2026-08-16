@@ -507,14 +507,13 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(partnerPlanning.discoverCarsEnabled, true);
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
-  assert.match(panel, /srcDoc/);
+  assert.match(panel, /\/partner-widget\?kind=/);
   assert.match(panel, /allow-same-origin/);
-  assert.match(panel, /<base href=\"https:\/\/tpwdgt\.com\/\">/);
   assert.match(panel, /surface === "experiences"/);
   assert.match(panel, /surface === "flights"/);
   assert.match(panel, /surface === "car"/);
   assert.match(panel, /Stay22/);
-  assert.match(panel, /srcDoc/);
+  assert.doesNotMatch(panel, /srcDoc/);
   assert.match(panel, /partner tool does not load/);
   assert.doesNotMatch(panel, /Agoda/);
   assert.match(routePage, /\/plan\?route=/);
