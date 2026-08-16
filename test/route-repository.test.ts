@@ -508,6 +508,8 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
   assert.match(panel, /srcDoc/);
+  assert.match(panel, /allow-same-origin/);
+  assert.match(panel, /<base href=\"https:\/\/tpwdgt\.com\/\">/);
   assert.match(panel, /surface === "experiences"/);
   assert.match(panel, /surface === "flights"/);
   assert.match(panel, /surface === "car"/);

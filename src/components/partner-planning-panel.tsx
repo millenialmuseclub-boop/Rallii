@@ -74,6 +74,6 @@ function TravelPayoutsWidget({ locale, currency, promoId, campaignId, options = 
   const params = new URLSearchParams({ trs: partnerPlanning.travelpayouts.trs, shmarker: partnerPlanning.travelpayouts.marker, locale, powered_by: "true", promo_id: promoId, campaign_id: campaignId, ...options });
   if (currency) params.set("curr", currency);
   const scriptUrl = `https://tpwdgt.com/content?${params.toString()}`;
-  const document = `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><script async src="${scriptUrl}" charset="utf-8"></script></body></html>`;
-  return <div className="partner-plan__widget"><iframe title="External partner search" className="partner-plan__partner-frame" loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-scripts" srcDoc={document} /><p className="partner-plan__widget-fallback">If the partner tool does not load, refresh the page or try again later.</p></div>;
+  const document = `<!doctype html><html><head><base href="https://tpwdgt.com/"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><script async src="${scriptUrl}" charset="utf-8"></script></body></html>`;
+  return <div className="partner-plan__widget"><iframe title="External partner search" className="partner-plan__partner-frame" loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" srcDoc={document} /><p className="partner-plan__widget-fallback">If the partner tool does not load, refresh the page or try again later.</p></div>;
 }
