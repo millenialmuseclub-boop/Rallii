@@ -20,6 +20,9 @@ import { theGhanRoute } from "../src/data/routes/the-ghan.ts";
 import { kandyEllaRailwayRoute } from "../src/data/routes/kandy-ella-railway.ts";
 import { coastStarlightRoute } from "../src/data/routes/coast-starlight.ts";
 import { theCanadianRoute } from "../src/data/routes/the-canadian.ts";
+import { easternExpressRoute } from "../src/data/routes/eastern-express.ts";
+import { hiramBinghamRoute } from "../src/data/routes/hiram-bingham.ts";
+import { alishanForestRailwayRoute } from "../src/data/routes/alishan-forest-railway.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -250,7 +253,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 19);
+  assert.equal(getAllRoutes().length, 22);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -422,7 +425,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 19);
+  assert.equal(getAllRoutes().length, 22);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -459,8 +462,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes nineteen routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 19);
+test("repository includes twenty-two routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 22);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -697,4 +700,19 @@ test("Kandy–Ella Railway, Coast Starlight, and The Canadian are complete gener
   assert.ok(getJourneyCollection("multi-day-journeys")?.routeSlugs.includes("the-canadian"));
   assert.ok(getJourneyCollection("coastal-journeys")?.routeSlugs.includes("coast-starlight"));
   assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("kandy-ella-railway"));
+});
+
+test("Eastern Express, Hiram Bingham, and Alishan Forest Railway remain generic routes", async () => {
+  for (const route of [easternExpressRoute, hiramBinghamRoute, alishanForestRailwayRoute]) {
+    assert.deepEqual(validateRoute(route), []);
+    assert.equal(getRouteBySlug(route.summary.slug), route);
+    assert.equal(route.capabilities.rideMode, false);
+    assert.equal(getRouteRelationships(route.summary.slug).length, 2);
+    assert.ok(getDirectionalStops(route, "reverse")[0].name === route.summary.destination);
+    assert.ok(route.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+    const data = JSON.parse(await readFile(`public${route.geoJsonPath}`, "utf8")) as { features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+    assert.ok(data.features[0].geometry.coordinates.length >= 3);
+  }
+  for (const query of ["Doğu Ekspresi", "Kars", "Hiram Bingham", "Machu Picchu", "Alishan", "Chiayi", "Taiwan"]) assert.ok(searchRoutes(getAllRoutes(), query).length > 0);
+  assert.equal(featuredRouteSlugs.length, 3);
 });

@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","metadata":{"route":"Alishan Forest Railway","relationIds":[],"contributingWayIds":[],"coordinateCount":4,"calculatedLengthKm":71.4,"preparedAt":"2026-08-16"},"features":[{"type":"Feature","properties":{"name":"Alishan Forest Railway"},"geometry":{"type":"LineString","coordinates":[[120.441,23.479],[120.55,23.527],[120.695,23.503],[120.806,23.51]]}}]}

@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","metadata":{"route":"Hiram Bingham","relationIds":[],"contributingWayIds":[],"coordinateCount":3,"calculatedLengthKm":93,"preparedAt":"2026-08-16"},"features":[{"type":"Feature","properties":{"name":"Hiram Bingham"},"geometry":{"type":"LineString","coordinates":[[-71.9675,-13.5319],[-72.265,-13.2589],[-72.5244,-13.1543]]}}]}
