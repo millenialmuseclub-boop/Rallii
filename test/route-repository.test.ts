@@ -17,6 +17,9 @@ import { settleCarlisleRoute } from "../src/data/routes/settle-carlisle.ts";
 import { californiaZephyrRoute } from "../src/data/routes/california-zephyr.ts";
 import { bergenLineRoute } from "../src/data/routes/bergen-line.ts";
 import { theGhanRoute } from "../src/data/routes/the-ghan.ts";
+import { kandyEllaRailwayRoute } from "../src/data/routes/kandy-ella-railway.ts";
+import { coastStarlightRoute } from "../src/data/routes/coast-starlight.ts";
+import { theCanadianRoute } from "../src/data/routes/the-canadian.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -247,7 +250,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 16);
+  assert.equal(getAllRoutes().length, 19);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -419,7 +422,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 16);
+  assert.equal(getAllRoutes().length, 19);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -456,8 +459,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes sixteen routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 16);
+test("repository includes nineteen routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 19);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -672,4 +675,26 @@ test("The Ghan geometry and direction-aware experience are prepared", async () =
   assert.deepEqual(getDirectionalEndpoints(theGhanRoute, "reverse"), { origin: "Darwin", destination: "Adelaide" });
   assert.ok(getDirectionalTimeline(theGhanRoute, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
   assert.ok(theGhanRoute.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+});
+
+test("Kandy–Ella Railway, Coast Starlight, and The Canadian are complete generic routes", async () => {
+  const routes = [kandyEllaRailwayRoute, coastStarlightRoute, theCanadianRoute];
+  assert.deepEqual(routes.map((route) => getRouteBySlug(route.summary.slug)), routes);
+  for (const route of routes) {
+    assert.deepEqual(validateRoute(route), []);
+    assert.equal(route.capabilities.rideMode, false);
+    assert.equal(getRouteRelationships(route.summary.slug).length, 2);
+    assert.ok(parseComparisonRoutes(`${route.summary.slug},the-ghan`, getAllRoutes()).length === 2);
+    assert.ok(getLibrarySummary([route]).distanceKm > 0);
+    assert.ok(getDirectionalTimeline(route, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+    assert.ok(route.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+    const data = JSON.parse(await readFile(`public${route.geoJsonPath}`, "utf8")) as { metadata: { coordinateCount: number; calculatedLengthKm: number }; features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> };
+    assert.equal(data.metadata.coordinateCount, data.features[0].geometry.coordinates.length);
+    assert.ok(data.features[0].geometry.coordinates.length >= 10);
+    assert.ok(Math.abs(routeLengthKm(data.features[0].geometry.coordinates) - data.metadata.calculatedLengthKm) < 0.02);
+  }
+  for (const query of ["Kandy Ella", "Nine Arch Bridge", "Sri Lanka", "Coast Starlight", "Santa Barbara", "Amtrak", "The Canadian", "VIA Rail", "Jasper", "Vancouver"]) assert.ok(searchRoutes(getAllRoutes(), query).length > 0, `Expected search result for ${query}`);
+  assert.ok(getJourneyCollection("multi-day-journeys")?.routeSlugs.includes("the-canadian"));
+  assert.ok(getJourneyCollection("coastal-journeys")?.routeSlugs.includes("coast-starlight"));
+  assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("kandy-ella-railway"));
 });

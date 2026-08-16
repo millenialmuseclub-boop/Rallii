@@ -68,6 +68,18 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "california-zephyr", reason: "Another landmark long-distance sleeper crossing" },
     { slug: "first-passage-west", reason: "A contrasting multi-day rail journey built around changing landscapes" },
   ],
+  "kandy-ella-railway": [
+    { slug: "tranzalpine", reason: "Another daylight journey shaped by changing mountain landscapes" },
+    { slug: "kurobe-gorge-railway", reason: "A shorter railway through steep forested terrain" },
+  ],
+  "coast-starlight": [
+    { slug: "california-zephyr", reason: "Another landmark American long-distance train" },
+    { slug: "west-highland-line", reason: "A contrasting railway with memorable coastal scenery" },
+  ],
+  "the-canadian": [
+    { slug: "the-ghan", reason: "Another defining multi-night rail journey across a continent" },
+    { slug: "california-zephyr", reason: "A contrasting North American sleeper crossing" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {
