@@ -550,6 +550,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .partner-plan__embed { width: 100%; min-height: 34rem; border: 0; background: var(--page); }
 .partner-plan__widget { min-height: 5rem; }
 .partner-plan__partner-frame { width: 100%; min-height: 11rem; border: 0; background: var(--page); }
+.partner-plan__partner-frame[data-kind="stays"], .partner-plan__partner-frame[data-kind="cars"], .partner-plan__partner-frame[data-kind="activities"] { min-height: 23rem; }
 .partner-plan__widget-fallback { margin-top: .6rem; color: var(--muted); font-size: .74rem; line-height: 1.45; }
 
 @media (max-width: 639px) {
