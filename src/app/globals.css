@@ -549,6 +549,8 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .partner-detail > p { color: var(--muted); font-size: .78rem; }
 .partner-plan__embed { width: 100%; min-height: 34rem; border: 0; background: var(--page); }
 .partner-plan__widget { min-height: 5rem; }
+.partner-plan__partner-frame { width: 100%; min-height: 11rem; border: 0; background: var(--page); }
+.partner-plan__widget-fallback { margin-top: .6rem; color: var(--muted); font-size: .74rem; line-height: 1.45; }
 
 @media (max-width: 639px) {
   .mobile-nav { border-top: 0; box-shadow: 0 -8px 30px rgb(29 40 33 / 10%); }

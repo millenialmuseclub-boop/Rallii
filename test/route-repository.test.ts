@@ -507,13 +507,19 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(partnerPlanning.discoverCarsEnabled, true);
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
-  assert.match(panel, /useEffect/);
+  assert.match(panel, /srcDoc/);
   assert.match(panel, /surface === "experiences"/);
   assert.match(panel, /surface === "flights"/);
   assert.match(panel, /surface === "car"/);
   assert.match(panel, /Stay22/);
+  assert.match(panel, /srcDoc/);
+  assert.match(panel, /partner tool does not load/);
   assert.doesNotMatch(panel, /Agoda/);
   assert.match(routePage, /\/plan\?route=/);
+  const routeCard = await readFile("src/components/route-card.tsx", "utf8");
+  const comparison = await readFile("src/components/compare-journeys.tsx", "utf8");
+  assert.match(routeCard, /\/plan\?route=/);
+  assert.match(comparison, /\/plan\?route=/);
 });
 
 test("Belfast–Derry is a complete Northern Irish coastal journey", async () => {

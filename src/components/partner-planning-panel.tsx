@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { RailRoute } from "@/types/route";
 import {
   getOfficialOperatorSource,
@@ -71,24 +71,9 @@ function GetYourGuideWidget() {
 }
 
 function TravelPayoutsWidget({ locale, currency, promoId, campaignId, options = {} }: { locale: string; currency?: string; promoId: string; campaignId: string; options?: Record<string, string> }) {
-  const container = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.async = true;
-    script.charset = "utf-8";
-    const params = new URLSearchParams({
-      trs: partnerPlanning.travelpayouts.trs,
-      shmarker: partnerPlanning.travelpayouts.marker,
-      locale,
-      powered_by: "true",
-      promo_id: promoId,
-      campaign_id: campaignId,
-      ...options,
-    });
-    if (currency) params.set("curr", currency);
-    script.src = `https://tpwdgt.com/content?${params.toString()}`;
-    container.current?.appendChild(script);
-    return () => script.remove();
-  }, [campaignId, currency, locale, options, promoId]);
-  return <div className="partner-plan__widget" ref={container} />;
+  const params = new URLSearchParams({ trs: partnerPlanning.travelpayouts.trs, shmarker: partnerPlanning.travelpayouts.marker, locale, powered_by: "true", promo_id: promoId, campaign_id: campaignId, ...options });
+  if (currency) params.set("curr", currency);
+  const scriptUrl = `https://tpwdgt.com/content?${params.toString()}`;
+  const document = `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><script async src="${scriptUrl}" charset="utf-8"></script></body></html>`;
+  return <div className="partner-plan__widget"><iframe title="External partner search" className="partner-plan__partner-frame" loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-scripts" srcDoc={document} /><p className="partner-plan__widget-fallback">If the partner tool does not load, refresh the page or try again later.</p></div>;
 }
