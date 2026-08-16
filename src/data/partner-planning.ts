@@ -17,8 +17,8 @@ export const partnerPlanning = {
   },
   // Supplied by the publisher as the approved Travelpayouts flight creative.
   tripFlightsEnabled: true,
-  // DiscoverCars requires a confirmed destination-aware embed or link format.
-  discoverCarsEnabled: false,
+  // Supplied by the publisher as the approved DiscoverCars creative.
+  discoverCarsEnabled: true,
 } as const;
 
 const activityDestinations = new Set([

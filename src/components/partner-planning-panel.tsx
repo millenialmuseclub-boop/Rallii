@@ -14,6 +14,9 @@ import {
 
 type PartnerSurface = "stays" | "flights" | "experiences" | "car" | null;
 
+const flightWidgetOptions = { border_radius: "0", plain: "true", color_button: "#2681ff", color_button_text: "#ffffff", color_border: "#2681ff" };
+const carWidgetOptions = { bg_color: "#fad130", font_color: "#333333", button_color: "#00a200", button_font_color: "#ffffff", button_text: "Search", rounded_corners: "false", benefits: "false", dc_powered_by: "false", supplier_logos: "false", top_logo: "false", logo_style: "dark", top_color: "#007ac2" };
+
 export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: RailRoute[]; initialRouteSlug?: string }) {
   const initialRoute = routes.find((route) => route.summary.slug === initialRouteSlug) ?? routes[0];
   const [routeSlug, setRouteSlug] = useState(initialRoute.summary.slug);
@@ -44,11 +47,12 @@ export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: Rai
       <section className="partner-plan__section"><p className="eyebrow">Stay near the journey</p><h3>Choose a practical base</h3><div className="partner-plan__locations">{locations.map((item) => <button key={item.id} type="button" className="action-button focus-ring" aria-pressed={location.id === item.id} onClick={() => setLocationId(item.id)}>{item.label}: {item.place}</button>)}</div>{isStay22Configured() ? <button className="action-button action-button--primary focus-ring" type="button" onClick={() => setSurface("stays")}>Search stays near {location.place}</button> : <p className="partner-plan__quiet">Accommodation search is not configured yet.</p>}</section>
       <section className="partner-plan__section"><p className="eyebrow">Get there</p><h3>Find flights</h3><p>Compare flight options separately from your rail journey.</p>{partnerPlanning.tripFlightsEnabled && isTravelpayoutsConfigured() ? <button className="action-button focus-ring" type="button" onClick={() => setSurface("flights")}>Find flights</button> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
       {hasPreparedActivityContext(route) && isGetYourGuideConfigured() ? <section className="partner-plan__section"><p className="eyebrow">Explore the destination</p><h3>Ideas around {route.summary.destination}</h3><p>A local activity search for the city at the end of this route.</p><button className="action-button focus-ring" type="button" onClick={() => setSurface("experiences")}>Explore destination</button></section> : null}
-      <section className="partner-plan__section"><p className="eyebrow">Continue by car</p><h3>Car hire when it makes sense</h3><p>Car-search options will appear for appropriate endpoints after a destination-aware partner format is configured.</p><span className="partner-plan__quiet">Partner search — coming soon</span></section>
+      <section className="partner-plan__section"><p className="eyebrow">Continue by car</p><h3>Car hire when it makes sense</h3><p>Compare car-hire options separately for your arrival or onward travel.</p>{partnerPlanning.discoverCarsEnabled && isTravelpayoutsConfigured() ? <button className="action-button focus-ring" type="button" onClick={() => setSurface("car")}>Continue by car</button> : <span className="partner-plan__quiet">Partner search is not configured yet.</span>}</section>
     </div>
     {surface === "stays" ? <PartnerDetail title={`Stays near ${location.place}`} onClose={() => setSurface(null)}><p>Partner search · Opens external booking options.</p><iframe className="partner-plan__embed" title={`Stay22 accommodation search near ${location.place}`} loading="lazy" src={getStay22Url(location.place, route.summary.country)} /></PartnerDetail> : null}
-    {surface === "flights" ? <PartnerDetail title="Find flights" onClose={() => setSurface(null)}><p>Partner search by Trip.com · Opens external booking options.</p><TravelPayoutsWidget locale="en" currency="USD" promoId="4132" campaignId="121" /></PartnerDetail> : null}
+    {surface === "flights" ? <PartnerDetail title="Find flights" onClose={() => setSurface(null)}><p>Partner search by Trip.com · Opens external booking options.</p><TravelPayoutsWidget locale="en" currency="USD" promoId="4132" campaignId="121" options={flightWidgetOptions} /></PartnerDetail> : null}
     {surface === "experiences" ? <PartnerDetail title={`Explore ${route.summary.destination}`} onClose={() => setSurface(null)}><p>Partner search by GetYourGuide · Opens external booking options.</p><GetYourGuideWidget /></PartnerDetail> : null}
+    {surface === "car" ? <PartnerDetail title="Continue by car" onClose={() => setSurface(null)}><p>Partner search by DiscoverCars · Opens external booking options.</p><TravelPayoutsWidget locale="en" promoId="3873" campaignId="117" options={carWidgetOptions} /></PartnerDetail> : null}
     <p className="planning-disclosure">Where a partner search is available, it opens external booking options with that provider. Rallii does not process reservations or show prices and availability.</p>
   </section>;
 }
@@ -66,7 +70,7 @@ function GetYourGuideWidget() {
   return <TravelPayoutsWidget locale="en-US" promoId="4040" campaignId="108" />;
 }
 
-function TravelPayoutsWidget({ locale, currency, promoId, campaignId }: { locale: string; currency?: string; promoId: string; campaignId: string }) {
+function TravelPayoutsWidget({ locale, currency, promoId, campaignId, options = {} }: { locale: string; currency?: string; promoId: string; campaignId: string; options?: Record<string, string> }) {
   const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const script = document.createElement("script");
@@ -77,18 +81,14 @@ function TravelPayoutsWidget({ locale, currency, promoId, campaignId }: { locale
       shmarker: partnerPlanning.travelpayouts.marker,
       locale,
       powered_by: "true",
-      border_radius: "0",
-      plain: "true",
-      color_button: "#2681ff",
-      color_button_text: "#ffffff",
-      color_border: "#2681ff",
       promo_id: promoId,
       campaign_id: campaignId,
+      ...options,
     });
     if (currency) params.set("curr", currency);
     script.src = `https://tpwdgt.com/content?${params.toString()}`;
     container.current?.appendChild(script);
     return () => script.remove();
-  }, [campaignId, currency, locale, promoId]);
+  }, [campaignId, currency, locale, options, promoId]);
   return <div className="partner-plan__widget" ref={container} />;
 }
