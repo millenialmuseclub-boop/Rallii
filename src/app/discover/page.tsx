@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DiscoverRoutes, isDiscoverFilter, type DiscoverFilter } from "@/components/discover-routes";
+import { DiscoverRoutes, type DiscoverFilter } from "@/components/discover-routes";
 import { AppScreenShell } from "@/components/app-screen-shell";
 import { getAllRoutes } from "@/data/routes";
 
@@ -9,7 +9,7 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Pro
   const routes = getAllRoutes();
   const value = (await searchParams).filter;
   const candidate = typeof value === "string" ? value : undefined;
-  const filter: DiscoverFilter = candidate && isDiscoverFilter(candidate) ? candidate : "all";
+  const filter: DiscoverFilter = candidate || "all";
   return <AppScreenShell title="Discover" context="Find a prepared journey by landscape, place, or length.">
     <DiscoverRoutes routes={routes} initialFilter={filter} />
   </AppScreenShell>;

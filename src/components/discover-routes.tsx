@@ -18,7 +18,6 @@ const durationFilters = [
 ] as const;
 export type DiscoverFilter = string;
 
-export function isDiscoverFilter(value: string | undefined): value is DiscoverFilter { return Boolean(value); }
 export function filterRoutes(routes: RailRoute[], filter: DiscoverFilter): RailRoute[] {
   if (filter === "all") return routes;
   if (filter === "northern-ireland") return routes.filter((route) => route.summary.slug === "belfast-derry");
