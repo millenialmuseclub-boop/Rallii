@@ -21,6 +21,14 @@ export const journeyCollections: JourneyCollection[] = [
   { slug: "great-rail-crossings", title: "Great Rail Crossings", description: "Long-distance journeys whose changing landscapes reveal the scale of a country or continent.", routeSlugs: ["tranzalpine", "bergen-line", "the-ghan", "first-passage-west", "california-zephyr", "coast-starlight", "the-canadian", "belgrade-bar", "konkan-railway", "blue-train"] },
 ];
 
+export const promotedCollectionSlugs = [
+  "short-scenic-escapes",
+  "coastal-journeys",
+  "mountain-journeys",
+  "multi-day-journeys",
+  "great-rail-crossings",
+] as const;
+
 export function getJourneyCollection(slug: string): JourneyCollection | undefined { return journeyCollections.find((collection) => collection.slug === slug); }
 export function getCollectionRoutes(collection: JourneyCollection, routes: RailRoute[]): RailRoute[] { return collection.routeSlugs.map((slug) => routes.find((route) => route.summary.slug === slug)).filter((route): route is RailRoute => Boolean(route)); }
 export function getCollectionsForRoute(routeSlug: string): JourneyCollection[] { return journeyCollections.filter((collection) => collection.routeSlugs.includes(routeSlug)); }

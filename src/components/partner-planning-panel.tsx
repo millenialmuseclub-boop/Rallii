@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PartnerWidgetFrame } from "@/components/partner-widget-frame";
+import { RouteMedia } from "@/components/route-media";
 import type { RailRoute } from "@/types/route";
 import {
   getOfficialOperatorSource,
@@ -44,7 +45,7 @@ export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: Rai
     <select id="plan-route" className="partner-plan__route-select focus-ring" value={routeSlug} onChange={(event) => selectRoute(event.target.value)}>
       {routes.map((item) => <option key={item.summary.slug} value={item.summary.slug}>{item.summary.name} — {item.summary.origin} to {item.summary.destination}</option>)}
     </select>
-    <div className="partner-plan__route-summary"><span>{route.summary.origin} → {route.summary.destination}</span><span>{route.summary.country}</span></div>
+    <div className="planning-route-visual"><RouteMedia summary={route.summary} variant="card" /><div className="partner-plan__route-summary"><span>{route.summary.origin} → {route.summary.destination}</span><span>{route.summary.country}</span></div></div>
 
     <div className="partner-plan__sections">
       <section className="partner-plan__section"><p className="eyebrow">Continue planning</p><h3>Travel with the operator</h3><p>Rallii’s route guidance is editorial. Check the operator directly for current reservations, schedules, and service information.</p>{operator?.url ? <a className="action-button focus-ring" href={operator.url} target="_blank" rel="noreferrer">Visit {route.summary.operator}</a> : null}</section>

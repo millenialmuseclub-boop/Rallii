@@ -30,7 +30,7 @@ import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
 import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "../src/lib/journey-comparison.ts";
-import { getCollectionRoutes, getCollectionsForRoute, getJourneyCollection, journeyCollections } from "../src/data/journey-collections.ts";
+import { getCollectionRoutes, getCollectionsForRoute, getJourneyCollection, journeyCollections, promotedCollectionSlugs } from "../src/data/journey-collections.ts";
 import { featuredRouteSlugs } from "../src/data/featured-routes.ts";
 import { isNavigationItemActive, primaryNavigation } from "../src/data/navigation.ts";
 import { buildComparePath, getRouteRelationships } from "../src/data/route-relationships.ts";
@@ -804,4 +804,23 @@ test("partner placements stay restrained and route-aware", () => {
   assert.ok(placementIncludes("compare", "stays"));
   assert.equal(routePlanningHref("blue-train"), "/plan?route=blue-train");
   assert.equal(routeStaysHref("konkan-railway"), "/stays?route=konkan-railway");
+});
+
+test("visual collection discovery promotes complete photographed collections", async () => {
+  assert.deepEqual(promotedCollectionSlugs, ["short-scenic-escapes", "coastal-journeys", "mountain-journeys", "multi-day-journeys", "great-rail-crossings"]);
+  for (const slug of promotedCollectionSlugs) {
+    const collection = getJourneyCollection(slug);
+    assert.ok(collection, `Expected promoted collection ${slug}`);
+    const routes = getCollectionRoutes(collection, getAllRoutes());
+    assert.ok(routes.length > 0);
+    assert.ok(routes.every((route) => getRouteMedia(route.summary.slug)));
+  }
+  const collectionPage = await readFile("src/app/discover/[collection]/page.tsx", "utf8");
+  const planningPanel = await readFile("src/components/partner-planning-panel.tsx", "utf8");
+  const stayPlanner = await readFile("src/components/stay-planner.tsx", "utf8");
+  assert.match(collectionPage, /RouteMedia/);
+  assert.match(collectionPage, /showStays/);
+  assert.match(planningPanel, /planning-route-visual/);
+  assert.match(stayPlanner, /planning-route-visual/);
+  assert.equal(featuredRouteSlugs.length, 3);
 });
