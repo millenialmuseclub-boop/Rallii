@@ -1,5 +1,6 @@
 export type RouteStatus = "want_to_go" | "been";
 export interface TravelLibrary { version: 1; routes: Record<string, RouteStatus>; }
+export interface LibraryUpdateResult { ok: boolean; reason?: "limit-reached"; }
 
 export const TRAVEL_LIBRARY_KEY = "rallii:travel-library";
 export const LEGACY_SAVED_KEY = "rallii:saved-routes";
@@ -32,6 +33,13 @@ export function getTravelLibrary(): TravelLibrary {
   cachedRaw = raw; cachedLibrary = parseTravelLibrary(raw); return cachedLibrary;
 }
 
-export function setRouteStatus(slug: string, status?: RouteStatus): void { if (typeof window === "undefined") return; const current = getTravelLibrary(); const routes = { ...current.routes }; if (status) routes[slug] = status; else delete routes[slug]; const next: TravelLibrary = { version: 1, routes }; window.localStorage.setItem(TRAVEL_LIBRARY_KEY, JSON.stringify(next)); window.localStorage.removeItem(LEGACY_SAVED_KEY); cachedRaw = undefined; window.dispatchEvent(new Event(CHANGE_EVENT)); }
+export function updateLibraryStatus(library: TravelLibrary, slug: string, status?: RouteStatus, limit: number | null = null): { library: TravelLibrary; result: LibraryUpdateResult } {
+  const routes = { ...library.routes };
+  const isNew = status !== undefined && routes[slug] === undefined;
+  if (isNew && limit !== null && Object.keys(routes).length >= limit) return { library, result: { ok: false, reason: "limit-reached" } };
+  if (status) routes[slug] = status; else delete routes[slug];
+  return { library: { version: 1, routes }, result: { ok: true } };
+}
+export function setRouteStatus(slug: string, status?: RouteStatus, limit: number | null = null): LibraryUpdateResult { if (typeof window === "undefined") return { ok: false }; const current = getTravelLibrary(); const update = updateLibraryStatus(current, slug, status, limit); if (!update.result.ok) return update.result; window.localStorage.setItem(TRAVEL_LIBRARY_KEY, JSON.stringify(update.library)); window.localStorage.removeItem(LEGACY_SAVED_KEY); cachedRaw = undefined; window.dispatchEvent(new Event(CHANGE_EVENT)); return update.result; }
 export function getRouteStatus(slug: string): RouteStatus | undefined { return getTravelLibrary().routes[slug]; }
 export function subscribeToTravelLibrary(onChange: () => void): () => void { if (typeof window === "undefined") return () => undefined; const storage = (event: StorageEvent) => { if (event.key === TRAVEL_LIBRARY_KEY || event.key === LEGACY_SAVED_KEY) { cachedRaw = undefined; onChange(); } }; window.addEventListener("storage", storage); window.addEventListener(CHANGE_EVENT, onChange); return () => { window.removeEventListener("storage", storage); window.removeEventListener(CHANGE_EVENT, onChange); }; }

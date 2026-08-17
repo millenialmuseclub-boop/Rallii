@@ -649,3 +649,36 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .discover-continuity { align-items: flex-start; flex-direction: column; gap: .35rem; }
   .discover-search input { min-height: 3.5rem; }
 }
+
+/* Prepared intelligence and Pro foundation */
+.route-intelligence { margin-top: 4rem; border-top: 1px solid var(--line); padding-top: 2.5rem; }
+.place-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .75rem; margin-top: 1.25rem; }
+.place-card, .lore-list details { border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); padding: 1rem; }
+.place-card h3, .lore-list summary { font-family: var(--font-serif); font-size: 1.15rem; }
+.place-card p, .lore-list p { margin-top: .5rem; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+.lore-list { display: grid; gap: .65rem; margin-top: 1.25rem; }
+.lore-list summary { min-height: 2.75rem; cursor: pointer; }
+.lore-list summary span, .lore-list summary strong, .lore-list summary small { display: block; }
+.lore-list summary span { color: var(--accent); font-size: .68rem; font-weight: 700; text-transform: uppercase; }
+.lore-list summary small { margin-top: .25rem; color: var(--muted); font-family: var(--font-sans); font-size: .78rem; font-weight: 400; }
+.lore-list details > div > small { display: block; margin-top: .6rem; color: var(--muted); font-size: .68rem; }
+.lore-list .route-media { margin-top: .75rem; }
+.operational-note { margin-top: .5rem; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+.pro-intro { max-width: 42rem; }
+.pro-features, .pro-pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .75rem; margin-top: 2rem; }
+.pro-features article, .pro-pricing article { border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); padding: 1.1rem; }
+.pro-disclaimer { margin-top: 2rem; max-width: 38rem; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+.ride-direction { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 1.5rem; background: var(--line); }
+.ride-direction button { min-height: 3rem; border: 0; background: var(--surface); padding: .65rem; color: var(--muted); font-size: .75rem; font-weight: 700; }
+.ride-direction button[aria-pressed="true"] { background: var(--accent-deep); color: white; }
+.ride-pro-note { margin-top: 1rem; color: var(--muted); font-size: .78rem; }
+.scenic-alert { margin-top: 1rem; border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); padding: 1rem; }
+.scenic-alert h3 { margin-top: .35rem; font-family: var(--font-serif); font-size: 1.5rem; }
+.scenic-alert p:not(.eyebrow) { margin-top: .4rem; color: var(--muted); line-height: 1.55; }
+.scenic-alert button { min-height: 2.75rem; margin-top: .65rem; border: 0; background: transparent; color: var(--accent); font-weight: 700; }
+.library-limit-note { display: block; max-width: 14rem; margin-top: .4rem; color: var(--muted); font-size: .68rem; line-height: 1.45; }
+.library-limit-note a { color: var(--accent); font-weight: 700; }
+
+@media (max-width: 480px) {
+  .ride-direction { grid-template-columns: 1fr; }
+}

@@ -55,6 +55,7 @@ export interface RouteSummary {
   searchAliases?: string[];
   experienceTags: ExperienceTag[];
   bestFor: string[];
+  accessTier?: "free" | "pro";
 }
 
 export interface JourneyInformationItem {
@@ -123,7 +124,7 @@ export interface BestSideSegment {
 }
 
 export interface RailRoute {
-  capabilities: { rideMode: boolean };
+  capabilities: { rideMode: boolean; scenicAlerts?: boolean };
   summary: RouteSummary;
   stops: RouteStop[];
   landmarks: Landmark[];

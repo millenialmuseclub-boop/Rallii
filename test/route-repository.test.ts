@@ -40,12 +40,17 @@ import { buildComparePath, getRouteRelationships } from "../src/data/route-relat
 import { getRouteMedia, routeMediaBySlug } from "../src/data/route-media.ts";
 import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
-import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-library.ts";
+import { migrateLegacySaved, parseTravelLibrary, updateLibraryStatus } from "../src/lib/travel-library.ts";
 import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
 import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments, getDirectionalStops, getDirectionalTimeline, parseJourneyDirection, transformRouteDistance } from "../src/lib/route-direction.ts";
 import { getOfficialOperatorSource, getPlanningLocations, hasPreparedActivityContext, isGetYourGuideConfigured, isStay22Configured, partnerPlanning } from "../src/data/partner-planning.ts";
 import { catalogueRegions, routesInRegion } from "../src/data/catalogue-taxonomy.ts";
 import { partnerPlacements, placementIncludes, routePlanningHref, routeStaysHref } from "../src/data/partner-placements.ts";
+import { getPlacesForRoute } from "../src/data/places.ts";
+import { getScenicMoments } from "../src/data/scenic-moments.ts";
+import { getLoreForRoute } from "../src/data/lore.ts";
+import { createEntitlements } from "../src/lib/entitlements.ts";
+import { getDirectionalScenicMoments, getForegroundScenicAlert } from "../src/lib/scenic-alerts.ts";
 
 test("direction parsing is strict and safely defaults forward", () => {
   assert.equal(parseJourneyDirection("reverse"), "reverse");
@@ -91,7 +96,7 @@ test("all routes satisfy generic direction invariants without changing canonical
     assert.ok(reverseTimeline.every((entry, index) => index === 0 || entry.distanceAlongRouteKm > reverseTimeline[index - 1].distanceAlongRouteKm));
     assert.deepEqual(route.stops, canonicalStops);
   }
-  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug), ["flam-railway"]);
+  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug).sort(), ["bernina-express", "flam-railway"]);
 });
 
 test("TranzAlpine is a complete New Zealand coast-to-coast route", () => {
@@ -199,8 +204,8 @@ test("personal library derives route groups, countries, distance, and map select
 
 async function getFlamGeometry(): Promise<RouteCoordinate[]> { const contents = await readFile("public/data/routes/flam-railway.geojson", "utf8"); const data = JSON.parse(contents) as { features: Array<{ geometry: { coordinates: RouteCoordinate[] } }> }; return data.features[0].geometry.coordinates; }
 
-test("Ride Mode capability is enabled only for Flåm Railway", () => {
-  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug), ["flam-railway"]);
+test("Ride Mode capability is enabled for prepared Gold Standard routes", () => {
+  assert.deepEqual(getAllRoutes().filter((route) => route.capabilities.rideMode).map((route) => route.summary.slug).sort(), ["bernina-express", "flam-railway"]);
 });
 
 test("route projection respects Flåm to Myrdal geometry direction", async () => {
@@ -875,4 +880,44 @@ test("collection covers remain centralized and photographed", () => {
     assert.ok(getRouteMedia(collection.coverRouteSlug!));
   }
   assert.deepEqual(featuredRouteSlugs, ["bernina-express", "tranzalpine", "cinque-terre"]);
+});
+
+test("Places and Scenic Moments adapt existing route intelligence without duplication", () => {
+  const places = getPlacesForRoute(berninaExpressRoute);
+  const moments = getScenicMoments(berninaExpressRoute);
+  assert.ok(places.some((place) => place.name === "Brusio Circular Viaduct"));
+  assert.equal(moments.length, berninaExpressRoute.timelineEntries.length);
+  assert.ok(moments.every((moment) => moment.routeId === "bernina-express"));
+  assert.ok(moments.some((moment) => moment.alertEligible && moment.placeId));
+});
+
+test("launch Lore is sourced for Bernina, Flåm, and Kurobe", () => {
+  for (const route of [berninaExpressRoute, flamRailwayRoute, kurobeGorgeRailwayRoute]) {
+    const lore = getLoreForRoute(route.summary.slug);
+    assert.ok(lore.length > 0);
+    assert.ok(lore.every((item) => item.source.url && item.source.confidence));
+  }
+});
+
+test("Scenic Alerts reverse direction and do not repeat fired moments", () => {
+  const canonical = getScenicMoments(berninaExpressRoute);
+  const forward = getDirectionalScenicMoments(canonical, berninaExpressRoute.summary.distanceKm, "forward");
+  const reverse = getDirectionalScenicMoments(canonical, berninaExpressRoute.summary.distanceKm, "reverse");
+  assert.equal(reverse[0].journeyDistanceKm, berninaExpressRoute.summary.distanceKm - forward.at(-1)!.journeyDistanceKm);
+  const eligible = forward.find((moment) => moment.alertEligible)!;
+  const first = getForegroundScenicAlert(forward, eligible.journeyDistanceKm - eligible.leadDistanceKm / 2, new Set());
+  assert.equal(first?.id, eligible.id);
+  assert.equal(getForegroundScenicAlert(forward, eligible.journeyDistanceKm - eligible.leadDistanceKm / 2, new Set([eligible.id]))?.id === eligible.id, false);
+});
+
+test("Free and Pro entitlements enforce the prepared library boundary", () => {
+  const free = createEntitlements("free");
+  const pro = createEntitlements("pro");
+  assert.equal(free.canUseScenicAlerts, false);
+  assert.equal(free.personalLibraryLimit, 2);
+  assert.equal(pro.canUseScenicAlerts, true);
+  assert.equal(pro.personalLibraryLimit, null);
+  const library = { version: 1 as const, routes: { one: "want_to_go" as const, two: "been" as const } };
+  assert.equal(updateLibraryStatus(library, "three", "want_to_go", free.personalLibraryLimit).result.reason, "limit-reached");
+  assert.equal(updateLibraryStatus(library, "three", "want_to_go", pro.personalLibraryLimit).result.ok, true);
 });

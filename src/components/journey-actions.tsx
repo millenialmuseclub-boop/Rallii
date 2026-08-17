@@ -3,22 +3,24 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
+import type { JourneyDirection } from "@/types/route";
 
 interface JourneyActionsProps {
   routeName: string;
   routeSlug: string;
   rideModeAvailable: boolean;
+  direction: JourneyDirection;
 }
 
-export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: JourneyActionsProps) {
+export function JourneyActions({ routeName, routeSlug, rideModeAvailable, direction }: JourneyActionsProps) {
   const { getStatus, setStatus } = useTravelLibrary();
   const routeStatus = getStatus(routeSlug);
   const [actionStatus, setActionStatus] = useState<string>();
 
   function updateStatus(status: "want_to_go" | "been") {
     const nextStatus = routeStatus === status ? undefined : status;
-    setStatus(routeSlug, nextStatus);
-    setActionStatus(nextStatus === "want_to_go" ? `${routeName} added to Want to Go.` : nextStatus === "been" ? `${routeName} marked Been.` : `${routeName} removed from Plan Journey.`);
+    const result = setStatus(routeSlug, nextStatus);
+    setActionStatus(!result.ok ? "The free library holds two journeys. Rallii Pro removes this limit." : nextStatus === "want_to_go" ? `${routeName} added to Want to Go.` : nextStatus === "been" ? `${routeName} marked Been.` : `${routeName} removed from Plan Journey.`);
   }
 
   async function shareJourney() {
@@ -48,7 +50,7 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable }: Jour
         <button className="action-button action-button--primary focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => updateStatus("want_to_go")}>{routeStatus === "want_to_go" ? "Saved: Want to Go" : "Want to Go"}</button>
         <button className="action-button focus-ring" type="button" aria-pressed={routeStatus === "been"} onClick={() => updateStatus("been")}>{routeStatus === "been" ? "Marked Been" : "Been"}</button>
       </div>
-      <div className="journey-actions__contextual"><button className="action-button focus-ring" type="button" onClick={shareJourney}>Share</button><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link><Link className="action-button focus-ring" href={`/plan?route=${routeSlug}`}>Plan</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}`}>Start Ride Mode</Link> : null}</div>
+      <div className="journey-actions__contextual"><button className="action-button focus-ring" type="button" onClick={shareJourney}>Share</button><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link><Link className="action-button focus-ring" href={`/plan?route=${routeSlug}`}>Plan</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}${direction === "reverse" ? "?direction=reverse" : ""}`}>Start Ride Mode</Link> : null}</div>
       <p className="journey-actions__status" role="status" aria-live="polite">{actionStatus}</p>
     </div>
   );

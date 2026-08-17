@@ -5,7 +5,8 @@ import { BestSideToSit } from "@/components/best-side-to-sit";
 import { JourneyHighlights } from "@/components/journey-highlights";
 import { RouteMap } from "@/components/route-map";
 import { ScenicTimeline } from "@/components/scenic-timeline";
-import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalStops, getDirectionalTimeline } from "@/lib/route-direction";
+import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalStops } from "@/lib/route-direction";
+import { getScenicMomentTimeline } from "@/lib/scenic-moment-direction";
 import type { JourneyDirection, RailRoute } from "@/types/route";
 
 interface RouteExperienceProps {
@@ -20,7 +21,7 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
   const endpoints = useMemo(() => getDirectionalEndpoints(route, direction), [route, direction]);
   const stops = useMemo(() => getDirectionalStops(route, direction), [route, direction]);
   const landmarks = useMemo(() => getDirectionalLandmarks(route, direction), [route, direction]);
-  const timeline = useMemo(() => getDirectionalTimeline(route, direction), [route, direction]);
+  const timeline = useMemo(() => getScenicMomentTimeline(route, direction), [route, direction]);
   const isMobile = useSyncExternalStore(subscribeToMobileViewport, getMobileViewportSnapshot, () => false);
   const shouldRenderMap = !isMobile || activeSurface === "map";
 
