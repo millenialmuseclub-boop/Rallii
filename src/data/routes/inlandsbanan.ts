@@ -1,0 +1,60 @@
+import type { RailRoute } from "../../types/route.ts";
+
+export const inlandsbananRoute = {
+  capabilities: { rideMode: false },
+  summary: {
+    id: "inlandsbanan", slug: "inlandsbanan", name: "Inlandsbanan", origin: "Mora", destination: "Gällivare", country: "Sweden", countries: ["Sweden"], journeyTypes: ["scenic", "multi-day"], operator: "Inlandsbanan AB",
+    durationMinutes: 1200, durationLabel: "Two daylight rail days", journeyDays: 2, overnightStops: ["Östersund"], distanceKm: 1062.03, trainType: "Seasonal inland tourist train", reservationStatus: "recommended",
+    shortDescription: "A slow, seasonal journey north through forests, lakes, small communities, Sámi cultural landscapes, and the Arctic Circle.", status: "published", heroImageAlt: "An Inlandsbanan railcar crossing a bridge in northern Sweden",
+    metadataDescription: "A direction-aware guide to the seasonal Inlandsbanan journey from Mora to Gällivare.", searchAliases: ["Inland Line", "Mora", "Östersund", "Ostersund", "Vilhelmina", "Storuman", "Sorsele", "Arvidsjaur", "Jokkmokk", "Arctic Circle", "Gällivare", "Gallivare", "Sweden", "Lapland", "Inlandsbanan AB"],
+    experienceTags: ["forest", "lakes", "rivers"], bestFor: ["slow travel through inland Sweden", "long summer daylight and northern landscapes", "a two-day rail journey with an Östersund overnight"],
+  },
+  stops: [
+    { id: "mora", name: "Mora", latitude: 61.0088, longitude: 14.5596, sequence: 1, distanceAlongRouteKm: 0 },
+    { id: "orsa", name: "Orsa", latitude: 61.12, longitude: 14.62, sequence: 2, distanceAlongRouteKm: 16 },
+    { id: "sveg", name: "Sveg", latitude: 62.034, longitude: 14.36, sequence: 3, distanceAlongRouteKm: 176 },
+    { id: "ostersund", name: "Östersund", latitude: 63.17, longitude: 14.64, sequence: 4, distanceAlongRouteKm: 327, shortDescription: "The practical overnight break between the two daylight sections." },
+    { id: "stromsund", name: "Strömsund", latitude: 63.85, longitude: 15.56, sequence: 5, distanceAlongRouteKm: 432 },
+    { id: "vilhelmina", name: "Vilhelmina", latitude: 64.62, longitude: 16.65, sequence: 6, distanceAlongRouteKm: 574 },
+    { id: "storuman", name: "Storuman", latitude: 65.095, longitude: 17.11, sequence: 7, distanceAlongRouteKm: 647 },
+    { id: "sorsele", name: "Sorsele", latitude: 65.535, longitude: 17.54, sequence: 8, distanceAlongRouteKm: 728 },
+    { id: "arvidsjaur", name: "Arvidsjaur", latitude: 65.59, longitude: 19.17, sequence: 9, distanceAlongRouteKm: 835 },
+    { id: "jokkmokk", name: "Jokkmokk", latitude: 66.606, longitude: 19.84, sequence: 10, distanceAlongRouteKm: 950 },
+    { id: "gallivare", name: "Gällivare", latitude: 67.1405, longitude: 20.6406, sequence: 11, distanceAlongRouteKm: 1062.03 },
+  ],
+  landmarks: [
+    { id: "dalarna", name: "Dalarna forests and lakes", type: "scenic-section", latitude: 61.4, longitude: 14.3, distanceAlongRouteKm: 65, shortDescription: "Lakes, timber country, and small settlements establish the journey’s unhurried rhythm.", importance: "highlight", bestSideForward: "varies", bestSideReverse: "varies" },
+    { id: "storsjon", name: "Storsjön", type: "lake", latitude: 63.15, longitude: 14.45, distanceAlongRouteKm: 320, shortDescription: "Water and distant mountains open around the approach to Östersund.", importance: "highlight", bestSideForward: "left", bestSideReverse: "right" },
+    { id: "inland-lakes", name: "Northern inland lakes", type: "lake", latitude: 64.9, longitude: 17.1, distanceAlongRouteKm: 620, shortDescription: "Long lake edges and forest clearings punctuate the northern rail day.", importance: "highlight", bestSideForward: "varies", bestSideReverse: "varies" },
+    { id: "arctic-circle", name: "Arctic Circle", type: "historic-site", latitude: 66.55, longitude: 19.75, distanceAlongRouteKm: 940, shortDescription: "The railway crosses the Arctic Circle before Jokkmokk; ceremonial stops depend on the operating plan.", importance: "dont-miss", bestSideForward: "both", bestSideReverse: "both" },
+    { id: "lapland", name: "Lapland approach", type: "scenic-section", latitude: 66.9, longitude: 20.1, distanceAlongRouteKm: 1010, shortDescription: "Wetlands, low forest, and broad northern skies lead toward Gällivare.", importance: "highlight", bestSideForward: "varies", bestSideReverse: "varies" },
+  ],
+  timelineEntries: [
+    { id: "dalarna", title: "Dalarna", distanceAlongRouteKm: 65, type: "scenic-section", importance: "highlight", bestSide: "varies", bestSideReverse: "varies", relatedLandmarkId: "dalarna", shortDescription: "Watch the alternating lake edges and forest clearings beyond Mora." },
+    { id: "sveg", title: "Sveg and Härjedalen", distanceAlongRouteKm: 176, type: "village", importance: "highlight", shortDescription: "The line continues through sparsely settled inland country." },
+    { id: "ostersund", title: "Östersund overnight", distanceAlongRouteKm: 327, type: "journey-note", importance: "dont-miss", shortDescription: "This prepared journey uses an independent overnight in Östersund; it is not a sleeper train." },
+    { id: "jamtland", title: "Jämtland to Lapland", distanceAlongRouteKm: 470, type: "scenic-section", importance: "highlight", bestSide: "varies", bestSideReverse: "varies", shortDescription: "The second rail day moves through rivers, forest, and increasingly northern settlements." },
+    { id: "vilhelmina", title: "Vilhelmina", distanceAlongRouteKm: 574, type: "village", importance: "highlight", shortDescription: "A cultural and practical anchor on the northern section." },
+    { id: "sorsele", title: "Sorsele and river country", distanceAlongRouteKm: 728, type: "river", importance: "highlight", bestSide: "varies", bestSideReverse: "varies", relatedLandmarkId: "inland-lakes", shortDescription: "Look for water-side openings between long stretches of forest." },
+    { id: "arctic-circle", title: "Cross the Arctic Circle", distanceAlongRouteKm: 940, type: "historic-site", importance: "dont-miss", bestSide: "both", bestSideReverse: "both", relatedLandmarkId: "arctic-circle", shortDescription: "The marker is visible from both sides; any stop is operationally changeable." },
+    { id: "gallivare-approach", title: "Lapland approach", distanceAlongRouteKm: 1010, type: "scenic-section", importance: "highlight", bestSide: "varies", bestSideReverse: "varies", relatedLandmarkId: "lapland", shortDescription: "Broad skies and lower vegetation signal the final northern chapter." },
+  ],
+  bestSideSegments: [
+    { id: "south", startDistanceKm: 0, endDistanceKm: 327, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "Lakes, forest openings, and river crossings alternate continuously.", confidenceType: "limited-data" },
+    { id: "storsjon", startDistanceKm: 280, endDistanceKm: 350, forwardDirectionSide: "left", reverseDirectionSide: "right", reason: "The more open Storsjön-side aspect is generally west of the railway near Östersund.", confidenceType: "limited-data" },
+    { id: "north", startDistanceKm: 350, endDistanceKm: 1062.03, forwardDirectionSide: "varies", reverseDirectionSide: "varies", reason: "The long northern section rewards attention to both sides rather than one fixed seat choice.", confidenceType: "limited-data" },
+  ],
+  journeyInformation: [
+    { id: "season", label: "Seasonal journey", detail: "The through tourist experience is seasonal and operating periods change. Check each section with Inlandsbanan before travel." },
+    { id: "overnight", label: "Östersund overnight", detail: "Mora–Gällivare is modeled as two daylight rail days with an independent overnight in Östersund, not as a sleeper train." },
+    { id: "changes", label: "Service changes", detail: "Rail replacement buses, altered stops, and food-break arrangements can occur. Confirm the latest operating information directly." },
+    { id: "daylight", label: "Daylight and weather", detail: "Summer provides very long northern daylight, but temperature, insects, and weather can change quickly." },
+  ],
+  sources: [
+    { id: "route", label: "Inlandsbanan train route", category: "operator", url: "https://res.inlandsbanan.se/en/travelling-with-inlandsbanan/train-route", note: "Official current passenger route and section context." },
+    { id: "timetables", label: "Inlandsbanan timetables", category: "operator", url: "https://res.inlandsbanan.se/tidtabeller", note: "Official seasonal service context; dates and substitutions remain changeable." },
+    { id: "train", label: "On the Inlandsbanan train", category: "operator", url: "https://inlandsbanan.se/en/train", note: "Official onboard, food-stop, landscape, and cultural context." },
+    { id: "osm", label: "OpenStreetMap relation 71047", category: "railway-map", url: "https://www.openstreetmap.org/relation/71047", note: "Prepared Mora–Gällivare railway geometry under ODbL." },
+  ],
+  geoJsonPath: "/data/routes/inlandsbanan.geojson",
+} satisfies RailRoute;

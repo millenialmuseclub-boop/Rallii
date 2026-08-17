@@ -26,6 +26,9 @@ import { alishanForestRailwayRoute } from "../src/data/routes/alishan-forest-rai
 import { belgradeBarRoute } from "../src/data/routes/belgrade-bar.ts";
 import { konkanRailwayRoute } from "../src/data/routes/konkan-railway.ts";
 import { blueTrainRoute } from "../src/data/routes/blue-train.ts";
+import { elChepeExpressRoute } from "../src/data/routes/el-chepe-express.ts";
+import { inlandsbananRoute } from "../src/data/routes/inlandsbanan.ts";
+import { trainDesMerveillesRoute } from "../src/data/routes/train-des-merveilles.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -259,7 +262,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 25);
+  assert.equal(getAllRoutes().length, 28);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -431,7 +434,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 25);
+  assert.equal(getAllRoutes().length, 28);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -468,8 +471,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes twenty-five routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 25);
+test("repository includes twenty-eight routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 28);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -750,8 +753,8 @@ test("Eastern Express, Hiram Bingham, and Alishan Forest Railway remain generic 
   assert.equal(featuredRouteSlugs.length, 3);
 });
 
-test("routes 23–25 are complete generic global journeys", () => {
-  assert.equal(getAllRoutes().length, 25);
+test("routes 23–25 remain complete generic global journeys", () => {
+  assert.equal(getAllRoutes().length, 28);
   for (const route of [belgradeBarRoute, konkanRailwayRoute, blueTrainRoute]) {
     assert.equal(getRouteBySlug(route.summary.slug), route);
     assert.deepEqual(validateRoute(route), []);
@@ -823,4 +826,53 @@ test("visual collection discovery promotes complete photographed collections", a
   assert.match(planningPanel, /planning-route-visual/);
   assert.match(stayPlanner, /planning-route-visual/);
   assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("routes 26–28 are complete, searchable, and direction-aware", () => {
+  const routes = [elChepeExpressRoute, inlandsbananRoute, trainDesMerveillesRoute];
+  assert.equal(getAllRoutes().length, 28);
+  for (const route of routes) {
+    assert.equal(getRouteBySlug(route.summary.slug), route);
+    assert.deepEqual(validateRoute(route), []);
+    assert.equal(route.capabilities.rideMode, false);
+    assert.equal(getRouteRelationships(route.summary.slug).length, 2);
+    assert.equal(parseComparisonRoutes(`${route.summary.slug},bernina-express`, getAllRoutes()).length, 2);
+    assert.equal(getDirectionalStops(route, "reverse")[0].name, route.summary.destination);
+    assert.ok(getDirectionalTimeline(route, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+    assert.ok(route.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+    assert.ok(getRouteMedia(route.summary.slug));
+  }
+  for (const query of ["El Chepe", "Copper Canyon", "Creel", "Inlandsbanan", "Arctic Circle", "Gällivare", "Train des Merveilles", "Roya Valley", "Tende"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => routes.includes(result.route as typeof routes[number])), `Expected routes 26–28 for ${query}`);
+  }
+  assert.ok(routesInRegion(getAllRoutes(), "north-america").includes(elChepeExpressRoute));
+  assert.ok(routesInRegion(getAllRoutes(), "europe").includes(inlandsbananRoute));
+  assert.ok(routesInRegion(getAllRoutes(), "europe").includes(trainDesMerveillesRoute));
+  assert.ok(getJourneyCollection("northern-landscapes")?.routeSlugs.includes("inlandsbanan"));
+  assert.ok(getJourneyCollection("short-scenic-escapes")?.routeSlugs.includes("train-des-merveilles"));
+  assert.ok(getJourneyCollection("great-rail-crossings")?.routeSlugs.includes("el-chepe-express"));
+});
+
+test("routes 26–28 use continuous prepared railway geometry", async () => {
+  for (const route of [elChepeExpressRoute, inlandsbananRoute, trainDesMerveillesRoute]) {
+    const data = JSON.parse(await readFile(`public${route.geoJsonPath}`, "utf8")) as { metadata: { relationIds: number[]; contributingWayIds: number[]; coordinateCount: number; calculatedDistanceKm: number }; features: Array<{ geometry: { type: string; coordinates: RouteCoordinate[] } }> };
+    const coordinates = data.features[0].geometry.coordinates;
+    assert.equal(data.features[0].geometry.type, "LineString");
+    assert.equal(data.metadata.coordinateCount, coordinates.length);
+    assert.ok(data.metadata.relationIds.length > 0);
+    assert.ok(data.metadata.contributingWayIds.length > 0);
+    assert.ok(coordinates.length > 100);
+    assert.ok(Math.abs(routeLengthKm(coordinates) - route.summary.distanceKm) < 0.03);
+    assert.equal(data.metadata.calculatedDistanceKm, route.summary.distanceKm);
+    assert.ok(projectCoordinateOntoRoute([route.stops[0].longitude, route.stops[0].latitude], coordinates).distanceFromRouteMeters < 20);
+    assert.ok(projectCoordinateOntoRoute([route.stops.at(-1)!.longitude, route.stops.at(-1)!.latitude], coordinates).distanceFromRouteMeters < 20);
+  }
+});
+
+test("collection covers remain centralized and photographed", () => {
+  for (const collection of journeyCollections.filter((item) => item.coverRouteSlug)) {
+    assert.ok(collection.routeSlugs.includes(collection.coverRouteSlug!));
+    assert.ok(getRouteMedia(collection.coverRouteSlug!));
+  }
+  assert.deepEqual(featuredRouteSlugs, ["bernina-express", "tranzalpine", "cinque-terre"]);
 });

@@ -1,8 +1,8 @@
 import type { ExperienceTag, RailRoute } from "@/types/route";
 
 export const catalogueRegions = [
-  { id: "europe", label: "Europe", countries: ["Switzerland", "Italy", "United Kingdom", "Norway", "Ireland", "Portugal", "Serbia", "Montenegro", "Türkiye"] },
-  { id: "north-america", label: "North America", countries: ["United States", "Canada"] },
+  { id: "europe", label: "Europe", countries: ["Switzerland", "Italy", "United Kingdom", "Norway", "Ireland", "Portugal", "Serbia", "Montenegro", "Türkiye", "Sweden", "France"] },
+  { id: "north-america", label: "North America", countries: ["United States", "Canada", "Mexico"] },
   { id: "asia", label: "Asia", countries: ["Japan", "Sri Lanka", "Taiwan", "India"] },
   { id: "oceania", label: "Oceania", countries: ["Australia", "New Zealand"] },
   { id: "africa", label: "Africa", countries: ["South Africa"] },
