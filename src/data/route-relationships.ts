@@ -83,6 +83,9 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
   "eastern-express": [{ slug: "the-ghan", reason: "Another overnight crossing of a vast interior" }, { slug: "the-canadian", reason: "A contrasting long-form sleeper journey" }],
   "hiram-bingham": [{ slug: "kandy-ella-railway", reason: "Another compact journey through mountain valleys" }, { slug: "tranzalpine", reason: "A longer mountain railway on another continent" }],
   "alishan-forest-railway": [{ slug: "kurobe-gorge-railway", reason: "Another compact forested mountain railway" }, { slug: "kandy-ella-railway", reason: "Another railway shaped by steep highland terrain" }],
+  "belgrade-bar": [{ slug: "eastern-express", reason: "Another long journey through changing mountain landscapes" }, { slug: "bergen-line", reason: "A contrasting full-day mountain crossing" }],
+  "konkan-railway": [{ slug: "kandy-ella-railway", reason: "Another South Asian journey transformed by monsoon landscapes" }, { slug: "alishan-forest-railway", reason: "A shorter contrast of forest, tunnels, and mountain engineering" }],
+  "blue-train": [{ slug: "the-ghan", reason: "Another defining luxury sleeper across an immense interior" }, { slug: "the-canadian", reason: "A contrasting multi-night crossing on another continent" }],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

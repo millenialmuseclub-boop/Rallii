@@ -20,6 +20,9 @@ import { theCanadianRoute } from "./the-canadian.ts";
 import { easternExpressRoute } from "./eastern-express.ts";
 import { hiramBinghamRoute } from "./hiram-bingham.ts";
 import { alishanForestRailwayRoute } from "./alishan-forest-railway.ts";
+import { belgradeBarRoute } from "./belgrade-bar.ts";
+import { konkanRailwayRoute } from "./konkan-railway.ts";
+import { blueTrainRoute } from "./blue-train.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -45,6 +48,9 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [easternExpressRoute.summary.slug, easternExpressRoute],
   [hiramBinghamRoute.summary.slug, hiramBinghamRoute],
   [alishanForestRailwayRoute.summary.slug, alishanForestRailwayRoute],
+  [belgradeBarRoute.summary.slug, belgradeBarRoute],
+  [konkanRailwayRoute.summary.slug, konkanRailwayRoute],
+  [blueTrainRoute.summary.slug, blueTrainRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { RouteMedia } from "@/components/route-media";
 import { SaveRouteButton } from "@/components/save-route-button";
 import type { RailRoute } from "@/types/route";
+import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
 
 export type RouteCardVariant = "standard" | "featured" | "compact";
 
@@ -10,9 +11,10 @@ interface RouteCardProps {
   matchContext?: string;
   relationshipReason?: string;
   variant?: RouteCardVariant;
+  showStays?: boolean;
 }
 
-export function RouteCard({ route, matchContext, relationshipReason, variant = "standard" }: RouteCardProps) {
+export function RouteCard({ route, matchContext, relationshipReason, variant = "standard", showStays = false }: RouteCardProps) {
   const { summary } = route;
   return (
     <article className={`journey-card journey-card--${variant}`}>
@@ -28,7 +30,7 @@ export function RouteCard({ route, matchContext, relationshipReason, variant = "
         {variant !== "compact" ? <p className="route-card-reason">{summary.bestFor[0]}</p> : null}
         <div className="route-card__footer">
           <span className="route-card-meta">{summary.durationLabel ?? formatDuration(summary.durationMinutes)} <i aria-hidden="true" /> {formatLabel(summary.journeyTypes[0])}</span>
-          <span className="route-card__links"><SaveRouteButton slug={summary.slug} compact /><Link className="text-link focus-ring" href={`/compare?routes=${summary.slug}`}>Compare</Link><Link className="text-link focus-ring" href={`/plan?route=${summary.slug}`}>Plan</Link><Link className="primary-link focus-ring" href={`/routes/${summary.slug}`}>Explore <span aria-hidden="true">→</span></Link></span>
+          <span className="route-card__links"><SaveRouteButton slug={summary.slug} compact /><Link className="text-link focus-ring" href={`/compare?routes=${summary.slug}`}>Compare</Link><Link className="text-link focus-ring" href={routePlanningHref(summary.slug)}>Plan</Link>{showStays ? <Link className="text-link focus-ring" href={routeStaysHref(summary.slug)}>Find stays</Link> : null}<Link className="primary-link focus-ring" href={`/routes/${summary.slug}`}>Explore <span aria-hidden="true">→</span></Link></span>
         </div>
       </div>
     </article>

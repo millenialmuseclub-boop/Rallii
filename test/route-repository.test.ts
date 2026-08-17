@@ -23,6 +23,9 @@ import { theCanadianRoute } from "../src/data/routes/the-canadian.ts";
 import { easternExpressRoute } from "../src/data/routes/eastern-express.ts";
 import { hiramBinghamRoute } from "../src/data/routes/hiram-bingham.ts";
 import { alishanForestRailwayRoute } from "../src/data/routes/alishan-forest-railway.ts";
+import { belgradeBarRoute } from "../src/data/routes/belgrade-bar.ts";
+import { konkanRailwayRoute } from "../src/data/routes/konkan-railway.ts";
+import { blueTrainRoute } from "../src/data/routes/blue-train.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -38,6 +41,8 @@ import { migrateLegacySaved, parseTravelLibrary } from "../src/lib/travel-librar
 import { getBeenRoutes, getLibrarySummary, getWantToGoRoutes } from "../src/lib/travel-library-summary.ts";
 import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments, getDirectionalStops, getDirectionalTimeline, parseJourneyDirection, transformRouteDistance } from "../src/lib/route-direction.ts";
 import { getOfficialOperatorSource, getPlanningLocations, hasPreparedActivityContext, isGetYourGuideConfigured, isStay22Configured, partnerPlanning } from "../src/data/partner-planning.ts";
+import { catalogueRegions, routesInRegion } from "../src/data/catalogue-taxonomy.ts";
+import { partnerPlacements, placementIncludes, routePlanningHref, routeStaysHref } from "../src/data/partner-placements.ts";
 
 test("direction parsing is strict and safely defaults forward", () => {
   assert.equal(parseJourneyDirection("reverse"), "reverse");
@@ -254,7 +259,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 22);
+  assert.equal(getAllRoutes().length, 25);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -426,7 +431,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 22);
+  assert.equal(getAllRoutes().length, 25);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -463,8 +468,8 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
   assert.deepEqual(getLibrarySummary([kurobeGorgeRailwayRoute]), { journeyCount: 1, countryCount: 1, distanceKm: 19.91, countries: ["Japan"] });
 });
 
-test("repository includes twenty-two routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 22);
+test("repository includes twenty-five routes while featured journeys remain exactly three", () => {
+  assert.equal(getAllRoutes().length, 25);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -522,11 +527,11 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.doesNotMatch(panel, /srcDoc/);
   assert.match(widgetFrame, /partner tool does not load/);
   assert.doesNotMatch(panel, /Stay22/);
-  assert.match(routePage, /\/plan\?route=/);
+  assert.match(routePage, /routePlanningHref/);
   const routeCard = await readFile("src/components/route-card.tsx", "utf8");
   const comparison = await readFile("src/components/compare-journeys.tsx", "utf8");
-  assert.match(routeCard, /\/plan\?route=/);
-  assert.match(comparison, /\/plan\?route=/);
+  assert.match(routeCard, /routePlanningHref/);
+  assert.match(comparison, /routePlanningHref/);
 });
 
 test("Belfast–Derry is a complete Northern Irish coastal journey", async () => {
@@ -743,4 +748,60 @@ test("Eastern Express, Hiram Bingham, and Alishan Forest Railway remain generic 
   }
   for (const query of ["Doğu Ekspresi", "Kars", "Hiram Bingham", "Machu Picchu", "Alishan", "Chiayi", "Taiwan"]) assert.ok(searchRoutes(getAllRoutes(), query).length > 0);
   assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("routes 23–25 are complete generic global journeys", () => {
+  assert.equal(getAllRoutes().length, 25);
+  for (const route of [belgradeBarRoute, konkanRailwayRoute, blueTrainRoute]) {
+    assert.equal(getRouteBySlug(route.summary.slug), route);
+    assert.deepEqual(validateRoute(route), []);
+    assert.equal(route.capabilities.rideMode, false);
+    assert.equal(getRouteRelationships(route.summary.slug).length, 2);
+    assert.equal(parseComparisonRoutes(`${route.summary.slug},the-ghan`, getAllRoutes()).length, 2);
+    assert.ok(getLibrarySummary([route]).distanceKm > 0);
+    assert.ok(route.timelineEntries.every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+    assert.ok(getDirectionalTimeline(route, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
+    assert.ok(route.bestSideSegments.every((segment) => segment.confidenceType === "limited-data"));
+  }
+  assert.deepEqual(belgradeBarRoute.summary.countries, ["Serbia", "Montenegro"]);
+  assert.deepEqual(getDirectionalEndpoints(konkanRailwayRoute, "reverse"), { origin: "Madgaon", destination: "Mumbai CSMT" });
+  assert.equal(blueTrainRoute.summary.journeyDays, 3);
+  assert.equal(featuredRouteSlugs.length, 3);
+});
+
+test("new global journeys are searchable and organized by reusable taxonomy", () => {
+  for (const query of ["Belgrade Bar", "Mala Rijeka", "Montenegro", "Konkan Railway", "Mumbai", "Madgaon", "Goa", "Western Ghats", "Blue Train", "Pretoria", "Cape Town", "Karoo", "South Africa"]) {
+    assert.ok(searchRoutes(getAllRoutes(), query).some((result) => ["belgrade-bar", "konkan-railway", "blue-train"].includes(result.route.summary.slug)), `Expected a new route for ${query}`);
+  }
+  assert.ok(catalogueRegions.some((region) => region.id === "africa"));
+  assert.deepEqual(routesInRegion(getAllRoutes(), "africa").map((route) => route.summary.slug), ["blue-train"]);
+  assert.ok(routesInRegion(getAllRoutes(), "asia").some((route) => route.summary.slug === "konkan-railway"));
+  assert.ok(getJourneyCollection("cross-border-journeys")?.routeSlugs.includes("belgrade-bar"));
+  assert.ok(getJourneyCollection("multi-day-journeys")?.routeSlugs.includes("blue-train"));
+  assert.ok(getJourneyCollection("great-rail-crossings")?.routeSlugs.includes("konkan-railway"));
+});
+
+test("new route geometry is canonical, continuous, oriented, and matches metadata", async () => {
+  for (const [route, expectedCount] of [[belgradeBarRoute, 3945], [konkanRailwayRoute, 3361], [blueTrainRoute, 11145]] as const) {
+    const data = JSON.parse(await readFile(`public${route.geoJsonPath}`, "utf8")) as { type: string; features: Array<{ properties: { coordinateCount: number; calculatedDistanceKm: number }; geometry: { type: string; coordinates: RouteCoordinate[] } }> };
+    const feature = data.features[0];
+    assert.equal(data.type, "FeatureCollection");
+    assert.equal(feature.geometry.type, "LineString");
+    assert.equal(feature.geometry.coordinates.length, expectedCount);
+    assert.equal(feature.properties.coordinateCount, expectedCount);
+    assert.ok(Math.abs(routeLengthKm(feature.geometry.coordinates) - route.summary.distanceKm) < 0.03);
+    assert.equal(feature.properties.calculatedDistanceKm, route.summary.distanceKm);
+    assert.ok(projectCoordinateOntoRoute([route.stops[0].longitude, route.stops[0].latitude], feature.geometry.coordinates).distanceFromRouteMeters < 1000);
+    assert.ok(projectCoordinateOntoRoute([route.stops.at(-1)!.longitude, route.stops.at(-1)!.latitude], feature.geometry.coordinates).distanceFromRouteMeters < 1000);
+  }
+});
+
+test("partner placements stay restrained and route-aware", () => {
+  assert.deepEqual(partnerPlacements.discover, ["plan"]);
+  assert.ok(placementIncludes("route", "plan"));
+  assert.ok(placementIncludes("route", "stays"));
+  assert.ok(placementIncludes("saved", "stays"));
+  assert.ok(placementIncludes("compare", "stays"));
+  assert.equal(routePlanningHref("blue-train"), "/plan?route=blue-train");
+  assert.equal(routeStaysHref("konkan-railway"), "/stays?route=konkan-railway");
 });

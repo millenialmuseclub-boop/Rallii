@@ -7,6 +7,7 @@ import { RouteMedia } from "@/components/route-media";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
 import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory } from "@/lib/journey-comparison";
 import type { RailRoute } from "@/types/route";
+import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
 
 export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; selected: RailRoute[] }) {
   const router = useRouter();
@@ -53,5 +54,5 @@ export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; sel
   </div>;
 }
 
-function CompareHeader({ route, saved, onSave }: { route: RailRoute; saved: boolean; onSave: () => void }) { const { summary } = route; return <article className="compare-header"><RouteMedia summary={summary} variant="card" /><div><p className="eyebrow">{summary.country}</p><h2 className="mt-2 font-serif text-3xl">{summary.name}</h2><p className="mt-2 font-serif text-lg text-stone-600">{summary.origin} → {summary.destination}</p><p className="mt-4 text-xs font-bold uppercase tracking-wider text-stone-500">{getJourneyDurationCategory(summary.durationMinutes)}</p><div className="mt-5 flex flex-wrap gap-2"><Link className="action-button" href={`/routes/${summary.slug}`}>View journey</Link><Link className="action-button" href={`/plan?route=${summary.slug}`}>Plan</Link><button className="action-button" type="button" aria-pressed={saved} onClick={onSave}>{saved ? "Want to Go" : "Add to Want to Go"}</button></div></div></article>; }
+function CompareHeader({ route, saved, onSave }: { route: RailRoute; saved: boolean; onSave: () => void }) { const { summary } = route; return <article className="compare-header"><RouteMedia summary={summary} variant="card" /><div><p className="eyebrow">{summary.country}</p><h2 className="mt-2 font-serif text-3xl">{summary.name}</h2><p className="mt-2 font-serif text-lg text-stone-600">{summary.origin} → {summary.destination}</p><p className="mt-4 text-xs font-bold uppercase tracking-wider text-stone-500">{getJourneyDurationCategory(summary.durationMinutes)}</p><div className="mt-5 flex flex-wrap gap-2"><Link className="action-button" href={`/routes/${summary.slug}`}>View journey</Link><Link className="action-button" href={routePlanningHref(summary.slug)}>Plan</Link><Link className="action-button" href={routeStaysHref(summary.slug)}>Find stays</Link><button className="action-button" type="button" aria-pressed={saved} onClick={onSave}>{saved ? "Want to Go" : "Add to Want to Go"}</button></div></div></article>; }
 function CompareRow({ label, routes, render }: { label: string; routes: RailRoute[]; render: (route: RailRoute) => string }) { return <div className="comparison-row"><dt>{label}</dt><dd><span>{routes[0].summary.name}</span>{render(routes[0])}</dd><dd><span>{routes[1].summary.name}</span>{render(routes[1])}</dd></div>; }

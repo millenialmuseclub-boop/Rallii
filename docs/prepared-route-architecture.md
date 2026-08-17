@@ -39,3 +39,11 @@ Want to Go, Been, Compare, My Rail Map, and Flåm Ride Mode continue to use the 
 Journey types describe the broad form of a route; experience tags describe reusable landscape and infrastructure traits used by Search, Discover, and Compare. Route #8 adds the generic tags `bridges`, `forest`, and `rivers`. Open-sided equipment remains train-character copy rather than a route-specific taxonomy value.
 
 New values should be added only when they can describe more than one journey and should continue to format through the shared comparison and search helpers.
+
+## Scaling the catalogue
+
+Discover uses the centralized catalogue taxonomy in `src/data/catalogue-taxonomy.ts` and searches route summaries, geography, stations, landmarks, operators, journey types, and experience tags without loading GeoJSON. Results are revealed incrementally in groups of eight, while only one browse group is open at a time.
+
+Typed local route records remain appropriate for the current curated catalogue and can support hundreds of prepared journeys. At roughly 300–500 published routes, retain incremental results and introduce durable pagination plus stronger regional index pages. Beyond roughly 1,000 routes—or earlier if the client index becomes measurably slow—move searchable route metadata into Turso and query it server-side. Keep prepared GeoJSON as separately cached static assets; catalogue browsing must never load every route geometry.
+
+Partner placements are centralized in `src/data/partner-placements.ts`. This keeps Plan and Stays actions consistent as the catalogue grows without turning editorial route content into advertising inventory.
