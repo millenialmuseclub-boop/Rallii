@@ -514,6 +514,9 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.match(panel, /openSurfaces\.experiences/);
   assert.match(panel, /openSurfaces\.flights/);
   assert.match(panel, /openSurfaces\.car/);
+  assert.match(panel, /openSurfaces\.stays/);
+  assert.match(panel, /plan-stay-location/);
+  assert.match(panel, /Partner search by Agoda/);
   assert.match(stayPlanner, /Partner search by Agoda/);
   assert.match(stayPlanner, /getPlanningLocations/);
   assert.doesNotMatch(panel, /srcDoc/);
