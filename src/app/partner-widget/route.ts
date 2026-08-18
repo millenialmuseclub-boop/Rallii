@@ -15,14 +15,15 @@ export function GET(request: Request): Response {
   if (!trs || !marker) return htmlResponse("Partner search is not configured.", 503);
   const parameters = new URLSearchParams({ trs, shmarker: marker, ...widgetParameters[kind] });
   const scriptUrl = `https://tpwdgt.com/content?${parameters.toString()}`.replaceAll("&", "&amp;");
-  return htmlResponse(`<script async src="${scriptUrl}" charset="utf-8"></script>`);
+  return htmlResponse(`<script async src="${scriptUrl}" charset="utf-8"></script>`, 200, kind);
 }
 
 function isWidgetKind(value: string | null): value is PartnerWidgetKind {
   return value === "stays" || value === "flights" || value === "cars" || value === "activities";
 }
 
-function htmlResponse(content: string, status = 200): Response {
-  const body = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;min-height:100%;font-family:Arial,sans-serif}body{padding:2px;box-sizing:border-box}</style></head><body>${content}</body></html>`;
+function htmlResponse(content: string, status = 200, kind?: PartnerWidgetKind): Response {
+  const resizer = kind ? `<script>const reportHeight=()=>window.parent.postMessage({type:"rallii-partner-widget-height",kind:"${kind}",height:document.documentElement.scrollHeight},"*");new ResizeObserver(reportHeight).observe(document.documentElement);new MutationObserver(reportHeight).observe(document.documentElement,{childList:true,subtree:true,attributes:true});window.addEventListener("load",reportHeight);setTimeout(reportHeight,500);setTimeout(reportHeight,1500);</script>` : "";
+  const body = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;font-family:Arial,sans-serif}body{padding:2px;box-sizing:border-box}</style></head><body>${content}${resizer}</body></html>`;
   return new Response(body, { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=300" } });
 }

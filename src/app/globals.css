@@ -715,8 +715,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .screen-media-header__copy { bottom: 3.25rem; max-width: 27rem; }
 .screen-media-header__copy strong { display: block; font-family: var(--font-serif); font-size: clamp(2.15rem, 9vw, 3.3rem); line-height: .94; }
 .screen-media-header__copy p { margin-top: .7rem; color: rgb(255 255 255 / 82%); font-size: .8rem; line-height: 1.5; }
-.partner-plan__partner-frame[data-kind="stays"], .partner-plan__partner-frame[data-kind="cars"], .partner-plan__partner-frame[data-kind="activities"] { height: 42rem; min-height: 42rem; }
-.partner-plan__partner-frame[data-kind="flights"] { height: 32rem; min-height: 32rem; }
+.partner-plan__partner-frame { min-height: 0; }
 .screen-media-header { min-height: 13.5rem; }
 .screen-media-header + .app-screen__intro { margin-top: 0; }
 .screen-media-header + .app-screen__intro .eyebrow, .screen-media-header + .app-screen__intro h1 { display: none; }
@@ -791,6 +790,20 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .home-app .home-collection-feature > div { padding: 1.15rem; }
 .home-app .cta-button, .home-app .action-button { border-radius: 0; }
 .home-app .home-pro-note { border-bottom: 1px solid var(--line); padding-bottom: 1.1rem; }
+/* Compact planning flow: the partner content determines its own height. */
+.plan-start { margin-top: .75rem; border-radius: 0; padding: 1.1rem; box-shadow: none; }
+.plan-start h2 { font-size: clamp(1.8rem, 7vw, 2.45rem); }
+.plan-start > p:last-child { margin-top: .85rem; }
+.plan-start__actions { margin-top: 1rem; }
+.plan-pro-note { margin-top: 1rem; padding-top: .8rem; }
+.partner-plan { margin-top: 1.35rem; }
+.partner-plan__route-label { margin-top: .85rem; }
+.planning-route-visual { margin-top: .55rem; }
+.planning-route-visual .route-media--card { min-height: 8.5rem; }
+.partner-plan__sections { gap: .45rem; margin-top: 1rem; }
+.partner-plan__section { gap: .5rem; padding-block: .95rem; }
+.partner-detail { gap: .65rem; margin-top: .15rem; padding-top: .65rem; }
+.partner-plan__widget-fallback { margin-top: .35rem; }
 @media (min-width: 640px) {
   .home-feature--immersive, .home-feature--immersive .home-feature__body { min-height: 37rem; }
   .home-action-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
