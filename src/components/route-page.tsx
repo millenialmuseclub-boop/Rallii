@@ -8,7 +8,7 @@ import { RouteExperience } from "@/components/route-experience";
 import { SiteHeader } from "@/components/site-header";
 import { RouteMedia } from "@/components/route-media";
 import type { JourneyDirection, RailRoute } from "@/types/route";
-import { getDirectionalEndpoints, parseJourneyDirection } from "@/lib/route-direction";
+import { getDirectionalEndpoints, getDirectionalSegments, parseJourneyDirection } from "@/lib/route-direction";
 import { getCollectionsForRoute } from "@/data/journey-collections";
 import { buildComparePath } from "@/data/route-relationships";
 import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
@@ -21,6 +21,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
   const { summary } = route;
   const direction = useSyncExternalStore<JourneyDirection>(subscribeToDirection, getDirectionSnapshot, () => "forward");
   const endpoints = getDirectionalEndpoints(route, direction);
+  const openingSeatGuide = getDirectionalSegments(route, direction)[0];
   const collections = getCollectionsForRoute(summary.slug);
   const [surface, setSurface] = useState("overview");
 
@@ -35,7 +36,7 @@ export function RoutePage({ route, nextRoutes }: { route: RailRoute; nextRoutes:
   return <><SiteHeader /><div className="journey-app-bar"><Link href="/discover">← Discover</Link><span>{summary.name}</span><small>{endpoints.origin} → {endpoints.destination}</small><Link className="journey-app-bar__saved" href="/saved">Saved</Link></div><main><article>
     <header className={`site-shell scroll-section py-10 sm:py-16 journey-surface${surface === "overview" ? " journey-surface--active" : ""}`} id="overview">
       <div className="route-hero-grid">
-        <div className="route-hero-identity"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><button className="direction-button focus-ring mt-5" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button></div>
+        <div className="route-hero-identity"><p className="eyebrow">{summary.country}</p><h1 className="mt-4 font-serif text-5xl leading-none tracking-tight sm:text-7xl">{summary.name}</h1><p className="mt-4 font-serif text-2xl text-stone-600 sm:text-3xl">{endpoints.origin} → {endpoints.destination}</p><div className="route-hero-controls"><button className="direction-button focus-ring" type="button" aria-pressed={direction === "reverse"} aria-label={`Change journey direction to ${endpoints.destination} to ${endpoints.origin}`} onClick={toggleDirection}>Travel {endpoints.destination} → {endpoints.origin}</button>{openingSeatGuide ? <button className="route-hero-seat-guide focus-ring" type="button" onClick={() => setSurface("best-side")}><span>Best Side</span><strong>{formatViewSide(direction === "reverse" ? openingSeatGuide.reverseDirectionSide : openingSeatGuide.forwardDirectionSide)}</strong><small>Open seat guide →</small></button> : null}</div></div>
         <RouteMedia summary={summary} variant="hero" />
         <div className="route-hero-summary"><dl className="route-essential-facts grid grid-cols-2 border-y border-stone-300"><Essential label="Duration" value={summary.durationLabel ?? formatDuration(summary.durationMinutes)} /><Essential label="Distance" value={`${summary.distanceKm} km`} /><Essential label="Train" value={summary.trainType} /><Essential label="Reservation" value={formatReservation(summary.reservationStatus)} /></dl><p className="mt-6 max-w-xl text-base leading-7 text-stone-600">{summary.shortDescription}</p><JourneyActions routeName={summary.name} routeSlug={summary.slug} rideModeAvailable={route.capabilities.rideMode} direction={direction} /></div>
       </div>
@@ -70,3 +71,4 @@ function OverviewItem({ term, detail, note }: { term: string; detail: string; no
 function formatReservation(status: string): string { return status === "required" ? "Required" : status === "not-required" ? "Not required" : status === "recommended" ? "Recommended" : "Check before travel"; }
 function formatDuration(minutes: number): string { const hours = Math.floor(minutes / 60); const rest = minutes % 60; return rest ? `${hours} hr ${rest} min` : hours === 1 ? "1 hour" : `${hours} hours`; }
 function getDiscoverFilter(route: RailRoute): string { if (route.summary.slug === "belfast-derry") return "northern-ireland"; if (route.summary.countries.includes("United Kingdom")) return "united-kingdom"; return route.summary.countries[0].toLowerCase().replaceAll(" ", "-"); }
+function formatViewSide(side: RailRoute["bestSideSegments"][number]["forwardDirectionSide"]): string { return side === "both" ? "Both sides" : side === "varies" ? "It varies" : side === "unknown" ? "Check guide" : `${side.charAt(0).toUpperCase()}${side.slice(1)}`; }

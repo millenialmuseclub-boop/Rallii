@@ -13,7 +13,7 @@ export function RouteMedia({ summary, variant }: RouteMediaProps) {
   if (media) {
     return (
       <figure className={className}>
-        <Image className="route-media__image" src={media.path} alt={media.alt} fill sizes={variant === "hero" ? "(min-width: 1024px) 55vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"} priority={variant === "hero"} />
+        <Image className="route-media__image" src={media.path} alt={media.alt} fill sizes={variant === "hero" ? "(min-width: 1024px) 55vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"} quality={variant === "hero" ? 88 : 76} priority={variant === "hero"} />
         <figcaption className="route-media__credit">
           {variant === "hero" ? <span>{media.caption}</span> : null}
           <small>Photo: <a href={media.sourcePageUrl} target="_blank" rel="noreferrer">{media.creator}</a> · <a href={media.licenseUrl} target="_blank" rel="noreferrer">{media.licenseName}</a></small>

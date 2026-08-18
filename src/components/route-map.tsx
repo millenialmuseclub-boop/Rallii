@@ -66,6 +66,7 @@ export function RouteMap({
       style: "https://tiles.openfreemap.org/styles/liberty",
       center: [8.75, 46.5],
       zoom: 6.5,
+      pitchWithRotate: false,
       attributionControl: false,
     });
     mapRef.current = map;
@@ -90,6 +91,12 @@ export function RouteMap({
             type: "line",
             source: "route",
             paint: { "line-color": "#f7f1df", "line-width": 10, "line-opacity": 0.92, "line-blur": 1.5 },
+          });
+          map.addLayer({
+            id: "route-core",
+            type: "line",
+            source: "route",
+            paint: { "line-color": "#e9b56a", "line-width": 1.25, "line-opacity": 0.9 },
           });
           map.addLayer({
             id: "route-line",
@@ -197,7 +204,7 @@ export function RouteMap({
         aria-label={`Interactive map of the ${routeName} route`}
         className="route-map-canvas"
       />
-      {ready ? <div className="map-tools" aria-label="Map display controls"><button type="button" onClick={fitRoute}>Fit route</button><button type="button" aria-pressed={showStations} onClick={() => setShowStations((value) => !value)}>Stations</button><button type="button" aria-pressed={showLandmarks} onClick={() => setShowLandmarks((value) => !value)}>Landmarks</button></div> : null}
+      {ready ? <div className="map-tools" aria-label="Map display controls"><button type="button" onClick={fitRoute}>Fit route</button><button type="button" aria-pressed={showStations} onClick={() => setShowStations((value) => !value)}>{showStations ? "Stations on" : "Stations off"}</button><button type="button" aria-pressed={showLandmarks} onClick={() => setShowLandmarks((value) => !value)}>{showLandmarks ? "Landmarks on" : "Landmarks off"}</button></div> : null}
       {!ready && !error ? <div className="map-preparing" role="status"><span>Preparing the route</span></div> : null}
       {error ? (
         <p className="absolute bottom-3 left-3 right-3 bg-stone-950/85 px-3 py-2 text-sm text-white" role="status">
