@@ -627,7 +627,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .journey-app-bar__saved { grid-column: 3; grid-row: 1 / 3; color: var(--accent); font-size: .72rem; font-weight: 700; text-decoration: none; }
 }
 
-.catalogue-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 1.5rem; background: var(--line); }
+.catalogue-groups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-top: 1.5rem; background: var(--line); }
 .catalogue-groups button { min-height: 2.9rem; border: 0; background: var(--surface); color: var(--muted); font-size: .75rem; font-weight: 700; }
 .catalogue-groups button[aria-selected="true"] { background: var(--accent-deep); color: white; }
 .discover-search { display: block; margin-top: 1.5rem; }
@@ -678,6 +678,24 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .scenic-alert button { min-height: 2.75rem; margin-top: .65rem; border: 0; background: transparent; color: var(--accent); font-weight: 700; }
 .library-limit-note { display: block; max-width: 14rem; margin-top: .4rem; color: var(--muted); font-size: .68rem; line-height: 1.45; }
 .library-limit-note a { color: var(--accent); font-weight: 700; }
+
+/* Catalogue and native-app refinement */
+.home-pro-note, .plan-pro-note { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--line); padding: 1.1rem 0 0; }
+.home-pro-note strong { display: block; margin-top: .2rem; font-family: var(--font-serif); font-size: 1.05rem; }
+.home-pro-note p:not(.eyebrow), .plan-pro-note p:not(.eyebrow) { margin-top: .3rem; color: var(--muted); font-size: .76rem; line-height: 1.5; }
+.plan-pro-note { align-items: flex-end; margin-top: 2rem; padding-top: 1rem; }
+.plan-pro-note > p:not(.eyebrow) { max-width: 38rem; }
+.route-map-frame { border-color: #7c9284; background: #d9e0d7; box-shadow: 0 14px 30px rgb(29 40 33 / 11%); }
+.route-map-frame::after { content: "Prepared railway guide"; position: absolute; right: .75rem; bottom: .65rem; z-index: 2; pointer-events: none; border: 1px solid rgb(247 241 223 / 80%); background: rgb(23 63 50 / 88%); padding: .35rem .5rem; color: #f7f1df; font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.route-map-frame .maplibregl-ctrl-group { overflow: hidden; border: 1px solid rgb(36 54 45 / 18%); border-radius: 2px; box-shadow: 0 3px 10px rgb(28 41 34 / 12%); }
+.route-map-frame .maplibregl-ctrl button { width: 2.45rem; height: 2.45rem; background-color: rgb(250 248 242 / 94%); }
+.route-map-frame .maplibregl-ctrl-attrib { max-width: calc(100% - 10.5rem); padding-right: 2.25rem; background: rgb(250 248 242 / 80%); font-size: .58rem; }
+@media (max-width: 639px) {
+  .home-pro-note, .plan-pro-note { align-items: flex-start; flex-direction: column; gap: .65rem; }
+  .home-pro-note .text-link, .plan-pro-note .text-link { min-height: 2.75rem; align-items: center; }
+  .catalogue-groups button { min-height: 3.1rem; font-size: .68rem; }
+  .route-map-frame::after { bottom: 2rem; }
+}
 
 @media (max-width: 480px) {
   .ride-direction { grid-template-columns: 1fr; }

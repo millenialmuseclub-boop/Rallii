@@ -63,7 +63,7 @@ export function RouteMap({
     });
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: "https://tiles.openfreemap.org/styles/positron",
+      style: "https://tiles.openfreemap.org/styles/liberty",
       center: [8.75, 46.5],
       zoom: 6.5,
       attributionControl: false,
@@ -89,13 +89,13 @@ export function RouteMap({
             id: "route-shadow",
             type: "line",
             source: "route",
-            paint: { "line-color": "#f5f1e8", "line-width": 7, "line-opacity": 0.9 },
+            paint: { "line-color": "#f7f1df", "line-width": 10, "line-opacity": 0.92, "line-blur": 1.5 },
           });
           map.addLayer({
             id: "route-line",
             type: "line",
             source: "route",
-            paint: { "line-color": "#17634a", "line-width": 4 },
+            paint: { "line-color": "#0f6249", "line-width": 4.5, "line-opacity": 0.98 },
           });
         }
 
