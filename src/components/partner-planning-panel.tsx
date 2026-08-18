@@ -16,7 +16,7 @@ import {
 type PartnerSurface = "stays" | "flights" | "experiences" | "car";
 type OpenSurfaces = Record<PartnerSurface, boolean>;
 
-const closedSurfaces: OpenSurfaces = { stays: false, flights: false, experiences: false, car: false };
+const closedSurfaces: OpenSurfaces = { stays: true, flights: true, experiences: true, car: true };
 
 export function PartnerPlanningPanel({ routes, initialRouteSlug }: { routes: RailRoute[]; initialRouteSlug?: string }) {
   const initialRoute = routes.find((route) => route.summary.slug === initialRouteSlug) ?? routes[0];

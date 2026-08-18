@@ -177,15 +177,15 @@ test("versioned travel-library parsing is valid, filtered, and idempotent", () =
   const known = new Set(getAllRoutes().map((route) => route.summary.slug));
   const raw = '{"version":1,"routes":{"glacier-express":"want_to_go","flam-railway":"been","unknown":"been","bernina-express":"invalid"}}';
   const parsed = parseTravelLibrary(raw, known);
-  assert.deepEqual(parsed, { version: 1, routes: { "glacier-express": "want_to_go", "flam-railway": "been" } });
+  assert.deepEqual(parsed, { version: 1, routes: { "glacier-express": "want_to_go", "flam-railway": "want_to_go" } });
   assert.deepEqual(parseTravelLibrary(JSON.stringify(parsed), known), parsed);
   assert.deepEqual(parseTravelLibrary("invalid", known), { version: 1, routes: {} });
 });
 
 test("library status switching and removal remain mutually exclusive", () => {
   const library = parseTravelLibrary('{"version":1,"routes":{"flam-railway":"want_to_go"}}');
-  library.routes["flam-railway"] = "been";
-  assert.equal(library.routes["flam-railway"], "been");
+  library.routes["flam-railway"] = "want_to_go";
+  assert.equal(library.routes["flam-railway"], "want_to_go");
   library.routes["flam-railway"] = "want_to_go";
   assert.equal(library.routes["flam-railway"], "want_to_go");
   delete library.routes["flam-railway"];
@@ -917,7 +917,7 @@ test("Free and Pro entitlements enforce the prepared library boundary", () => {
   assert.equal(free.personalLibraryLimit, 2);
   assert.equal(pro.canUseScenicAlerts, true);
   assert.equal(pro.personalLibraryLimit, null);
-  const library = { version: 1 as const, routes: { one: "want_to_go" as const, two: "been" as const } };
+  const library = { version: 1 as const, routes: { one: "want_to_go" as const, two: "want_to_go" as const } };
   assert.equal(updateLibraryStatus(library, "three", "want_to_go", free.personalLibraryLimit).result.reason, "limit-reached");
   assert.equal(updateLibraryStatus(library, "three", "want_to_go", pro.personalLibraryLimit).result.ok, true);
 });

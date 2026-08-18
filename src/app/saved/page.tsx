@@ -6,5 +6,5 @@ import { getAllRoutes } from "@/data/routes";
 export const metadata: Metadata = { title: "Saved Journeys", description: "Your private Rallii journey library and rail map." };
 
 export default function SavedPage() {
-  return <AppScreenShell title="Saved" context="Your private journey library and rail map." backHref="/" backLabel="Home"><TravelLibrary routes={getAllRoutes()} /></AppScreenShell>;
+  return <AppScreenShell title="Saved" context="Your private journey library and rail map." backHref="/" backLabel="Home" mediaKey="saved"><TravelLibrary routes={getAllRoutes()} /></AppScreenShell>;
 }

@@ -1,4 +1,4 @@
-export type RouteStatus = "want_to_go" | "been";
+export type RouteStatus = "want_to_go";
 export interface TravelLibrary { version: 1; routes: Record<string, RouteStatus>; }
 export interface LibraryUpdateResult { ok: boolean; reason?: "limit-reached"; }
 
@@ -16,7 +16,7 @@ export function parseTravelLibrary(raw: string | null, knownSlugs?: ReadonlySet<
     if (!value || typeof value !== "object" || Array.isArray(value)) return emptyLibrary;
     const candidate = value as { version?: unknown; routes?: unknown };
     if (candidate.version !== 1 || !candidate.routes || typeof candidate.routes !== "object" || Array.isArray(candidate.routes)) return emptyLibrary;
-    const routes = Object.fromEntries(Object.entries(candidate.routes).filter(([slug, status]) => (!knownSlugs || knownSlugs.has(slug)) && (status === "want_to_go" || status === "been"))) as Record<string, RouteStatus>;
+    const routes = Object.fromEntries(Object.entries(candidate.routes).filter(([slug, status]) => (!knownSlugs || knownSlugs.has(slug)) && (status === "want_to_go" || status === "been")).map(([slug]) => [slug, "want_to_go"])) as Record<string, RouteStatus>;
     return { version: 1, routes };
   } catch { return emptyLibrary; }
 }

@@ -7,5 +7,5 @@ export const metadata: Metadata = { title: "Find Places to Stay", description: "
 
 export default async function StaysPage({ searchParams }: PageProps<"/stays">) {
   const { route } = await searchParams;
-  return <AppScreenShell title="Find Places to Stay" context="Choose a useful base along your rail journey." backHref="/plan" backLabel="Plan"><StayPlanner routes={getAllRoutes()} initialRouteSlug={typeof route === "string" ? route : undefined} /></AppScreenShell>;
+  return <AppScreenShell title="Find Places to Stay" context="Choose a useful base along your rail journey." backHref="/plan" backLabel="Plan" mediaKey="stays"><StayPlanner routes={getAllRoutes()} initialRouteSlug={typeof route === "string" ? route : undefined} /></AppScreenShell>;
 }

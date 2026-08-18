@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { RouteMedia } from "@/components/route-media";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
 import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory } from "@/lib/journey-comparison";
@@ -12,24 +11,12 @@ import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
 export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; selected: RailRoute[] }) {
   const router = useRouter();
   const { getStatus, setStatus } = useTravelLibrary();
-  const [shareStatus, setShareStatus] = useState("");
   const slugs = selected.map((route) => route.summary.slug);
 
   function selectRoute(index: number, slug: string) {
     const next = [...slugs];
     if (!slug) next.splice(index, 1); else next[index] = slug;
     router.push(buildComparisonPath(next));
-  }
-
-  async function shareComparison() {
-    const url = window.location.href;
-    const title = selected.length === 2 ? `${selected[0].summary.name} vs ${selected[1].summary.name} | Rallii` : "Compare Rail Journeys | Rallii";
-    try {
-      const usedNativeShare = Boolean(navigator.share);
-      if (usedNativeShare) await navigator.share({ title, text: "Compare two rail journeys on Rallii.", url });
-      else await navigator.clipboard.writeText(url);
-      setShareStatus(usedNativeShare ? "Shared" : "Link copied");
-    } catch (error) { if (!(error instanceof DOMException && error.name === "AbortError")) setShareStatus("Unable to share"); }
   }
 
   return <div className="mt-10">
@@ -49,7 +36,7 @@ export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; sel
         <CompareRow label="Best side guidance" routes={selected} render={getBestSideSummary} />
       </dl>
       <div className="comparison-grid mt-8">{selected.map((route) => <section className="compare-best-for" key={route.summary.slug}><p className="eyebrow">{route.summary.name}</p><h2 className="mt-2 font-serif text-2xl">Choose this if you want</h2><ul>{route.summary.bestFor.map((item) => <li key={item}>{item}</li>)}</ul></section>)}</div>
-      <div className="mt-8 flex flex-wrap items-center gap-3"><button className="action-button" type="button" onClick={shareComparison}>Share comparison</button><button className="action-button" type="button" onClick={() => router.push(buildComparisonPath([slugs[1], slugs[0]]))}>Swap journeys</button><Link className="cta-button" href="/plan">Continue planning</Link><span className="text-xs text-stone-600" aria-live="polite">{shareStatus}</span></div>
+      <div className="mt-8 flex flex-wrap items-center gap-3"><button className="action-button" type="button" onClick={() => router.push(buildComparisonPath([slugs[1], slugs[0]]))}>Swap journeys</button><Link className="cta-button" href="/plan">Continue planning</Link></div>
     </>}
   </div>;
 }

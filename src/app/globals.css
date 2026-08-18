@@ -685,6 +685,19 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .library-limit-note { display: block; max-width: 14rem; margin-top: .4rem; color: var(--muted); font-size: .68rem; line-height: 1.45; }
 .library-limit-note a { color: var(--accent); font-weight: 700; }
 
+.screen-media-header { position: relative; min-height: 10rem; overflow: hidden; margin-bottom: 1.25rem; background: var(--accent-deep); color: white; }
+.screen-media-header > img { object-fit: cover; object-position: center; }
+.screen-media-header::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(12 29 23 / 72%), rgb(12 29 23 / 12%)); }
+.screen-media-header figcaption, .screen-media-header > strong { position: absolute; z-index: 1; left: 1rem; right: 1rem; }
+.screen-media-header figcaption { bottom: .75rem; display: flex; justify-content: space-between; gap: 1rem; align-items: end; font-size: .62rem; }
+.screen-media-header figcaption span { font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.screen-media-header figcaption small { max-width: 13rem; font-size: .55rem; text-align: right; }
+.screen-media-header figcaption a { color: inherit; text-decoration: underline; }
+.screen-media-header > strong { top: 1rem; font-family: var(--font-serif); font-size: 1.8rem; line-height: 1; }
+.partner-plan__section { border-inline: 0; border-top: 1px solid var(--line); border-bottom: 0; background: transparent; padding-inline: 0; }
+.partner-detail, .partner-inline-widget { border-top: 0; padding-top: 0; }
+.partner-plan__partner-frame, .partner-plan__widget { background: transparent; }
+
 /* Catalogue and native-app refinement */
 .home-pro-note, .plan-pro-note { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--line); padding: 1.1rem 0 0; }
 .home-pro-note strong { display: block; margin-top: .2rem; font-family: var(--font-serif); font-size: 1.05rem; }

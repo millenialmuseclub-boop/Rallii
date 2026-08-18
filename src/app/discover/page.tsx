@@ -10,7 +10,7 @@ export default async function DiscoverPage({ searchParams }: { searchParams: Pro
   const value = (await searchParams).filter;
   const candidate = typeof value === "string" ? value : undefined;
   const filter: DiscoverFilter = candidate || "all";
-  return <AppScreenShell title="Discover" context="Find a prepared journey by landscape, place, or length.">
+  return <AppScreenShell title="Discover" context="Find a prepared journey by landscape, place, or length." mediaKey="discover">
     <DiscoverRoutes routes={routes} initialFilter={filter} />
   </AppScreenShell>;
 }

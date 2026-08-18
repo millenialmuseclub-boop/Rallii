@@ -8,5 +8,5 @@ export const metadata: Metadata = { title: "Plan Your Journey", description: "Ke
 export default async function PlanPage({ searchParams }: PageProps<"/plan">) {
   const { route } = await searchParams;
   const initialRouteSlug = typeof route === "string" ? route : undefined;
-  return <AppScreenShell title="Plan Your Journey" context="Keep your rail ideas together, then arrange the practical pieces around them." backHref="/" backLabel="Home"><PlanJourney routes={getAllRoutes()} initialRouteSlug={initialRouteSlug} /></AppScreenShell>;
+  return <AppScreenShell title="Plan Your Journey" context="Keep your rail ideas together, then arrange the practical pieces around them." backHref="/" backLabel="Home" mediaKey="plan"><PlanJourney routes={getAllRoutes()} initialRouteSlug={initialRouteSlug} /></AppScreenShell>;
 }
