@@ -713,6 +713,20 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .screen-media-header figcaption small { max-width: 13rem; font-size: .55rem; text-align: right; }
 .screen-media-header figcaption a { color: inherit; text-decoration: underline; }
 .screen-media-header > strong { top: 1rem; font-family: var(--font-serif); font-size: 1.8rem; line-height: 1; }
+.partner-plan__partner-frame[data-kind="stays"], .partner-plan__partner-frame[data-kind="cars"], .partner-plan__partner-frame[data-kind="activities"] { height: 42rem; min-height: 42rem; }
+.partner-plan__partner-frame[data-kind="flights"] { height: 32rem; min-height: 32rem; }
+.screen-media-header { min-height: 13.5rem; }
+.screen-media-header + .app-screen__intro { margin-top: 0; }
+.screen-media-header + .app-screen__intro .eyebrow, .screen-media-header + .app-screen__intro h1 { display: none; }
+.category-grid--visual { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; border: 0; background: transparent; }
+.category-grid--visual > a { position: relative; display: block; min-height: 12rem; overflow: hidden; border: 0; background: var(--accent-deep); color: white; padding: 0; box-shadow: var(--shadow-card); }
+.category-grid--visual .route-media { position: absolute; inset: 0; min-height: 100%; padding: 0; }
+.category-grid--visual .route-media__credit { display: none; }
+.category-grid--visual > a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(12 30 23 / 88%), transparent 65%); }
+.category-grid--visual > a > span { position: absolute; right: .85rem; bottom: .8rem; left: .85rem; z-index: 1; display: grid; gap: .2rem; }
+.category-grid--visual strong { color: white; font-size: 1.2rem; }
+.category-grid--visual small { color: rgb(255 255 255 / 75%); font-size: .62rem; }
+.category-grid--visual b { position: static; color: #d9f0e0; font-size: .65rem; }
 .partner-plan__section { border-inline: 0; border-top: 1px solid var(--line); border-bottom: 0; background: transparent; padding-inline: 0; }
 .partner-detail, .partner-inline-widget { border-top: 0; padding-top: 0; }
 .partner-plan__partner-frame, .partner-plan__widget { background: transparent; }
