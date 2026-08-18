@@ -12,6 +12,7 @@ export default function HomePage() {
   const routes = getAllRoutes();
   const featured = featuredRouteSlugs.map((slug) => routes.find((route) => route.summary.slug === slug)).filter((route) => route !== undefined);
   const lead = featured[0];
+  const visualAlternatives = featured.slice(1);
   const categories = journeyCollections.filter((item) => categorySlugs.includes(item.slug));
   const homeCollection = journeyCollections.find((item) => item.slug === "coastal-journeys");
   const collectionCover = homeCollection ? getCollectionRoutes(homeCollection, routes)[0] : undefined;
@@ -20,6 +21,7 @@ export default function HomePage() {
     <section className="home-dashboard"><div className="site-shell">
       <div className="home-dashboard__identity"><p className="eyebrow">Rallii</p><h1>Know where to sit, what to see, and when to look.</h1><p>Directional guides for remarkable train journeys.</p></div>
       {lead ? <article className="home-feature"><RouteMedia summary={lead.summary} variant="hero" /><div className="home-feature__body"><p className="eyebrow">Featured journey · {lead.summary.country}</p><h2>{lead.summary.name}</h2><p className="home-feature__route">{lead.summary.origin} → {lead.summary.destination} · {lead.summary.durationLabel ?? formatDuration(lead.summary.durationMinutes)}</p><p>{lead.summary.bestFor[0]}.</p><div className="home-feature__actions"><Link className="cta-button focus-ring" href={`/routes/${lead.summary.slug}`}>Explore journey</Link><Link className="action-button focus-ring" href={`/compare?routes=${lead.summary.slug}`}>Compare</Link><SaveRouteButton slug={lead.summary.slug} /></div></div></article> : null}
+      {visualAlternatives.length ? <section className="home-visual-alternatives" aria-label="More featured journeys">{visualAlternatives.map((route) => <Link key={route.summary.slug} className="home-visual-alternative focus-ring" href={`/routes/${route.summary.slug}`}><RouteMedia summary={route.summary} variant="card" /><span><small>{route.summary.country}</small><strong>{route.summary.name}</strong><b>Explore →</b></span></Link>)}</section> : null}
       <nav className="home-intent-grid" aria-label="Start with Rallii"><Link href="/discover"><b>Find a journey</b><span>Browse by landscape, place, or length →</span></Link><Link href="/compare"><b>Compare journeys</b><span>Put two experiences side by side →</span></Link><Link href="/plan"><b>Plan a journey</b><span>Save routes and arrange practical details →</span></Link></nav>
       <aside className="home-pro-note"><div><p className="eyebrow">Rallii Pro</p><strong>A quieter way to keep your rail plans together.</strong><p>Prepared for deeper organization, not a paywall around discovery.</p></div><Link className="text-link focus-ring" href="/pro">See Pro</Link></aside>
     </div></section>

@@ -7,3 +7,5 @@
 - Keep railway-source data separate from Rallii editorial intelligence.
 - No artificial gamification.
 - Avoid adding features that are not required for the current milestone.
+- Cap the published Rallii catalogue at 250 curated routes. Grow depth, accuracy, and maintenance quality before expanding quantity.
+- Keep reusable exploration-platform concepts separate from rail-specific concepts so future products can share proven infrastructure without inheriting rail assumptions.
