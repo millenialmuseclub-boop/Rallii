@@ -785,6 +785,12 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .home-action-tile strong { font-family: var(--font-serif); font-size: 1.45rem; line-height: 1; }
 .home-action-tile em { color: rgb(255 255 255 / 82%); font-size: .7rem; font-style: normal; line-height: 1.4; }
 .home-action-tile b { margin-top: .2rem; color: #d9f0e0; font-size: .68rem; }
+/* Home stays intentionally square and editorial. */
+.home-app .home-feature, .home-app .home-visual-alternative, .home-app .home-action-tile, .home-app .home-collection-feature, .home-app .category-grid--visual > a { border-radius: 0; box-shadow: none; }
+.home-app .home-collection-feature { gap: 0; }
+.home-app .home-collection-feature > div { padding: 1.15rem; }
+.home-app .cta-button, .home-app .action-button { border-radius: 0; }
+.home-app .home-pro-note { border-bottom: 1px solid var(--line); padding-bottom: 1.1rem; }
 @media (min-width: 640px) {
   .home-feature--immersive, .home-feature--immersive .home-feature__body { min-height: 37rem; }
   .home-action-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
