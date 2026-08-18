@@ -257,6 +257,7 @@ test("controlled experience metadata and comparison side summaries are available
 test("editorial collections resolve repository routes without empty membership", () => {
   assert.ok(journeyCollections.every((collection) => getCollectionRoutes(collection, getAllRoutes()).length > 0));
   assert.deepEqual(getJourneyCollection("alpine-journeys")?.routeSlugs, ["glacier-express", "bernina-express", "goldenpass-express"]);
+  assert.ok(["railway-engineering", "gorge-and-valley-journeys", "heritage-lines"].every((slug) => getJourneyCollection(slug)));
 });
 
 test("looks up a route by slug", () => {

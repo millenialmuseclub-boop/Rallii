@@ -6,7 +6,7 @@ import { featuredRouteSlugs } from "@/data/featured-routes";
 import { getCollectionCover, journeyCollections } from "@/data/journey-collections";
 import { getAllRoutes } from "@/data/routes";
 
-const categorySlugs = ["mountain-journeys", "coastal-journeys", "river-journeys", "short-scenic-escapes", "multi-day-journeys"];
+const categorySlugs = ["mountain-journeys", "coastal-journeys", "river-journeys", "short-scenic-escapes", "multi-day-journeys", "railway-engineering", "gorge-and-valley-journeys", "heritage-lines"];
 const homeActions = [
   { href: "/discover", label: "Find a journey", description: "Browse remarkable routes by place, landscape, or time.", routeSlug: "glacier-express" },
   { href: "/compare", label: "Compare journeys", description: "Put the scenery, pace, and practical details side by side.", routeSlug: "bergen-line" },
