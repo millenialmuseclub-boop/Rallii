@@ -29,6 +29,7 @@ These concepts should remain product-neutral wherever possible:
 - **Media registry**: licensed locally stored imagery with creator, licence, source, location, access date, and reuse context.
 - **Catalogue taxonomy**: region, place, landscape, experience character, duration, and editorial collection membership.
 - **Relationships**: exactly reviewable related experiences with an editorial reason; no opaque recommendation engine.
+- **Journey guides**: a small, reusable editorial layer that sequences a few existing experiences around a larger travel idea. Guides reuse route, Place, ScenicMoment, media, collection, and planning data; they are not booking itineraries.
 - **Personal library**: on-device saved experiences, with a simple entitlement boundary and no account required.
 - **Planning placements**: centrally configured external planning links and embeds, never presented as first-party booking.
 - **Entitlements**: a product-neutral Free/Pro boundary. Pro improves organization and in-experience utility; it does not gate ordinary discovery.

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { RouteCard } from "@/components/route-card";
 import { JourneyCollections } from "@/components/journey-collections";
+import { journeyGuides } from "@/data/journey-guides";
 import { catalogueExperiences, catalogueRegions, routesInRegion } from "@/data/catalogue-taxonomy";
 import { searchRoutes } from "@/lib/route-search";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
@@ -45,7 +46,7 @@ export function DiscoverRoutes({ routes, initialFilter = "all" }: { routes: Rail
   return <section className="discover-catalogue" aria-labelledby="all-journeys-title">
     <div className="screen-section-heading"><div><p className="eyebrow">World rail catalogue</p><h2 id="all-journeys-title">Find your next journey</h2></div><span>{matches.length} {matches.length === 1 ? "route" : "routes"}</span></div>
     <label className="discover-search"><span className="sr-only">Search the rail catalogue</span><input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setVisibleCount(8); }} placeholder="Search routes, cities, countries, operators…" /></label>
-    <div className="discover-continuity"><span>{savedCount ? `${savedCount} saved ${savedCount === 1 ? "journey" : "journeys"} on this device` : "Save a journey to continue planning later"}</span><Link className="text-link focus-ring" href={savedCount ? "/saved" : "/discover"}>{savedCount ? "Open saved" : "Keep exploring"}</Link></div>
+    <div className="discover-continuity"><span>{savedCount ? `${savedCount} saved ${savedCount === 1 ? "journey" : "journeys"} on this device` : "Save a journey to continue planning later"}</span><span><Link className="text-link focus-ring" href="/guides">{journeyGuides.length} trip guides</Link><Link className="text-link focus-ring" href={savedCount ? "/saved" : "/discover"}>{savedCount ? "Open saved" : "Keep exploring"}</Link></span></div>
     <div className="catalogue-groups" role="tablist" aria-label="Browse journeys"><button type="button" role="tab" aria-selected={group === "regions"} onClick={() => { setGroup("regions"); setVisibleCount(8); }}>Region</button><button type="button" role="tab" aria-selected={group === "experiences"} onClick={() => { setGroup("experiences"); setVisibleCount(8); }}>Experience</button><button type="button" role="tab" aria-selected={group === "duration"} onClick={() => { setGroup("duration"); setVisibleCount(8); }}>Duration</button><button type="button" role="tab" aria-selected={showingCollections} onClick={() => setGroup("collections")}>Collections</button></div>
     {showingCollections ? <JourneyCollections routes={routes} limit={5} compact /> : <>
       <div className="discover-filter-heading"><p>Browse by {group === "regions" ? "world region" : group === "experiences" ? "journey character" : "available time"}</p>{filter !== "all" ? <button className="text-link" type="button" onClick={() => chooseFilter("all")}>Show all</button> : null}</div>

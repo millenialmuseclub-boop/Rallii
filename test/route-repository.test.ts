@@ -34,6 +34,7 @@ import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
 import { buildComparisonPath, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "../src/lib/journey-comparison.ts";
 import { getCollectionRoutes, getCollectionsForRoute, getJourneyCollection, journeyCollections, promotedCollectionSlugs } from "../src/data/journey-collections.ts";
+import { getGuideRoutes, getGuidesForRoute, journeyGuides } from "../src/data/journey-guides.ts";
 import { featuredRouteSlugs } from "../src/data/featured-routes.ts";
 import { isNavigationItemActive, primaryNavigation } from "../src/data/navigation.ts";
 import { buildComparePath, getRouteRelationships } from "../src/data/route-relationships.ts";
@@ -401,6 +402,17 @@ test("route-to-collection links derive from centralized collection membership", 
     assert.ok(collections.length > 0);
     assert.ok(collections.every((collection) => collection.routeSlugs.includes(route.summary.slug)));
   }
+});
+
+test("journey guides are composed from published routes and preserve route order", () => {
+  const routes = getAllRoutes();
+  assert.equal(journeyGuides.length, 4);
+  for (const guide of journeyGuides) {
+    const guideRoutes = getGuideRoutes(guide, routes);
+    assert.deepEqual(guideRoutes.map((route) => route.summary.slug), guide.routeSlugs);
+    assert.ok(guideRoutes.every((route) => getRouteMedia(route.summary.slug)));
+  }
+  assert.deepEqual(getGuidesForRoute("flam-railway").map((guide) => guide.slug), ["norway-mountain-to-fjord"]);
 });
 
 test("every route has complete, locally prepared, licensed hero photography", async () => {
