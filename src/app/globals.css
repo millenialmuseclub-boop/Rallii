@@ -746,6 +746,22 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .route-map-frame .maplibregl-ctrl-group { overflow: hidden; border: 1px solid rgb(36 54 45 / 18%); border-radius: 2px; box-shadow: 0 3px 10px rgb(28 41 34 / 12%); }
 .route-map-frame .maplibregl-ctrl button { width: 2.45rem; height: 2.45rem; background-color: rgb(250 248 242 / 94%); }
 .route-map-frame .maplibregl-ctrl-attrib { max-width: calc(100% - 10.5rem); padding-right: 2.25rem; background: rgb(250 248 242 / 80%); font-size: .58rem; }
+.route-map-frame .maplibregl-canvas { outline: 0; }
+.route-map-frame .route-marker, .route-map-frame .landmark-marker { position: relative; border-color: #faf8f2; }
+.route-map-frame .route-marker { width: .78rem; height: .78rem; background: #3b6b58; box-shadow: 0 0 0 2px rgb(255 255 255 / 70%), 0 3px 8px rgb(16 39 29 / 30%); }
+.route-map-frame .route-marker--endpoint { width: 1.1rem; height: 1.1rem; background: #174e3e; box-shadow: 0 0 0 4px rgb(217 240 224 / 85%), 0 3px 10px rgb(16 39 29 / 34%); }
+.route-map-frame .route-marker--arrival { border-width: 3px; background: #faf8f2; box-shadow: 0 0 0 4px rgb(23 78 62 / 72%), 0 3px 10px rgb(16 39 29 / 34%); }
+.route-map-frame .landmark-marker { width: 1.3rem; height: 1.3rem; border-width: 2px; background: #c98347; box-shadow: 0 0 0 2px rgb(255 243 211 / 88%), 0 4px 10px rgb(55 34 18 / 28%); }
+.route-map-frame .landmark-marker::after { content: "✦"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff7e8; font-size: .68rem; line-height: 1; }
+.route-map-frame .landmark-marker:hover, .route-map-frame .landmark-marker:focus-visible, .route-map-frame .landmark-marker--selected { transform: scale(1.28); background: #a95d32; }
+.route-map-frame .maplibregl-popup-content { min-width: 12rem; border: 1px solid rgb(29 61 48 / 12%); border-radius: 0 !important; background: #faf8f2; box-shadow: 0 12px 32px rgb(21 42 32 / 22%) !important; }
+.route-map-frame .maplibregl-popup-tip { border-bottom-color: #faf8f2; }
+.route-map-legend { position: absolute; right: .75rem; bottom: .75rem; left: .75rem; z-index: 3; display: flex; min-height: 2.6rem; align-items: center; gap: .45rem; overflow: hidden; border: 1px solid rgb(31 55 43 / 16%); background: rgb(250 248 242 / 94%); padding: .45rem .6rem; color: #294538; box-shadow: 0 4px 14px rgb(28 41 34 / 12%); font-size: .65rem; font-weight: 700; backdrop-filter: blur(10px); }
+.route-map-legend span { display: inline-flex; min-width: 0; align-items: center; gap: .3rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.route-map-legend i { width: .55rem; height: .55rem; flex: 0 0 auto; border: 2px solid #faf8f2; border-radius: 999px; background: #174e3e; box-shadow: 0 0 0 1px #174e3e; }
+.route-map-legend .route-map-legend__finish { background: #faf8f2; box-shadow: 0 0 0 2px #174e3e; }
+.route-map-legend b { color: #b77640; font-size: .85rem; }
+.route-map-legend small { margin-left: auto; color: #66766b; font-size: .58rem; white-space: nowrap; }
 
 /* Image-led home discovery */
 .home-feature--immersive { position: relative; min-height: 34rem; border: 0; background: var(--accent-deep); color: #f8f5ed; box-shadow: var(--shadow-card); }
@@ -780,6 +796,9 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
   .home-pro-note .text-link, .plan-pro-note .text-link { min-height: 2.75rem; align-items: center; }
   .catalogue-groups button { min-height: 3.1rem; font-size: .68rem; }
   .route-map-frame::after { bottom: 2rem; }
+  .route-map-frame::after { right: .7rem; bottom: 3.85rem; }
+  .route-map-legend { right: .6rem; bottom: .6rem; left: .6rem; gap: .3rem; font-size: .6rem; }
+  .route-map-legend small { display: none; }
 }
 
 @media (max-width: 480px) {

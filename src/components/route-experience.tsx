@@ -38,7 +38,7 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
           <p className="hidden text-xs text-stone-600 sm:block">Pan and zoom to explore</p>
         </div>
         <div className={`journey-explorer journey-explorer--${activeSurface ?? "map"}`}>
-          <div className="journey-explorer__map">{shouldRenderMap ? <RouteMap routeName={route.summary.name} originName={endpoints.origin} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /> : null}<p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
+          <div className="journey-explorer__map">{shouldRenderMap ? <RouteMap routeName={route.summary.name} originName={endpoints.origin} destinationName={endpoints.destination} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /> : null}<p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
           <ScenicTimeline origin={endpoints.origin} destination={endpoints.destination} durationMinutes={route.summary.durationMinutes} entries={timeline} stops={stops} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} />
         </div>
       </section>
