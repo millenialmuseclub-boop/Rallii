@@ -9,3 +9,5 @@
 - Avoid adding features that are not required for the current milestone.
 - Cap the published Rallii catalogue at 250 curated routes. Grow depth, accuracy, and maintenance quality before expanding quantity.
 - Keep reusable exploration-platform concepts separate from rail-specific concepts so future products can share proven infrastructure without inheriting rail assumptions.
+- Use licensed photography as a primary orientation layer. Home and core task screens should open with image-led editorial headers sourced through the central media registry, never duplicated page-by-page.
+- Keep core task screens photo-led but task-first: imagery establishes place and purpose, then yields immediately to discovery, planning, or saved-journey actions.

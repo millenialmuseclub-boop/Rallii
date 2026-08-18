@@ -38,6 +38,7 @@ import { featuredRouteSlugs } from "../src/data/featured-routes.ts";
 import { isNavigationItemActive, primaryNavigation } from "../src/data/navigation.ts";
 import { buildComparePath, getRouteRelationships } from "../src/data/route-relationships.ts";
 import { getRouteMedia, routeMediaBySlug } from "../src/data/route-media.ts";
+import { screenMedia } from "../src/data/screen-media.ts";
 import { getNextHighlight, getPreviousHighlight, getMatchConfidence } from "../src/lib/ride-guidance.ts";
 import { interpolateRouteCoordinate, projectCoordinateOntoRoute, routeLengthKm, type RouteCoordinate } from "../src/lib/route-geometry.ts";
 import { migrateLegacySaved, parseTravelLibrary, updateLibraryStatus } from "../src/lib/travel-library.ts";
@@ -424,6 +425,12 @@ test("featured routes use prepared photography and unknown routes retain fallbac
   assert.ok(featuredRouteSlugs.every((slug) => Boolean(getRouteMedia(slug))));
   assert.equal(getRouteMedia("unprepared-route"), undefined);
   assert.equal(Object.keys(routeMediaBySlug).length, getAllRoutes().length);
+});
+
+test("screen media headers reuse licensed registered route photography", () => {
+  for (const screen of Object.values(screenMedia)) {
+    assert.ok(getRouteMedia(screen.routeSlug));
+  }
 });
 
 test("media landmark references resolve within their canonical route", () => {

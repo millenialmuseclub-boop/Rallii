@@ -92,6 +92,7 @@ Never publish decorative straight-line geometry, guessed viewing advice, stale s
 - Photography creates place; maps create orientation; editorial copy creates confidence.
 - Use square or lightly rounded controls with clear touch targets. Avoid gamification, badges, fake urgency, carousels, and sales-page behavior.
 - Headers may reuse licensed experience imagery through a central screen-media registry. Never duplicate media metadata in screen components.
+- Home and core task screens use square-edged, image-led editorial entry surfaces from that registry. They establish orientation without becoming decorative website banners or delaying the primary task.
 - Maps should foreground prepared geometry, then useful stops/features, then base-map context. They should not imitate live navigation.
 
 ## Monetization boundary
