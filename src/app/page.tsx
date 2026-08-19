@@ -44,12 +44,21 @@ function formatDuration(minutes: number): string {
 function BerninaJourneyTrace() {
   return <div className="bernina-journey-trace" aria-hidden="true">
     <svg viewBox="0 0 360 240" focusable="false">
-      <path className="bernina-journey-trace__shadow" d="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" />
-      <path className="bernina-journey-trace__line" pathLength="1" d="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" />
-      <circle className="bernina-journey-trace__station" cx="24" cy="203" r="3" />
-      <circle className="bernina-journey-trace__station" cx="336" cy="25" r="3" />
-      <circle className="bernina-journey-trace__train" r="6"><animateMotion dur="11s" repeatCount="indefinite" path="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" /></circle>
-      <circle className="bernina-journey-trace__train-static" cx="24" cy="203" r="6" />
+      <path className="bernina-journey-trace__shadow" d="M8 192C70 165 102 210 166 184c66-27 101 13 186-38" />
+      <path className="bernina-journey-trace__line" pathLength="1" d="M8 192C70 165 102 210 166 184c66-27 101 13 186-38" />
+      <circle className="bernina-journey-trace__station" cx="8" cy="192" r="3" />
+      <circle className="bernina-journey-trace__station" cx="352" cy="146" r="3" />
+      <g className="bernina-journey-trace__train"><animateMotion dur="14s" repeatCount="indefinite" rotate="auto" path="M8 192C70 165 102 210 166 184c66-27 101 13 186-38" /><TrainMark /></g>
+      <g className="bernina-journey-trace__train-static" transform="translate(8 192)"><TrainMark /></g>
     </svg>
   </div>;
+}
+
+function TrainMark() {
+  return <>
+    <path d="M-11-5h19v10h-19z" />
+    <path className="bernina-journey-trace__window" d="M-7-2h5v3h-5zM1-2h4v3H1z" />
+    <circle cx="-6" cy="6" r="2" />
+    <circle cx="4" cy="6" r="2" />
+  </>;
 }
