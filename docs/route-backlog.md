@@ -8,7 +8,7 @@ This is an editorial research backlog, not a live directory. A candidate does no
 - **Planned, not yet published:** routes #29–33 (Jacobite Steam Train, Sagano Scenic Railway, Madaraka Express, Reunification Express, and East Rift Valley Railway).
 - **Capacity today:** 222 published-route slots remain.
 - **Expected capacity after #29–33:** 217 slots remain, for a 33-route catalogue.
-- **Current editorial backlog:** 80 candidates. The backlog may exceed the publication cap because candidates compete for a limited number of fully verified places.
+- **Current editorial backlog:** 90 candidates. The backlog may exceed the publication cap because candidates compete for a limited number of fully verified places.
 
 The cap of 250 is a quality ceiling, not a quota. A route may be deferred, replaced, or never published when its geometry, image licence, operating status, or editorial value is not strong enough.
 
@@ -67,6 +67,8 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Ferrocarril de Sóller | Palma → Sóller | Spain / Ferrocarril de Sóller | Heritage, mountains | Tram-like heritage railway through Mallorca’s Serra de Tramuntana foothills. | Needs licensed photography |
 | Pilatus Railway | Alpnachstad → Pilatus Kulm | Switzerland / Pilatus-Bahnen | Rack, mountains | Steep rack-rail climb with a precise, compact mountain experience. | Needs operator/source verification |
 | Trenino Verde | Sardinia selected branches | Italy / ARST | Heritage, rural | Seasonal heritage routes through Sardinian interior landscapes. | Deferred |
+| Belgrade–Bar Railway | Belgrade → Bar | Serbia–Montenegro / Srbija Voz–ŽPCG | Mountains, canyons, cross-border | A dramatic Balkan crossing with a clear international journey identity. | Needs geometry research |
+| Venice Simplon corridor | Venice → Trieste | Italy / Trenitalia | Lagoon, coast, regional | A concise Adriatic corridor with a distinct coastal-and-lagoon character. | Needs operator/source verification |
 
 ### Asia
 
@@ -95,6 +97,8 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Eastern & Oriental Express | Singapore → Malaysia routes | Southeast Asia / Belmond | Luxury, multi-day | Premium rail storytelling, subject to route and availability verification. | Deferred |
 | Hokkaido Shinkansen approach | Aomori → Hakodate | Japan / JR Hokkaido | Coast, engineering | A high-speed crossing with tunnel and northern landscape context. | Deferred |
 | Uyuni–Oruro railway | Uyuni → Oruro | Bolivia / Empresa Ferroviaria Andina | Altiplano, long-distance | A potential high-plateau journey with a distinct South American geography. | Needs operator/source verification |
+| Hida Wide View | Nagoya → Takayama | Japan / JR Central | River, mountains | A strong Japanese river-valley approach to the Hida highlands. | Research-ready |
+| Mahaparinirvan Express corridor | Delhi → Varanasi | India / Indian Railways | Culture, overnight | A culturally significant long-distance route requiring careful service definition. | Needs operator/source verification |
 
 ### Africa and Middle East
 
@@ -111,6 +115,8 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | NGR coastal corridor | Dar es Salaam → Morogoro | Tanzania / TRC | Modern, foothills | Emerging passenger corridor requiring primary-source confirmation. | Deferred |
 | Algerian highlands route | Algiers → Béjaïa | Algeria / SNTF | Coast, mountains | Potential Mediterranean mountain-to-coast journey. | Deferred |
 | Desert Express | Windhoek → Swakopmund | Namibia / service operator to verify | Desert, heritage | Desert rail storytelling is compelling, but current operation and route identity require verification. | Needs operator/source verification |
+| Lobito Railway | Lobito → Luau | Angola / Lobito Atlantic Railway | Cross-country, highlands | A major southern African corridor whose passenger identity requires fresh verification. | Needs operator/source verification |
+| Mekelle–Djibouti corridor | Addis Ababa → Djibouti | Ethiopia–Djibouti / Ethio-Djibouti Railway | Highlands, desert, cross-border | A strategically important long-distance journey if public passenger operations can be confirmed. | Deferred |
 
 ### North and South America
 
@@ -132,6 +138,8 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Nariz del Diablo | Alausí → Sibambe | Ecuador / national tourism operation | Mountains, heritage | Famous switchback route, subject to current operation verification. | Needs operator/source verification |
 | Copper Canyon branch extension | Creel → Los Mochis | Mexico / Chepe | Canyon, mountains | Extend existing El Chepe only if it represents a materially distinct route experience. | Deferred |
 | Rockies to the Red Rocks | Moab → Denver | United States / Rocky Mountaineer | Canyons, multi-day | A materially different Rocky Mountaineer experience through Utah and Colorado. | Needs geometry research |
+| Sunset Limited | New Orleans → Los Angeles | United States / Amtrak | Desert, bayous, long-distance | A rare coast-to-coast southern landscape story with operating-pattern research needed. | Needs operator/source verification |
+| Tren del Fin del Mundo | Ushuaia → Parque Nacional Tierra del Fuego | Argentina / End of the World Train | Heritage, subantarctic | A compact heritage journey with exceptionally distinctive destination context. | Needs licensed photography |
 
 ### Oceania
 
@@ -146,6 +154,8 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Coastal Pacific | Picton → Christchurch | New Zealand / Great Journeys New Zealand | Coast, mountains | Kaikōura coast and a strong link to South Island travel. | Research-ready |
 | Taieri Gorge Railway | Dunedin → Pukerangi | New Zealand / Dunedin Railways | Gorge, heritage | Compact Otago gorge experience with clear landscape identity. | Needs licensed photography |
 | West Coast Wilderness Railway | Queenstown → Dubbil Barril | Australia / West Coast Wilderness Railway | Rainforest, heritage | Tasmanian rack-rail history, rainforest, and a sharply distinct compact journey. | Needs operator/source verification |
+| Overland | Melbourne → Adelaide | Australia / Journey Beyond Rail | Intercity, plains | A practical cross-state journey that complements Australia's scenic multi-day routes. | Needs operator/source verification |
+| Wairarapa Line | Wellington → Masterton | New Zealand / Metlink | Coast, valleys, regional | A compact lower-North-Island route with harbour and valley scenery. | Needs geometry research |
 
 ## Route quality gate
 

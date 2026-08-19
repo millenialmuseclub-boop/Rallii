@@ -25,7 +25,7 @@ export default function HomePage() {
   return <><SiteHeader /><main className="home-app">
     <section className="home-dashboard"><div className="site-shell">
       <div className="home-dashboard__identity"><p className="eyebrow">Rallii · Curated rail journeys</p><h1>Know where to sit, what to see, and when to look.</h1><p>Directional guides for remarkable train journeys.</p></div>
-      {lead ? <article className="home-feature home-feature--immersive"><RouteMedia summary={lead.summary} variant="hero" /><div className="home-feature__body"><p className="eyebrow">Featured journey · {lead.summary.country}</p><h2>{lead.summary.name}</h2><p className="home-feature__route">{lead.summary.origin} → {lead.summary.destination} · {lead.summary.durationLabel ?? formatDuration(lead.summary.durationMinutes)}</p><p>{lead.summary.bestFor[0]}.</p><div className="home-feature__actions"><Link className="cta-button focus-ring" href={`/routes/${lead.summary.slug}`}>Explore journey</Link><Link className="action-button focus-ring" href={`/compare?routes=${lead.summary.slug}`}>Compare</Link><SaveRouteButton slug={lead.summary.slug} /></div></div></article> : null}
+      {lead ? <article className="home-feature home-feature--immersive"><RouteMedia summary={lead.summary} variant="hero" />{lead.summary.slug === "bernina-express" ? <BerninaJourneyTrace /> : null}<div className="home-feature__body"><p className="eyebrow">Featured journey · {lead.summary.country}</p><h2>{lead.summary.name}</h2><p className="home-feature__route">{lead.summary.origin} → {lead.summary.destination} · {lead.summary.durationLabel ?? formatDuration(lead.summary.durationMinutes)}</p><p>{lead.summary.bestFor[0]}.</p><div className="home-feature__actions"><Link className="cta-button focus-ring" href={`/routes/${lead.summary.slug}`}>Explore journey</Link><Link className="action-button focus-ring" href={`/compare?routes=${lead.summary.slug}`}>Compare</Link><SaveRouteButton slug={lead.summary.slug} /></div></div></article> : null}
       {visualAlternatives.length ? <section className="home-visual-alternatives" aria-label="More featured journeys">{visualAlternatives.map((route) => <Link key={route.summary.slug} className="home-visual-alternative focus-ring" href={`/routes/${route.summary.slug}`}><RouteMedia summary={route.summary} variant="card" /><span><small>{route.summary.country}</small><strong>{route.summary.name}</strong><b>Explore →</b></span></Link>)}</section> : null}
       <section className="home-guides"><div><p className="eyebrow">Journey guides</p><h2>Start with a bigger trip idea.</h2><p>Pair prepared routes through a region or landscape, then plan each journey with the right context.</p></div><Link className="cta-button focus-ring" href={`/guides/${journeyGuides[0].slug}`}>Open Swiss guide</Link><Link className="text-link focus-ring" href="/guides">All guides →</Link></section>
       <nav className="home-action-grid" aria-label="Start with Rallii">{actions.map((action) => action.route ? <Link key={action.href} className="home-action-tile focus-ring" href={action.href}><RouteMedia summary={action.route.summary} variant="card" /><span><small>Rallii tools</small><strong>{action.label}</strong><em>{action.description}</em><b>Open →</b></span></Link> : null)}</nav>
@@ -39,4 +39,17 @@ function formatDuration(minutes: number): string {
   const hours = Math.floor(minutes / 60);
   const rest = minutes % 60;
   return rest ? `${hours} hr ${rest} min` : `${hours} hours`;
+}
+
+function BerninaJourneyTrace() {
+  return <div className="bernina-journey-trace" aria-hidden="true">
+    <svg viewBox="0 0 360 240" focusable="false">
+      <path className="bernina-journey-trace__shadow" d="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" />
+      <path className="bernina-journey-trace__line" pathLength="1" d="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" />
+      <circle className="bernina-journey-trace__station" cx="24" cy="203" r="3" />
+      <circle className="bernina-journey-trace__station" cx="336" cy="25" r="3" />
+      <circle className="bernina-journey-trace__train" r="6"><animateMotion dur="11s" repeatCount="indefinite" path="M24 203C69 188 72 142 120 137c52-5 39-68 90-74 46-5 61 12 126-38" /></circle>
+      <circle className="bernina-journey-trace__train-static" cx="24" cy="203" r="6" />
+    </svg>
+  </div>;
 }
