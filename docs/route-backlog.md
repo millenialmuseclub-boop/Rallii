@@ -8,6 +8,7 @@ This is an editorial research backlog, not a live directory. A candidate does no
 - **Planned, not yet published:** routes #29–33 (Jacobite Steam Train, Sagano Scenic Railway, Madaraka Express, Reunification Express, and East Rift Valley Railway).
 - **Capacity today:** 222 published-route slots remain.
 - **Expected capacity after #29–33:** 217 slots remain, for a 33-route catalogue.
+- **Current editorial backlog:** 80 candidates. The backlog may exceed the publication cap because candidates compete for a limited number of fully verified places.
 
 The cap of 250 is a quality ceiling, not a quota. A route may be deferred, replaced, or never published when its geometry, image licence, operating status, or editorial value is not strong enough.
 
@@ -64,6 +65,7 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Strathspey Railway | Aviemore → Broomhill | Scotland / Strathspey Railway | Heritage, Highlands | A compact heritage complement to the larger Highland routes. | Needs operator/source verification |
 | Isle of Man Railway | Douglas → Port Erin | Isle of Man / Isle of Man Transport | Heritage, coast | Historic steam railway with island landscape and strong product identity. | Needs operator/source verification |
 | Ferrocarril de Sóller | Palma → Sóller | Spain / Ferrocarril de Sóller | Heritage, mountains | Tram-like heritage railway through Mallorca’s Serra de Tramuntana foothills. | Needs licensed photography |
+| Pilatus Railway | Alpnachstad → Pilatus Kulm | Switzerland / Pilatus-Bahnen | Rack, mountains | Steep rack-rail climb with a precise, compact mountain experience. | Needs operator/source verification |
 | Trenino Verde | Sardinia selected branches | Italy / ARST | Heritage, rural | Seasonal heritage routes through Sardinian interior landscapes. | Deferred |
 
 ### Asia
@@ -92,6 +94,7 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Northern Line | Bangkok → Chiang Mai | Thailand / State Railway of Thailand | Overnight, mountains | A major northern rail journey with a strong overnight story. | Needs operator/source verification |
 | Eastern & Oriental Express | Singapore → Malaysia routes | Southeast Asia / Belmond | Luxury, multi-day | Premium rail storytelling, subject to route and availability verification. | Deferred |
 | Hokkaido Shinkansen approach | Aomori → Hakodate | Japan / JR Hokkaido | Coast, engineering | A high-speed crossing with tunnel and northern landscape context. | Deferred |
+| Uyuni–Oruro railway | Uyuni → Oruro | Bolivia / Empresa Ferroviaria Andina | Altiplano, long-distance | A potential high-plateau journey with a distinct South American geography. | Needs operator/source verification |
 
 ### Africa and Middle East
 
@@ -107,6 +110,7 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Addis Ababa–Djibouti railway | Addis Ababa → Djibouti | Ethiopia–Djibouti / Ethio-Djibouti Railway | Cross-border, desert | Major modern corridor, but passenger service evidence needs careful review. | Deferred |
 | NGR coastal corridor | Dar es Salaam → Morogoro | Tanzania / TRC | Modern, foothills | Emerging passenger corridor requiring primary-source confirmation. | Deferred |
 | Algerian highlands route | Algiers → Béjaïa | Algeria / SNTF | Coast, mountains | Potential Mediterranean mountain-to-coast journey. | Deferred |
+| Desert Express | Windhoek → Swakopmund | Namibia / service operator to verify | Desert, heritage | Desert rail storytelling is compelling, but current operation and route identity require verification. | Needs operator/source verification |
 
 ### North and South America
 
@@ -127,6 +131,7 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | La Trochita | Esquel → Nahuel Pan | Argentina / La Trochita | Heritage, Patagonia | Narrow-gauge Patagonian cultural and landscape route. | Needs licensed photography |
 | Nariz del Diablo | Alausí → Sibambe | Ecuador / national tourism operation | Mountains, heritage | Famous switchback route, subject to current operation verification. | Needs operator/source verification |
 | Copper Canyon branch extension | Creel → Los Mochis | Mexico / Chepe | Canyon, mountains | Extend existing El Chepe only if it represents a materially distinct route experience. | Deferred |
+| Rockies to the Red Rocks | Moab → Denver | United States / Rocky Mountaineer | Canyons, multi-day | A materially different Rocky Mountaineer experience through Utah and Colorado. | Needs geometry research |
 
 ### Oceania
 
@@ -140,6 +145,7 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | Northern Explorer | Auckland → Wellington | New Zealand / Great Journeys New Zealand | Volcanic plateau, long-distance | North Island counterpart to TranzAlpine. | Research-ready |
 | Coastal Pacific | Picton → Christchurch | New Zealand / Great Journeys New Zealand | Coast, mountains | Kaikōura coast and a strong link to South Island travel. | Research-ready |
 | Taieri Gorge Railway | Dunedin → Pukerangi | New Zealand / Dunedin Railways | Gorge, heritage | Compact Otago gorge experience with clear landscape identity. | Needs licensed photography |
+| West Coast Wilderness Railway | Queenstown → Dubbil Barril | Australia / West Coast Wilderness Railway | Rainforest, heritage | Tasmanian rack-rail history, rainforest, and a sharply distinct compact journey. | Needs operator/source verification |
 
 ## Route quality gate
 
