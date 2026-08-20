@@ -93,6 +93,7 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "west-highland-line", reason: "The longer scheduled journey that shares this Highland railway section" },
     { slug: "train-des-merveilles", reason: "Another short scenic railway defined by remarkable engineering" },
   ],
+  "sagano-scenic-railway": [{ slug: "kurobe-gorge-railway", reason: "Another compact Japanese sightseeing railway through steep terrain" }, { slug: "alishan-forest-railway", reason: "A longer forested mountain railway in East Asia" }],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

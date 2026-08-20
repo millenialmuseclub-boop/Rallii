@@ -30,6 +30,7 @@ import { elChepeExpressRoute } from "../src/data/routes/el-chepe-express.ts";
 import { inlandsbananRoute } from "../src/data/routes/inlandsbanan.ts";
 import { trainDesMerveillesRoute } from "../src/data/routes/train-des-merveilles.ts";
 import { jacobiteSteamTrainRoute } from "../src/data/routes/jacobite-steam-train.ts";
+import { saganoScenicRailwayRoute } from "../src/data/routes/sagano-scenic-railway.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -271,7 +272,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -460,14 +461,14 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
   for (const query of ["Kurobe Gorge Railway", "Kurobe", "Unazuki", "Keyakidaira", "Japan", "Japanese Alps", "gorge", "river", "bridges", "tunnels", "open-sided train", "Atobiki Bridge"]) {
     assert.ok(searchRoutes(getAllRoutes(), query).some((result) => result.route.summary.slug === "kurobe-gorge-railway"), `Expected Kurobe Gorge Railway for ${query}`);
   }
-  assert.deepEqual(getAllRoutes().filter((route) => route.summary.countries.includes("Japan")).map((route) => route.summary.slug), ["kurobe-gorge-railway"]);
+  assert.deepEqual(getAllRoutes().filter((route) => route.summary.countries.includes("Japan")).map((route) => route.summary.slug), ["kurobe-gorge-railway", "sagano-scenic-railway"]);
   assert.ok(getJourneyCollection("short-scenic-escapes")?.routeSlugs.includes("kurobe-gorge-railway"));
   assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("kurobe-gorge-railway"));
 });
@@ -498,7 +499,7 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
 });
 
 test("repository includes twenty-nine routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -780,7 +781,7 @@ test("Eastern Express, Hiram Bingham, and Alishan Forest Railway remain generic 
 });
 
 test("routes 23–25 remain complete generic global journeys", () => {
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
   for (const route of [belgradeBarRoute, konkanRailwayRoute, blueTrainRoute]) {
     assert.equal(getRouteBySlug(route.summary.slug), route);
     assert.deepEqual(validateRoute(route), []);
@@ -856,7 +857,7 @@ test("visual collection discovery promotes complete photographed collections", a
 
 test("routes 26–28 are complete, searchable, and direction-aware", () => {
   const routes = [elChepeExpressRoute, inlandsbananRoute, trainDesMerveillesRoute];
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
   for (const route of routes) {
     assert.equal(getRouteBySlug(route.summary.slug), route);
     assert.deepEqual(validateRoute(route), []);
@@ -880,7 +881,7 @@ test("routes 26–28 are complete, searchable, and direction-aware", () => {
 });
 
 test("Jacobite Steam Train is a complete seasonal Fort William–Mallaig journey", async () => {
-  assert.equal(getAllRoutes().length, 29);
+  assert.equal(getAllRoutes().length, 30);
   assert.equal(getRouteBySlug("jacobite-steam-train"), jacobiteSteamTrainRoute);
   assert.deepEqual(validateRoute(jacobiteSteamTrainRoute), []);
   assert.equal(jacobiteSteamTrainRoute.capabilities.rideMode, false);
