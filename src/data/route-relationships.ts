@@ -18,7 +18,7 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
   ],
   "west-highland-line": [
     { slug: "tranzalpine", reason: "Another remote landscape experience" },
-    { slug: "cinque-terre", reason: "A contrasting coastal railway" },
+    { slug: "jacobite-steam-train", reason: "The seasonal steam journey on its Fort William–Mallaig section" },
   ],
   "flam-railway": [
     { slug: "bergen-line", reason: "Connect at Myrdal for the separate Bergen Line journey" },
@@ -89,6 +89,10 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
   "el-chepe-express": [{ slug: "california-zephyr", reason: "Another North American journey shaped by canyons and mountain engineering" }, { slug: "hiram-bingham", reason: "A contrasting Latin American railway into celebrated mountain landscapes" }],
   inlandsbanan: [{ slug: "the-canadian", reason: "Another long-form journey through immense northern landscapes" }, { slug: "west-highland-line", reason: "A shorter contrast of remote communities, water, and northern scenery" }],
   "train-des-merveilles": [{ slug: "cinque-terre", reason: "Another compact regional railway of tunnels and dramatic terrain" }, { slug: "bernina-express", reason: "A longer Alpine contrast of viaducts, valleys, and high mountains" }],
+  "jacobite-steam-train": [
+    { slug: "west-highland-line", reason: "The longer scheduled journey that shares this Highland railway section" },
+    { slug: "train-des-merveilles", reason: "Another short scenic railway defined by remarkable engineering" },
+  ],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

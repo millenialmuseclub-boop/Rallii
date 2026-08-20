@@ -26,6 +26,7 @@ import { blueTrainRoute } from "./blue-train.ts";
 import { elChepeExpressRoute } from "./el-chepe-express.ts";
 import { inlandsbananRoute } from "./inlandsbanan.ts";
 import { trainDesMerveillesRoute } from "./train-des-merveilles.ts";
+import { jacobiteSteamTrainRoute } from "./jacobite-steam-train.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -57,6 +58,7 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [elChepeExpressRoute.summary.slug, elChepeExpressRoute],
   [inlandsbananRoute.summary.slug, inlandsbananRoute],
   [trainDesMerveillesRoute.summary.slug, trainDesMerveillesRoute],
+  [jacobiteSteamTrainRoute.summary.slug, jacobiteSteamTrainRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 
