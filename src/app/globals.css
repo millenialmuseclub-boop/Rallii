@@ -775,6 +775,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 /* Image-led home discovery */
 .home-feature--immersive { position: relative; min-height: 34rem; border: 0; background: var(--accent-deep); color: #f8f5ed; box-shadow: var(--shadow-card); }
 .home-feature--immersive .route-media--hero { position: absolute; inset: 0; min-height: 100%; margin: 0; padding: 0; }
+.home-feature--immersive .route-media__image { animation: home-photo-drift 18s ease-in-out infinite alternate; transform-origin: center; }
 .home-feature--immersive .route-media__credit { display: none; }
 .home-feature--immersive::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(10 26 20 / 94%), rgb(10 26 20 / 8%) 70%); }
 .home-feature--immersive .home-feature__body { position: relative; z-index: 1; display: flex; min-height: 34rem; flex-direction: column; justify-content: end; max-width: 36rem; padding: 1.5rem; }
@@ -783,7 +784,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .home-feature--immersive .home-feature__body > p:not(.eyebrow):not(.home-feature__route) { color: rgb(248 245 237 / 80%); }
 .home-feature--immersive .home-feature__actions .action-button { border-color: rgb(255 255 255 / 55%); color: white; }
 .home-feature--immersive .home-feature__actions .cta-button { border-color: #f8f5ed; background: #f8f5ed; color: var(--accent-deep); }
-.bernina-journey-trace { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.bernina-journey-trace { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
 .bernina-journey-trace svg { position: absolute; right: -1.5rem; bottom: -2.5rem; left: -1.5rem; width: calc(100% + 3rem); height: auto; opacity: .88; filter: drop-shadow(0 2px 7px rgb(0 0 0 / 30%)); }
 .bernina-journey-trace path { fill: none; stroke-linecap: round; }
 .bernina-journey-trace__shadow { stroke: rgb(8 24 18 / 46%); stroke-width: 8; }
@@ -793,7 +794,9 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .bernina-journey-trace__train circle, .bernina-journey-trace__train-static circle { fill: #173f32; stroke: #fff6e8; stroke-width: .8; }
 .bernina-journey-trace__window { fill: #f5e5bd; stroke: none; }
 .bernina-journey-trace__train-static { display: none; }
+@keyframes home-photo-drift { from { transform: scale(1); } to { transform: scale(1.07) translate3d(-1.25%, -0.75%, 0); } }
 @media (prefers-reduced-motion: reduce) { .bernina-journey-trace__train { display: none; } .bernina-journey-trace__train-static { display: block; } }
+@media (prefers-reduced-motion: reduce) { .home-feature--immersive .route-media__image { animation: none; } }
 .home-action-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; margin-top: 1rem; }
 .home-action-tile { position: relative; display: block; min-width: 0; min-height: 13rem; overflow: hidden; background: var(--accent-deep); color: white; text-decoration: none; box-shadow: var(--shadow-card); }
 .home-action-tile:last-child { grid-column: 1 / -1; min-height: 11.5rem; }
