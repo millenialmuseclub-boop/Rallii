@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { RouteSummary } from "@/types/route";
 import { getRouteMedia } from "@/data/route-media";
+import { JourneyTraceHeader } from "@/components/journey-trace-header";
 
 interface RouteMediaProps {
   summary: RouteSummary;
@@ -25,7 +26,7 @@ export function RouteMedia({ summary, variant }: RouteMediaProps) {
   return (
     <div className={className} role="img" aria-label={summary.heroImageAlt}>
       <span className="route-media__kicker">{summary.country}</span>
-      <span className="route-media__line" aria-hidden="true"><i /><i /><i /></span>
+      <JourneyTraceHeader origin={summary.origin} destination={summary.destination} />
       <span className="route-media__journey"><span>{summary.origin}</span><b aria-hidden="true">→</b><span>{summary.destination}</span></span>
     </div>
   );
