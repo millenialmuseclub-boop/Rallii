@@ -94,6 +94,7 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
     { slug: "train-des-merveilles", reason: "Another short scenic railway defined by remarkable engineering" },
   ],
   "sagano-scenic-railway": [{ slug: "kurobe-gorge-railway", reason: "Another compact Japanese sightseeing railway through steep terrain" }, { slug: "alishan-forest-railway", reason: "A longer forested mountain railway in East Asia" }],
+  "rauma-line": [{ slug: "bergen-line", reason: "Another Norwegian mountain railway linking interior and western landscapes" }, { slug: "flam-railway", reason: "A compact Scandinavian railway shaped by steep valleys and dramatic terrain" }],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {

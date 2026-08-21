@@ -27,7 +27,7 @@ export const journeyGuides: readonly JourneyGuide[] = [
     title: "Norway: Mountain to Fjord",
     eyebrow: "A Bergen and Flåm pairing",
     description: "Cross Norway’s high plateau on the Bergen Line, then descend on the separate Flåm Railway from the mountain interchange at Myrdal.",
-    routeSlugs: ["bergen-line", "flam-railway"],
+    routeSlugs: ["bergen-line", "rauma-line", "flam-railway"],
     connectionNote: "Myrdal is the interchange. The Bergen Line does not travel to Flåm, and the two services must be planned and checked independently.",
     coverRouteSlug: "flam-railway",
     collectionSlugs: ["northern-landscapes", "mountain-journeys"],

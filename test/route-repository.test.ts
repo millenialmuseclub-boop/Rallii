@@ -31,6 +31,7 @@ import { inlandsbananRoute } from "../src/data/routes/inlandsbanan.ts";
 import { trainDesMerveillesRoute } from "../src/data/routes/train-des-merveilles.ts";
 import { jacobiteSteamTrainRoute } from "../src/data/routes/jacobite-steam-train.ts";
 import { saganoScenicRailwayRoute } from "../src/data/routes/sagano-scenic-railway.ts";
+import { raumaLineRoute } from "../src/data/routes/rauma-line.ts";
 import { getAllRoutes, getRouteBySlug } from "../src/data/routes/index.ts";
 import { validateRoute } from "../src/lib/route-validation.ts";
 import { normalizeSearchText, searchRoutes } from "../src/lib/route-search.ts";
@@ -272,7 +273,7 @@ test("looks up a route by slug", () => {
   assert.equal(getRouteBySlug("flam-railway")?.summary.name, "Flåm Railway");
   assert.equal(getRouteBySlug("tranzalpine")?.summary.name, "TranzAlpine");
   assert.equal(getRouteBySlug("kurobe-gorge-railway")?.summary.name, "Kurobe Gorge Railway");
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
   assert.equal(getRouteBySlug("missing-route"), undefined);
 });
 
@@ -428,7 +429,7 @@ test("every route has complete, locally prepared, licensed hero photography", as
     assert.match(media.originalFileUrl, /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//);
     assert.match(media.licenseName, /Public domain|CC BY/);
     assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
-    assert.match(media.accessedAt, /^2026-08-(12|14|15|16|20)$/);
+    assert.match(media.accessedAt, /^2026-08-(12|14|15|16|20|21)$/);
     assert.ok(media.width >= 1400 && media.height >= 800);
     const file = await readFile(`public${media.path}`);
     assert.ok(file.length > 150_000);
@@ -461,7 +462,7 @@ test("Kurobe Gorge Railway is a complete canonical Japanese route", () => {
   assert.deepEqual(kurobeGorgeRailwayRoute.summary.countries, ["Japan"]);
   assert.deepEqual(kurobeGorgeRailwayRoute.stops.map((stop) => stop.name), ["Unazuki", "Kuronagi", "Kanetsuri", "Keyakidaira"]);
   assert.equal(kurobeGorgeRailwayRoute.capabilities.rideMode, false);
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
 });
 
 test("Kurobe search, Discover, and collections use generic metadata", () => {
@@ -499,7 +500,7 @@ test("Kurobe timeline, reverse guidance, relationships, and library remain gener
 });
 
 test("repository includes twenty-nine routes while featured journeys remain exactly three", () => {
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
   assert.ok(getAllRoutes().some((route) => route.summary.slug === "kurobe-gorge-railway"));
   assert.equal(featuredRouteSlugs.length, 3);
 });
@@ -781,7 +782,7 @@ test("Eastern Express, Hiram Bingham, and Alishan Forest Railway remain generic 
 });
 
 test("routes 23–25 remain complete generic global journeys", () => {
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
   for (const route of [belgradeBarRoute, konkanRailwayRoute, blueTrainRoute]) {
     assert.equal(getRouteBySlug(route.summary.slug), route);
     assert.deepEqual(validateRoute(route), []);
@@ -857,7 +858,7 @@ test("visual collection discovery promotes complete photographed collections", a
 
 test("routes 26–28 are complete, searchable, and direction-aware", () => {
   const routes = [elChepeExpressRoute, inlandsbananRoute, trainDesMerveillesRoute];
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
   for (const route of routes) {
     assert.equal(getRouteBySlug(route.summary.slug), route);
     assert.deepEqual(validateRoute(route), []);
@@ -881,7 +882,7 @@ test("routes 26–28 are complete, searchable, and direction-aware", () => {
 });
 
 test("Jacobite Steam Train is a complete seasonal Fort William–Mallaig journey", async () => {
-  assert.equal(getAllRoutes().length, 30);
+  assert.equal(getAllRoutes().length, 31);
   assert.equal(getRouteBySlug("jacobite-steam-train"), jacobiteSteamTrainRoute);
   assert.deepEqual(validateRoute(jacobiteSteamTrainRoute), []);
   assert.equal(jacobiteSteamTrainRoute.capabilities.rideMode, false);
@@ -959,4 +960,27 @@ test("Free and Pro entitlements enforce the prepared library boundary", () => {
   const library = { version: 1 as const, routes: { one: "want_to_go" as const, two: "want_to_go" as const } };
   assert.equal(updateLibraryStatus(library, "three", "want_to_go", free.personalLibraryLimit).result.reason, "limit-reached");
   assert.equal(updateLibraryStatus(library, "three", "want_to_go", pro.personalLibraryLimit).result.ok, true);
+});
+
+test("Rauma Line is a complete, mapped Norwegian journey", async () => {
+  assert.equal(getAllRoutes().length, 31);
+  assert.equal(getRouteBySlug("rauma-line"), raumaLineRoute);
+  assert.deepEqual(validateRoute(raumaLineRoute), []);
+  assert.equal(raumaLineRoute.capabilities.rideMode, false);
+  assert.deepEqual(raumaLineRoute.stops.map((stop) => stop.name), ["Dombås", "Lesja", "Bjorli", "Verma", "Åndalsnes"]);
+  assert.ok(searchRoutes(getAllRoutes(), "Trollveggen").some((result) => result.route.summary.slug === "rauma-line"));
+  assert.ok(getJourneyCollection("mountain-journeys")?.routeSlugs.includes("rauma-line"));
+  assert.ok(getRouteRelationships("rauma-line").length === 2);
+  assert.ok(getGuidesForRoute("rauma-line").length > 0);
+  assert.ok(getRouteMedia("rauma-line"));
+  const data = JSON.parse(await readFile("public/data/routes/rauma-line.geojson", "utf8")) as { metadata: { osmRelationIds: number[]; coordinateCount: number; calculatedDistanceKm: number }; features: Array<{ geometry: { type: string; coordinates: RouteCoordinate[] } }> };
+  const coordinates = data.features[0].geometry.coordinates;
+  assert.equal(data.features[0].geometry.type, "LineString");
+  assert.deepEqual(data.metadata.osmRelationIds, [950560]);
+  assert.equal(data.metadata.coordinateCount, coordinates.length);
+  assert.equal(data.metadata.coordinateCount, 3451);
+  assert.equal(data.metadata.calculatedDistanceKm, raumaLineRoute.summary.distanceKm);
+  assert.ok(Math.abs(routeLengthKm(coordinates) - raumaLineRoute.summary.distanceKm) < 0.03);
+  assert.deepEqual(getDirectionalEndpoints(raumaLineRoute, "reverse"), { origin: "Åndalsnes", destination: "Dombås" });
+  assert.ok(getDirectionalTimeline(raumaLineRoute, "reverse").every((entry, index, entries) => index === 0 || entry.distanceAlongRouteKm > entries[index - 1].distanceAlongRouteKm));
 });

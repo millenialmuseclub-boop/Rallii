@@ -28,6 +28,7 @@ import { inlandsbananRoute } from "./inlandsbanan.ts";
 import { trainDesMerveillesRoute } from "./train-des-merveilles.ts";
 import { jacobiteSteamTrainRoute } from "./jacobite-steam-train.ts";
 import { saganoScenicRailwayRoute } from "./sagano-scenic-railway.ts";
+import { raumaLineRoute } from "./rauma-line.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -61,6 +62,7 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [trainDesMerveillesRoute.summary.slug, trainDesMerveillesRoute],
   [jacobiteSteamTrainRoute.summary.slug, jacobiteSteamTrainRoute],
   [saganoScenicRailwayRoute.summary.slug, saganoScenicRailwayRoute],
+  [raumaLineRoute.summary.slug, raumaLineRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 
