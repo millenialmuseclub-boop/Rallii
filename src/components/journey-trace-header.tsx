@@ -1,3 +1,0 @@
-export function JourneyTraceHeader({ origin, destination }: { origin: string; destination: string }) {
-  return <div className="journey-trace-header" aria-hidden="true"><svg viewBox="0 0 360 88" preserveAspectRatio="none"><path d="M8 62C76 28 112 84 180 51c68-33 101 8 172-29" /><g><animateMotion dur="15s" repeatCount="indefinite" rotate="auto" path="M8 62C76 28 112 84 180 51c68-33 101 8 172-29" /><rect x="-10" y="-5" width="20" height="10" rx="1" /><path d="M-6-2h4v3h-4zM2-2h4v3H2z" /><circle cx="-6" cy="6" r="2" /><circle cx="6" cy="6" r="2" /></g></svg><span>{origin}</span><span>{destination}</span></div>;
-}
