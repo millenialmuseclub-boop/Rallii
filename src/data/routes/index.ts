@@ -29,6 +29,11 @@ import { trainDesMerveillesRoute } from "./train-des-merveilles.ts";
 import { jacobiteSteamTrainRoute } from "./jacobite-steam-train.ts";
 import { saganoScenicRailwayRoute } from "./sagano-scenic-railway.ts";
 import { raumaLineRoute } from "./rauma-line.ts";
+import { madarakaExpressRoute } from "./madaraka-express.ts";
+import { reunificationExpressRoute } from "./reunification-express.ts";
+import { eastRiftValleyRailwayRoute } from "./east-rift-valley-railway.ts";
+import { kurandaScenicRailwayRoute } from "./kuranda-scenic-railway.ts";
+import { kalkaShimlaRailwayRoute } from "./kalka-shimla-railway.ts";
 import type { RailRoute } from "../../types/route.ts";
 
 const routeEntries: Array<readonly [string, RailRoute]> = [
@@ -63,6 +68,11 @@ const routeEntries: Array<readonly [string, RailRoute]> = [
   [jacobiteSteamTrainRoute.summary.slug, jacobiteSteamTrainRoute],
   [saganoScenicRailwayRoute.summary.slug, saganoScenicRailwayRoute],
   [raumaLineRoute.summary.slug, raumaLineRoute],
+  [madarakaExpressRoute.summary.slug, madarakaExpressRoute],
+  [reunificationExpressRoute.summary.slug, reunificationExpressRoute],
+  [eastRiftValleyRailwayRoute.summary.slug, eastRiftValleyRailwayRoute],
+  [kurandaScenicRailwayRoute.summary.slug, kurandaScenicRailwayRoute],
+  [kalkaShimlaRailwayRoute.summary.slug, kalkaShimlaRailwayRoute],
 ];
 const routesBySlug: ReadonlyMap<string, RailRoute> = new Map(routeEntries);
 

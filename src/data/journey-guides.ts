@@ -47,10 +47,20 @@ export const journeyGuides: readonly JourneyGuide[] = [
     title: "Great Rail Crossings",
     eyebrow: "Long-form rail journeys",
     description: "A collection of large-scale crossings where the changing landscape is the point of the journey, not simply the route between cities.",
-    routeSlugs: ["tranzalpine", "california-zephyr", "the-ghan"],
+    routeSlugs: ["tranzalpine", "california-zephyr", "the-ghan", "madaraka-express"],
     connectionNote: "Each route is a separate long-distance journey on another continent. Use this guide to compare the character and scale, then plan the chosen route directly.",
     coverRouteSlug: "the-ghan",
     collectionSlugs: ["great-rail-crossings", "multi-day-journeys"],
+  },
+  {
+    slug: "asian-rail-landscapes",
+    title: "Asian Rail Landscapes",
+    eyebrow: "Four distinct mountain and coast journeys",
+    description: "From the East Rift Valley to Himalayan foothills, these journeys show how railways meet forest, monsoon country, coast, and mountain terrain across Asia.",
+    routeSlugs: ["reunification-express", "east-rift-valley-railway", "kuranda-scenic-railway", "kalka-shimla-railway"],
+    connectionNote: "This is an editorial grouping, not an itinerary. Each route has separate operators, seasons, and travel requirements; check current details independently.",
+    coverRouteSlug: "kalka-shimla-railway",
+    collectionSlugs: ["mountain-journeys", "heritage-lines"],
   },
 ];
 

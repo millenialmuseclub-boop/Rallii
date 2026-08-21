@@ -95,6 +95,11 @@ export const routeRelationships: Record<string, readonly [RouteRelationship, Rou
   ],
   "sagano-scenic-railway": [{ slug: "kurobe-gorge-railway", reason: "Another compact Japanese sightseeing railway through steep terrain" }, { slug: "alishan-forest-railway", reason: "A longer forested mountain railway in East Asia" }],
   "rauma-line": [{ slug: "bergen-line", reason: "Another Norwegian mountain railway linking interior and western landscapes" }, { slug: "flam-railway", reason: "A compact Scandinavian railway shaped by steep valleys and dramatic terrain" }],
+  "madaraka-express": [{ slug: "blue-train", reason: "Another long African rail journey across changing landscapes" }, { slug: "the-ghan", reason: "A contrasting long-distance rail crossing with a strong sense of scale" }],
+  "reunification-express": [{ slug: "eastern-express", reason: "Another long overland rail journey with a changing regional landscape" }, { slug: "coast-starlight", reason: "A contrasting long-distance railway shaped by coastal sections" }],
+  "east-rift-valley-railway": [{ slug: "alishan-forest-railway", reason: "Another Taiwanese journey shaped by mountain landscapes" }, { slug: "kurobe-gorge-railway", reason: "A compact East Asian railway through dramatic green terrain" }],
+  "kuranda-scenic-railway": [{ slug: "kurobe-gorge-railway", reason: "Another short heritage railway through steep, wooded scenery" }, { slug: "sagano-scenic-railway", reason: "A contrasting compact sightseeing railway through a gorge" }],
+  "kalka-shimla-railway": [{ slug: "konkan-railway", reason: "Another Indian railway where mountain engineering shapes the journey" }, { slug: "alishan-forest-railway", reason: "A contrasting narrow-gauge mountain railway in Asia" }],
 };
 
 export function getRouteRelationships(slug: string): readonly RouteRelationship[] {
