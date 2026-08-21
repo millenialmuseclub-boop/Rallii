@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RouteCard } from "@/components/route-card";
 import { JourneyCollections } from "@/components/journey-collections";
 import { journeyGuides } from "@/data/journey-guides";
@@ -37,6 +37,11 @@ export function DiscoverRoutes({ routes, initialFilter = "all" }: { routes: Rail
   const [visibleCount, setVisibleCount] = useState(8);
   const [query, setQuery] = useState("");
   const { statuses } = useTravelLibrary();
+  useEffect(() => {
+    const filterFromUrl = new URLSearchParams(window.location.search).get("filter");
+    const timeout = filterFromUrl ? window.setTimeout(() => setFilter(filterFromUrl), 0) : undefined;
+    return () => { if (timeout) window.clearTimeout(timeout); };
+  }, []);
   const savedCount = Object.values(statuses).filter(Boolean).length;
   const filtered = useMemo(() => filterRoutes(routes, filter), [routes, filter]);
   const matches = useMemo(() => query.trim() ? searchRoutes(filtered, query).map((result) => result.route) : filtered, [filtered, query]);

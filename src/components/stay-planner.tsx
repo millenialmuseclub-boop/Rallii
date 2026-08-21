@@ -1,13 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PartnerWidgetFrame } from "@/components/partner-widget-frame";
 import { RouteMedia } from "@/components/route-media";
 import { getPlanningLocations, isTravelpayoutsConfigured } from "@/data/partner-planning";
 import type { RailRoute } from "@/types/route";
 
 export function StayPlanner({ routes, initialRouteSlug }: { routes: RailRoute[]; initialRouteSlug?: string }) {
+  const [routeFromUrl, setRouteFromUrl] = useState(initialRouteSlug);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setRouteFromUrl(new URLSearchParams(window.location.search).get("route") ?? initialRouteSlug), 0);
+    return () => window.clearTimeout(timeout);
+  }, [initialRouteSlug]);
+  return <StayPlannerContent key={routeFromUrl ?? "default"} routes={routes} initialRouteSlug={routeFromUrl} />;
+}
+
+function StayPlannerContent({ routes, initialRouteSlug }: { routes: RailRoute[]; initialRouteSlug?: string }) {
   const initialRoute = routes.find((route) => route.summary.slug === initialRouteSlug) ?? routes[0];
   const [routeSlug, setRouteSlug] = useState(initialRoute.summary.slug);
   const [locationId, setLocationId] = useState(getPlanningLocations(initialRoute)[0].id);

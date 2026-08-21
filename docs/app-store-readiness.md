@@ -1,34 +1,26 @@
-# Rallii app-store readiness
+# Rallii Rail app-store readiness
 
-Rallii Rail’s web foundation includes installable PWA metadata, appropriately sized icons, safe mobile metadata, a navigation fallback for core editorial screens, public Privacy and Terms pages, and an affiliate disclosure. This is readiness work only. It is not Apple App Store or Google Play approval, compliance certification, or a submission.
+Rallii Rail has PWA metadata, public Privacy and Terms pages, affiliate disclosure, and an offline fallback. This is readiness work only—not App Store or Google Play approval, compliance certification, or a submission.
 
-## Capacitor foundation
+## Capacitor and OTA foundation
 
-The repository now includes Capacitor's official core, CLI, iOS, and Android packages plus a `capacitor.config.ts` identity for **Rallii Rail** (`com.rallii.rail`). The identifier is a development default and must be verified as available before registering it in Apple Developer and Google Play Console.
+The repository includes Capacitor core, CLI, iOS, Android, and the Capgo updater, with the native identity **Rallii Rail** (`com.rallii.rail`). The app can generate a static Capacitor bundle with `npm run native:build`; Vercel builds remain unchanged.
 
-Rallii Rail intentionally does **not** yet include `ios/` or `android/` projects. Its current Next.js app has server-rendered route-selection and partner-widget endpoints, while Capacitor requires a separate built web-assets directory with a root `index.html`. Creating native projects before that static bundle exists would produce a wrapper that cannot faithfully run the app.
+OTA is self-hosted on Cloudflare R2. The packaged app manually polls R2 for an encrypted manifest and uses the Capgo plugin only to verify and decrypt bundles provided by Rallii. It does not use Capgo-hosted infrastructure. See [capacitor-native-plan.md](./capacitor-native-plan.md).
 
-The planned native bundle directory is `native-web/`; it is ignored as generated output. `npm run cap:doctor` validates the Capacitor setup. `npm run cap:sync` becomes usable after the native bundle is implemented and after the iOS/Android projects are deliberately created.
-
-## OTA policy
-
-OTA is planned only for changes that can safely be represented by bundled web assets: editorial copy, presentation, route data, prepared geometry, and compatible web behavior. Native capabilities, permissions, Capacitor plugins, privacy-manifest changes, app icons, and platform configuration always require a new signed App Store / Play Store binary.
-
-Choose one managed OTA provider before implementation—Capacitor’s documented Appflow workflow or another reviewed provider—and keep its credentials outside source control. The update channel must support staged rollout, rollback, version compatibility, and a clear release record. Rallii Rail will not enable arbitrary remote code execution or silently change native behavior through OTA.
+Only compatible web-layer updates can use OTA: UI, editorial content, route data, prepared GeoJSON, and web behavior. Native plugins, permissions, native configuration, signing, app icons, privacy manifests, and public-key rotation require a new signed store binary.
 
 ## Still required before submission
 
-- Build the static `native-web/` bundle: move URL-query state that belongs in the client, replace server-only partner-widget delivery with a native-compatible strategy, and prove all core route screens work without Next.js server rendering.
-- On a Mac with Xcode and on a configured Android Studio environment, create and version-control the Capacitor `ios/` and `android/` projects; then run `npm run cap:sync` for each tested build.
-- Choose, configure, and test a managed OTA provider and release workflow. Do not enable OTA until compatibility, rollback, and store-policy checks are complete.
-- Enrol in the Apple Developer Program and Google Play Console.
-- Add a maintained public support URL and contact address to the legal pages and store listings.
-- Complete Apple App Privacy and Google Play Data Safety declarations using the final native build and every embedded partner SDK or web surface.
-- Confirm tracking, consent, cookie, advertising, and affiliate obligations for every intended market with qualified counsel.
-- Create final app icons, launch assets, phone and tablet screenshots, descriptions, age ratings, categories, and review notes.
-- Test installation, offline behaviour, external links, safe areas, orientation, accessibility, account-deletion applicability, and partner redirects on physical iOS and Android devices.
-- Review every embedded partner’s terms for permission to display its widget inside a packaged application.
-- Configure signing, bundle identifiers, versioning, production monitoring, crash reporting decisions, and release tracks.
-- Submit builds, answer reviewer questions, address findings, and obtain separate approval from Apple and Google.
+- Generate and commit the `ios/` and `android/` Capacitor projects, then validate `cap sync` with the static bundle. This can be done with cloud CI; iOS needs a macOS runner, not a local Mac.
+- Configure Rallii Rail's own signing certificates, provisioning profile/keystore, bundle IDs, versioning, and cloud release workflows.
+- Test staging and production R2 OTA updates on physical iOS and Android devices, including rollback.
+- Enrol in Apple Developer Program and Google Play Console.
+- Add a maintained public support URL and contact address to legal pages and store listings.
+- Complete Apple App Privacy and Google Play Data Safety declarations for the final native build and every embedded partner surface.
+- Confirm consent, tracking, cookie, advertising, affiliate, and partner-widget obligations for intended markets with qualified counsel.
+- Create final icons, launch assets, screenshots, descriptions, age ratings, categories, review notes, and release notes.
+- Test installation, offline behavior, external links, safe areas, orientation, accessibility, partner redirects, and update recovery on physical devices.
+- Submit builds, respond to review questions, and obtain separate Apple and Google approval.
 
-Re-audit the current [Apple App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and [Google Play policy centre](https://support.google.com/googleplay/android-developer/topic/9858052) immediately before submission.
+Re-check the current [Apple App Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) and [Google Play policy centre](https://support.google.com/googleplay/android-developer/topic/9858052) immediately before submission.

@@ -1,0 +1,57 @@
+name: Publish OTA Update (zero-server)
+
+# Manual only: no push or merge can publish an update. Rallii Rail owns the
+# manifest in Cloudflare R2; neither this workflow nor the app contacts Capgo.
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Channel to publish to
+        required: true
+        default: staging
+        type: choice
+        options: [staging, production]
+
+jobs:
+  publish-ota:
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build the static native bundle
+        run: npm run native:build
+        env:
+          NEXT_PUBLIC_OTA_CHANNEL: ${{ inputs.channel }}
+          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
+          NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
+      - name: Sign, encrypt, and publish to R2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          CAPGO_PRIVATE_KEY_B64: ${{ secrets.CAPGO_PRIVATE_KEY }}
+          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          OTA_CHANNEL: ${{ inputs.channel }}
+          GIT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$CAPGO_PRIVATE_KEY_B64" | base64 -d > capgo_key_v2
+          npx @capgo/cli@latest bundle zip com.rallii.rail --path ./out --json > zip.json
+          ZIP=$(jq -r '.filename' zip.json)
+          ZIP_CHECKSUM=$(jq -r '.checksum' zip.json)
+          npx @capgo/cli@latest bundle encrypt "$ZIP" "$ZIP_CHECKSUM" --key ./capgo_key_v2 --json > enc.json
+          rm -f capgo_key_v2
+          ENC_ZIP=$(jq -r '.filename' enc.json)
+          ENC_CHECKSUM=$(jq -r '.checksum' enc.json)
+          SESSION_KEY=$(jq -r '.ivSessionKey' enc.json)
+          COMMIT_TS=$(git log -1 --format=%ct)
+          jq -n --arg v "$COMMIT_TS" --arg sha "$GIT_SHA" --arg url "$R2_PUBLIC_BASE_URL/updates/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --arg ck "$ENC_CHECKSUM" --arg sk "$SESSION_KEY" '{version:$v,sha:$sha,url:$url,checksum:$ck,sessionKey:$sk}' > manifest.json
+          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --remote --file="$ENC_ZIP" --cache-control "public, max-age=31536000, immutable"
+          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/$OTA_CHANNEL/manifest.json" --remote --file=./manifest.json --cache-control "no-cache, max-age=0"

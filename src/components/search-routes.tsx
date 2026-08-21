@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RouteCard } from "@/components/route-card";
 import { searchRoutes } from "@/lib/route-search";
 import type { RailRoute } from "@/types/route";
@@ -10,6 +10,11 @@ const suggestions = ["Glacier Express", "United States", "Overnight", "Coastal"]
 
 export function SearchRoutes({ routes, initialQuery = "" }: { routes: RailRoute[]; initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
+  useEffect(() => {
+    const queryFromUrl = new URLSearchParams(window.location.search).get("q");
+    const timeout = queryFromUrl ? window.setTimeout(() => setQuery(queryFromUrl), 0) : undefined;
+    return () => { if (timeout) window.clearTimeout(timeout); };
+  }, []);
   const results = searchRoutes(routes, query);
   const hasQuery = query.trim().length > 0;
 

@@ -1,5 +1,10 @@
 import { ImageResponse } from "next/og";
 
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return [{ size: "192" }, { size: "512" }];
+}
+
 export async function GET(_request: Request, { params }: { params: Promise<{ size: string }> }) {
   const value = (await params).size;
   const size = value === "512" ? 512 : 192;

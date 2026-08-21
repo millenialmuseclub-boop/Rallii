@@ -2,14 +2,20 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { RouteMedia } from "@/components/route-media";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
-import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory } from "@/lib/journey-comparison";
+import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "@/lib/journey-comparison";
 import type { RailRoute } from "@/types/route";
 import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
 
-export function CompareJourneys({ routes, selected }: { routes: RailRoute[]; selected: RailRoute[] }) {
+export function CompareJourneys({ routes, selected: initialSelected }: { routes: RailRoute[]; selected?: RailRoute[] }) {
   const router = useRouter();
+  const [selected, setSelected] = useState(initialSelected ?? []);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setSelected(parseComparisonRoutes(new URLSearchParams(window.location.search).get("routes") ?? undefined, routes)), 0);
+    return () => window.clearTimeout(timeout);
+  }, [routes]);
   const { getStatus, setStatus } = useTravelLibrary();
   const slugs = selected.map((route) => route.summary.slug);
 

@@ -3,6 +3,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import { PwaRegistration } from "@/components/pwa-registration";
 import { SiteFooter } from "@/components/site-footer";
+import { NativeOtaUpdater } from "@/components/native-ota-updater";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rallii-kappa.vercel.app"),
@@ -33,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>{children}<SiteFooter /><PwaRegistration /></body>
+      <body>{children}<SiteFooter /><PwaRegistration /><NativeOtaUpdater /></body>
     </html>
   );
 }

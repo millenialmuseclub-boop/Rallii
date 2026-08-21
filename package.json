@@ -12,12 +12,14 @@
     "test": "node --experimental-strip-types --test test/route-repository.test.ts",
     "db:seed": "node --experimental-strip-types scripts/seed.ts",
     "cap:doctor": "cap doctor",
-    "cap:sync": "cap sync"
+    "cap:sync": "cap sync",
+    "native:build": "node scripts/build-native.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.0",
     "@capacitor/core": "^8.5.0",
     "@capacitor/ios": "^8.5.0",
+    "@capgo/capacitor-updater": "8.51.14",
     "@libsql/client": "latest",
     "maplibre-gl": "latest",
     "next": "latest",
