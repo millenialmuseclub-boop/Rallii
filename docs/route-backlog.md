@@ -4,10 +4,10 @@
 
 This is an editorial research backlog, not a live directory. A candidate does not appear in Rallii until it passes the published-route quality gate below.
 
-- **Verified published catalogue:** 29 routes.
+- **Verified published catalogue:** 30 routes.
 - **Researching now:** routes #30–33 (Sagano Scenic Railway, Madaraka Express, Reunification Express, and East Rift Valley Railway).
 - **Prepared next:** routes #34–35 (Rauma Line and Kuranda Scenic Railway), subject to the same source, geometry, and photography gate.
-- **Capacity today:** 221 published-route slots remain.
+- **Capacity today:** 220 published-route slots remain.
 - **Expected capacity after #30–35:** 215 slots remain, for a 35-route catalogue.
 - **Current editorial backlog:** 90 candidates. The backlog may exceed the publication cap because candidates compete for a limited number of fully verified places.
 
@@ -33,6 +33,19 @@ The cap of 250 is a quality ceiling, not a quota. A route may be deferred, repla
 | #35 | Kuranda Scenic Railway | Research-ready | Full source, geometry, and photography package |
 
 These six are a release path, not a promise to publish incomplete records. They become live only when each row clears the route quality gate.
+
+## Prepared 50-route publishing queue
+
+The next ten live additions are routes #31–40 already selected for production research. The following queue keeps a balanced 50-route target ready without changing the live app prematurely.
+
+| Release order | Candidate |
+| --- | --- |
+| 31–35 | Madaraka Express; Reunification Express; East Rift Valley Railway; Rauma Line; Kuranda Scenic Railway |
+| 36–40 | Kalka–Shimla Railway; Durango & Silverton; Indian Pacific; Northern Explorer; Coastal Pacific |
+| 41–45 | Cumbres & Toltec; Alaska Coastal Classic; Empire Builder; Kyle Line; Gotthard Panorama rail section |
+| 46–50 | Yufuin no Mori; Oigawa Main Line steam section; Jungle Railway; Serra Verde Express; Le Petit Train Jaune |
+
+This is a production queue, not a claim that each service, timetable, fare, or connection is permanent. Each candidate still passes the route quality gate immediately before publication.
 
 ## Next 15 after route #35
 
