@@ -1,6 +1,6 @@
-# Rallii
+# Rallii Rail
 
-Rallii is a curated rail-journey discovery platform that helps travelers experience great train journeys better: know where to sit, what to see, and when to look.
+Rallii Rail is the rail-journey app in the Rallii family. It helps travelers experience great train journeys better: know where to sit, what to see, and when to look.
 
 ## Technology stack
 
@@ -35,7 +35,7 @@ The public prototype reads prepared route data at build time and does not requir
 
 ## Current product state
 
-Rallii currently has 28 curated rail journeys. The home and country-aware Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
+Rallii Rail currently has 31 curated rail journeys. The home and country-aware Discover pages are generated from reusable route data, while one shared route template provides prepared railway-aligned GeoJSON, structured landmarks, cautious directional seat guidance, synchronized MapLibre maps and scenic timelines, practical information, and source attribution.
 
 Saved journeys are stored locally in the browser as a small list of route slugs. They require no account, never duplicate route content, and are resolved against the central route repository on `/saved`.
 

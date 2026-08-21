@@ -7,20 +7,20 @@ import { SiteFooter } from "@/components/site-footer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://rallii-kappa.vercel.app"),
   title: {
-    default: "Rallii — Curated Rail Journeys",
-    template: "%s | Rallii",
+    default: "Rallii Rail — Curated Rail Journeys",
+    template: "%s | Rallii Rail",
   },
   description: "Know where to sit, what to see, and when to look on the world's great rail journeys.",
-  applicationName: "Rallii",
+  applicationName: "Rallii Rail",
   openGraph: {
-    title: "Rallii — Curated Rail Journeys",
+    title: "Rallii Rail — Curated Rail Journeys",
     description: "Know where to sit, what to see, and when to look.",
     siteName: "Rallii",
     type: "website",
   },
-  twitter: { card: "summary", title: "Rallii — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
+  twitter: { card: "summary", title: "Rallii Rail — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, title: "Rallii", statusBarStyle: "black-translucent" },
+  appleWebApp: { capable: true, title: "Rallii Rail", statusBarStyle: "black-translucent" },
   formatDetection: { telephone: false },
 };
 
