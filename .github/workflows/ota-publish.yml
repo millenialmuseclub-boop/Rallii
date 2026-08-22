@@ -28,7 +28,9 @@ jobs:
         run: npm run native:build
         env:
           NEXT_PUBLIC_OTA_CHANNEL: ${{ inputs.channel }}
-          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          # Public R2 delivery host. This is intentionally checked in: it is
+          # not a credential, and native builds must know where to poll.
+          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: "https://pub-9fa41a6ec38e4064b998f30a35df2cb0.r2.dev"
           NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
           NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
       - name: Sign, encrypt, and publish to R2
@@ -39,7 +41,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: "344cd8a55f89a18a61927cd5005ae20d"
           R2_BUCKET_NAME: "letthemeatcake-ota"
           CAPGO_PRIVATE_KEY_B64: ${{ secrets.CAPGO_PRIVATE_KEY }}
-          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          R2_PUBLIC_BASE_URL: "https://pub-9fa41a6ec38e4064b998f30a35df2cb0.r2.dev"
           OTA_CHANNEL: ${{ inputs.channel }}
           GIT_SHA: ${{ github.sha }}
         run: |

@@ -25,7 +25,7 @@ jobs:
       - run: npm run native:build
         env:
           NEXT_PUBLIC_OTA_CHANNEL: ${{ inputs.channel }}
-          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: "https://pub-9fa41a6ec38e4064b998f30a35df2cb0.r2.dev"
           NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
           NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
       - name: Sync Android container
@@ -47,7 +47,7 @@ jobs:
       - run: npm run native:build
         env:
           NEXT_PUBLIC_OTA_CHANNEL: ${{ inputs.channel }}
-          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: "https://pub-9fa41a6ec38e4064b998f30a35df2cb0.r2.dev"
           NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
           NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
       - name: Sync iOS container
