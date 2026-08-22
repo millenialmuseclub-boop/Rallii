@@ -218,7 +218,7 @@ button.timeline-content:hover, .timeline-content--selected { background: #ebe9e1
 .map-preparing span { position: relative; background: #e6e7e0; padding: 0.5rem; }
 .mobile-nav { position: fixed; right: 0; bottom: 0; left: 0; z-index: 50; border-top: 1px solid var(--line); background: rgb(250 248 242 / 97%); padding-bottom: env(safe-area-inset-bottom); backdrop-filter: blur(14px); }
 .mobile-top-bar { display: none; }
-.mobile-nav ul { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
+.mobile-nav ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 .mobile-nav a { display: flex; min-height: 3.8rem; flex-direction: column; align-items: center; justify-content: center; gap: 0.18rem; color: #6d716b; font-size: 0.65rem; font-weight: 700; text-decoration: none; }
 .mobile-nav a[aria-current="page"] { color: var(--accent); }
 .mobile-nav a[aria-current="page"] span { text-decoration: underline; text-underline-offset: 0.3rem; }
