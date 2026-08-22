@@ -34,8 +34,10 @@ jobs:
       - name: Sign, encrypt, and publish to R2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          # These identifiers are not credentials. Keeping them here makes a
+          # missing secret fail only when the actual upload credential is absent.
+          CLOUDFLARE_ACCOUNT_ID: "344cd8a55f89a18a61927cd5005ae20d"
+          R2_BUCKET_NAME: "letthemeatcake-ota"
           CAPGO_PRIVATE_KEY_B64: ${{ secrets.CAPGO_PRIVATE_KEY }}
           R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
           OTA_CHANNEL: ${{ inputs.channel }}
