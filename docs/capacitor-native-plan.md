@@ -36,4 +36,4 @@ Publish to staging first, test it on a staging device/build, then explicitly pub
 
 ## Native projects and cloud builds
 
-`ios/` and `android/` still need to be generated and committed when the current workstation's Capacitor CLI issue is cleared or from a cloud build environment. This does not require owning a Mac: GitHub Actions macOS runners can build iOS once signing credentials and the generated iOS project are committed. The local CLI currently fails before project creation because its Node runtime cannot read the Windows user profile (`uv_os_get_passwd` / `ENOMEM`); that is an environment issue, not an OTA configuration failure.
+`ios/` and `android/` are committed and synced from the same static `out/` bundle. This does not require owning a Mac: GitHub Actions macOS runners compile iOS. A small local Capacitor user-info shim keeps the Windows CLI usable when Node cannot read the current Windows user profile; it changes no app or OTA behavior.

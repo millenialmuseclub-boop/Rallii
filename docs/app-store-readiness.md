@@ -12,7 +12,7 @@ Only compatible web-layer updates can use OTA: UI, editorial content, route data
 
 ## Still required before submission
 
-- Generate and commit the `ios/` and `android/` Capacitor projects, then validate `cap sync` with the static bundle. This can be done with cloud CI; iOS needs a macOS runner, not a local Mac.
+- The generated `ios/` and `android/` Capacitor projects are committed. Validate `npm run cap:sync` with each static native bundle; cloud CI provides the macOS runner needed for iOS, so a local Mac is not required.
 - Configure Rallii Rail's own signing certificates, provisioning profile/keystore, bundle IDs, versioning, and cloud release workflows.
 - Test staging and production R2 OTA updates on physical iOS and Android devices, including rollback.
 - Enrol in Apple Developer Program and Google Play Console.
