@@ -70,9 +70,6 @@ jobs:
             -archivePath "$RUNNER_TEMP/RalliiRail.xcarchive" \
             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
             PRODUCT_BUNDLE_IDENTIFIER="$APPLE_BUNDLE_ID" \
-            CODE_SIGN_STYLE=Manual \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
-            PROVISIONING_PROFILE_SPECIFIER="$APPLE_PROFILE_NAME" \
             CURRENT_PROJECT_VERSION="$GITHUB_RUN_NUMBER"
       - name: Export App Store archive
         run: |
@@ -81,11 +78,8 @@ jobs:
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0"><dict>
             <key>method</key><string>app-store-connect</string>
-            <key>signingStyle</key><string>manual</string>
+            <key>signingStyle</key><string>automatic</string>
             <key>teamID</key><string>${APPLE_TEAM_ID}</string>
-            <key>provisioningProfiles</key><dict>
-              <key>${APPLE_BUNDLE_ID}</key><string>${APPLE_PROFILE_NAME}</string>
-            </dict>
           </dict></plist>
           EOF
           xcodebuild -exportArchive \
