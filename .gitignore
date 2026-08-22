@@ -5,6 +5,7 @@
 /.next
 /out
 /native-web
+/.rallii-private
 
 # production
 /build

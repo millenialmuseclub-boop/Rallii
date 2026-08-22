@@ -1,0 +1,53 @@
+name: Build Android Internal Test Bundle
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: OTA channel compiled into the native bundle
+        required: true
+        default: production
+        type: choice
+        options: [staging, production]
+
+jobs:
+  android-internal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "21" }
+      - uses: android-actions/setup-android@v3
+      - run: npm ci
+      - name: Build static native bundle
+        run: npm run native:build
+        env:
+          NEXT_PUBLIC_OTA_CHANNEL: ${{ inputs.channel }}
+          NEXT_PUBLIC_R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
+          NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
+      - name: Sync Android container
+        run: APP_BUILD_VERSION=$(git log -1 --format=%ct) npx cap sync android
+      - name: Install release signing key
+        env:
+          ANDROID_RELEASE_KEYSTORE_BASE64: ${{ secrets.ANDROID_RELEASE_KEYSTORE_BASE64 }}
+        run: echo "$ANDROID_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/rallii-rail-release.p12"
+      - name: Build signed Android App Bundle
+        env:
+          ANDROID_RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_STORE_PASSWORD }}
+          ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          ANDROID_RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+        run: |
+          chmod +x android/gradlew
+          cd android
+          ./gradlew bundleRelease --no-daemon \
+            -PRALLII_RELEASE_STORE_FILE="$RUNNER_TEMP/rallii-rail-release.p12" \
+            -PRALLII_RELEASE_STORE_PASSWORD="$ANDROID_RELEASE_STORE_PASSWORD" \
+            -PRALLII_RELEASE_KEY_ALIAS="$ANDROID_RELEASE_KEY_ALIAS" \
+            -PRALLII_RELEASE_KEY_PASSWORD="$ANDROID_RELEASE_KEY_PASSWORD"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rallii-rail-android-internal-aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
