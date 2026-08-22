@@ -10,8 +10,11 @@ export function SiteHeader() {
           <RalliiMark className="h-7 w-7 shrink-0" />
           <span>Rallii Rail</span>
         </Link>
-        <PrimaryNavigation />
+        <div className="flex items-center gap-5">
+          <a className="text-xs font-semibold uppercase tracking-[0.12em] text-stone-500 hover:text-[#173f32] focus-ring" href="https://jordypop.vercel.app/work/rallii" target="_blank" rel="noreferrer">Rallii family ↗</a>
+          <PrimaryNavigation />
+        </div>
       </div>
-    </header><div className="mobile-top-bar"><Link className="flex items-center gap-2 focus-ring" href="/"><RalliiMark className="h-6 w-6" /><span>Rallii Rail</span></Link><Link className="focus-ring" href="/saved">Saved</Link></div><PrimaryNavigation mobile /></>
+    </header><div className="mobile-top-bar"><Link className="flex items-center gap-2 focus-ring" href="/"><RalliiMark className="h-6 w-6" /><span>Rallii Rail</span></Link><a className="focus-ring" href="https://jordypop.vercel.app/work/rallii" target="_blank" rel="noreferrer">Rallii family ↗</a></div><PrimaryNavigation mobile /></>
   );
 }

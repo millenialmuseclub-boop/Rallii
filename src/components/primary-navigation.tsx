@@ -9,7 +9,7 @@ export function PrimaryNavigation({ mobile = false }: { mobile?: boolean }) {
   return (
     <nav className={mobile ? "mobile-nav" : "desktop-nav"} aria-label={mobile ? "Mobile navigation" : "Primary navigation"}>
       <ul>
-        {primaryNavigation.filter((item) => !mobile || item.href !== "/saved").map((item) => {
+        {primaryNavigation.map((item) => {
           const active = isNavigationItemActive(pathname, item.href);
           return <li key={item.href}><Link className="nav-link focus-ring" href={item.href} aria-current={active ? "page" : undefined}>{mobile ? <NavigationIcon href={item.href} /> : null}<span>{item.label}</span></Link></li>;
         })}
