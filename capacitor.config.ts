@@ -10,7 +10,7 @@ const config: CapacitorConfig = {
       // Keeping automatic checks off means the plugin never contacts Capgo.
       autoUpdate: false,
       publicKey:
-        "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEA0TnpGNshjZhpvuwuJ1dGINYNwvbTYGblK+ryNQ8UrvQsxzg8UhDb\no9oibq1hhPy8tU0PrnuHJY6GLhCzeCzLvR9cF3GQexWXTctqMXape3yv1YxTz3/G\n8CsXNVwFEOtC1pqLXlB3sMjOdpTEn9CWgJFMcKg40Egdsd1ZqkJmqoJSJqiCNX7u\nANcdN14fBpl2K22MHBQzAXEBUm7UX5cB9A2LlrPMgDXs7YaRrNSeZiy8HorAXzPj\nGOP/MS1/Y73LuR4Xt/qvE7CPRIsbQxfAGwgEfoZHlKcHwJGg5eSmyNrr3DZfywPC\nwDSoZDS4ag/Gr1yzK9bN4RTSUAj6Z94BhwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+        "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAjieUlnHyiFvYV8Y0sgKPKL2EJ68TnTjM5EiLH5Co6/aCw06S8aLj\ncKF1onAo+zSjJ+QmyF33mnX/eMegU9WeoSUJeGlFD0g6n9rn3ZOuG4NDRTaM61Sv\nHwEpQKljaEfbEUG7VKFAuk/HCP0rYjplg6b9ViusSFZK11YZpgndezFsDh6+4fpG\nGyU/ZeOMaz4/1fLIVWbqlrAU0o52xrzj8UN0mWzevuJANMiMS90ybxFNCQujUPsA\nDvdoCr5te/tis0zAykx1VfjGRBhvYQnXGHqWcrjJTYUOYO2d1WmaQErBH9vLvKYU\nlGK/Dz8aV+gc65gx97ZkFTRrDrNqnA2DPwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
       version: process.env.APP_BUILD_VERSION,
     },
   },
