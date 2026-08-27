@@ -22,5 +22,6 @@ function NavigationIcon({ href }: { href: string }) {
   if (href === "/") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9H4z" /><path d="M9 19v-6h6v6" /></svg>;
   if (href === "/discover") return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" /><path d="m15 9-2 4-4 2 2-4z" /></svg>;
   if (href === "/plan") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z" /><path d="M9 8h6M9 12h6M9 16h4" /></svg>;
+  if (href === "/gear") return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10l2 12H5z" /><path d="M9 8a3 3 0 0 1 6 0" /></svg>;
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" /></svg>;
 }

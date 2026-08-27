@@ -5,6 +5,8 @@ export const primaryNavigation = [
   { href: "/saved", label: "Saved" },
 ] as const;
 
+export const secondaryNavigation = [{ href: "/gear", label: "Rail Gear" }] as const;
+
 export function isNavigationItemActive(pathname: string, href: string): boolean {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
