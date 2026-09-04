@@ -31,8 +31,10 @@ jobs:
           # Public R2 delivery host. This is intentionally checked in: it is
           # not a credential, and native builds must know where to poll.
           NEXT_PUBLIC_R2_PUBLIC_BASE_URL: "https://pub-9fa41a6ec38e4064b998f30a35df2cb0.r2.dev"
-          NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS }}
-          NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER }}
+          # Public publisher attribution from .env.example; missing repository
+          # variables must not silently disable every partner widget.
+          NEXT_PUBLIC_TRAVELPAYOUTS_TRS: ${{ vars.TRAVELPAYOUTS_TRS || '460464' }}
+          NEXT_PUBLIC_TRAVELPAYOUTS_MARKER: ${{ vars.TRAVELPAYOUTS_MARKER || '673999' }}
       - name: Sign, encrypt, and publish to R2
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
