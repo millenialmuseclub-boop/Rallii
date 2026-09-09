@@ -40,7 +40,7 @@ jobs:
           mkdir -p fastlane/metadata/en-US
           printf '%s\n' 'Rallii' > fastlane/metadata/en-US/name.txt
           cat > fastlane/metadata/en-US/release_notes.txt <<'NOTES'
-          Green, Trail, and MTB are three new ways to explore with Rallii. Trail and MTB use compact, tap-to-open region lists, with trip-planning links for stays, flights, activities, and car hire.
+          Green, Trail, MTB, and Snow are four new ways to explore with Rallii. Browse golf, hiking, mountain biking, and winter destinations in compact, tap-to-open lists, with trip-planning links for stays, flights, activities, and car hire.
           NOTES
           cat > fastlane/Fastfile <<'RUBY'
           default_platform(:ios)

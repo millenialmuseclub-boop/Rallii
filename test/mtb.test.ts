@@ -39,8 +39,8 @@ test("MTB Want to Ride, Ridden and Favorites round-trip without touching other l
   assert.deepEqual(updateMtbSave(ridden, "whistler-bike-park", "ridden").rides, {});
   for (const raw of [null, "broken", "[]", '{"version":2,"rides":{}}', '{"version":1,"rides":{"x":null,"__proto__":{"status":"ridden"}}}']) assert.deepEqual(parseMtbLibrary(raw).rides, {});
 });
-test("four-mode routing remembers MTB without making it an alias of Trail", () => {
-  assert.deepEqual(activities.map(item => item.id), ["rail", "green", "trail", "mtb"]);
+test("released-mode routing remembers MTB without making it an alias of Trail", () => {
+  assert.deepEqual(activities.map(item => item.id), ["rail", "green", "trail", "mtb", "snow"]);
   assert.equal(activityForPath("/mtb/whistler-bike-park/"), "mtb");
   assert.equal(activityForPath("/trail/mist-trail/"), "trail");
   assert.equal(launchActivity("/", true, "mtb"), "mtb");

@@ -4,16 +4,18 @@ export const activities = [
   { id: "green", label: "Green", href: "/green/" },
   { id: "trail", label: "Trail", href: "/trail/" },
   { id: "mtb", label: "MTB", href: "/mtb/" },
+  { id: "snow", label: "Snow", href: "/snow/" },
 ] as const;
 export type Activity = (typeof activities)[number]["id"];
 export const ACTIVITY_KEY = "rallii:activity:v1";
 export function activityForPath(path: string): Activity {
+  if (path === "/snow" || path.startsWith("/snow/")) return "snow";
   if (path === "/mtb" || path.startsWith("/mtb/")) return "mtb";
   if (path === "/trail" || path.startsWith("/trail/")) return "trail";
   return path === "/green" || path.startsWith("/green/") ? "green" : "rail";
 }
 export function launchActivity(path: string, native: boolean, saved: string | null): Activity {
-  return native && path === "/" && (saved === "green" || saved === "trail" || saved === "mtb") ? saved : activityForPath(path);
+  return native && path === "/" && (saved === "green" || saved === "trail" || saved === "mtb" || saved === "snow") ? saved : activityForPath(path);
 }
 export function rememberActivity(activity: Activity) {
   try { window.localStorage.setItem(ACTIVITY_KEY, activity); } catch { /* Navigation still works when storage is unavailable. */ }

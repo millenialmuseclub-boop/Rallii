@@ -7,10 +7,12 @@ import { useTrailLibrary } from "@/trail/use-trail-library";
 import { useMtbLibrary } from "@/mtb/use-mtb-library";
 import { SaveMtb } from "@/mtb/save-mtb";
 import { SaveTrail } from "@/trail/save-trail";
+import { useSnowLibrary } from "@/snow/use-snow-library";
+import { SaveSnow } from "@/snow/save-snow";
 import { useEntitlements } from "@/hooks/use-entitlements";
 import { COLLECTIONS_KEY, parseCollections, updateCollection, type TripCollection } from "@/lib/pro-collections";
 
-export interface SavedExperience { activity: "rail" | "green" | "trail" | "mtb"; slug: string; name: string; href: string }
+export interface SavedExperience { activity: "rail" | "green" | "trail" | "mtb" | "snow"; slug: string; name: string; href: string }
 function snapshot() { try { return localStorage.getItem(COLLECTIONS_KEY) ?? ""; } catch { return ""; } }
 function subscribe(callback: () => void) {
   const storage = (event: StorageEvent) => { if (!event.key || event.key === COLLECTIONS_KEY) callback(); };
@@ -23,16 +25,17 @@ export function MyRallii({ experiences }: { experiences: SavedExperience[] }) {
   const { library } = useCourseLibrary();
   const { library: trailLibrary } = useTrailLibrary();
   const { library: mtbLibrary } = useMtbLibrary();
+  const { library: snowLibrary } = useSnowLibrary();
   const { isPro } = useEntitlements();
   const raw = useSyncExternalStore(subscribe, snapshot, serverSnapshot);
   const collections = parseCollections(raw);
-  const [filter, setFilter] = useState<"all" | "rail" | "green" | "trail" | "mtb">("all");
+  const [filter, setFilter] = useState<"all" | "rail" | "green" | "trail" | "mtb" | "snow">("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [draft, setDraft] = useState<TripCollection>();
   const [message, setMessage] = useState("");
-  const savedStatus = (item: SavedExperience) => item.activity === "rail" ? statuses[item.slug] : item.activity === "green" ? library.courses[item.slug] : item.activity === "trail" ? trailLibrary.trails[item.slug] : mtbLibrary.rides[item.slug]?.status;
+  const savedStatus = (item: SavedExperience) => item.activity === "rail" ? statuses[item.slug] : item.activity === "green" ? library.courses[item.slug] : item.activity === "trail" ? trailLibrary.trails[item.slug] : item.activity === "mtb" ? mtbLibrary.rides[item.slug]?.status : snowLibrary.places[item.slug]?.status;
   const saved = experiences.filter(item => savedStatus(item));
-  const visible = saved.filter(item => (filter === "all" || item.activity === filter) && (statusFilter === "all" || (statusFilter === "favorite" ? item.activity === "mtb" && mtbLibrary.rides[item.slug]?.favorite : statusFilter === "been" ? ["been", "played", "ridden"].includes(savedStatus(item) ?? "") : ["want_to_go", "want_to_play", "want_to_ride"].includes(savedStatus(item) ?? ""))));
+  const visible = saved.filter(item => (filter === "all" || item.activity === filter) && (statusFilter === "all" || (statusFilter === "favorite" ? (item.activity === "mtb" && mtbLibrary.rides[item.slug]?.favorite) || (item.activity === "snow" && snowLibrary.places[item.slug]?.favorite) : statusFilter === "been" ? ["been", "played", "ridden"].includes(savedStatus(item) ?? "") : ["want_to_go", "want_to_play", "want_to_ride"].includes(savedStatus(item) ?? ""))));
   function save() {
     if (!draft || !isPro || !draft.name.trim()) return;
     try {
@@ -42,10 +45,10 @@ export function MyRallii({ experiences }: { experiences: SavedExperience[] }) {
     } catch { setMessage("Your collection could not be saved. Device storage may be full or unavailable. Your notes are still here; copy them before leaving."); }
   }
   return <div className="family-workspace">
-    <p>Private to this device. Your Rail journeys, Green courses, Trail hikes and MTB rides, together.</p>
-    <div className="family-actions" aria-label="Filter saved experiences">{(["all", "rail", "green", "trail", "mtb"] as const).map(value => <button key={value} type="button" aria-pressed={filter === value} onClick={() => { setFilter(value); if (statusFilter === "favorite") setStatusFilter("all"); }}>{value === "mtb" ? "MTB" : value.charAt(0).toUpperCase() + value.slice(1)}</button>)}</div>
+    <p>Private to this device. Your Rail, Green, Trail, MTB and Snow places, together.</p>
+    <div className="family-actions" aria-label="Filter saved experiences">{(["all", "rail", "green", "trail", "mtb", "snow"] as const).map(value => <button key={value} type="button" aria-pressed={filter === value} onClick={() => { setFilter(value); if (statusFilter === "favorite") setStatusFilter("all"); }}>{value === "mtb" ? "MTB" : value.charAt(0).toUpperCase() + value.slice(1)}</button>)}</div>
     <div className="family-actions" aria-label="Filter saved status">{[["all", "All statuses"], ["want", filter === "mtb" ? "Want to Ride" : "Want to Go"], ["been", filter === "mtb" ? "Ridden" : "Been"], ...(filter === "mtb" ? [["favorite", "Favorites"]] : [])].map(([value, label]) => <button key={value} type="button" aria-pressed={statusFilter === value} onClick={() => setStatusFilter(value)}>{label}</button>)}</div>
-    {visible.length ? <ul className="family-saved-list">{visible.map(item => <li key={`${item.activity}:${item.slug}`}><span className="eyebrow">{item.activity}</span><div><Link href={item.href}>{item.name} →</Link>{item.activity === "trail" ? <SaveTrail slug={item.slug} name={item.name} /> : item.activity === "mtb" ? <SaveMtb slug={item.slug} name={item.name} /> : null}</div></li>)}</ul> : <p>No saved experiences in this view yet. Discover a <Link href="/discover/">rail journey</Link>, <Link href="/green/">golf course</Link> <Link href="/trail/">hiking trail</Link> or <Link href="/mtb/">MTB destination</Link>.</p>}
+    {visible.length ? <ul className="family-saved-list">{visible.map(item => <li key={`${item.activity}:${item.slug}`}><span className="eyebrow">{item.activity}</span><div><Link href={item.href}>{item.name} →</Link>{item.activity === "trail" ? <SaveTrail slug={item.slug} name={item.name} /> : item.activity === "mtb" ? <SaveMtb slug={item.slug} name={item.name} /> : item.activity === "snow" ? <SaveSnow slug={item.slug} name={item.name} /> : null}</div></li>)}</ul> : <p>No saved experiences in this view yet. Explore <Link href="/#explore">Rallii’s five modes</Link>.</p>}
     <div className="family-actions"><Link href="/saved/">Manage Rail saves</Link><Link href="/green/my-green/">Manage Green saves</Link></div>
     <section className="family-collections" aria-labelledby="collections-title"><p className="eyebrow">Rallii Pro</p><h2 id="collections-title">Trips that bring it all together</h2><p>Collect rail journeys, golf courses, hiking trails and MTB rides in one place, with your own trip notes.</p>
       {isPro ? <button type="button" onClick={() => { setDraft({ id: crypto.randomUUID(), name: "", notes: "", experiences: [] }); setMessage(""); }}>New collection</button> : <p><Link href="/pro/">Explore Rallii Pro →</Link> Existing collections remain readable when your membership ends.</p>}

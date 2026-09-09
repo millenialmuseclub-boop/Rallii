@@ -1,0 +1,4 @@
+"use client";
+import { useState } from "react";
+import { useSnowLibrary } from "./use-snow-library";
+export function SaveSnow({slug,name,compact=false}:{slug:string;name:string;compact?:boolean}){const{library,setSave}=useSnowLibrary();const[error,setError]=useState("");const current=library.places[slug];const actions=([...[ ["want_to_go","Want to Go"] ],...(!compact?[["been","Been"],["favorite","Favorite"]]:[])] as ["want_to_go"|"been"|"favorite",string][]);return <div className="trail-save" aria-label={`Save ${name}`}>{actions.map(([value,label])=><button key={value} type="button" aria-label={`${label}: ${name}`} aria-pressed={value==="favorite"?current?.favorite===true:current?.status===value} onClick={()=>setError(setSave(slug,value)?"":"Could not save. Device storage is unavailable.")}>{label}{(value==="favorite"?current?.favorite:current?.status===value)?" ✓":""}</button>)}{error?<small role="alert">{error}</small>:null}</div>}

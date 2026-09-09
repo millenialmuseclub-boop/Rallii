@@ -1,0 +1,9 @@
+export type SnowStatus = "want_to_go" | "been";
+export interface SnowSave { status: SnowStatus; favorite: boolean }
+export interface SnowLibrary { version: 1; places: Record<string, SnowSave> }
+export const SNOW_LIBRARY_KEY = "rallii:snow-library:v1";
+export const SNOW_LIBRARY_EVENT = "rallii:snow-library-change";
+export function parseSnowLibrary(raw: string | null): SnowLibrary { try { const value=JSON.parse(raw ?? "null"); if(value?.version!==1 || !value.places || typeof value.places!=="object" || Array.isArray(value.places)) return {version:1,places:{}}; return {version:1,places:Object.fromEntries(Object.entries(value.places).flatMap(([slug,entry])=>{const saved=entry as SnowSave|null; return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)&&saved&&(saved.status==="want_to_go"||saved.status==="been")?[[slug,{status:saved.status,favorite:saved.favorite===true}]]:[]}))}; } catch{return {version:1,places:{}}} }
+export function snowSnapshot(){try{return localStorage.getItem(SNOW_LIBRARY_KEY)??""}catch{return ""}}
+export function subscribeToSnow(callback:()=>void){const storage=(event:StorageEvent)=>{if(!event.key||event.key===SNOW_LIBRARY_KEY)callback()};window.addEventListener("storage",storage);window.addEventListener(SNOW_LIBRARY_EVENT,callback);return()=>{window.removeEventListener("storage",storage);window.removeEventListener(SNOW_LIBRARY_EVENT,callback)}}
+export function writeSnowSave(slug:string,change:SnowStatus|"favorite"){try{const library=parseSnowLibrary(snowSnapshot());const places={...library.places};const current=places[slug];if(change==="favorite")places[slug]={status:current?.status??"want_to_go",favorite:!current?.favorite};else if(current?.status===change)delete places[slug];else places[slug]={status:change,favorite:current?.favorite??false};localStorage.setItem(SNOW_LIBRARY_KEY,JSON.stringify({version:1,places}));window.dispatchEvent(new Event(SNOW_LIBRARY_EVENT));return true}catch{return false}}
