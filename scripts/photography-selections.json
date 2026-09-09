@@ -1,0 +1,411 @@
+[
+  {
+    "mode": "snow",
+    "key": "whistler-blackcomb",
+    "query": "whistler-blackcomb",
+    "title": "File:Beautiful day at Whistler Mtn. (16153337155).jpg",
+    "caption": "Winter slopes on Whistler Mountain.",
+    "alt": "Snow-covered Whistler Mountain beneath a clear winter sky"
+  },
+  {
+    "mode": "snow",
+    "key": "banff-sunshine",
+    "query": "banff-sunshine",
+    "title": "File:Banff Sunshine (December) (4173458034).jpg",
+    "caption": "Banff Sunshine in December; monochrome photograph.",
+    "alt": "Winter mountain terrain at Banff Sunshine in a monochrome photograph"
+  },
+  {
+    "mode": "snow",
+    "key": "lake-louise",
+    "query": "lake-louise",
+    "title": "File:Lake Louise 2017-03 ski 05.jpg",
+    "caption": "On the slopes at Lake Louise, March 2017.",
+    "alt": "Ski slopes and snowy Rocky Mountain peaks at Lake Louise"
+  },
+  {
+    "mode": "snow",
+    "key": "revelstoke",
+    "query": "revelstoke",
+    "title": "File:A day's skiing at spedtacular Mt Revelstoke - Noth Americas biggest vertical drop at 1713m (5620 ft) - the buried trees appear like snow ghosts - (28905451175).jpg",
+    "caption": "A ski day at Revelstoke among snow-covered trees.",
+    "alt": "Deep snow and snow-coated trees on the ski mountain at Revelstoke"
+  },
+  {
+    "mode": "snow",
+    "key": "park-city",
+    "query": "park-city",
+    "title": "File:Park City Ski Resort (6856251934).jpg",
+    "caption": "The First Time beginner slope at Park City Mountain.",
+    "alt": "Skiers on Park City Mountain's snowy beginner slope beneath the lifts"
+  },
+  {
+    "mode": "snow",
+    "key": "jackson-hole",
+    "query": "jackson-winter",
+    "title": "File:Peak View 2.jpg",
+    "caption": "Mountain view from Jackson Hole Mountain Resort.",
+    "alt": "Snow-covered mountain terrain seen from Jackson Hole Mountain Resort"
+  },
+  {
+    "mode": "snow",
+    "key": "aspen-snowmass",
+    "query": "aspen-snowmass",
+    "title": "File:Aspen Snowmass panorama on Pitkin county from Elk camp.jpg",
+    "creator": "Wolfgang Moroder",
+    "caption": "Snowmass ski terrain from Elk Camp.",
+    "alt": "Broad snowy slopes and distant Colorado peaks from Elk Camp at Snowmass"
+  },
+  {
+    "mode": "snow",
+    "key": "chamonix",
+    "query": "chamonix",
+    "title": "File:View towards Aiguille Verte from Planpraz, Chamonix-Mont-Blanc, 2007.jpg",
+    "caption": "Aiguille Verte from Planpraz, Chamonix.",
+    "alt": "Snow-covered alpine peaks toward Aiguille Verte from Planpraz in Chamonix"
+  },
+  {
+    "mode": "snow",
+    "key": "zermatt",
+    "query": "zermatt",
+    "title": "File:Zermatt-rothorn.jpg",
+    "caption": "Winter ski terrain at Unterrothorn above Zermatt.",
+    "alt": "High alpine ski slopes and mountain installations at Unterrothorn in Zermatt",
+    "position": "95% 50%"
+  },
+  {
+    "mode": "snow",
+    "key": "niseko-united",
+    "query": "niseko-winter",
+    "title": "File:Niseko United Ski Resort in Hokkaido Japan.jpg",
+    "caption": "Niseko United on Mount Annupuri, Hokkaido.",
+    "alt": "Winter ski terrain at Niseko United on Mount Annupuri"
+  },
+  {
+    "mode": "snow",
+    "key": "coronet-peak",
+    "query": "coronet-peak",
+    "title": "File:Snow Fields Coronet Peak NZ 1.jpg",
+    "caption": "Snow fields at Coronet Peak, New Zealand.",
+    "alt": "Snow-covered ski terrain on Coronet Peak above Queenstown"
+  },
+  {
+    "mode": "snow",
+    "key": "falls-creek",
+    "query": "falls-creek",
+    "title": "File:Falls-creek-ruined-castle-and-terrain-park.jpg",
+    "caption": "Ruined Castle chairlift and terrain park at Falls Creek.",
+    "alt": "Chairlift and snow-covered terrain park at Falls Creek in Victoria"
+  },
+  {
+    "mode": "green",
+    "key": "pacific-dunes",
+    "query": "pacific-course",
+    "title": "File:Bandon Dunes Resort-7.jpg",
+    "caption": "Bandon Dunes Golf Resort. Representative regional view; not the named course.",
+    "alt": "Bandon Dunes Golf Resort; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "old-macdonald",
+    "query": "bandon-coast",
+    "title": "File:Sunset over beach, Bandon, Oregon.JPG",
+    "caption": "Sunset on the Bandon coast. Representative regional view; not the named course.",
+    "alt": "Sunset on the Bandon coast; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "sheep-ranch",
+    "query": "bandon-coast",
+    "title": "File:Bandon State Nature Area (Bandon, Oregon).jpg",
+    "caption": "Bandon State Natural Area. Representative regional view; not the named course.",
+    "alt": "Bandon State Natural Area; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "kapalua-plantation",
+    "query": "kapalua-course",
+    "title": "File:Maui Pano Kapalua - Flickr - Joe Parks.jpg",
+    "caption": "Kapalua on the Maui coast. Representative regional view; not the named course.",
+    "alt": "Kapalua on the Maui coast; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "mauna-kea",
+    "query": "hapuna",
+    "title": "File:Hapuna Beach Hawaii 2021.jpg",
+    "caption": "Hāpuna Beach on the Kohala Coast. Representative regional view; not the named course.",
+    "alt": "Hāpuna Beach on the Kohala Coast; representative coastal setting, not the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "pasatiempo",
+    "query": "santa-cruz",
+    "title": "File:California coast, Santa Cruz, CA.jpg",
+    "caption": "The Pacific coast at Santa Cruz. Representative regional view; not the named course.",
+    "alt": "The Pacific coast at Santa Cruz; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "sand-valley",
+    "query": "wisconsin-sands",
+    "title": "File:Gfp-wisconsin-roche-a-cri-state-park.jpg",
+    "caption": "Roche-A-Cri State Park in central Wisconsin. Representative regional view; not the named course.",
+    "alt": "Roche-A-Cri State Park in central Wisconsin; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "mammoth-dunes",
+    "query": "wisconsin-pines",
+    "title": "File:Petenwell Lake and dam.jpg",
+    "caption": "Petenwell Lake in central Wisconsin. Representative regional view; not the named course.",
+    "alt": "Petenwell Lake in central Wisconsin; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "streamsong-red",
+    "query": "streamsong-course",
+    "title": "File:Streamsong-Black-Par-3-Hole-5.jpg",
+    "caption": "Streamsong Black, fifth hole. Representative resort view; not the Red course.",
+    "alt": "The fifth hole of Streamsong Black; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "streamsong-blue",
+    "query": "lake-kissimmee",
+    "title": "File:Lake Wales FL Lake Kissimmee SP03.jpg",
+    "caption": "Lake Kissimmee State Park in central Florida. Representative regional view; not the named course.",
+    "alt": "Lake Kissimmee State Park in central Florida; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "wolf-creek",
+    "query": "mesquite",
+    "title": "File:I-15 Las Vegas - Mesquite Nevada 2018-04-11 03.jpg",
+    "caption": "Desert landscape on the road toward Mesquite, Nevada. Representative regional view; not the named course.",
+    "alt": "Desert landscape on the road toward Mesquite, Nevada; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "troia",
+    "query": "troia-coast",
+    "title": "File:Playa Troia Mar, Troia, Portugal, 2021-09-12, DD 06.jpg",
+    "caption": "Tróia Mar Beach on the Tróia Peninsula. Representative regional view; not the named course.",
+    "alt": "Tróia Mar Beach on the Tróia Peninsula; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "west-cliffs",
+    "query": "obidos-coast",
+    "title": "File:Lagoa Obidos.jpg",
+    "caption": "Sunset at Óbidos Lagoon. Representative regional view; not the named course.",
+    "alt": "Sunset at Óbidos Lagoon; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "kingston-heath",
+    "query": "black-rock",
+    "title": "File:Black Rock beach.jpg",
+    "caption": "Black Rock beach on the Melbourne coast. Representative regional view; not the named course.",
+    "alt": "Black Rock beach on the Melbourne coast; representative coastal setting, not the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "cape-wickham",
+    "query": "wickham-course",
+    "title": "File:Pan of the coast near Cape Wickham. Lighthouse at the far left. Peter Neaum. - panoramio.jpg",
+    "caption": "The coast and lighthouse at Cape Wickham. Representative regional view; not the named course.",
+    "alt": "The coast and lighthouse at Cape Wickham; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "tara-iti",
+    "query": "mangawhai",
+    "title": "File:Mangawhai Heads Beach NZ. (44164103752).jpg",
+    "caption": "Mangawhai Heads Beach in Northland. Representative regional view; not the named course.",
+    "alt": "Mangawhai Heads Beach in Northland; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "nine-bridges",
+    "query": "jeju",
+    "title": "File:Green vegetation on the low cloud-swept relief in Hallasan National Park Jeju South Korea.jpg",
+    "caption": "Hallasan National Park on Jeju Island. Representative regional view; not the named course.",
+    "alt": "Hallasan National Park on Jeju Island; representative setting, not a photograph of the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "green",
+    "key": "cabo-del-sol-desert",
+    "query": "cabo-beach",
+    "title": "File:Cabo-San-Lucas-Playa-Solmar.jpg",
+    "caption": "Playa Solmar at Cabo San Lucas. Representative regional view; not the named course.",
+    "alt": "Playa Solmar at Cabo San Lucas; representative coastal setting, not the named golf course",
+    "representative": true
+  },
+  {
+    "mode": "trail",
+    "key": "upper-yosemite-falls",
+    "query": "upper-yosemite-falls",
+    "title": "File:Yosemite Falls Trail May 2011 003.jpg",
+    "caption": "Upper Yosemite Fall from the Yosemite Falls Trail.",
+    "alt": "Upper Yosemite Fall from the Yosemite Falls Trail"
+  },
+  {
+    "mode": "trail",
+    "key": "mirror-lake",
+    "query": "mirror-lake",
+    "title": "File:Yosemite National Park (California, USA), Yosemite Valley, Mirror Lake -- 2012 -- 4685.jpg",
+    "caption": "Mirror Lake in Yosemite Valley.",
+    "alt": "Mirror Lake in Yosemite Valley"
+  },
+  {
+    "mode": "trail",
+    "key": "ryan-mountain",
+    "query": "ryan-mountain",
+    "title": "File:Ryan Mountain Trail 04.jpg",
+    "caption": "The summit of Ryan Mountain in Joshua Tree.",
+    "alt": "The summit of Ryan Mountain in Joshua Tree"
+  },
+  {
+    "mode": "trail",
+    "key": "barker-dam",
+    "query": "barker-dam",
+    "title": "File:Barker Dam Joshua Tree December 2013 004.jpg",
+    "caption": "Barker Dam Trail in Joshua Tree.",
+    "alt": "Barker Dam Trail in Joshua Tree"
+  },
+  {
+    "mode": "trail",
+    "key": "nisqually-vista",
+    "query": "nisqually-vista",
+    "title": "File:Several overlooks along the Nisqually Vista Trail offer views of the Nisqually Valley and Mount Rainier. (999ddea8-0073-4332-9a94-73a565d485bc).JPG",
+    "caption": "Mount Rainier framed by trees from Nisqually Vista Trail.",
+    "alt": "Mount Rainier framed by trees from Nisqually Vista Trail"
+  },
+  {
+    "mode": "trail",
+    "key": "canyon-overlook",
+    "query": "canyon-overlook",
+    "title": "File:Canyon Overlook Trail NPS.jpg",
+    "caption": "Canyon Overlook Trail in Zion.",
+    "alt": "Canyon Overlook Trail in Zion"
+  },
+  {
+    "mode": "trail",
+    "key": "riverside-walk",
+    "query": "riverside-walk",
+    "title": "File:Riverside Walk, Zion NP.JPG",
+    "caption": "Riverside Walk at the gateway to the Narrows in Zion.",
+    "alt": "Riverside Walk at the gateway to the Narrows in Zion"
+  },
+  {
+    "mode": "trail",
+    "key": "bryce-rim-walk",
+    "query": "bryce-rim-walk",
+    "title": "File:Bryce Amphitheater from Sunrise Point Highres 2013.jpg",
+    "caption": "Bryce Amphitheater from Sunrise Point.",
+    "alt": "Bryce Amphitheater from Sunrise Point"
+  },
+  {
+    "mode": "trail",
+    "key": "emerald-lake",
+    "query": "emerald-lake",
+    "title": "File:Rocky Mountain NP, Emerald Lake - panoramio.jpg",
+    "caption": "Emerald Lake in Rocky Mountain National Park.",
+    "alt": "Emerald Lake in Rocky Mountain National Park"
+  },
+  {
+    "mode": "trail",
+    "key": "alberta-falls",
+    "query": "alberta-falls",
+    "title": "File:Alberta Falls (50451749938).jpg",
+    "caption": "Alberta Falls in Rocky Mountain National Park.",
+    "alt": "Alberta Falls in Rocky Mountain National Park"
+  },
+  {
+    "mode": "trail",
+    "key": "avalanche-lake",
+    "query": "avalanche-lake",
+    "title": "File:Avalanche Lake in Glacier National Park.JPG",
+    "caption": "Avalanche Lake beneath mountains and waterfalls in Glacier National Park.",
+    "alt": "Avalanche Lake beneath mountains and waterfalls in Glacier National Park"
+  },
+  {
+    "mode": "trail",
+    "key": "hidden-falls-jenny-lake",
+    "query": "hidden-falls-jenny-lake",
+    "title": "File:Hidden Falls Smaldone.jpg",
+    "caption": "Hidden Falls in Grand Teton National Park.",
+    "alt": "Hidden Falls in Grand Teton National Park"
+  },
+  {
+    "mode": "trail",
+    "key": "diamond-head",
+    "query": "diamond-head",
+    "title": "File:View to Waikiki and Honolulu from Diamond Head summit - panoramio.jpg",
+    "caption": "Waikīkī and Honolulu from the summit of Diamond Head.",
+    "alt": "Waikīkī and Honolulu from the summit of Diamond Head"
+  },
+  {
+    "mode": "trail",
+    "key": "verna-dunshee",
+    "query": "verna-dunshee",
+    "title": "File:View of San Francisco Bay area from Mount Tamalpais East Peak.jpg",
+    "caption": "San Francisco Bay from Mount Tamalpais East Peak.",
+    "alt": "San Francisco Bay from Mount Tamalpais East Peak"
+  },
+  {
+    "mode": "mtb",
+    "key": "lost-lake",
+    "query": "lost-lake",
+    "title": "File:Lost Lake, Whistler B.C.jpg",
+    "caption": "Lost Lake in Whistler.",
+    "alt": "Lost Lake in Whistler",
+    "representative": false
+  },
+  {
+    "mode": "mtb",
+    "key": "moab-brands",
+    "query": "moab-brands",
+    "title": "File:Mountain Biking- Moab Brands Trails (21066004768).jpg",
+    "caption": "Mountain biking on the Moab Brands Trails.",
+    "alt": "Mountain biking on the Moab Brands Trails",
+    "representative": false,
+    "creator": "Leslie Kehmeier / Bureau of Land Management"
+  },
+  {
+    "mode": "mtb",
+    "key": "morzine",
+    "query": "morzine",
+    "title": "File:Morzine summer.jpg",
+    "caption": "Representative setting: Morzine in summer.",
+    "alt": "Representative setting: Morzine in summer",
+    "representative": true
+  },
+  {
+    "mode": "mtb",
+    "key": "slaughter-pen",
+    "query": "bentonville-trails",
+    "title": "File:Crystal Bridges Trail.jpg",
+    "caption": "Representative setting: Crystal Bridges Trail in Bentonville; regional setting, not Slaughter Pen.",
+    "alt": "Representative setting: Crystal Bridges Trail in Bentonville; regional setting, not Slaughter Pen",
+    "representative": true
+  }
+]

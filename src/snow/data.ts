@@ -1,5 +1,5 @@
 export type SnowKind = "Resort" | "Ski region";
-export interface SnowDestination { slug: string; name: string; location: string; region: string; kind: SnowKind; terrain: string; season: string; summary: string; sourceUrl: string }
+export interface SnowDestination { slug: string; imageKey: string; name: string; location: string; region: string; kind: SnowKind; terrain: string; season: string; summary: string; sourceUrl: string }
 export const snowDestinations: SnowDestination[] = [
   ["whistler-blackcomb","Whistler Blackcomb","British Columbia, Canada","Canada","Resort","Two linked mountains with a broad mix of alpine and tree skiing.","Northern winter","A big-mountain base for long ski days and a village-built trip.","https://www.whistlerblackcomb.com/"],
   ["banff-sunshine","Banff Sunshine","Alberta, Canada","Canada","Resort","High alpine bowls and open terrain in Banff National Park.","November–May","A high-elevation ski day surrounded by the Canadian Rockies.","https://www.skibanff.com/"],
@@ -13,6 +13,6 @@ export const snowDestinations: SnowDestination[] = [
   ["niseko-united","Niseko United","Hokkaido, Japan","Japan","Ski region","Four connected areas known for frequent winter snow and tree skiing.","December–April","A Hokkaido snow trip with several bases and a strong food culture beyond the lifts.","https://www.niseko.ne.jp/en/"],
   ["coronet-peak","Coronet Peak","Queenstown, New Zealand","New Zealand","Resort","Open groomed terrain close to Queenstown.","June–October","A Southern Hemisphere ski day that fits naturally into a Queenstown trip.","https://www.coronetpeak.co.nz/"],
   ["falls-creek","Falls Creek","Victoria, Australia","Australia","Resort","A pedestrian alpine village with groomed runs and Nordic access.","June–October","An Australian winter base with village convenience and varied snow activities.","https://www.fallscreek.com.au/"],
-].map(([slug,name,location,region,kind,terrain,season,summary,sourceUrl]) => ({slug,name,location,region,kind: kind as SnowKind,terrain,season,summary,sourceUrl}));
+].map(([slug,name,location,region,kind,terrain,season,summary,sourceUrl]) => ({slug,imageKey:slug,name,location,region,kind: kind as SnowKind,terrain,season,summary,sourceUrl}));
 export function findSnow(slug: string) { return snowDestinations.find(item => item.slug === slug); }
 export function filterSnow(query = "", region = "All", kind = "All") { const q=query.trim().toLowerCase(); return snowDestinations.filter(item => (!q || `${item.name} ${item.location} ${item.terrain}`.toLowerCase().includes(q)) && (region === "All" || item.region === region) && (kind === "All" || item.kind === kind)); }

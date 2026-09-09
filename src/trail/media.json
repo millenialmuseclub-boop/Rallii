@@ -8,7 +8,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/yose/planyourvisit/images/waterfall-web_1.jpg?maxwidth=1300&autorotate=false",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 477,
+    "fileSize": 62462,
+    "position": "50% 50%"
   },
   "yosemite": {
     "src": "/images/trails/yosemite.webp",
@@ -19,7 +23,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/yose/planyourvisit/images/hiker-in-valley_3.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 782,
+    "fileSize": 191194,
+    "position": "50% 50%"
   },
   "joshua": {
     "src": "/images/trails/joshua.webp",
@@ -30,7 +38,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/jotr/planyourvisit/images/hiker-schwalbe.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 867,
+    "fileSize": 131658,
+    "position": "50% 50%"
   },
   "rainier": {
     "src": "/images/trails/rainier.webp",
@@ -41,7 +53,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/pwr/park/mora/8E424516-D186-DB59-22723258ADBC7E03/8E424516-D186-DB59-22723258ADBC7E03.jpg?autorotate=false&maxWidth=1300&maxHeight=1020&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 960,
+    "height": 655,
+    "fileSize": 117020,
+    "position": "50% 50%"
   },
   "moss": {
     "src": "/images/trails/moss.webp",
@@ -52,7 +68,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/cropped_image/primary/1A4034FE-B953-699C-D92B619BDA313DA6.jpg?width=1600&quality=90&mode=crop",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 900,
+    "fileSize": 268310,
+    "position": "50% 50%"
   },
   "olympic": {
     "src": "/images/trails/olympic.webp",
@@ -63,7 +83,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/olym/planyourvisit/images/Slideshow-84.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 715,
+    "fileSize": 245118,
+    "position": "50% 50%"
   },
   "zion": {
     "src": "/images/trails/zion.webp",
@@ -74,7 +98,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/zion/planyourvisit/images/Zion-Canyon-Trail-Hero-Image.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 574,
+    "fileSize": 235376,
+    "position": "50% 50%"
   },
   "bryce": {
     "src": "/images/trails/bryce.webp",
@@ -85,7 +113,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/cropped_image/primary/97B393CF-999C-3A86-2E8713CB94E28EB1.jpeg?width=1300&quality=90&mode=crop",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 731,
+    "fileSize": 303694,
+    "position": "50% 50%"
   },
   "canyon": {
     "src": "/images/trails/canyon.webp",
@@ -96,7 +128,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/grca/planyourvisit/images/s_kaibab_l.jpg?maxwidth=650&autorotate=false",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 285,
+    "height": 275,
+    "fileSize": 22150,
+    "position": "50% 50%"
   },
   "fairy": {
     "src": "/images/trails/fairy.webp",
@@ -107,7 +143,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/cropped_image/primary/04D45895-B19C-913D-1D40EBCBA112480E.jpg?width=1300&quality=90&mode=crop",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 731,
+    "fileSize": 263942,
+    "position": "50% 50%"
   },
   "taggart": {
     "src": "/images/trails/taggart.webp",
@@ -118,7 +158,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/cropped_image/primary/6433D2E0-BABE-9A14-93620C92A3AB28A7.jpg?width=1300&quality=90&mode=crop",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 731,
+    "fileSize": 206812,
+    "position": "50% 50%"
   },
   "jenny": {
     "src": "/images/trails/jenny.webp",
@@ -129,7 +173,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/grte/planyourvisit/images/jennylake_10.jpg?maxwidth=650&autorotate=false",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 650,
+    "height": 433,
+    "fileSize": 45836,
+    "position": "50% 50%"
   },
   "kilauea": {
     "src": "/images/trails/kilauea.webp",
@@ -140,7 +188,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/havo/planyourvisit/images/HAVO_20190607_K%C4%ABlauea-Iki-Trail-with-Ohia-in-Foreground_JWei.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 586,
+    "fileSize": 255566,
+    "position": "50% 50%"
   },
   "devastation": {
     "src": "/images/trails/devastation.webp",
@@ -151,7 +203,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/havo/planyourvisit/images/Devastation_960.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 960,
+    "height": 502,
+    "fileSize": 120046,
+    "position": "50% 50%"
   },
   "tomales": {
     "src": "/images/trails/tomales.webp",
@@ -162,7 +218,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/common/uploads/cropped_image/primary/E8ECDBBA-B31B-0276-ECABDF2D376283D1.jpg?width=1300&quality=90&mode=crop",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1300,
+    "height": 730,
+    "fileSize": 148006,
+    "position": "50% 50%"
   },
   "diamond": {
     "src": "/images/trails/diamond.webp",
@@ -173,7 +233,11 @@
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/93/Diamond_Head_Hawaii_From_Round_Top_Rd.JPG",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1200,
+    "fileSize": 165146,
+    "position": "50% 50%"
   },
   "tam": {
     "src": "/images/trails/tam.webp",
@@ -184,7 +248,11 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Mt._Tamalpais%2C_viewed_from_the_south.jpg",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1067,
+    "fileSize": 76770,
+    "position": "50% 50%"
   },
   "lands": {
     "src": "/images/trails/lands.webp",
@@ -195,7 +263,11 @@
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/88/Coastal_Trail_and_Golden_Gate_Bridge%2C_April_2019.JPG",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1200,
+    "fileSize": 243910,
+    "position": "50% 50%"
   },
   "rocky": {
     "src": "/images/trails/rocky.webp",
@@ -206,7 +278,11 @@
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Rocky_Mountain_National_Park_in_September_2011_-_Glacier_Gorge_from_Bear_Lake.JPG",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1138,
+    "fileSize": 157876,
+    "position": "50% 50%"
   },
   "glacier": {
     "src": "/images/trails/glacier.webp",
@@ -217,7 +293,11 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Mountain_Goat_at_Hidden_Lake.jpg",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1067,
+    "fileSize": 323636,
+    "position": "50% 50%"
   },
   "yosemite-falls": {
     "src": "/images/trails/yosemite-falls.webp",
@@ -228,7 +308,11 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/yose/planyourvisit/images/yosemite-falls-cjacoby-sq.jpg?maxwidth=650&autorotate=false",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 650,
+    "height": 653,
+    "fileSize": 105746,
+    "position": "50% 50%"
   },
   "bridalveil": {
     "src": "/images/trails/bridalveil.webp",
@@ -239,6 +323,262 @@
     "license": "Public domain",
     "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
     "originalUrl": "https://www.nps.gov/yose/planyourvisit/images/bridalveil-fall-cjacoby-sq.jpg?maxwidth=650&autorotate=false",
-    "accessedAt": "2026-09-09"
+    "accessedAt": "2026-09-09",
+    "width": 650,
+    "height": 650,
+    "fileSize": 97342,
+    "position": "50% 50%"
+  },
+  "upper-yosemite-falls": {
+    "src": "/images/trail/upper-yosemite-falls.webp",
+    "alt": "Upper Yosemite Fall from the Yosemite Falls Trail",
+    "caption": "Upper Yosemite Fall from the Yosemite Falls Trail.",
+    "credit": "King of Hearts",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yosemite_Falls_Trail_May_2011_003.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Yosemite_Falls_Trail_May_2011_003.jpg/1920px-Yosemite_Falls_Trail_May_2011_003.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 800,
+    "height": 1200,
+    "fileSize": 203960,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Yosemite Falls Trail May 2011 003.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "mirror-lake": {
+    "src": "/images/trail/mirror-lake.webp",
+    "alt": "Mirror Lake in Yosemite Valley",
+    "caption": "Mirror Lake in Yosemite Valley.",
+    "credit": "Dietmar Rabich",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yosemite_National_Park_(California,_USA),_Yosemite_Valley,_Mirror_Lake_--_2012_--_4685.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Yosemite_National_Park_%28California%2C_USA%29%2C_Yosemite_Valley%2C_Mirror_Lake_--_2012_--_4685.jpg/1920px-Yosemite_National_Park_%28California%2C_USA%29%2C_Yosemite_Valley%2C_Mirror_Lake_--_2012_--_4685.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 853,
+    "height": 1200,
+    "fileSize": 246596,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Yosemite National Park (California, USA), Yosemite Valley, Mirror Lake -- 2012 -- 4685.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "ryan-mountain": {
+    "src": "/images/trail/ryan-mountain.webp",
+    "alt": "The summit of Ryan Mountain in Joshua Tree",
+    "caption": "The summit of Ryan Mountain in Joshua Tree.",
+    "credit": "Bernard Gagnon",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ryan_Mountain_Trail_04.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Ryan_Mountain_Trail_04.jpg/1920px-Ryan_Mountain_Trail_04.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1067,
+    "fileSize": 555336,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Ryan Mountain Trail 04.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "barker-dam": {
+    "src": "/images/trail/barker-dam.webp",
+    "alt": "Barker Dam Trail in Joshua Tree",
+    "caption": "Barker Dam Trail in Joshua Tree.",
+    "credit": "King of Hearts",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barker_Dam_Joshua_Tree_December_2013_004.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Barker_Dam_Joshua_Tree_December_2013_004.jpg/1920px-Barker_Dam_Joshua_Tree_December_2013_004.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1060,
+    "fileSize": 487782,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Barker Dam Joshua Tree December 2013 004.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "nisqually-vista": {
+    "src": "/images/trail/nisqually-vista.webp",
+    "alt": "Mount Rainier framed by trees from Nisqually Vista Trail",
+    "caption": "Mount Rainier framed by trees from Nisqually Vista Trail.",
+    "credit": "NPS Photo",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Several_overlooks_along_the_Nisqually_Vista_Trail_offer_views_of_the_Nisqually_Valley_and_Mount_Rainier._(999ddea8-0073-4332-9a94-73a565d485bc).JPG",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Several_overlooks_along_the_Nisqually_Vista_Trail_offer_views_of_the_Nisqually_Valley_and_Mount_Rainier._(999ddea8-0073-4332-9a94-73a565d485bc).JPG",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Several_overlooks_along_the_Nisqually_Vista_Trail_offer_views_of_the_Nisqually_Valley_and_Mount_Rainier._%28999ddea8-0073-4332-9a94-73a565d485bc%29.JPG/1920px-Several_overlooks_along_the_Nisqually_Vista_Trail_offer_views_of_the_Nisqually_Valley_and_Mount_Rainier._%28999ddea8-0073-4332-9a94-73a565d485bc%29.JPG",
+    "accessedAt": "2026-09-09",
+    "width": 900,
+    "height": 1200,
+    "fileSize": 397694,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Several overlooks along the Nisqually Vista Trail offer views of the Nisqually Valley and Mount Rainier. (999ddea8-0073-4332-9a94-73a565d485bc).JPG",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "canyon-overlook": {
+    "src": "/images/trail/canyon-overlook.webp",
+    "alt": "Canyon Overlook Trail in Zion",
+    "caption": "Canyon Overlook Trail in Zion.",
+    "credit": "National Park Service",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canyon_Overlook_Trail_NPS.jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Canyon_Overlook_Trail_NPS.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Canyon_Overlook_Trail_NPS.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 324,
+    "height": 432,
+    "fileSize": 44804,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Canyon Overlook Trail NPS.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "riverside-walk": {
+    "src": "/images/trail/riverside-walk.webp",
+    "alt": "Riverside Walk at the gateway to the Narrows in Zion",
+    "caption": "Riverside Walk at the gateway to the Narrows in Zion.",
+    "credit": "McGhiever",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Riverside_Walk,_Zion_NP.JPG",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Riverside_Walk%2C_Zion_NP.JPG",
+    "accessedAt": "2026-09-09",
+    "width": 600,
+    "height": 800,
+    "fileSize": 124800,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Riverside Walk, Zion NP.JPG",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "bryce-rim-walk": {
+    "src": "/images/trail/bryce-rim-walk.webp",
+    "alt": "Bryce Amphitheater from Sunrise Point",
+    "caption": "Bryce Amphitheater from Sunrise Point.",
+    "credit": "Tuxyso",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bryce_Amphitheater_from_Sunrise_Point_Highres_2013.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Bryce_Amphitheater_from_Sunrise_Point_Highres_2013.jpg/1920px-Bryce_Amphitheater_from_Sunrise_Point_Highres_2013.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 543,
+    "fileSize": 333414,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Bryce Amphitheater from Sunrise Point Highres 2013.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "emerald-lake": {
+    "src": "/images/trail/emerald-lake.webp",
+    "alt": "Emerald Lake in Rocky Mountain National Park",
+    "caption": "Emerald Lake in Rocky Mountain National Park.",
+    "credit": "Frans-Banja Mulder",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rocky_Mountain_NP,_Emerald_Lake_-_panoramio.jpg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Rocky_Mountain_NP%2C_Emerald_Lake_-_panoramio.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 858,
+    "height": 643,
+    "fileSize": 200930,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Rocky Mountain NP, Emerald Lake - panoramio.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "alberta-falls": {
+    "src": "/images/trail/alberta-falls.webp",
+    "alt": "Alberta Falls in Rocky Mountain National Park",
+    "caption": "Alberta Falls in Rocky Mountain National Park.",
+    "credit": "G. Lamar",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alberta_Falls_(50451749938).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Alberta_Falls_%2850451749938%29.jpg/1920px-Alberta_Falls_%2850451749938%29.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 902,
+    "height": 1200,
+    "fileSize": 452180,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Alberta Falls (50451749938).jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "avalanche-lake": {
+    "src": "/images/trail/avalanche-lake.webp",
+    "alt": "Avalanche Lake beneath mountains and waterfalls in Glacier National Park",
+    "caption": "Avalanche Lake beneath mountains and waterfalls in Glacier National Park.",
+    "credit": "Beatlesnature",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Avalanche_Lake_in_Glacier_National_Park.JPG",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Avalanche_Lake_in_Glacier_National_Park.JPG/1920px-Avalanche_Lake_in_Glacier_National_Park.JPG",
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1200,
+    "fileSize": 358366,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Avalanche Lake in Glacier National Park.JPG",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "hidden-falls-jenny-lake": {
+    "src": "/images/trail/hidden-falls-jenny-lake.webp",
+    "alt": "Hidden Falls in Grand Teton National Park",
+    "caption": "Hidden Falls in Grand Teton National Park.",
+    "credit": "Smaldone",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hidden_Falls_Smaldone.jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/File:Hidden_Falls_Smaldone.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Hidden_Falls_Smaldone.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 510,
+    "height": 766,
+    "fileSize": 84250,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:Hidden Falls Smaldone.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "diamond-head": {
+    "src": "/images/trail/diamond-head.webp",
+    "alt": "Waikīkī and Honolulu from the summit of Diamond Head",
+    "caption": "Waikīkī and Honolulu from the summit of Diamond Head.",
+    "credit": "verygreen",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_to_Waikiki_and_Honolulu_from_Diamond_Head_summit_-_panoramio.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/View_to_Waikiki_and_Honolulu_from_Diamond_Head_summit_-_panoramio.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 1200,
+    "height": 794,
+    "fileSize": 226416,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:View to Waikiki and Honolulu from Diamond Head summit - panoramio.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+  },
+  "verna-dunshee": {
+    "src": "/images/trail/verna-dunshee.webp",
+    "alt": "San Francisco Bay from Mount Tamalpais East Peak",
+    "caption": "San Francisco Bay from Mount Tamalpais East Peak.",
+    "credit": "Chris Koerner from St. Louis, USA",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_of_San_Francisco_Bay_area_from_Mount_Tamalpais_East_Peak.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/View_of_San_Francisco_Bay_area_from_Mount_Tamalpais_East_Peak.jpg/1920px-View_of_San_Francisco_Bay_area_from_Mount_Tamalpais_East_Peak.jpg",
+    "accessedAt": "2026-09-09",
+    "width": 1600,
+    "height": 1068,
+    "fileSize": 39116,
+    "position": "50% 50%",
+    "representative": false,
+    "selectionTitle": "File:View of San Francisco Bay area from Mount Tamalpais East Peak.jpg",
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
   }
 }

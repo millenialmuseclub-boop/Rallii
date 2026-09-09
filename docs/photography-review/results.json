@@ -1,0 +1,607 @@
+{
+  "visits": [
+    {
+      "path": "/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/rail/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/routes/glacier-express/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/compare/?routes=glacier-express,bernina-express",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/plan/?route=glacier-express",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/saved/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/discover/collections/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/courses/pacific-dunes/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/courses/mauna-kea/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/destinations/hawaii-island-golf/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/compare/?a=pacific-dunes&b=pebble-beach",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/plan/?course=mauna-kea",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/collections/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/my-green/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/mirror-lake/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/mist-trail/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/moab-brands/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/slaughter-pen/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/zermatt/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/my-rallii/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/rail/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/routes/glacier-express/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/compare/?routes=glacier-express,bernina-express",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/plan/?route=glacier-express",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/saved/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/discover/collections/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/courses/pacific-dunes/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/courses/mauna-kea/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/destinations/hawaii-island-golf/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/compare/?a=pacific-dunes&b=pebble-beach",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/plan/?course=mauna-kea",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/collections/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/green/my-green/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/mirror-lake/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/trail/mist-trail/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/moab-brands/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/mtb/slaughter-pen/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/zermatt/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/my-rallii/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/whistler-blackcomb/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/banff-sunshine/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/lake-louise/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/revelstoke/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/park-city/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/jackson-hole/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/aspen-snowmass/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/chamonix/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/zermatt/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/niseko-united/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/coronet-peak/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/snow/falls-creek/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/my-rallii/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/my-rallii/",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    },
+    {
+      "path": "/my-rallii/",
+      "width": 1440,
+      "overflow": false,
+      "broken": [],
+      "alt": [],
+      "clipped": [],
+      "remote": []
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "Snow 1440px: closed regions, tap-to-open entries, only one card mounted",
+    "Snow 390px: closed regions, tap-to-open entries, only one card mounted",
+    "Saved photography for all five modes survives reload in an isolated device context"
+  ],
+  "screenshots": [
+    "rail-1440.png",
+    "green-1440.png",
+    "snow-1440.png",
+    "green-courses-pacific-dunes-390.png",
+    "trail-390.png",
+    "mtb-390.png",
+    "snow-zermatt-390.png",
+    "snow-expanded-390.png",
+    "saved-populated-mobile.png",
+    "saved-populated-desktop.png"
+  ]
+}

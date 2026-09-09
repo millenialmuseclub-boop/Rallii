@@ -78,3 +78,15 @@
 
 /* Store-readiness public policy surfaces */
 :where([data-experience="green"]) footer nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:1rem;margin-top:.8rem}:where([data-experience="green"]) footer nav a{font-weight:800}:where([data-experience="green"]) .policy-page{max-width:56rem}:where([data-experience="green"]) .policy-page>h1{max-width:11ch;margin:.6rem 0;font-family:var(--serif);font-size:clamp(3.5rem,8vw,7rem);font-weight:400;letter-spacing:-.055em;line-height:.88}:where([data-experience="green"]) .policy-lead{max-width:42rem;color:var(--ink);font-family:var(--serif);font-size:1.35rem;line-height:1.55}:where([data-experience="green"]) .policy-page section{padding:2rem 0;border-top:1px solid var(--line)}:where([data-experience="green"]) .policy-page section:first-of-type{margin-top:3rem}:where([data-experience="green"]) .policy-page h2{margin:0 0 .7rem;font-family:var(--serif);font-size:1.65rem;font-weight:400}:where([data-experience="green"]) .policy-page section p{max-width:44rem;color:var(--muted);line-height:1.7}:where([data-experience="green"]) .policy-page .primary-button{margin-top:1rem}@media(max-width:800px){:where([data-experience="green"]) footer nav{justify-content:flex-start}:where([data-experience="green"]) .policy-page>h1{font-size:3.5rem}:where([data-experience="green"]) .policy-lead{font-size:1.1rem}}
+
+/* Photography pass: credits and representative context remain readable at every size. */
+[data-experience="green"] .course-visual > figcaption { display:block; right:0; bottom:0; left:0; overflow:visible; padding:8px 12px; background:rgba(15,35,26,.9); color:#fff; font-size:14px; line-height:1.45; white-space:normal; text-overflow:clip; overflow-wrap:anywhere; }
+[data-experience="green"] .course-visual > figcaption a { display:inline-flex; min-height:44px; align-items:center; }
+[data-experience="green"] .course-representative { display:block; margin-bottom:4px; }
+[data-experience="green"] .course-visual > span { top:12px; bottom:auto; text-shadow:0 1px 5px #173f32; }
+[data-experience="green"] .course-visual:has(.course-representative) { min-height:260px; }
+[data-experience="green"] .editorial-index-grid .editorial-cover { grid-template-columns:minmax(170px,.8fr) minmax(0,1.2fr); }
+[data-experience="green"] .screen-cover__copy { bottom:100px; }
+[data-experience="green"] .discover-hub--visual .course-visual > figcaption { top:0; bottom:auto; }
+[data-experience="green"] .card-body > p, [data-experience="green"] .planning-course-context small { font-size:16px; }
+@media(max-width:550px) { [data-experience="green"] .editorial-index-grid .editorial-cover { grid-template-columns:1fr; } }

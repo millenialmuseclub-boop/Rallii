@@ -1,4 +1,5 @@
 "use client";
+import { DestinationPhoto, DestinationCredit, type DestinationMedia } from "./destination-photo";
 import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
@@ -12,7 +13,7 @@ import { SaveSnow } from "@/snow/save-snow";
 import { useEntitlements } from "@/hooks/use-entitlements";
 import { COLLECTIONS_KEY, parseCollections, updateCollection, type TripCollection } from "@/lib/pro-collections";
 
-export interface SavedExperience { activity: "rail" | "green" | "trail" | "mtb" | "snow"; slug: string; name: string; href: string }
+export interface SavedExperience { activity: "rail" | "green" | "trail" | "mtb" | "snow"; slug: string; name: string; href: string; photo?: DestinationMedia }
 function snapshot() { try { return localStorage.getItem(COLLECTIONS_KEY) ?? ""; } catch { return ""; } }
 function subscribe(callback: () => void) {
   const storage = (event: StorageEvent) => { if (!event.key || event.key === COLLECTIONS_KEY) callback(); };
@@ -36,6 +37,7 @@ export function MyRallii({ experiences }: { experiences: SavedExperience[] }) {
   const savedStatus = (item: SavedExperience) => item.activity === "rail" ? statuses[item.slug] : item.activity === "green" ? library.courses[item.slug] : item.activity === "trail" ? trailLibrary.trails[item.slug] : item.activity === "mtb" ? mtbLibrary.rides[item.slug]?.status : snowLibrary.places[item.slug]?.status;
   const saved = experiences.filter(item => savedStatus(item));
   const visible = saved.filter(item => (filter === "all" || item.activity === filter) && (statusFilter === "all" || (statusFilter === "favorite" ? (item.activity === "mtb" && mtbLibrary.rides[item.slug]?.favorite) || (item.activity === "snow" && snowLibrary.places[item.slug]?.favorite) : statusFilter === "been" ? ["been", "played", "ridden"].includes(savedStatus(item) ?? "") : ["want_to_go", "want_to_play", "want_to_ride"].includes(savedStatus(item) ?? ""))));
+  const inspiration = experiences.find(item => item.photo && (filter === "all" || item.activity === filter));
   function save() {
     if (!draft || !isPro || !draft.name.trim()) return;
     try {
@@ -48,13 +50,17 @@ export function MyRallii({ experiences }: { experiences: SavedExperience[] }) {
     <p>Private to this device. Your Rail, Green, Trail, MTB and Snow places, together.</p>
     <div className="family-actions" aria-label="Filter saved experiences">{(["all", "rail", "green", "trail", "mtb", "snow"] as const).map(value => <button key={value} type="button" aria-pressed={filter === value} onClick={() => { setFilter(value); if (statusFilter === "favorite") setStatusFilter("all"); }}>{value === "mtb" ? "MTB" : value.charAt(0).toUpperCase() + value.slice(1)}</button>)}</div>
     <div className="family-actions" aria-label="Filter saved status">{[["all", "All statuses"], ["want", filter === "mtb" ? "Want to Ride" : "Want to Go"], ["been", filter === "mtb" ? "Ridden" : "Been"], ...(filter === "mtb" ? [["favorite", "Favorites"]] : [])].map(([value, label]) => <button key={value} type="button" aria-pressed={statusFilter === value} onClick={() => setStatusFilter(value)}>{label}</button>)}</div>
-    {visible.length ? <ul className="family-saved-list">{visible.map(item => <li key={`${item.activity}:${item.slug}`}><span className="eyebrow">{item.activity}</span><div><Link href={item.href}>{item.name} →</Link>{item.activity === "trail" ? <SaveTrail slug={item.slug} name={item.name} /> : item.activity === "mtb" ? <SaveMtb slug={item.slug} name={item.name} /> : item.activity === "snow" ? <SaveSnow slug={item.slug} name={item.name} /> : null}</div></li>)}</ul> : <p>No saved experiences in this view yet. Explore <Link href="/#explore">Rallii’s five modes</Link>.</p>}
+    {visible.length ? <ul className="family-saved-list">{visible.map(item => <li key={`${item.activity}:${item.slug}`}>{item.photo ? <SavedPhoto media={item.photo} /> : null}<div><span className="eyebrow">{item.activity}</span><Link href={item.href}>{item.name} →</Link>{item.activity === "trail" ? <SaveTrail slug={item.slug} name={item.name} /> : item.activity === "mtb" ? <SaveMtb slug={item.slug} name={item.name} /> : item.activity === "snow" ? <SaveSnow slug={item.slug} name={item.name} /> : null}</div></li>)}</ul> : <div className="family-empty-photo">{inspiration?.photo ? <><SavedPhoto media={inspiration.photo} /><p>From the Rallii collection · <Link href={inspiration.href}>{inspiration.name}</Link></p></> : null}<p>No saved experiences in this view yet. Explore <Link href="/#explore">Rallii’s five modes</Link>.</p></div>}
     <div className="family-actions"><Link href="/saved/">Manage Rail saves</Link><Link href="/green/my-green/">Manage Green saves</Link></div>
     <section className="family-collections" aria-labelledby="collections-title"><p className="eyebrow">Rallii Pro</p><h2 id="collections-title">Trips that bring it all together</h2><p>Collect rail journeys, golf courses, hiking trails and MTB rides in one place, with your own trip notes.</p>
       {isPro ? <button type="button" onClick={() => { setDraft({ id: crypto.randomUUID(), name: "", notes: "", experiences: [] }); setMessage(""); }}>New collection</button> : <p><Link href="/pro/">Explore Rallii Pro →</Link> Existing collections remain readable when your membership ends.</p>}
       <p role="status">{message}</p>
       {draft && isPro ? <form onSubmit={event => { event.preventDefault(); save(); }} className="family-collection-editor"><label>Collection name<input required maxLength={80} value={draft.name} onChange={event => setDraft({ ...draft, name: event.target.value })} /></label><label>Trip notes<textarea rows={5} maxLength={4000} value={draft.notes} onChange={event => setDraft({ ...draft, notes: event.target.value })} /></label><fieldset><legend>Include saved experiences</legend>{saved.length ? saved.map(item => <label key={`${item.activity}:${item.slug}`} className="family-check"><input type="checkbox" checked={draft.experiences.some(ref => ref.activity === item.activity && ref.slug === item.slug)} onChange={event => setDraft({ ...draft, experiences: event.target.checked ? [...draft.experiences, { activity: item.activity, slug: item.slug }] : draft.experiences.filter(ref => ref.activity !== item.activity || ref.slug !== item.slug) })} />{item.name} · {item.activity}</label>) : <p>Save a journey, course, trail or ride to include it here. You can still save notes.</p>}</fieldset><div className="family-actions"><button type="submit">Save collection</button><button type="button" onClick={() => setDraft(undefined)}>Cancel</button></div></form> : null}
-      <div className="family-collection-grid">{collections.map(collection => <article key={collection.id}><h3>{collection.name}</h3><p className="family-notes">{collection.notes}</p><ul>{collection.experiences.map(ref => { const item = experiences.find(item => item.activity === ref.activity && item.slug === ref.slug); return <li key={`${ref.activity}:${ref.slug}`}>{item ? <Link href={item.href}>{item.name} · {item.activity}</Link> : "Experience no longer in the catalogue"}</li>; })}</ul>{isPro ? <button type="button" onClick={() => setDraft(collection)}>Edit {collection.name}</button> : null}</article>)}</div>
+      <div className="family-collection-grid">{collections.map(collection => <article key={collection.id}>{(() => { const lead = collection.experiences.map(ref => experiences.find(item => item.activity === ref.activity && item.slug === ref.slug)).find(item => item?.photo); return lead?.photo ? <SavedPhoto media={lead.photo} /> : null; })()}<h3>{collection.name}</h3><p className="family-notes">{collection.notes}</p><ul>{collection.experiences.map(ref => { const item = experiences.find(item => item.activity === ref.activity && item.slug === ref.slug); return <li key={`${ref.activity}:${ref.slug}`}>{item ? <Link href={item.href}>{item.name} · {item.activity}</Link> : "Experience no longer in the catalogue"}</li>; })}</ul>{isPro ? <button type="button" onClick={() => setDraft(collection)}>Edit {collection.name}</button> : null}</article>)}</div>
     </section>
   </div>;
+}
+
+function SavedPhoto({ media }: { media: DestinationMedia }) {
+  return <figure className="saved-photo"><div className="saved-photo-image"><DestinationPhoto media={media} /></div><figcaption><DestinationCredit media={media} /></figcaption></figure>;
 }

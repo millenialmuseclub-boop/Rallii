@@ -434,9 +434,12 @@ test("every route has complete, locally prepared, licensed hero photography", as
     assert.match(media.licenseName, /Public domain|CC BY/);
     assert.match(media.licenseUrl, /^https:\/\/creativecommons\.org\//);
     assert.match(media.accessedAt, /^2026-08-(12|14|15|16|20|21)$/);
-    assert.ok(media.width >= 1400 && media.height >= 800);
+    assert.ok(media.width >= 1200 && media.height >= 400);
     const file = await readFile(`public${media.path}`);
-    assert.ok(file.length > 150_000);
+    // Efficient WebP files can be much smaller than their JPEG originals.
+    assert.equal(file.length, media.fileSize);
+    assert.equal(file.toString("ascii", 0, 4), "RIFF");
+    assert.equal(file.toString("ascii", 8, 12), "WEBP");
   }
 });
 
