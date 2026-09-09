@@ -1,11 +1,11 @@
 export const COLLECTIONS_KEY = "rallii:collections:v1";
-export interface ExperienceRef { activity: "rail" | "green" | "trail"; slug: string }
+export interface ExperienceRef { activity: "rail" | "green" | "trail" | "mtb"; slug: string }
 export interface TripCollection { id: string; name: string; notes: string; experiences: ExperienceRef[] }
 export function parseCollections(raw: string | null): TripCollection[] {
   try {
     const value: unknown = JSON.parse(raw ?? "null");
     if (!value || typeof value !== "object" || !("version" in value) || value.version !== 1 || !("collections" in value) || !Array.isArray(value.collections)) return [];
-    return value.collections.filter((entry): entry is TripCollection => !!entry && typeof entry.id === "string" && typeof entry.name === "string" && typeof entry.notes === "string" && Array.isArray(entry.experiences) && entry.experiences.every((ref: ExperienceRef) => ref && (ref.activity === "rail" || ref.activity === "green" || ref.activity === "trail") && typeof ref.slug === "string"));
+    return value.collections.filter((entry): entry is TripCollection => !!entry && typeof entry.id === "string" && typeof entry.name === "string" && typeof entry.notes === "string" && Array.isArray(entry.experiences) && entry.experiences.every((ref: ExperienceRef) => ref && (ref.activity === "rail" || ref.activity === "green" || ref.activity === "trail" || ref.activity === "mtb") && typeof ref.slug === "string"));
   } catch { return []; }
 }
 export function updateCollection(collections: TripCollection[], collection: TripCollection, isPro: boolean): TripCollection[] {

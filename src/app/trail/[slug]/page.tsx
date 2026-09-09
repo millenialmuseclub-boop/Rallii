@@ -1,3 +1,4 @@
+import { OutdoorTripPlanning } from "@/components/outdoor-trip-planning";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { findTrail, trails } from "@/trail/data";
@@ -23,7 +24,7 @@ export default async function TrailDetail({ params }: { params: Promise<{ slug: 
       <div className="trail-detail-columns"><div><section><p className="rallii-kicker">01 / Why go</p><h2>{trail.tags[0]}, with a different perspective.</h2><p>{trail.whyGo}</p></section>
       <section><p className="rallii-kicker">02 / The route</p><h2>Start here. Take your time.</h2><p>{trail.route}</p><p className="trail-start"><strong>Start at</strong> {trail.map.trailhead.name}</p></section>
       <section><p className="rallii-kicker">03 / What you’ll see</p><ul className="trail-scenery">{trail.tags.map((tag, index) => <li key={tag}><span>0{index + 1}</span>{tag}</li>)}</ul></section></div>
-      <aside className="trail-guide"><p className="rallii-kicker">Your field notes</p><h2>Know before you go.</h2><p>{trail.guidance}</p><h3>Best time</h3><p>{trail.bestTime}.</p><h3>Check before you leave</h3><p>Static editorial guidance, reviewed {trail.reviewedAt}. This page does not report live conditions, closures or permit availability.</p><a className="rallii-button" href={trail.sourceUrl} target="_blank" rel="noreferrer">Official trail guidance ↗</a><p className="trail-fact-note">Use the land manager’s current map for navigation. Route tracking and offline trail maps are not available yet.</p></aside></div>
+      <aside className="trail-guide"><p className="rallii-kicker">Your field notes</p><h2>Know before you go.</h2><p>{trail.guidance}</p><h3>Best time</h3><p>{trail.bestTime}.</p><h3>Check before you leave</h3><p>Static editorial guidance, reviewed {trail.reviewedAt}. This page does not report live conditions, closures or permit availability.</p><a className="rallii-button" href={trail.sourceUrl} target="_blank" rel="noreferrer">Official trail guidance ↗</a><p className="trail-fact-note">Use the land manager’s current map for navigation. Route tracking and offline trail maps are not available yet.</p></aside></div><OutdoorTripPlanning place={trail.destination} />
       <section className="rallii-section"><div className="rallii-section-heading"><div><p className="rallii-kicker">Keep wandering</p><h2>Another day, another trail.</h2></div><Link href="/trail/">All trails →</Link></div><div className="trail-grid">{related.map(item => <TrailCard key={item.slug} trail={item} />)}</div></section>
     </div>
   </main>;

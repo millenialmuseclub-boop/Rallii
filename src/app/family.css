@@ -209,3 +209,51 @@
  .mobile-top-bar .activity-switcher a,.mobile-bar .activity-switcher a { min-width:40px;padding-inline:7px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .rallii-mode-image>img { transition:none; } }
+
+/* MTB extends the shared family surface; Trail keeps its hiking identity. */
+.rallii-modes { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.family-saved-counts { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.mtb-editorial { --mtb-ink:#403d26; }
+.mtb-hero { position:relative;min-height:590px;display:flex;align-items:center;isolation:isolate;color:#fffdf5;background:#273627; }
+.mtb-hero>img { z-index:-2; }
+.mtb-hero-copy { padding-block:90px; }
+.mtb-hero h1 { max-width:850px; }
+.mtb-hero-copy>p:not(.rallii-kicker) { font-size:18px;margin:26px 0 32px; }
+.mtb-editorial .rallii-button:not(.rallii-button-light),.mtb-save button[aria-pressed=true] { background:#45452c; }
+.mtb-card-photo { background:#c8cbb9; }
+.mtb-card-summary { font-size:14px;color:#5d6556; }
+.mtb-card .trail-card-body h2 { min-height:0; }
+.mtb-filters { flex-wrap:wrap; }
+.mtb-filters .trail-search { min-width:200px; }
+.mtb-facts { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.mtb-facts dd { font-size:21px; }
+.mtb-editorial .trail-detail-title .trail-save { max-width:240px; }
+.mtb-pro-note { padding:32px;border-block:1px solid #c9cebe;display:flex;align-items:center;gap:32px;justify-content:space-between; }
+.mtb-pro-note h2 { font-size:30px; }
+.mtb-pro-note p:not(.rallii-kicker) { font-size:14px;max-width:680px; }
+@media(max-width:1050px) { .rallii-modes { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:760px) { .mtb-hero { min-height:520px; }.mtb-hero h1 { font-size:54px;letter-spacing:-1px; }.mtb-facts { grid-template-columns:repeat(2,minmax(0,1fr)); }.mtb-pro-note { display:block;padding:24px 0; } }
+@media(max-width:550px) { .rallii-modes { grid-template-columns:1fr; }.family-saved-counts { grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px; }.rallii-header .activity-switcher { flex-basis:100%;justify-content:space-between;order:2;margin-top:8px; }.rallii-header .activity-switcher a { flex:1;text-align:center;justify-content:center; }.rallii-family-nav { order:3; }.mtb-hero h1 { font-size:46px; }.mtb-hero-copy>p:not(.rallii-kicker) { font-size:16px; }.mtb-filters label:not(.trail-search) { flex-basis:100%; }.mtb-filters .trail-search { min-width:0; } }
+
+/* Compact, tap-to-explore outdoor catalogues. */
+.catalogue-filters { border-block: 1px solid #d6dacd; margin: 20px 0; }
+.catalogue-filters > summary { cursor: pointer; padding: 18px 4px; font-weight: 650; }
+.destination-browser { border-top: 1px solid #cbd1c1; }
+.destination-region { border-bottom: 1px solid #cbd1c1; }
+.destination-region-toggle, .destination-entry-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; text-align: left; color: inherit; background: transparent; border: 0; padding: 20px 8px; cursor: pointer; font: inherit; font-size: 22px; }
+.destination-region-toggle small, .destination-entry-toggle small { display: block; margin-top: 5px; font-size: 14px; font-weight: 400; opacity: .7; }
+.destination-entry { border-top: 1px solid #e0e3d9; margin-inline: 12px; }
+.destination-entry-toggle { font-size: 17px; padding: 16px 8px; }
+.destination-entry .trail-card { max-width: 560px; margin: 0 auto 20px; }
+.destination-entry .trail-card-photo { max-height: 240px; }
+.destination-region-toggle:focus-visible, .destination-entry-toggle:focus-visible, .catalogue-filters > summary:focus-visible { outline: 2px solid #315d39; outline-offset: 3px; }
+.outdoor-planning { margin: 28px 0; border-block: 1px solid #cbd1c1; }
+.outdoor-planning-body { padding: 0 8px 24px; }
+.outdoor-planning-options { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+.mtb-hero { min-height: 0; height: 340px; }
+.trail-intro { padding-block: 32px; }
+.trail-intro-photo { max-height: 300px; }
+@media(max-width: 600px) { .mtb-hero { height: 280px; } .mtb-hero-copy h1 { font-size: 36px; } .mtb-hero-copy > p:not(.rallii-kicker) { display: none; } .trail-intro-photo { display: none; } .trail-intro h1 { font-size: 38px; } .trail-intro { display: block; padding-block: 24px; } }
+
+.destination-region-toggle { padding-block: 14px; font-size: 19px; }
+.mtb-editorial > .rallii-section, .trail-discover > .rallii-section { padding-block: 28px; }
