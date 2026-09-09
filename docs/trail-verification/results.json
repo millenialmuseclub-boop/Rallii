@@ -1,0 +1,53 @@
+{
+  "checks": [
+    "Home → Rail, Green and Trail links work on the real static export",
+    "Trail search and difficulty filters survive mode switching",
+    "Want to Go persists on reload; Been updates Saved and the home preview",
+    "Legacy Rail migration and Green saves remain intact when Trail is removed",
+    "Desktop, 390px iPhone, 768px iPad and 320px layouts: no document overflow or broken loaded photos",
+    "Search empty state recovers to all 30 trails",
+    "Unavailable storage reports a save error without falsely showing saved state"
+  ],
+  "routes": [
+    "1440px /",
+    "1440px /",
+    "1440px /my-rallii/",
+    "390px /",
+    "390px /rail/",
+    "390px /green/",
+    "390px /trail/",
+    "390px /trail/mist-trail/",
+    "390px /my-rallii/",
+    "390px /pro/",
+    "768px /",
+    "768px /rail/",
+    "768px /green/",
+    "768px /trail/",
+    "768px /trail/mist-trail/",
+    "768px /my-rallii/",
+    "768px /pro/",
+    "320px /",
+    "320px /rail/",
+    "320px /green/",
+    "320px /trail/",
+    "320px /trail/mist-trail/",
+    "320px /my-rallii/",
+    "320px /pro/",
+    "320px /trail/?q=unlikely-no-results"
+  ],
+  "errors": [],
+  "screenshots": [
+    "docs/trail-verification/home-desktop.png",
+    "docs/trail-verification/discover-desktop.png",
+    "docs/trail-verification/detail-desktop.png",
+    "docs/trail-verification/saved-desktop.png",
+    "docs/trail-verification/home-390.png",
+    "docs/trail-verification/discover-390.png",
+    "docs/trail-verification/detail-390.png",
+    "docs/trail-verification/saved-390.png",
+    "docs/trail-verification/home-768.png",
+    "docs/trail-verification/discover-768.png",
+    "docs/trail-verification/detail-768.png",
+    "docs/trail-verification/saved-768.png"
+  ]
+}

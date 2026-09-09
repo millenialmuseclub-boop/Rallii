@@ -1,0 +1,211 @@
+/* Shared editorial surface. Existing Rail and Green styles remain scoped. */
+.rallii-editorial,.rallii-header { color:#263b30; background:#f7f5ee; font-family:var(--font-source-sans),Arial,sans-serif; }
+.rallii-editorial *,.rallii-header * { box-sizing:border-box; }
+.rallii-container { width:min(1240px,calc(100% - 80px)); margin-inline:auto; }
+.rallii-header { border-bottom:1px solid #d6dbd0; padding-top:env(safe-area-inset-top); }
+.rallii-header-inner { min-height:88px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
+.rallii-wordmark { display:flex; align-items:center; gap:10px; font:650 36px var(--font-source-sans),Arial,sans-serif; letter-spacing:-1px; white-space:nowrap; text-decoration:none; }
+.rallii-wordmark svg { width:30px; height:30px; }
+.rallii-wordmark span { font:17px var(--font-source-sans),Arial,sans-serif; letter-spacing:0; }
+.rallii-family-nav { display:flex; gap:30px; align-items:center; }
+.rallii-family-nav a { font-size:13px; display:inline-flex; min-height:44px; align-items:center; text-decoration:none; }
+.rallii-header .activity-switcher { border-color:#c6cfc0; background:transparent; }
+.rallii-editorial a:focus-visible,.rallii-header a:focus-visible,.rallii-editorial button:focus-visible,.rallii-editorial input:focus-visible,.rallii-editorial select:focus-visible { outline:3px solid #b26836; outline-offset:4px; }
+.rallii-kicker { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; line-height:1.8; margin:0 0 16px; }
+.rallii-editorial h1,.rallii-editorial h2,.rallii-editorial h3,.rallii-editorial h4 { font-family:var(--font-source-sans),Arial,sans-serif; font-weight:600; }
+.rallii-editorial h1 { font-size:clamp(44px,6.4vw,88px); line-height:1.03; letter-spacing:-2px; margin:0; }
+.rallii-editorial h2 { font-size:clamp(32px,3.8vw,50px); line-height:1.12; letter-spacing:-1.5px; margin:0; }
+.rallii-editorial em { font-weight:inherit; font-style:normal; }
+.rallii-editorial p { line-height:1.7; }
+.rallii-button { min-height:48px; display:inline-flex; align-items:center; justify-content:center; gap:24px; padding:13px 23px; background:#284632; color:#fffdf5; border:1px solid transparent; border-radius:3px; font-size:13px; font-weight:600; cursor:pointer; text-decoration:none; }
+.rallii-button-light { background:#f6f2e8; color:#223d2c; }
+.rallii-button:hover { filter:brightness(.94); }
+.rallii-home-hero { position:relative; min-height:650px; display:flex; flex-direction:column; justify-content:center; color:#fffdf7; isolation:isolate; }
+.rallii-home-hero>img { z-index:-2; object-fit:cover; object-position:center 52%; }
+.rallii-hero-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgba(12,25,18,.7),rgba(12,25,18,.2) 65%,rgba(12,25,18,.1)); }
+.rallii-hero-copy { padding-block:90px 115px; }
+.rallii-hero-copy .rallii-kicker { color:#e9ecdb; }
+.rallii-hero-copy h1 { max-width:860px; }
+.rallii-hero-copy>p:not(.rallii-kicker) { font-size:16px; margin:24px 0 32px; }
+.rallii-hero-caption { position:absolute; bottom:26px; left:0; right:0; display:flex; justify-content:space-between; align-items:center; font-size:11px; letter-spacing:.6px; }
+.rallii-hero-caption a { display:inline-flex; align-items:center; min-height:44px; }
+.rallii-section { padding-block:84px; scroll-margin-top:24px; }
+.rallii-section-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:38px; }
+.rallii-section-heading>p { font-size:14px; color:#646e62; margin:0; }
+.rallii-section-heading>a { font-size:13px; padding:12px 0; }
+.rallii-modes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.rallii-mode-image { display:block; position:relative; aspect-ratio:4/4.5; overflow:hidden; color:white; isolation:isolate; }
+.rallii-mode-image::after { content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(13,32,22,.6),transparent 65%); }
+.rallii-mode-image>img { object-fit:cover; z-index:-2; transition:transform .5s; }
+.rallii-mode-image:hover>img { transform:scale(1.025); }
+.rallii-mode-number { position:absolute;top:24px;left:24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-shadow:0 1px 5px #000; }
+.rallii-mode-image h3 { position:absolute; bottom:20px; left:24px; font-size:54px; line-height:1; margin:0; }
+.rallii-mode-arrow { position:absolute;right:24px;bottom:25px;font-size:30px; }
+.rallii-mode-copy { padding:23px 0 3px; }
+.rallii-mode-copy h4 { font-size:23px; line-height:1.22; margin:0 0 12px; }
+.rallii-mode-copy p { font-size:13px; color:#626e60; margin:0 0 14px; }
+.rallii-text-link { display:inline-flex;align-items:center;min-height:44px;font-size:12px;font-weight:700;text-decoration:none;border-bottom:1px solid #9ea78f; }
+.trail-credit { display:block; color:#6b7267; font:10px/1.6 var(--font-source-sans),Arial,sans-serif; margin-top:10px; overflow-wrap:anywhere; }
+.trail-credit a { text-decoration:underline; text-underline-offset:2px; }
+.rallii-featured-band { background:#eeeee4; border-block:1px solid #dddfd2; }
+.rallii-featured-list article { display:grid;grid-template-columns:105px 1fr auto 44px;gap:25px;align-items:center;padding:24px 0;border-top:1px solid #c9cebe; }
+.rallii-feature-index { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; }
+.rallii-featured-list h3 { font-size:28px;line-height:1.25;margin:0 0 6px; }
+.rallii-featured-list h3 a { text-decoration:none; }
+.rallii-featured-list p { margin:0;font-size:12px;color:#626e60; }
+.rallii-feature-go { font-size:28px;min-height:44px;display:grid;place-items:center; }
+.rallii-featured-list .library-actions { display:flex;gap:6px;flex-wrap:wrap; }
+.rallii-featured-list .library-actions button { font-size:11px;min-height:44px;padding:8px 12px;border:1px solid #98a68e;border-radius:4px;cursor:pointer; }
+.rallii-featured-list .library-actions button[aria-pressed=true] { background:#284632;color:white; }
+.family-saved-preview { display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center; }
+.family-saved-preview>div>p:not(.rallii-kicker) { font-size:14px;color:#626e60;max-width:370px;margin:22px 0; }
+.family-saved-counts { display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #c9cebe;padding-bottom:22px;gap:16px; }
+.family-saved-counts a { display:grid;text-decoration:none;gap:8px; }
+.family-saved-counts strong { font:600 52px var(--font-source-sans),Arial,sans-serif; }
+.family-saved-counts span { font-size:11px; }
+.family-saved-summary span { margin:0 16px; color:#a1a991; }
+.family-preview-list { list-style:none;padding:0;margin:0; }
+.family-preview-list a { display:flex;align-items:center;justify-content:space-between;min-height:48px;border-top:1px solid #daddce;font:17px var(--font-source-sans),Arial,sans-serif; }
+.rallii-family-pro { padding:56px;display:grid;grid-template-columns:1.15fr 1fr;gap:70px;align-items:center;background:#263f2f;color:#f3f1e5; }
+.rallii-family-pro h2 { font-size:clamp(30px,3.4vw,46px); }
+.rallii-family-pro p:not(.rallii-kicker) { font-size:13px;color:#d7decf;margin:22px 0; }
+.rallii-family-pro ul { list-style:none;padding:0; }
+.rallii-family-pro li { border-top:1px solid #5c705a;padding:18px 0;font-size:13px;line-height:1.6; }
+.rallii-family-pro li small { text-transform:uppercase;font-size:9px;letter-spacing:1px;display:block;color:#d6cdaa; }
+.rallii-family-pro .rallii-pro-note { font-size:11px; }
+.rallii-signoff { margin:0;text-align:center;padding:72px 20px;font:500 24px var(--font-source-sans),Arial,sans-serif; }
+.rallii-signoff span { display:block;font:650 30px var(--font-source-sans),Arial,sans-serif;margin-top:15px; }
+.trail-intro { display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;padding-top:52px; }
+.trail-intro h1 { font-size:clamp(44px,5.3vw,76px); }
+.trail-intro>div>p:not(.rallii-kicker) { max-width:380px;font-size:15px;color:#65705f;margin:26px 0; }
+.trail-intro-photo { position:relative;min-height:440px;overflow:hidden; }
+.trail-intro-photo>span { position:absolute;bottom:22px;left:24px;color:white;font-size:10px;letter-spacing:1.5px;text-shadow:0 1px 5px #000;text-transform:uppercase; }
+.trail-filters { display:flex;align-items:flex-end;gap:16px;padding:22px;background:#eeeee5;border:1px solid #d8ddce; }
+.trail-filters label { display:grid;gap:8px;min-width:0;font-size:11px;font-weight:700; }
+.trail-search { flex:1; }
+.trail-filters input,.trail-filters select { min-height:48px;width:100%;padding:10px 12px;border:1px solid #abb5a2;border-radius:3px;background:#faf9f3;color:#263b30;font:16px var(--font-source-sans),Arial,sans-serif; }
+.trail-results-line { display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:12px;margin:16px 0 25px; }
+.trail-results-line button { min-height:44px;text-decoration:underline;cursor:pointer; }
+.trail-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:28px;row-gap:44px; }
+.trail-card { min-width:0; }
+.trail-card-photo { position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#d6dece; }
+.trail-card-photo>span { position:absolute;left:14px;bottom:14px;background:#f6f4ea;color:#2f4734;padding:6px 10px;font-size:10px; }
+.trail-card-body { padding-top:20px; }
+.trail-card-body .rallii-kicker { font-size:9px;letter-spacing:1.3px;margin-bottom:7px; }
+.trail-card-body h2 { font-size:27px;letter-spacing:-.5px;line-height:1.15;min-height:62px; }
+.trail-card-body h2 a { text-decoration:none; }
+.trail-card-facts { font-size:12px;margin:13px 0 6px;color:#4f604e; }
+.trail-card-facts i { font-style:normal;margin:0 5px; }
+.trail-character { font-size:11px;color:#687160;margin:0 0 17px; }
+.trail-character span { margin:0 5px;color:#a1a992; }
+.trail-save { display:flex;flex-wrap:wrap;align-items:center;gap:8px; }
+.trail-save button { display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 15px;border:1px solid #a6b29b;border-radius:3px;background:transparent;font:12px var(--font-source-sans),Arial,sans-serif;cursor:pointer; }
+.trail-save button[aria-pressed=true] { color:#fff;background:#284632;border-color:#284632; }
+.trail-save small { color:#91401c;flex-basis:100%;font-size:12px; }
+.trail-editorial-note { border-top:1px solid #c9cebe;margin:50px 0 0;padding-top:20px;font-size:12px;color:#687160;max-width:780px; }
+.trail-empty { text-align:center;padding:70px 20px;border:1px solid #d6ddcf; }
+.trail-breadcrumb { display:flex;flex-wrap:wrap;align-items:center;gap:13px;font-size:11px;padding-block:12px;min-height:54px; }
+.trail-breadcrumb a { min-height:44px;display:inline-flex;align-items:center; }
+.trail-detail-hero { position:relative;height:clamp(280px,38vw,550px); }
+.trail-detail-title { display:flex;gap:45px;justify-content:space-between;align-items:center;padding:42px 0 30px; }
+.trail-detail-title>div:first-child { max-width:790px; }
+.trail-detail-title h1 { font-size:clamp(40px,5.5vw,70px);letter-spacing:-2px; }
+.trail-detail-title p:not(.rallii-kicker) { font:20px/1.5 var(--font-source-sans),Arial,sans-serif;color:#64705d;margin:18px 0 0; }
+.trail-detail-title .trail-save { flex-shrink:0;max-width:180px; }
+.trail-facts { display:grid;grid-template-columns:repeat(5,1fr);border-block:1px solid #c6cebe;margin:0;padding:24px 0;gap:20px; }
+.trail-facts dt { font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#5f6c56; }
+.trail-facts dd { font:23px/1.3 var(--font-source-sans),Arial,sans-serif;margin:8px 0 0; }
+.trail-fact-note { font-size:11px;color:#67705f;line-height:1.7;margin:12px 0; }
+.trail-detail-columns { display:grid;grid-template-columns:1.5fr 1fr;gap:90px;margin-top:50px; }
+.trail-detail-columns section { margin-bottom:40px; }
+.trail-detail-columns h2 { font-size:34px; }
+.trail-detail-columns p:not(.rallii-kicker) { font-size:15px;color:#5f6c58; }
+.trail-start { border-left:2px solid #8d9b7d;padding:8px 0 8px 20px; }
+.trail-start strong { display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px; }
+.trail-guide { align-self:start;background:#ebece0;padding:30px; }
+.trail-guide h3 { font:21px var(--font-source-sans),Arial,sans-serif;margin:25px 0 8px; }
+.trail-guide .rallii-button { margin:12px 0; }
+.trail-guide p.trail-fact-note { font-size:11px; }
+.trail-scenery { padding:0;list-style:none;margin-top:20px; }
+.trail-scenery li { display:flex;align-items:center;gap:24px;border-top:1px solid #cbd2c0;padding:15px 0;font:24px var(--font-source-sans),Arial,sans-serif; }
+.trail-scenery span { font:10px var(--font-source-sans),Arial,sans-serif;color:#6f7a60; }
+.rallii-header + .app-screen-bar { display:none; }
+.app-screen--family .app-screen__intro { display:block; }
+@media(min-width:901px) { .rallii-editorial + .site-footer { margin-top:0; } }
+@media(max-width:1050px) {
+ .rallii-container { width:calc(100% - 48px); }
+ .rallii-family-nav { gap:18px; }
+ .rallii-modes,.trail-grid { gap:22px; }
+ .rallii-featured-list article { grid-template-columns:75px 1fr auto;gap:18px; }
+ .rallii-feature-go { display:none; }
+ .family-saved-preview { gap:45px; }
+ .rallii-family-pro { padding:38px;gap:35px; }
+ .trail-intro { gap:35px; }
+ .trail-intro-photo { min-height:380px; }
+ .trail-detail-columns { gap:35px; }
+}
+@media(max-width:760px) {
+ .rallii-header-inner { flex-wrap:wrap;gap:6px 12px;padding-block:12px 0;min-height:105px; }
+ .rallii-wordmark { font-size:30px; }
+ .rallii-wordmark svg { width:24px;height:24px; }
+ .rallii-wordmark span { font-size:13px; }
+ .rallii-family-nav { order:3;flex-basis:100%;justify-content:space-between;border-top:1px solid #e0e2d6;margin-top:8px; }
+ .rallii-header .activity-switcher a { min-width:45px;padding-inline:9px; }
+ .rallii-section { padding-block:56px; }
+ .rallii-home-hero { min-height:610px; }
+ .rallii-hero-copy { padding-block:65px 115px; }
+ .rallii-hero-copy h1 { font-size:clamp(44px,8.4vw,65px);letter-spacing:-1px; }
+ .rallii-hero-caption { flex-wrap:wrap;gap:6px; }
+ .rallii-section-heading { display:block;margin-bottom:28px; }
+ .rallii-section-heading>p { margin-top:20px; }
+ .rallii-modes { gap:18px; }
+ .rallii-mode-image h3 { font-size:38px;left:15px; }
+ .rallii-mode-number { left:15px;top:15px; }
+ .rallii-mode-arrow { right:15px;font-size:23px; }
+ .rallii-mode-copy h4 { font-size:21px; }
+ .rallii-featured-list article { grid-template-columns:1fr auto;gap:14px; }
+ .rallii-feature-index { grid-column:1/-1; }
+ .rallii-featured-list h3 { font-size:24px; }
+ .family-saved-preview,.rallii-family-pro { grid-template-columns:1fr;gap:35px; }
+ .trail-intro { grid-template-columns:1fr;gap:30px;padding-top:36px; }
+ .trail-intro-photo { min-height:300px; }
+ .trail-intro h1 { letter-spacing:-2px; }
+ .trail-filters { flex-wrap:wrap;padding:16px;gap:14px; }
+ .trail-search { flex-basis:100%; }
+ .trail-filters label:not(.trail-search) { flex:1; }
+ .trail-grid { grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px; }
+ .trail-detail-title { align-items:flex-start;flex-direction:column;gap:22px; }
+ .trail-detail-title .trail-save { max-width:none; }
+ .trail-facts { grid-template-columns:repeat(3,1fr);row-gap:23px; }
+ .trail-detail-columns { grid-template-columns:1fr;gap:15px; }
+}
+@media(max-width:550px) {
+ .rallii-container { width:calc(100% - 36px); }
+ .rallii-wordmark { font-size:28px;gap:6px; }
+ .rallii-wordmark span { font-size:12px; }
+ .rallii-header .activity-switcher { font-size:11px; }
+ .rallii-header .activity-switcher a { min-width:40px;padding-inline:7px; }
+ .rallii-home-hero { min-height:590px; }
+ .rallii-hero-copy>p:not(.rallii-kicker) { font-size:14px; }
+ .rallii-home-hero>img { object-position:60% center; }
+ .rallii-modes { grid-template-columns:1fr;gap:34px; }
+ .rallii-mode-image { aspect-ratio:1.2; }
+ .rallii-mode-image h3 { font-size:52px;left:24px;bottom:22px; }
+ .rallii-mode-number { left:24px;top:24px; }
+ .rallii-mode-copy h4 { font-size:25px; }
+ .rallii-featured-list article { grid-template-columns:1fr;gap:12px; }
+ .rallii-featured-list .save-route-button { justify-self:start; }
+ .rallii-family-pro { padding:30px 24px; }
+ .trail-grid { grid-template-columns:1fr;gap:38px; }
+ .trail-card-body h2 { min-height:0;font-size:29px; }
+ .trail-filters .rallii-button { flex-basis:100%; }
+ .trail-facts dd { font-size:19px; }
+ .trail-facts dt { font-size:9px; }
+ .trail-detail-title h1 { font-size:43px; }
+ .trail-guide { padding:25px; }
+ .rallii-signoff { font-size:20px; }
+ /* Keep three modes reachable in existing Rail/Green mobile headers. */
+ .mobile-top-bar .activity-switcher,.mobile-bar .activity-switcher { font-size:11px; }
+ .mobile-top-bar .activity-switcher a,.mobile-bar .activity-switcher a { min-width:40px;padding-inline:7px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .rallii-mode-image>img { transition:none; } }

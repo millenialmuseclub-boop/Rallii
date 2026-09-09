@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import { PwaRegistration } from "@/components/pwa-registration";
@@ -6,11 +7,19 @@ import { ProProvider } from "@/components/pro-provider";
 import { FamilyShell } from "@/components/family-shell";
 import { NativeOtaUpdater } from "@/components/native-ota-updater";
 
+const sourceSans = localFont({
+  src: "./fonts/SourceSans3-Upright.woff2",
+  variable: "--font-source-sans",
+  weight: "200 900",
+  style: "normal",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://rallii-kappa.vercel.app"),
   title: {
-    default: "Rallii Rail — Curated Rail Journeys",
-    template: "%s | Rallii Rail",
+    default: "Rallii — Go somewhere worth remembering",
+    template: "%s | Rallii",
   },
   description: "Know where to sit, what to see, and when to look on the world's great rail journeys.",
   applicationName: "Rallii Rail",
@@ -39,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" className={sourceSans.variable} data-scroll-behavior="smooth">
       <body><ProProvider><FamilyShell>{children}</FamilyShell></ProProvider><PwaRegistration /><NativeOtaUpdater /></body>
     </html>
   );
