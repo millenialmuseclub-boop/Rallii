@@ -6,7 +6,7 @@ Rallii Rail uses Capacitor for iOS and Android containers and a self-hosted, zer
 
 There is no Capgo-hosted service and no Rallii OTA backend. The app-side updater in `src/lib/ota-updater.ts` checks this static R2 manifest:
 
-`<R2_PUBLIC_BASE_URL>/updates/<channel>/manifest.json`
+`<R2_PUBLIC_BASE_URL>/updates/com.rallii.rail/<channel>/manifest.json`
 
 The on-device Capgo plugin is in manual mode. It only verifies and decrypts encrypted bundles supplied by Rallii's manifest. It does not automatically check Capgo.
 
@@ -37,3 +37,7 @@ Publish to staging first, test it on a staging device/build, then explicitly pub
 ## Native projects and cloud builds
 
 `ios/` and `android/` are committed and synced from the same static `out/` bundle. This does not require owning a Mac: GitHub Actions macOS runners compile iOS. A small local Capacitor user-info shim keeps the Windows CLI usable when Node cannot read the current Windows user profile; it changes no app or OTA behavior.
+
+## September 2026 delivery repair
+
+The legacy `/updates/<channel>/manifest.json` path was shared with Let Them Eat Cake. Its commit `953119abf404d80d4897f89f9e8b21103630993e` replaced the Rallii `60437e6` production manifest after publication. Rallii now publishes only under `/updates/com.rallii.rail/<channel>/`, and the client validates the app identity and exact bundle location before downloading. Do not republish Rallii to the shared legacy path. Existing installations that still poll that path need a replacement native build to migrate safely; the isolated OTA alone cannot redirect them.

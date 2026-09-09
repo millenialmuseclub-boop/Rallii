@@ -58,6 +58,6 @@ jobs:
           ENC_CHECKSUM=$(jq -r '.checksum' enc.json)
           SESSION_KEY=$(jq -r '.ivSessionKey' enc.json)
           COMMIT_TS=$(git log -1 --format=%ct)
-          jq -n --arg v "$COMMIT_TS" --arg sha "$GIT_SHA" --arg url "$R2_PUBLIC_BASE_URL/updates/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --arg ck "$ENC_CHECKSUM" --arg sk "$SESSION_KEY" '{version:$v,sha:$sha,url:$url,checksum:$ck,sessionKey:$sk}' > manifest.json
-          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --remote --file="$ENC_ZIP" --cache-control "public, max-age=31536000, immutable"
-          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/$OTA_CHANNEL/manifest.json" --remote --file=./manifest.json --cache-control "no-cache, max-age=0"
+          jq -n --arg v "$COMMIT_TS" --arg sha "$GIT_SHA" --arg url "$R2_PUBLIC_BASE_URL/updates/com.rallii.rail/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --arg ck "$ENC_CHECKSUM" --arg sk "$SESSION_KEY" '{appId:"com.rallii.rail",version:$v,sha:$sha,url:$url,checksum:$ck,sessionKey:$sk}' > manifest.json
+          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/com.rallii.rail/$OTA_CHANNEL/bundles/$GIT_SHA.zip" --remote --file="$ENC_ZIP" --cache-control "public, max-age=31536000, immutable"
+          npx wrangler@4 r2 object put "$R2_BUCKET_NAME/updates/com.rallii.rail/$OTA_CHANNEL/manifest.json" --remote --file=./manifest.json --cache-control "no-cache, max-age=0"

@@ -1,14 +1,7 @@
 import { Capacitor } from "@capacitor/core";
 import { CapacitorUpdater } from "@capgo/capacitor-updater";
 import { OTA_MANIFEST_URL } from "@/lib/ota-config";
-
-interface OtaManifest {
-  version: string;
-  sha: string;
-  url: string;
-  checksum: string;
-  sessionKey: string;
-}
+import { parseOtaManifest } from "@/lib/ota-manifest";
 
 let checkInFlight: Promise<boolean> | null = null;
 
@@ -36,8 +29,8 @@ async function check(): Promise<boolean> {
 
   try {
     const response = await fetch(OTA_MANIFEST_URL, { cache: "no-store" });
-    if (!response.ok) return false;
-    const manifest = (await response.json()) as OtaManifest;
+    if (!response.ok) throw new Error(`OTA manifest HTTP ${response.status}`);
+    const manifest = parseOtaManifest(await response.json(), OTA_MANIFEST_URL);
     const { bundle } = await CapacitorUpdater.current();
     const candidateVersion = Number(manifest.version);
     const currentVersion = Number(bundle.version) || 0;
@@ -50,8 +43,10 @@ async function check(): Promise<boolean> {
       sessionKey: manifest.sessionKey,
     });
     await CapacitorUpdater.next({ id: downloaded.id });
+    console.info("[Rallii OTA] Update ready for next launch", { version: manifest.version });
     return true;
-  } catch {
+  } catch (error) {
+    console.warn("[Rallii OTA] Update check failed", error instanceof Error ? error.message : "Native update failed");
     return false;
   }
 }
