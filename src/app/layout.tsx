@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
+import "./mobile.css";
 import { PwaRegistration } from "@/components/pwa-registration";
 import { ProProvider } from "@/components/pro-provider";
 import { FamilyShell } from "@/components/family-shell";

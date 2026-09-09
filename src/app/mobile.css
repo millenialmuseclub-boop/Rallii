@@ -1,0 +1,182 @@
+/* A shared phone-first layer over the existing activity styles. */
+:root { --rallii-cream:#f7f5ee; --rallii-forest:#173f32; --rallii-line:#ccd3c6; --rallii-serif:Georgia,"Times New Roman",serif; }
+.phone-header,.phone-nav { display:none; }
+[data-experience] :focus-visible { outline:3px solid #ab6136; outline-offset:3px; }
+[data-experience] { font-family:var(--font-source-sans),Arial,sans-serif; }
+.rallii-editorial h1,.rallii-editorial .rallii-section-heading h2,.family-membership h2 { font-family:var(--rallii-serif); font-weight:400; letter-spacing:-.035em; }
+.rallii-editorial h1 { line-height:1.08; }
+.rallii-button,.trail-save button { border-radius:8px; font-size:14px; }
+.discovery-search { display:flex; align-items:end; gap:10px; margin-bottom:12px; }
+.discovery-search label { display:grid; gap:6px; min-width:0; font-size:14px; font-weight:600; }
+.discovery-search input { width:100%; min-height:48px; border:1px solid #8e9f90; border-radius:8px; padding:10px 12px; font:16px var(--font-source-sans),Arial,sans-serif; background:#fffdf7; color:var(--rallii-forest); }
+.catalogue-filters summary { min-height:48px; padding:12px 0; cursor:pointer; font-size:15px; }
+.catalogue-filters summary span { font-size:13px; font-weight:400; margin-left:12px; color:#536354; }
+.catalogue-filters .trail-filters { display:flex; flex-wrap:wrap; border-radius:8px; padding:16px; }
+.catalogue-filters .trail-filters label { flex:1 1 150px; font-size:14px; }
+.destination-region { border:0; margin:0 0 32px; }
+.destination-region-heading { display:flex; justify-content:space-between; align-items:baseline; gap:12px; border-top:1px solid var(--rallii-line); padding:18px 0; }
+.destination-region-heading h3 { font-size:23px; margin:0; }
+.destination-region-heading span { font-size:14px; white-space:nowrap; color:#536354; }
+.destination-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.destination-grid>div { min-width:0; }
+.destination-grid .trail-card,.destination-grid .snow-card { height:100%; border:1px solid var(--rallii-line); border-radius:12px; overflow:hidden; background:#fffdf7; padding:0; }
+.destination-grid .trail-card-photo,.destination-grid .snow-card-photo { aspect-ratio:16/10; height:auto; border-radius:0; }
+.destination-grid .trail-card-body { padding:16px; }
+.destination-grid .trail-card h2,.destination-grid .snow-card h2 { min-height:0; font-size:24px; line-height:1.2; letter-spacing:-.02em; }
+.destination-grid .trail-card-facts,.destination-grid .trail-character,.destination-grid .mtb-card-summary { font-size:14px; }
+.destination-grid .trail-card-body .rallii-kicker { font-size:12px; letter-spacing:.06em; }
+.destination-grid .snow-card>:not(.snow-card-photo) { margin-left:16px; margin-right:16px; }
+.destination-grid .snow-card>.rallii-text-link { margin-bottom:16px; }
+.photo-credit,.trail-credit { font-size:12px; line-height:1.5; }
+.photo-credit a { display:inline; min-height:0; padding-block:4px; }
+.destination-grid .photo-credit { margin-top:12px; }
+[data-experience="green"] .course-rail { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-flow:row; gap:20px; overflow:visible; }
+[data-experience="green"] .course-rail>.course-card { min-width:0; }
+[data-experience="green"] .course-rail .course-visual,[data-experience="green"] .course-rail>.course-card:first-child .course-visual { min-height:0; height:auto; aspect-ratio:16/10; }
+.family-membership .family-benefits { margin-block:24px; }
+.family-membership .family-benefits p { margin:8px 0 0; }
+.pro-planned { padding:16px 0; border-block:1px solid var(--rallii-line); }
+.pro-planned summary { cursor:pointer; min-height:44px; }
+@media (min-width:801px) and (max-width:1100px) {
+  .destination-grid,[data-experience="green"] .course-rail { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rallii-header-inner { flex-wrap:wrap; gap:8px 20px; padding-block:12px; }
+}
+@media (max-width:800px) {
+  html { scroll-padding-top:calc(72px + env(safe-area-inset-top)); }
+  [data-experience] { padding-bottom:calc(76px + env(safe-area-inset-bottom)); }
+  [data-experience]>.rallii-header,[data-experience] .site-header,[data-experience] .mobile-top-bar,[data-experience] .mobile-bar,[data-experience] .mobile-nav { display:none; }
+  .phone-header { position:sticky; top:0; z-index:60; display:flex; align-items:center; gap:12px; min-height:calc(64px + env(safe-area-inset-top)); padding:env(safe-area-inset-top) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left)); border-bottom:1px solid var(--rallii-line); background:var(--rallii-cream); color:var(--rallii-forest); box-sizing:border-box; }
+  .phone-brand { display:flex; align-items:center; gap:7px; min-height:44px; text-decoration:none; }
+  .phone-brand img { width:28px; height:28px; border-radius:6px; }
+  .phone-brand strong { font:700 24px var(--font-source-sans),Arial,sans-serif; letter-spacing:-.04em; }
+  .phone-activity { margin-left:auto; }
+  .phone-activity select { width:124px; min-height:44px; padding:8px 10px; border:1px solid #a4b09d; border-radius:24px; background:#edeee4; color:var(--rallii-forest); font:600 16px var(--font-source-sans),Arial,sans-serif; }
+  .phone-pro { display:grid; place-items:center; min-height:44px; min-width:44px; font-size:14px; text-decoration:none; }
+  .phone-nav { display:block; position:fixed; z-index:60; bottom:0; left:0; right:0; border-top:1px solid var(--rallii-line); background:var(--rallii-cream); color:var(--rallii-forest); padding:5px max(12px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(12px,env(safe-area-inset-left)); box-shadow:0 -4px 18px #173f3208; }
+  .phone-nav ul { display:flex; list-style:none; margin:0; padding:0; gap:4px; }
+  .phone-nav li { flex:1; min-width:0; }
+  .phone-nav a { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-height:58px; border-radius:12px; font:600 12px var(--font-source-sans),Arial,sans-serif; text-decoration:none; }
+  .phone-nav a[aria-current] { background:#e3e8db; }
+  .phone-nav svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  [data-experience]:has(input:focus,textarea:focus) .phone-nav { display:none; }
+  .rallii-container { width:calc(100% - 32px); }
+  .rallii-section { padding-block:28px; scroll-margin-top:76px; }
+  .rallii-section-heading { margin-bottom:18px; }
+  .rallii-section-heading h2 { font-size:30px; line-height:1.15; }
+  .rallii-section-heading>p { margin-top:8px; font-size:14px; }
+  .rallii-kicker { font-size:11px; letter-spacing:.1em; margin-bottom:8px; }
+  .trail-intro { display:grid; grid-template-columns:1fr; gap:16px; padding-block:24px 0; }
+  .trail-intro h1 { font-size:36px; }
+  .trail-intro>div>p:not(.rallii-kicker) { margin:12px 0 16px; font-size:15px; }
+  .trail-intro-photo { display:block; min-height:0; height:150px; border-radius:10px; }
+  .trail-intro-photo>span { bottom:12px; left:12px; }
+  .trail-intro + .rallii-container .photo-credit { margin-bottom:0; }
+  .mtb-hero,.snow-hero { min-height:0; height:auto; }
+  .mtb-hero-copy,.snow-hero>.rallii-container { padding-block:28px; }
+  .mtb-hero-copy h1,.snow-hero h1 { font-size:36px; }
+  .mtb-hero-copy>p:not(.rallii-kicker) { display:block; font-size:15px; margin:12px 0 16px; }
+  .snow-hero p { margin:12px 0 16px; }
+  .trail-results-line { margin:12px 0; font-size:14px; flex-wrap:wrap; }
+  .trail-fact-note { font-size:13px; }
+  .destination-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  .trail-detail-hero { height:220px; }
+  .trail-detail-title { padding-block:24px; gap:16px; }
+  .trail-detail-title h1 { font-size:36px; line-height:1.12; letter-spacing:-.035em; overflow-wrap:anywhere; }
+  .trail-detail-title p:not(.rallii-kicker) { font-size:17px; }
+  .trail-detail-title .trail-save { max-width:none; }
+  .trail-facts dt,.trail-guide p.trail-fact-note { font-size:13px; }
+  .trail-facts dd { font-size:20px; }
+  .rallii-home-hero { min-height:460px; }
+  .rallii-hero-copy { padding-block:36px 112px; }
+  .rallii-hero-copy h1 { font-size:42px; }
+  .rallii-mode-image { aspect-ratio:16/10; }
+  [data-experience] .app-screen-bar,[data-experience] .journey-app-bar { top:calc(64px + env(safe-area-inset-top)); }
+  [data-experience] .app-screen { padding-top:20px; }
+  .app-screen--family .app-screen__intro { margin-bottom:16px; }
+  .app-screen--family .app-screen__intro h1 { font-size:32px; }
+  .app-screen--family .app-screen__intro>.eyebrow { display:none; }
+  .family-membership h2 { font-size:32px; }
+  .family-benefits article { padding:16px; }
+  .family-membership p { line-height:1.5; }
+  .family-membership-notice { margin-block:16px; }
+  [data-experience="green"] .opening-copy h1 { font-size:38px; line-height:1.08; max-width:16ch; }
+  [data-experience="green"] .family-kicker { display:none; }
+  [data-experience="green"] .opening-grid { gap:16px; }
+  [data-experience="green"] .opening-copy { padding-block:8px; }
+  [data-experience="green"] .catalogue { padding-top:24px; scroll-margin-top:76px; }
+  [data-experience="green"] .catalogue .section-heading h2 { font-size:30px; line-height:1.1; max-width:none; }
+  [data-experience="green"] .course-rail { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  [data-experience="green"] .course-rail .card-body>p:not(.eyebrow) { display:block; }
+  [data-experience="green"] .library-actions--compact button:last-child { display:inline-flex; }
+  [data-experience="green"] .my-green-tools { top:calc(64px + env(safe-area-inset-top)); }
+  [data-experience="rail"] .home-dashboard__identity h1 { font-size:32px; line-height:1.12; }
+  [data-experience="rail"] .home-dashboard { padding-top:20px; }
+  [data-experience="rail"] .home-dashboard__identity { margin-bottom:18px; }
+}
+@media(max-width:550px) {
+  .destination-grid,[data-experience="green"] .course-rail { grid-template-columns:minmax(0,1fr); }
+  .discovery-search .rallii-button { padding-inline:16px; }
+  .family-saved-list li:has(.saved-photo) { grid-template-columns:90px minmax(0,1fr); gap:12px; }
+  .family-saved-list .saved-photo-image { height:90px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  [data-experience] *,[data-experience] *::before,[data-experience] *::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}
+
+[data-experience="green"] .opening--compact .opening-grid { grid-template-columns:1fr; }
+[data-experience="green"] .green-featured-section { margin-block:32px; }
+.destination-grid .snow-card-photo { margin:0 0 12px; }
+@media(max-width:800px) {
+  [data-experience="rail"] .app-screen:has(.discover-catalogue) .screen-media-header { min-height:160px; height:160px; margin-bottom:20px; }
+  [data-experience="rail"] .app-screen:has(.discover-catalogue) .screen-media-header__copy { bottom:50px; }
+  [data-experience="rail"] .app-screen:has(.discover-catalogue) .screen-media-header__copy strong { font-size:28px; }
+  [data-experience="rail"] .app-screen:has(.discover-catalogue) .screen-media-header__copy p { display:none; }
+  [data-experience="rail"] .app-screen-bar { position:static; min-height:44px; padding-block:4px; }
+  [data-experience="rail"] .app-screen-bar:has(.app-screen-bar__brand) { display:none; }
+  [data-experience="rail"] .journey-app-bar { min-height:48px; padding-block:6px; }
+  [data-experience="green"] .my-green-screen .screen-cover { min-height:180px; }
+  [data-experience="green"] .my-green-tools { display:flex; flex-wrap:wrap; position:static; }
+  [data-experience="green"] .my-green-tools a { flex:1 1 auto; min-height:44px; padding-inline:8px; }
+  [data-experience="green"] .course-hero h1 { line-height:1.08; overflow-wrap:anywhere; }
+}
+
+@media(max-width:800px) {
+  [data-experience="green"] .catalogue .section-heading { margin-bottom:16px; gap:12px; }
+  [data-experience="green"] .catalogue .section-heading h2 { font-size:27px; }
+  [data-experience="green"] .catalogue .section-heading .eyebrow { display:none; }
+  [data-experience="green"] .catalogue .search { margin-block:12px; }
+  [data-experience="green"] .catalogue .atlas-heading { margin-block:12px; padding-block:0; gap:4px; }
+  [data-experience="green"] .catalogue .atlas-heading h3 { font-size:24px; margin:0; }
+  [data-experience="green"] .catalogue .atlas-heading .eyebrow,[data-experience="green"] .catalogue .atlas-heading>span { display:none; }
+  [data-experience="green"] .catalogue .filter-summary { margin-block:12px; }
+  [data-experience="rail"] .app-screen:has(.discover-catalogue) .discover-catalogue { padding-top:20px; }
+}
+
+.browse-reset { min-height:44px; }
+@media(min-width:801px) {
+  [data-experience="green"] .green-discovery { display:grid; grid-template-columns:1fr 1fr; grid-template-areas:"intro feature" "catalogue catalogue" "highlights highlights"; gap:24px 40px; width:min(100% - 2rem,76rem); margin:auto; }
+  [data-experience="green"] .green-discovery>.shell { width:100%; }
+  [data-experience="green"] .green-discovery>.opening { grid-area:intro; align-self:center; }
+  [data-experience="green"] .green-discovery>.green-featured-section { grid-area:feature; }
+  [data-experience="green"] .green-discovery>.catalogue { grid-area:catalogue; }
+  [data-experience="green"] .green-discovery>.discover-hub { grid-area:highlights; }
+}
+@media(max-width:800px) {
+  [data-experience="green"] .my-green-screen .screen-cover { min-height:230px; }
+  [data-experience="green"] .my-green-screen .screen-cover__copy h1 { font-size:32px; line-height:1.1; }
+  [data-experience="green"] .course-appbar { top:calc(64px + env(safe-area-inset-top)); }
+  [data-experience="green"] .section-nav { top:calc(114px + env(safe-area-inset-top)); }
+  [data-experience="green"] .course-section { scroll-margin-top:174px; }
+  [data-experience="rail"] .app-screen:has(.rail-library) .screen-media-header { min-height:190px; height:190px; }
+  [data-experience="rail"] .app-screen:has(.rail-library) .screen-media-header__copy { bottom:64px; }
+  [data-experience="rail"] .app-screen:has(.rail-library) .screen-media-header__copy strong { font-size:30px; }
+  [data-experience="rail"] .route-hero-grid { grid-template-columns:1fr; grid-template-areas:"identity" "media" "summary"; gap:24px; }
+  [data-experience="rail"] .route-hero-identity h1 { font-size:40px; line-height:1.1; }
+  [data-experience="rail"] .route-hero-grid>.route-media { min-height:240px; max-height:360px; }
+  [data-experience="rail"] .screen-section-heading { flex-wrap:wrap; }
+  .trail-discover .rallii-section-heading .rallii-kicker { display:none; }
+}
+@media(max-width:639px) {
+  [data-experience="rail"] .route-section-nav { top:calc(112px + env(safe-area-inset-top)); }
+}

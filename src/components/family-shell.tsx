@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Capacitor } from "@capacitor/core";
 import { ACTIVITY_KEY, ACTIVITY_PATHS_KEY, activities, parseActivityPaths, isFamilyPath, activityForPath, launchActivity, rememberActivity } from "@/lib/activities";
 import { SiteFooter } from "@/components/site-footer";
+import { MobileShell } from "./mobile-shell";
 
 export function FamilyShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
@@ -36,5 +37,5 @@ export function FamilyShell({ children }: { children: React.ReactNode }) {
       } catch { /* Discovery works without device storage. */ }
     }
   }, [activity, path, router]);
-  return <div data-experience={activity === "trail" || activity === "mtb" || activity === "snow" ? "rail" : activity}>{children}{activity !== "green" ? <SiteFooter /> : null}</div>;
+  return <div data-experience={activity === "trail" || activity === "mtb" || activity === "snow" ? "rail" : activity}><MobileShell />{children}{activity !== "green" ? <SiteFooter /> : null}</div>;
 }

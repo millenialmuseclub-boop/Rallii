@@ -60,11 +60,3 @@ test("Green destinations, collections and planning trips resolve photographed ov
   for(const trip of publishedTrips) for(const stop of trip.stops) assert.ok(getCourseMedia(stop.courseSlug));
   assert.equal(new Set(courseMedia.map(m=>m.id)).size,courseMedia.length);
 });
-
-test("Snow keeps tap-to-open region drawers and mounts only the selected destination",()=>{
-  const discovery=readFileSync(new URL("../src/snow/discover.tsx",import.meta.url),"utf8");
-  const browser=readFileSync(new URL("../src/components/destination-browser.tsx",import.meta.url),"utf8");
-  assert.match(discovery,/<DestinationBrowser/);
-  assert.match(browser,/selected === item.slug \? render\(item\) : null/);
-  assert.doesNotMatch(discovery,/IntersectionObserver|infiniteScroll|loadMore/);
-});

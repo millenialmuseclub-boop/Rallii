@@ -9,8 +9,10 @@ export function PwaRegistration() {
     if (!("serviceWorker" in navigator)) return;
 
     let refreshing = false;
+    const updatingExistingWorker = Boolean(navigator.serviceWorker.controller);
     const refreshForUpdate = () => {
-      if (refreshing) return;
+      // Initial installation can claim this page without interrupting navigation.
+      if (!updatingExistingWorker || refreshing) return;
       refreshing = true;
       window.location.reload();
     };
