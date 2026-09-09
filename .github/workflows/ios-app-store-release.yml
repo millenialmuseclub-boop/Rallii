@@ -11,6 +11,11 @@ on:
         description: Processed App Store Connect build number
         required: true
         default: "12"
+      submit_for_review:
+        description: Submit after updating release metadata
+        required: true
+        default: true
+        type: boolean
 
 jobs:
   submit:
@@ -29,11 +34,12 @@ jobs:
           APP_STORE_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
           APP_VERSION: ${{ inputs.version }}
           APP_BUILD_NUMBER: ${{ inputs.build_number }}
+          SUBMIT_FOR_REVIEW: ${{ inputs.submit_for_review }}
         run: |
           set -euo pipefail
           mkdir -p fastlane/metadata/en-US
           cat > fastlane/metadata/en-US/release_notes.txt <<'NOTES'
-          Explore 30 mountain biking destinations in the new MTB mode. Trail and MTB collections now use compact, tap-to-open region lists, with trip-planning links for stays, flights, activities, and car hire.
+          Green, Trail, and MTB are three new ways to explore with Rallii. Trail and MTB use compact, tap-to-open region lists, with trip-planning links for stays, flights, activities, and car hire.
           NOTES
           cat > fastlane/Fastfile <<'RUBY'
           default_platform(:ios)
@@ -54,7 +60,7 @@ jobs:
                 metadata_path: "fastlane/metadata",
                 skip_metadata: false,
                 skip_screenshots: true,
-                submit_for_review: true,
+                submit_for_review: ENV.fetch("SUBMIT_FOR_REVIEW") == "true",
                 automatic_release: true,
                 force: true,
                 precheck_include_in_app_purchases: false,
