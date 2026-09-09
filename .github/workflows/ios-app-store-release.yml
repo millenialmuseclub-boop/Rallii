@@ -1,0 +1,64 @@
+name: Submit iOS Build to App Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: App Store marketing version
+        required: true
+        default: "1.2"
+      build_number:
+        description: Processed App Store Connect build number
+        required: true
+        default: "12"
+
+jobs:
+  submit:
+    runs-on: macos-latest
+    environment: Production
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install App Store release tooling
+        run: gem install fastlane --no-document
+      - name: Submit the existing build for review and automatic release
+        env:
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          APP_VERSION: ${{ inputs.version }}
+          APP_BUILD_NUMBER: ${{ inputs.build_number }}
+        run: |
+          set -euo pipefail
+          mkdir -p fastlane
+          cat > fastlane/Fastfile <<'RUBY'
+          default_platform(:ios)
+          platform :ios do
+            lane :release do
+              key = app_store_connect_api_key(
+                key_id: ENV.fetch("APP_STORE_KEY_ID"),
+                issuer_id: ENV.fetch("APP_STORE_ISSUER_ID"),
+                key_content: ENV.fetch("APP_STORE_PRIVATE_KEY"),
+                in_house: false
+              )
+              deliver(
+                api_key: key,
+                app_identifier: "com.rallii.rail",
+                app_version: ENV.fetch("APP_VERSION"),
+                build_number: ENV.fetch("APP_BUILD_NUMBER"),
+                skip_binary_upload: true,
+                skip_metadata: true,
+                skip_screenshots: true,
+                submit_for_review: true,
+                automatic_release: true,
+                force: true,
+                precheck_include_in_app_purchases: false,
+                submission_information: {
+                  export_compliance_uses_encryption: false
+                }
+              )
+            end
+          end
+          RUBY
+          fastlane ios release
