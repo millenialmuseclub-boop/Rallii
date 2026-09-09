@@ -10,7 +10,7 @@ export function ActivitySwitcher() {
   const router = useRouter();
   const active = isFamilyPath(path) ? undefined : activityForPath(path);
   return <nav className="activity-switcher" aria-label="Rallii activities">
-    {activities.map((activity) => <Link key={activity.id} href={activity.href}
+    {activities.map((activity) => <Link key={activity.id} href={activity.href} data-activity={activity.id}
       aria-current={active === activity.id ? "true" : undefined}
       onClick={event => {
         rememberActivity(activity.id);

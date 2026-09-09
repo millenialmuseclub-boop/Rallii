@@ -22,16 +22,16 @@ export const metadata: Metadata = {
     template: "%s | Rallii",
   },
   description: "Know where to sit, what to see, and when to look on the world's great rail journeys.",
-  applicationName: "Rallii Rail",
+  applicationName: "Rallii",
   openGraph: {
-    title: "Rallii Rail — Curated Rail Journeys",
-    description: "Know where to sit, what to see, and when to look.",
+    title: "Rallii — One world, five ways outside",
+    description: "Explore memorable journeys by rail, green, trail, mountain bike, and snow.",
     siteName: "Rallii",
     type: "website",
   },
-  twitter: { card: "summary", title: "Rallii Rail — Curated Rail Journeys", description: "Know where to sit, what to see, and when to look." },
+  twitter: { card: "summary", title: "Rallii — One world, five ways outside", description: "Explore memorable journeys by rail, green, trail, mountain bike, and snow." },
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, title: "Rallii Rail", statusBarStyle: "black-translucent" },
+  appleWebApp: { capable: true, title: "Rallii", statusBarStyle: "black-translucent" },
   formatDetection: { telephone: false },
 };
 

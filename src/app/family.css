@@ -5,7 +5,8 @@
 .rallii-header { border-bottom:1px solid #d6dbd0; padding-top:env(safe-area-inset-top); }
 .rallii-header-inner { min-height:88px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
 .rallii-wordmark { display:flex; align-items:center; gap:10px; font:650 36px var(--font-source-sans),Arial,sans-serif; letter-spacing:-1px; white-space:nowrap; text-decoration:none; }
-.rallii-wordmark svg { width:30px; height:30px; }
+.rallii-wordmark img { width:34px; height:34px; border-radius:22%; box-shadow:0 1px 0 rgba(23,63,50,.18); }
+.rallii-wordmark strong { font:700 32px var(--font-source-sans),Arial,sans-serif; letter-spacing:-1.2px; }
 .rallii-wordmark span { font:17px var(--font-source-sans),Arial,sans-serif; letter-spacing:0; }
 .rallii-family-nav { display:flex; gap:30px; align-items:center; }
 .rallii-family-nav a { font-size:13px; display:inline-flex; min-height:44px; align-items:center; text-decoration:none; }
@@ -147,7 +148,8 @@
 @media(max-width:760px) {
  .rallii-header-inner { flex-wrap:wrap;gap:6px 12px;padding-block:12px 0;min-height:105px; }
  .rallii-wordmark { font-size:30px; }
- .rallii-wordmark svg { width:24px;height:24px; }
+ .rallii-wordmark img { width:28px;height:28px; }
+ .rallii-wordmark strong { font-size:28px; }
  .rallii-wordmark span { font-size:13px; }
  .rallii-family-nav { order:3;flex-basis:100%;justify-content:space-between;border-top:1px solid #e0e2d6;margin-top:8px; }
  .rallii-header .activity-switcher a { min-width:45px;padding-inline:9px; }

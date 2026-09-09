@@ -8,8 +8,19 @@ body { margin: 0; }
 [data-experience] { min-height: 100vh; }
 .activity-switcher { display: inline-flex; gap: 2px; border: 1px solid #9ba99f; border-radius: 999px; padding: 3px; font: 700 13px Arial, sans-serif; background: #f5f2ea; color: #173f32; }
 .activity-switcher a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 54px; padding: 0 10px; border-radius: 999px; text-decoration: none; }
-.activity-switcher a[aria-current] { background: #173f32; color: white; }
+.activity-switcher a::before { content:""; width:6px; height:6px; margin-right:6px; border-radius:50%; background:var(--activity-accent,#6f7d73); }
+.activity-switcher a[data-activity="rail"] { --activity-accent:#b88b42; }
+.activity-switcher a[data-activity="green"] { --activity-accent:#4f7a4b; }
+.activity-switcher a[data-activity="trail"] { --activity-accent:#a7643e; }
+.activity-switcher a[data-activity="mtb"] { --activity-accent:#55563b; }
+.activity-switcher a[data-activity="snow"] { --activity-accent:#6f9ca1; }
+.activity-switcher a[aria-current] { background: #173f32; color: white; box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); }
+.activity-switcher a[aria-current]::before { background:#f5f2ea; }
 .activity-switcher a:focus-visible { outline: 3px solid #ad653f; outline-offset: 2px; }
+.rallii-site-brand { display:flex; align-items:center; gap:.6rem; color:#173f32; text-decoration:none; font-family:var(--font-source-sans),Arial,sans-serif; }
+.rallii-site-brand img { border-radius:22%; box-shadow:0 1px 0 rgba(23,63,50,.18); }
+.rallii-site-brand strong { font-size:1.45rem; font-weight:700; letter-spacing:-.04em; }
+.rallii-site-brand span { color:#637269; font-size:.85rem; font-weight:600; letter-spacing:.02em; }
 
 .family-workspace, .family-membership { max-width: 960px; margin: 0 auto; color: #173f32; }
 .family-workspace p, .family-membership p { line-height: 1.7; margin: 1rem 0; }

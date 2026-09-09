@@ -3,5 +3,5 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
-  return { id: "/", name: "Rallii Rail — Curated Rail Journeys", short_name: "Rallii Rail", description: "Know where to sit, what to see, and when to look.", start_url: "/", scope: "/", display: "standalone", orientation: "portrait-primary", background_color: "#f5f2ea", theme_color: "#173f32", categories: ["travel", "lifestyle"], icons: [{ src: "/pwa-icon/192", sizes: "192x192", type: "image/png", purpose: "any" }, { src: "/pwa-icon/512", sizes: "512x512", type: "image/png", purpose: "any" }, { src: "/pwa-icon/512", sizes: "512x512", type: "image/png", purpose: "maskable" }] };
+  return { id: "/", name: "Rallii — One world, five ways outside", short_name: "Rallii", description: "Explore memorable journeys by rail, green, trail, mountain bike, and snow.", start_url: "/", scope: "/", display: "standalone", orientation: "portrait-primary", background_color: "#f5f2ea", theme_color: "#173f32", categories: ["travel", "lifestyle"], icons: [{ src: "/rallii-icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" }, { src: "/rallii-icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" }, { src: "/rallii-icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }] };
 }
