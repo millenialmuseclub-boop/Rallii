@@ -2,7 +2,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "com.rallii.rail",
-  appName: "Rallii Rail",
+  appName: "Rallii",
   webDir: "out",
   plugins: {
     CapacitorUpdater: {
