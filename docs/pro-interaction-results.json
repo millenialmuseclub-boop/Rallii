@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Green coastal query and typed course search return matching cards",
+    "Green comparison and planner preserve selected course queries",
+    "Green and Rail map canvases render; Rail save survives reload",
+    "Ride Mode demo starts, updates journey progress, and ends"
+  ],
+  "errors": []
+}

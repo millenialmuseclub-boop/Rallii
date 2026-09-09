@@ -1,0 +1,102 @@
+
+> rallii@0.1.0 build
+> next build
+
+▲ Next.js 16.3.0 (Turbopack)
+✓ Running next.config.ts took 89ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.0s
+  Running TypeScript ...
+  Finished TypeScript in 7.2s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/193) ...
+  Generating static pages using 15 workers (48/193) 
+  Generating static pages using 15 workers (96/193) 
+  Generating static pages using 15 workers (144/193) 
+✓ Generating static pages using 15 workers (193/193) in 4.5s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /apple-icon
+├ ○ /compare
+├ ○ /discover
+├   /discover/[collection]
+│ ├ ● /discover/alpine-journeys
+│ ├ ● /discover/northern-landscapes
+│ ├ ● /discover/cross-border-journeys
+│ └ ● [+11 more paths]
+├ ○ /discover/collections
+├ ○ /gear
+├ ○ /green
+├ ○ /green/about
+├ ○ /green/collections
+├   /green/collections/[slug]
+│ ├ ● /green/collections/golf-at-the-edge
+│ ├ ● /green/collections/great-public-golf
+│ ├ ● /green/collections/architectural-masterpieces
+│ └ ● /green/collections/walking-golf
+├ ○ /green/compare
+├   /green/courses/[slug]
+│ ├ ● /green/courses/pebble-beach
+│ ├ ● /green/courses/spyglass-hill
+│ ├ ● /green/courses/pacific-dunes
+│ └ ● [+47 more paths]
+├ ○ /green/destinations
+├   /green/destinations/[slug]
+│ ├ ● /green/destinations/monterey-peninsula
+│ ├ ● /green/destinations/bandon-oregon-coast
+│ ├ ● /green/destinations/san-diego
+│ └ ● [+4 more paths]
+├ ○ /green/gear
+├ ○ /green/map
+├ ○ /green/my-green
+├ ○ /green/offline
+├ ○ /green/partner-widget
+├ ○ /green/plan
+├ ○ /green/privacy
+├ ○ /green/support
+├ ○ /green/trips
+├   /green/trips/[slug]
+│ ├ ● /green/trips/monterey-three-ways
+│ ├ ● /green/trips/bandon-read-the-wind
+│ ├ ● /green/trips/sandhills-dialogue
+│ └ ● /green/trips/links-before-and-after
+├ ○ /guides
+├   /guides/[guide]
+│ ├ ● /guides/swiss-panoramic-railways
+│ ├ ● /guides/norway-mountain-to-fjord
+│ ├ ● /guides/alps-to-the-riviera
+│ └ ● [+2 more paths]
+├ ○ /icon
+├ ○ /manifest.webmanifest
+├ ○ /my-rallii
+├ ○ /partner-widget
+├ ○ /plan
+├ ○ /privacy
+├ ○ /pro
+├   /pwa-icon/[size]
+│ ├ ● /pwa-icon/192
+│ ├ ● /pwa-icon/512
+│ └ ● /pwa-icon/1024
+├   /ride/[slug]
+│ ├ ● /ride/glacier-express
+│ ├ ● /ride/bernina-express
+│ ├ ● /ride/goldenpass-express
+│ └ ● [+33 more paths]
+├   /routes/[slug]
+│ ├ ● /routes/glacier-express
+│ ├ ● /routes/bernina-express
+│ ├ ● /routes/goldenpass-express
+│ └ ● [+33 more paths]
+├ ○ /saved
+├ ○ /search
+├ ○ /stays
+└ ○ /terms
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+

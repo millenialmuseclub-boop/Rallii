@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { parseCourseLibrary, updateCourseStatus } from "../src/green/lib/course-library.ts";
+import{buildGreenInsights,resolveComparison}from"../src/green/lib/course-insights.ts";import{publishedCourses}from"../src/green/data/courses.ts";
+import { parseShoppingList } from "../src/green/lib/shopping-list.ts";
+
+test("parses valid versioned course state", () => { assert.deepEqual(parseCourseLibrary('{"version":1,"courses":{"pebble-beach":"played"}}'), { version: 1, courses: { "pebble-beach": "played" } }); });
+test("rejects malformed and future versions", () => { assert.deepEqual(parseCourseLibrary("nope"), { version: 1, courses: {} }); assert.deepEqual(parseCourseLibrary('{"version":2,"courses":{}}'), { version: 1, courses: {} }); });
+test("filters unknown slugs", () => { assert.deepEqual(parseCourseLibrary('{"version":1,"courses":{"known":"want_to_play","unknown":"played"}}', new Set(["known"])), { version: 1, courses: { known: "want_to_play" } }); });
+test("primary statuses are mutually exclusive", () => { const wanted = updateCourseStatus({ version: 1, courses: {} }, "pebble", "want_to_play"); const played = updateCourseStatus(wanted, "pebble", "played"); assert.deepEqual(played.courses, { pebble: "played" }); });
+test("comparison rejects duplicate and unknown selections",()=>{const result=resolveComparison(publishedCourses,"unknown","pebble-beach");assert.equal(result.a,publishedCourses[0].slug);assert.notEqual(result.a,result.b);const duplicate=resolveComparison(publishedCourses,"pebble-beach","pebble-beach");assert.notEqual(duplicate.a,duplicate.b)});
+test("My Green insights remain factual and local",()=>{const insights=buildGreenInsights(publishedCourses,{"pebble-beach":"played","old-course-st-andrews":"want_to_play"});assert.equal(insights.played.length,1);assert.equal(insights.wanted.length,1);assert.equal(insights.saved.length,2);assert.ok(insights.settings.has("coastal"));assert.equal(insights.access.public+insights.access.resort+insights.access.private,2)});
+test("shopping list accepts valid versioned private items and rejects malformed data",()=>{const list=parseShoppingList('{"version":1,"items":[{"id":"one","name":"  Rain gloves  ","category":"Weather","completed":false,"courseSlug":"pebble-beach"},{"id":2,"name":"bad","category":"Other","completed":false}]}');assert.deepEqual(list,{version:1,items:[{id:"one",name:"Rain gloves",category:"Weather",completed:false,courseSlug:"pebble-beach"}]});assert.deepEqual(parseShoppingList('{"version":2,"items":[]}'),{version:1,items:[]});assert.deepEqual(parseShoppingList("bad"),{version:1,items:[]})});

@@ -1,0 +1,4 @@
+"use client";
+import { useCourseLibrary } from "@/green/hooks/use-course-library";
+
+export function LibraryActions({ slug, compact = false }: { slug: string; compact?: boolean }) { const { status, setStatus } = useCourseLibrary(); const current = status(slug); return <div className={`library-actions ${compact ? "library-actions--compact" : ""}`} aria-label="Personal course library"><button type="button" aria-pressed={current === "want_to_play"} onClick={() => setStatus(slug, current === "want_to_play" ? undefined : "want_to_play")}>{current === "want_to_play" ? "✓ Want to Play" : "Want to Play"}</button><button type="button" aria-pressed={current === "played"} onClick={() => setStatus(slug, current === "played" ? undefined : "played")}>{current === "played" ? "✓ Played" : "Played"}</button></div>; }

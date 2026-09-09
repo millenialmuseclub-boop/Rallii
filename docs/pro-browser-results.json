@@ -1,0 +1,40 @@
+{
+  "checkedRoutes": [
+    "/",
+    "/my-rallii/",
+    "/pro/",
+    "/pro/",
+    "/my-rallii/",
+    "/pro/",
+    "/my-rallii/",
+    "/saved/",
+    "/routes/bernina-express/",
+    "/routes/glacier-express/",
+    "/ride/bernina-express/",
+    "/green/",
+    "/green/courses/pebble-beach/",
+    "/green/courses/spyglass-hill/",
+    "/green/my-green/",
+    "/green/compare/?a=pebble-beach&b=spyglass-hill",
+    "/green/plan/?course=pebble-beach",
+    "/green/?setting=coastal",
+    "/green/courses/pebble-beach/",
+    "/pro/"
+  ],
+  "errors": [],
+  "screenshots": [
+    "pro-mobile.png",
+    "my-rallii-desktop.png",
+    "pro-active-fixture-mobile.png"
+  ],
+  "checks": [
+    "Save filters, legacy migration, keyboard activity switch, mode persistence through Pro, back navigation, free restore and responsive shared screens",
+    "All generated routes detail documents return 200 with headings",
+    "All generated green/courses detail documents return 200 with headings",
+    "All generated green/destinations detail documents return 200 with headings",
+    "All generated green/collections detail documents return 200 with headings",
+    "All generated green/trips detail documents return 200 with headings",
+    "Isolated real-component fixture: free → restore → Rail Pro → Green Pro → mixed collection and notes → expiry → read-only persistence; fixture is outside app routes and native output",
+    "Real FamilyShell with isolated Capacitor/navigation fixture restores Green on native root launch and preserves explicit Rail deep links"
+  ]
+}

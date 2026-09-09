@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import { PwaRegistration } from "@/components/pwa-registration";
-import { SiteFooter } from "@/components/site-footer";
+import { ProProvider } from "@/components/pro-provider";
+import { FamilyShell } from "@/components/family-shell";
 import { NativeOtaUpdater } from "@/components/native-ota-updater";
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>{children}<SiteFooter /><PwaRegistration /><NativeOtaUpdater /></body>
+      <body><ProProvider><FamilyShell>{children}</FamilyShell></ProProvider><PwaRegistration /><NativeOtaUpdater /></body>
     </html>
   );
 }

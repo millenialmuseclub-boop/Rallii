@@ -16,6 +16,8 @@ interface RouteGeoJson { features: Array<{ geometry: { coordinates: RouteCoordin
 
 export function RideMode({ route, initialDirection = "forward" }: { route: RailRoute; initialDirection?: JourneyDirection }) {
   const entitlements = useEntitlements();
+  const alertsAllowed = useRef(entitlements.canUseScenicAlerts);
+  useEffect(() => { alertsAllowed.current = entitlements.canUseScenicAlerts; }, [entitlements.canUseScenicAlerts]);
   const [geometry, setGeometry] = useState<RouteCoordinate[]>();
   const [mode, setMode] = useState<Mode>("landing");
   const [direction, setDirection] = useState<JourneyDirection>(initialDirection);
@@ -49,7 +51,7 @@ export function RideMode({ route, initialDirection = "forward" }: { route: RailR
   const arrived = progress >= 0.995;
 
   function considerAlert(nextProgress: number, nextDirection: JourneyDirection, allowPreview: boolean) {
-    if (!route.capabilities.scenicAlerts || (!entitlements.canUseScenicAlerts && !allowPreview)) return;
+    if (!route.capabilities.scenicAlerts || (!alertsAllowed.current && !allowPreview)) return;
     const directional = getDirectionalScenicMoments(getScenicMoments(route), totalKm, nextDirection);
     const alert = getForegroundScenicAlert(directional, totalKm * nextProgress, firedAlertIds.current);
     if (!alert) return;

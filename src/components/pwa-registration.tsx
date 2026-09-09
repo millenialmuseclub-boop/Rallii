@@ -16,7 +16,7 @@ export function PwaRegistration() {
     };
 
     navigator.serviceWorker.addEventListener("controllerchange", refreshForUpdate);
-    void navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).then((registration) => registration.update());
+    void navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).then((registration) => registration?.update()).catch(() => { /* Browsing remains available when service workers are blocked or offline. */ });
 
     return () => navigator.serviceWorker.removeEventListener("controllerchange", refreshForUpdate);
   }, []);

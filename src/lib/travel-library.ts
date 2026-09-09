@@ -27,10 +27,12 @@ export function migrateLegacySaved(raw: string | null, knownSlugs?: ReadonlySet<
 
 export function getTravelLibrary(): TravelLibrary {
   if (typeof window === "undefined") return emptyLibrary;
+  try {
   let raw = window.localStorage.getItem(TRAVEL_LIBRARY_KEY);
   if (!raw) { const migrated = migrateLegacySaved(window.localStorage.getItem(LEGACY_SAVED_KEY)); if (Object.keys(migrated.routes).length) { raw = JSON.stringify(migrated); window.localStorage.setItem(TRAVEL_LIBRARY_KEY, raw); window.localStorage.removeItem(LEGACY_SAVED_KEY); } }
   if (raw === cachedRaw) return cachedLibrary;
   cachedRaw = raw; cachedLibrary = parseTravelLibrary(raw); return cachedLibrary;
+  } catch { return cachedLibrary; }
 }
 
 export function updateLibraryStatus(library: TravelLibrary, slug: string, status?: RouteStatus, limit: number | null = null): { library: TravelLibrary; result: LibraryUpdateResult } {

@@ -1,0 +1,2 @@
+import type { Course } from "@/green/types/course";
+export function CharacterMeter({ course }: { course: Course }) { const entries = Object.entries(course.character).filter(([, value]) => typeof value === "number") as [string, number][]; return <div className="character-grid">{entries.map(([label, value]) => <div key={label}><span>{label}</span><div aria-label={`${label}: ${value} out of 5`}><i style={{ width: `${value * 20}%` }} /></div></div>)}</div>; }

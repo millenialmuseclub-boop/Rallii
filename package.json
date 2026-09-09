@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test test/route-repository.test.ts",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
     "db:seed": "node --experimental-strip-types scripts/seed.ts",
     "cap:doctor": "node -r ./scripts/capacitor-userinfo-shim.cjs ./node_modules/@capacitor/cli/bin/capacitor doctor",
     "cap:sync": "node -r ./scripts/capacitor-userinfo-shim.cjs ./node_modules/@capacitor/cli/bin/capacitor sync",
