@@ -31,7 +31,10 @@ jobs:
           APP_BUILD_NUMBER: ${{ inputs.build_number }}
         run: |
           set -euo pipefail
-          mkdir -p fastlane
+          mkdir -p fastlane/metadata/en-US
+          cat > fastlane/metadata/en-US/release_notes.txt <<'NOTES'
+          Explore 30 mountain biking destinations in the new MTB mode. Trail and MTB collections now use compact, tap-to-open region lists, with trip-planning links for stays, flights, activities, and car hire.
+          NOTES
           cat > fastlane/Fastfile <<'RUBY'
           default_platform(:ios)
           platform :ios do
@@ -48,7 +51,8 @@ jobs:
                 app_version: ENV.fetch("APP_VERSION"),
                 build_number: ENV.fetch("APP_BUILD_NUMBER"),
                 skip_binary_upload: true,
-                skip_metadata: true,
+                metadata_path: "fastlane/metadata",
+                skip_metadata: false,
                 skip_screenshots: true,
                 submit_for_review: true,
                 automatic_release: true,
