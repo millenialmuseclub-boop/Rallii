@@ -26,3 +26,10 @@ Upload authorized by the owner on 10 September 2026. Cleanup is being committed 
 2. Run the existing Upload iOS Build to TestFlight workflow on that commit with the production channel. It builds the static assets, syncs iOS and assigns its next workflow run number as the build number; no manual native refactor is necessary.
 3. Verify the new build on a fresh iPhone installation, including first/offline launch, then attach that actual processed build to version 1.2 in App Store Connect. Do not reuse build 16, which predates this cleanup.
 4. Submit the new build and use APP_REVIEW_RESPONSE.md after confirming its statements against that build. Check App Store Connect screenshots/metadata for old Pro references; repository metadata contains no stale subscription offer.
+
+## Upload completed
+- Version 1.2, build 17 uploaded successfully on 10 September 2026 at 18:58 UTC. Apple upload tooling reported UPLOAD SUCCEEDED with no errors.
+- Source commit: d0d829e5a71f8b78204e7c85b99d7d961a0f92c8, pushed to codex/rallii-home-trail.
+- Workflow: https://github.com/millenialmuseclub-boop/Rallii/actions/runs/34517225144 (success).
+- No review submission was made. Apple processing/availability for selection was not independently verified. Owner should select build 17 once processing completes and submit for review.
+- APP_REVIEW_RESPONSE.md now answers Apple’s four business-model questions.
