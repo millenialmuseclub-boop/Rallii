@@ -958,15 +958,17 @@ test("Scenic Alerts reverse direction and do not repeat fired moments", () => {
   assert.equal(getForegroundScenicAlert(forward, eligible.journeyDistanceKm - eligible.leadDistanceKm / 2, new Set([eligible.id]))?.id === eligible.id, false);
 });
 
-test("Free and Pro entitlements enforce the prepared library boundary", () => {
+test("All release users can save beyond two journeys and use shipped capabilities", () => {
   const free = createEntitlements("free");
   const pro = createEntitlements("pro");
-  assert.equal(free.canUseScenicAlerts, false);
-  assert.equal(free.personalLibraryLimit, 2);
+  assert.equal(free.canUseScenicAlerts, true);
+  assert.equal(free.canUseCollections, true);
+  assert.equal(free.canAccessRoute("pro"), true);
+  assert.equal(free.personalLibraryLimit, null);
   assert.equal(pro.canUseScenicAlerts, true);
   assert.equal(pro.personalLibraryLimit, null);
   const library = { version: 1 as const, routes: { one: "want_to_go" as const, two: "want_to_go" as const } };
-  assert.equal(updateLibraryStatus(library, "three", "want_to_go", free.personalLibraryLimit).result.reason, "limit-reached");
+  assert.equal(updateLibraryStatus(library, "three", "want_to_go", free.personalLibraryLimit).result.ok, true);
   assert.equal(updateLibraryStatus(library, "three", "want_to_go", pro.personalLibraryLimit).result.ok, true);
 });
 

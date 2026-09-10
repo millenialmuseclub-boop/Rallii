@@ -15,13 +15,14 @@ export function createEntitlements(state: EntitlementState): Entitlements {
   const hasPro = state === "pro" || state === "restore-successful";
   return {
     state, isPro: hasPro,
-    canAccessRoute: (accessTier = "free") => accessTier === "free" || hasPro,
-    canUseScenicAlerts: hasPro,
+    // All shipped capabilities are free in this release, regardless of legacy membership.
+    canAccessRoute: () => true,
+    canUseScenicAlerts: true,
     // These capabilities are not implemented, even for subscribers.
     canUseOffline: false,
     canUseAdvancedSchedules: false,
-    canUseCollections: hasPro,
-    personalLibraryLimit: hasPro ? null : 2,
+    canUseCollections: true,
+    personalLibraryLimit: null,
   };
 }
 export const defaultEntitlements = createEntitlements("free");

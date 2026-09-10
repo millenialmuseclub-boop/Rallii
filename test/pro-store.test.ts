@@ -50,11 +50,11 @@ test("duplicate operations share a pending request and newer customer events win
   listener(free); resolve(active); await first;
   assert.equal(store.getSnapshot().isPro, false); assert.equal(store.getSnapshot().isLoadingEntitlements, false);
 });
-test("provider expiry updates all consumers and releases its listener", async () => {
+test("provider expiry preserves free features and releases its listener", async () => {
   let listener!: (customer: typeof active) => void; let disposed = false;
   const store = createProStore(provider({ subscribe: fn => { listener = fn; return () => { disposed = true; }; } }));
   const disconnect = store.connect(); await store.refreshEntitlements(); listener(free);
-  assert.equal(store.getSnapshot().canUseCollections, false); assert.equal(store.getSnapshot().canUseScenicAlerts, false);
+  assert.equal(store.getSnapshot().canUseCollections, true); assert.equal(store.getSnapshot().canUseScenicAlerts, true);
   disconnect(); assert.equal(disposed, true);
 });
 test("switching modes does not reset entitlement or alter legacy Rail and Green saves", async () => {

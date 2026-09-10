@@ -21,7 +21,6 @@ export function MobileShell() {
     <header className="phone-header">
       <Link href="/" className="phone-brand" aria-label="Rallii home"><RalliiMark title="Rallii" /><strong>Rallii</strong></Link>
       <ActivitySwitcher compact />
-      <Link href="/pro/" className="phone-pro" aria-current={path === "/pro" ? "page" : undefined}>Pro</Link>
     </header>
     <nav className="phone-nav" aria-label={family ? "Rallii navigation" : `${activity === "mtb" ? "MTB" : activity.charAt(0).toUpperCase() + activity.slice(1)} navigation`}><ul>{items.map(item => {
       const active = path === item.href || (item.href === "/discover" && (path.startsWith("/routes/") || path.startsWith("/discover/"))) || (item.href === "/green" && /^\/green\/(courses|destinations|collections|trips)(\/|$)/.test(path)) || (item.href === `/${activity}` && !family && (activity === "trail" || activity === "mtb" || activity === "snow"));

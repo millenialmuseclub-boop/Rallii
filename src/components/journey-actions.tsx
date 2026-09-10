@@ -20,7 +20,7 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable, direct
   function updateStatus(status: "want_to_go") {
     const nextStatus = routeStatus === status ? undefined : status;
     const result = setStatus(routeSlug, nextStatus);
-    setActionStatus(!result.ok ? "The free library holds two journeys. Unlimited Rail saves are part of Rallii Pro, which is not available for purchase yet." : nextStatus === "want_to_go" ? `${routeName} saved.` : `${routeName} removed from Saved.`);
+    setActionStatus(!result.ok ? "Your journey could not be saved. Please try again." : nextStatus === "want_to_go" ? `${routeName} saved.` : `${routeName} removed from Saved.`);
   }
 
   return (
