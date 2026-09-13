@@ -42,6 +42,6 @@ export function FamilyHome() {
     <FamilySavedPreview />
     <section className="rallii-container rallii-family-pro"><div><p className="rallii-kicker">Across the Rallii family</p><h2>More to your journey.<br /><em>All together.</em></h2><p>Bring Rail, Green, Trail, MTB and Snow into the same trip, with private collections and notes. Keep your plans together, wherever curiosity takes you.</p><Link className="rallii-button rallii-button-light" href="/my-rallii/">Open My Rallii ↗</Link></div><div><p className="rallii-pro-label">Plan with more possibility</p><ul><li>Trip collections across activities & private notes</li><li>Unlimited Rail saves & supported Scenic Alerts</li></ul><p className="rallii-pro-note">All available features are free.</p></div></section>
     <div className="rallii-container"><JordypopCollection /></div>
-    <p className="rallii-signoff">A little curiosity goes a long way. <span>Rallii</span></p>
+
   </main></>;
 }

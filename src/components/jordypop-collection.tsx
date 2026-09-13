@@ -1,4 +1,18 @@
 import Image from "next/image";
 import { jordypopProjects } from "@/data/jordypop";
-export function JordypopCollection(){return <section className="jordypop-collection"><p className="rallii-kicker">From the jordypop collection</p><h2>More to discover.</h2><div className="jordypop-links">{jordypopProjects.map(project=><article key={project.id}><h3>{project.name}</h3><p>{project.description}</p><a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={project.appStore?`Download ${project.name} on the App Store`:`Explore ${project.name}`}>{project.appStore?<Image src="/images/app-store-official.svg" width={150} height={50} unoptimized alt="Download on the App Store"/>:"Explore →"}</a></article>)}</div></section>;}
+
+export function JordypopCollection() {
+  return <section className="jordypop-collection" aria-labelledby="jordypop-heading">
+    <header><p className="rallii-kicker">From jordypop</p><h2 id="jordypop-heading">More to explore.</h2></header>
+    <div className="jordypop-products">
+      {jordypopProjects.map(project => <a key={project.id} className="jordypop-product" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}: ${project.appStore ? "View on App Store" : "Explore"} (opens in a new tab)`}>
+        <Image className="jordypop-product-icon" src={project.icon} width={48} height={48} unoptimized alt="" />
+        <span className="jordypop-product-copy"><strong>{project.name}</strong><span>{project.description}</span></span>
+        <span className="jordypop-product-action" aria-hidden="true"><span>{project.appStore ? "View on App Store" : "Explore"}</span><span>→</span></span>
+      </a>)}
+    </div>
+    <p className="jordypop-colophon">Independent apps by jordypop.</p>
+  </section>;
+}
+
 export function LatinAmericaContext(){const project=jordypopProjects.find(item=>item.id==="latam")!;return <p className="trail-fact-note">Beyond the ride: <a href={project.href} target="_blank" rel="noopener noreferrer">explore Latin America with Jet Set LatAm ↗</a>.</p>;}

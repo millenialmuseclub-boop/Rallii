@@ -37,5 +37,5 @@ export function FamilyShell({ children }: { children: React.ReactNode }) {
       } catch { /* Discovery works without device storage. */ }
     }
   }, [activity, path, router]);
-  return <div data-experience={activity === "trail" || activity === "mtb" || activity === "snow" ? "rail" : activity}><MobileShell />{children}{activity !== "green" ? <SiteFooter /> : null}</div>;
+  return <div data-experience={activity === "trail" || activity === "mtb" || activity === "snow" ? "rail" : activity}><MobileShell />{children}{activity !== "green" ? <SiteFooter compact={path === "/"} /> : null}</div>;
 }
