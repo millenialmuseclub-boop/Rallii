@@ -12,7 +12,8 @@
     "width": 1300,
     "height": 477,
     "fileSize": 62462,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/vernal.card.webp"
   },
   "yosemite": {
     "src": "/images/trails/yosemite.webp",
@@ -27,7 +28,8 @@
     "width": 1300,
     "height": 782,
     "fileSize": 191194,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/yosemite.card.webp"
   },
   "joshua": {
     "src": "/images/trails/joshua.webp",
@@ -42,7 +44,8 @@
     "width": 1300,
     "height": 867,
     "fileSize": 131658,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/joshua.card.webp"
   },
   "rainier": {
     "src": "/images/trails/rainier.webp",
@@ -57,7 +60,8 @@
     "width": 960,
     "height": 655,
     "fileSize": 117020,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/rainier.card.webp"
   },
   "moss": {
     "src": "/images/trails/moss.webp",
@@ -72,7 +76,8 @@
     "width": 1600,
     "height": 900,
     "fileSize": 268310,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/moss.card.webp"
   },
   "olympic": {
     "src": "/images/trails/olympic.webp",
@@ -87,7 +92,8 @@
     "width": 1300,
     "height": 715,
     "fileSize": 245118,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/olympic.card.webp"
   },
   "zion": {
     "src": "/images/trails/zion.webp",
@@ -102,7 +108,8 @@
     "width": 1300,
     "height": 574,
     "fileSize": 235376,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/zion.card.webp"
   },
   "bryce": {
     "src": "/images/trails/bryce.webp",
@@ -117,7 +124,8 @@
     "width": 1300,
     "height": 731,
     "fileSize": 303694,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/bryce.card.webp"
   },
   "canyon": {
     "src": "/images/trails/canyon.webp",
@@ -132,7 +140,8 @@
     "width": 285,
     "height": 275,
     "fileSize": 22150,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/canyon.card.webp"
   },
   "fairy": {
     "src": "/images/trails/fairy.webp",
@@ -147,7 +156,8 @@
     "width": 1300,
     "height": 731,
     "fileSize": 263942,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/fairy.card.webp"
   },
   "taggart": {
     "src": "/images/trails/taggart.webp",
@@ -162,7 +172,8 @@
     "width": 1300,
     "height": 731,
     "fileSize": 206812,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/taggart.card.webp"
   },
   "jenny": {
     "src": "/images/trails/jenny.webp",
@@ -177,7 +188,8 @@
     "width": 650,
     "height": 433,
     "fileSize": 45836,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/jenny.card.webp"
   },
   "kilauea": {
     "src": "/images/trails/kilauea.webp",
@@ -192,7 +204,8 @@
     "width": 1300,
     "height": 586,
     "fileSize": 255566,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/kilauea.card.webp"
   },
   "devastation": {
     "src": "/images/trails/devastation.webp",
@@ -207,7 +220,8 @@
     "width": 960,
     "height": 502,
     "fileSize": 120046,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/devastation.card.webp"
   },
   "tomales": {
     "src": "/images/trails/tomales.webp",
@@ -222,7 +236,8 @@
     "width": 1300,
     "height": 730,
     "fileSize": 148006,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/tomales.card.webp"
   },
   "diamond": {
     "src": "/images/trails/diamond.webp",
@@ -237,7 +252,8 @@
     "width": 1600,
     "height": 1200,
     "fileSize": 165146,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/diamond.card.webp"
   },
   "tam": {
     "src": "/images/trails/tam.webp",
@@ -252,7 +268,8 @@
     "width": 1600,
     "height": 1067,
     "fileSize": 76770,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/tam.card.webp"
   },
   "lands": {
     "src": "/images/trails/lands.webp",
@@ -267,7 +284,8 @@
     "width": 1600,
     "height": 1200,
     "fileSize": 243910,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/lands.card.webp"
   },
   "rocky": {
     "src": "/images/trails/rocky.webp",
@@ -282,7 +300,8 @@
     "width": 1600,
     "height": 1138,
     "fileSize": 157876,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/rocky.card.webp"
   },
   "glacier": {
     "src": "/images/trails/glacier.webp",
@@ -297,7 +316,8 @@
     "width": 1600,
     "height": 1067,
     "fileSize": 323636,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/glacier.card.webp"
   },
   "yosemite-falls": {
     "src": "/images/trails/yosemite-falls.webp",
@@ -312,7 +332,8 @@
     "width": 650,
     "height": 653,
     "fileSize": 105746,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/yosemite-falls.card.webp"
   },
   "bridalveil": {
     "src": "/images/trails/bridalveil.webp",
@@ -327,7 +348,8 @@
     "width": 650,
     "height": 650,
     "fileSize": 97342,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/trails/bridalveil.card.webp"
   },
   "upper-yosemite-falls": {
     "src": "/images/trail/upper-yosemite-falls.webp",
@@ -345,7 +367,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Yosemite Falls Trail May 2011 003.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/upper-yosemite-falls.card.webp"
   },
   "mirror-lake": {
     "src": "/images/trail/mirror-lake.webp",
@@ -363,7 +386,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Yosemite National Park (California, USA), Yosemite Valley, Mirror Lake -- 2012 -- 4685.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/mirror-lake.card.webp"
   },
   "ryan-mountain": {
     "src": "/images/trail/ryan-mountain.webp",
@@ -381,7 +405,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Ryan Mountain Trail 04.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/ryan-mountain.card.webp"
   },
   "barker-dam": {
     "src": "/images/trail/barker-dam.webp",
@@ -399,7 +424,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Barker Dam Joshua Tree December 2013 004.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/barker-dam.card.webp"
   },
   "nisqually-vista": {
     "src": "/images/trail/nisqually-vista.webp",
@@ -417,7 +443,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Several overlooks along the Nisqually Vista Trail offer views of the Nisqually Valley and Mount Rainier. (999ddea8-0073-4332-9a94-73a565d485bc).JPG",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/nisqually-vista.card.webp"
   },
   "canyon-overlook": {
     "src": "/images/trail/canyon-overlook.webp",
@@ -435,7 +462,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Canyon Overlook Trail NPS.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/canyon-overlook.card.webp"
   },
   "riverside-walk": {
     "src": "/images/trail/riverside-walk.webp",
@@ -453,7 +481,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Riverside Walk, Zion NP.JPG",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/riverside-walk.card.webp"
   },
   "bryce-rim-walk": {
     "src": "/images/trail/bryce-rim-walk.webp",
@@ -471,7 +500,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Bryce Amphitheater from Sunrise Point Highres 2013.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/bryce-rim-walk.card.webp"
   },
   "emerald-lake": {
     "src": "/images/trail/emerald-lake.webp",
@@ -489,7 +519,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Rocky Mountain NP, Emerald Lake - panoramio.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/emerald-lake.card.webp"
   },
   "alberta-falls": {
     "src": "/images/trail/alberta-falls.webp",
@@ -507,7 +538,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Alberta Falls (50451749938).jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/alberta-falls.card.webp"
   },
   "avalanche-lake": {
     "src": "/images/trail/avalanche-lake.webp",
@@ -525,7 +557,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Avalanche Lake in Glacier National Park.JPG",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/avalanche-lake.card.webp"
   },
   "hidden-falls-jenny-lake": {
     "src": "/images/trail/hidden-falls-jenny-lake.webp",
@@ -543,7 +576,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Hidden Falls Smaldone.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/hidden-falls-jenny-lake.card.webp"
   },
   "diamond-head": {
     "src": "/images/trail/diamond-head.webp",
@@ -561,7 +595,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:View to Waikiki and Honolulu from Diamond Head summit - panoramio.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/diamond-head.card.webp"
   },
   "verna-dunshee": {
     "src": "/images/trail/verna-dunshee.webp",
@@ -579,6 +614,64 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:View of San Francisco Bay area from Mount Tamalpais East Peak.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/trail/verna-dunshee.card.webp"
+  },
+  "hooker-valley": {
+    "src": "/images/trail/hooker-valley.webp",
+    "alt": "A footbridge across Stocking Stream in the Hooker Valley.",
+    "caption": "A footbridge across Stocking Stream in the Hooker Valley.",
+    "credit": "Pseudopanax at English Wikipedia",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bridge_over_Stocking_Stream_with_snow.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Bridge_over_Stocking_Stream_with_snow.jpg/960px-Bridge_over_Stocking_Stream_with_snow.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 640,
+    "fileSize": 140248,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Bridge over Stocking Stream with snow.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/trail/hooker-valley.card.webp"
+  },
+  "preikestolen": {
+    "src": "/images/trail/preikestolen.webp",
+    "alt": "Preikestolen rising above the Lysefjord.",
+    "caption": "Preikestolen rising above the Lysefjord.",
+    "credit": "Stefan Krause, Germany",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Preikestolen_Norge.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Preikestolen_Norge.jpg/960px-Preikestolen_Norge.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 1344,
+    "fileSize": 254298,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Preikestolen Norge.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/trail/preikestolen.card.webp"
+  },
+  "johnston-canyon": {
+    "src": "/images/trail/johnston-canyon.webp",
+    "alt": "The Lower Falls in Johnston Canyon.",
+    "caption": "The Lower Falls in Johnston Canyon.",
+    "credit": "Florian Fuchs",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Johnston_Canyon-Lower_Falls.jpg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Johnston_Canyon-Lower_Falls.jpg/960px-Johnston_Canyon-Lower_Falls.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 588,
+    "fileSize": 110638,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Johnston Canyon-Lower Falls.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/trail/johnston-canyon.card.webp"
   }
 }

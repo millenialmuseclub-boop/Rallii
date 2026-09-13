@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 import "./mobile.css";
+import "./expansion.css";
 import { PwaRegistration } from "@/components/pwa-registration";
 import { ProProvider } from "@/components/pro-provider";
 import { FamilyShell } from "@/components/family-shell";

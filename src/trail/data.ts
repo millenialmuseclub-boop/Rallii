@@ -1,4 +1,5 @@
 import type { Trail, TrailDifficulty, TrailShape } from "./types";
+import { globalTrails } from "./expanded.ts";
 
 const nps = "https://www.nps.gov/";
 const sources = {
@@ -61,10 +62,10 @@ const seeds: Seed[] = [
   ["devastation-trail", "Devastation Trail", "Hawaiʻi Volcanoes National Park", "Hawaii", 1.6, null, "1 hr", "Easy", "Out & Back", "devastation", ["Volcanic", "Nature", "Geology"], "Watch a forest return to a landscape reshaped by eruption.", "Follow the paved trail through the cinder landscape and return to your starting parking area.", "Stay on paving and do not feed nēnē. Check volcanic alerts before visiting.", "Year-round, conditions permitting", "devastation", "Devastation Trail parking area"],
 ];
 
-export const trails: Trail[] = seeds.map(([slug, name, destination, region, distanceKm, elevationGainM, duration, difficulty, routeType, imageKey, tags, whyGo, route, guidance, bestTime, source, trailhead]) => ({
+export const trails: Trail[] = [...seeds.map(([slug, name, destination, region, distanceKm, elevationGainM, duration, difficulty, routeType, imageKey, tags, whyGo, route, guidance, bestTime, source, trailhead]) => ({
   slug, name, destination, region, country: "United States", distanceKm, elevationGainM, duration, difficulty, routeType, imageKey, tags, whyGo, route, guidance, bestTime,
   sourceUrl: sources[source], reviewedAt: "2026-09-09", map: { trailhead: { name: trailhead }, waypoints: [] },
-}));
+})), ...globalTrails];
 
 export function findTrail(slug: string) { return trails.find(trail => trail.slug === slug); }
 export function filterTrails(query: string, difficulty = "All", region = "All") {
@@ -74,6 +75,3 @@ export function filterTrails(query: string, difficulty = "All", region = "All") 
     return (difficulty === "All" || trail.difficulty === difficulty) && (region === "All" || trail.region === region) && terms.every(term => text.includes(term));
   });
 }
-
-
-

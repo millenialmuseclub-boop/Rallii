@@ -413,7 +413,7 @@ test("route-to-collection links derive from centralized collection membership", 
 
 test("journey guides are composed from published routes and preserve route order", () => {
   const routes = getAllRoutes();
-  assert.equal(journeyGuides.length, 5);
+  assert.equal(journeyGuides.length, 9);
   for (const guide of journeyGuides) {
     const guideRoutes = getGuideRoutes(guide, routes);
     assert.deepEqual(guideRoutes.map((route) => route.summary.slug), guide.routeSlugs);

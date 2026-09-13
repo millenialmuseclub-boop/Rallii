@@ -12,6 +12,10 @@ export interface JourneyGuide {
 }
 
 export const journeyGuides: readonly JourneyGuide[] = [
+  {slug:"scotland-beyond-the-viaduct",title:"Scotland beyond the viaduct",eyebrow:"Highland rail, slowly",description:"Give the West Highland landscape more than one passing glance. Base in Fort William, leave a day for the coast at Mallaig and compare the regular railway with the seasonal Jacobite experience.",routeSlugs:["west-highland-line","jacobite-steam-train"],connectionNote:"These journeys share track: choose separate days if taking both. Confirm the Jacobite’s current operation and reservations; allow an overnight in Fort William rather than assuming a same-day connection from a sleeper arrival.",coverRouteSlug:"west-highland-line",collectionSlugs:["northern-landscapes","heritage-lines"]},
+  {slug:"japan-and-taiwan-by-scenic-rail",title:"Forest trains of Japan and Taiwan",eyebrow:"Small railways, large landscapes",description:"Compare Kyoto’s short gorge excursion, the mountain engineering of Kurobe and Alishan’s climb into Taiwan’s forest. Each works best as the centerpiece of its own local stay.",routeSlugs:["sagano-scenic-railway","kurobe-gorge-railway","alishan-forest-railway"],connectionNote:"An editorial collection across two countries, not a through itinerary. Mountain operations can be seasonal or curtailed; verify the open section and onward transport before reserving accommodation.",coverRouteSlug:"alishan-forest-railway",collectionSlugs:["heritage-lines","mountain-journeys"]},
+  {slug:"latin-america-window-seat",title:"Latin America from the window",eyebrow:"Canyons and the Sacred Valley",description:"Copper Canyon and the Sacred Valley offer very different rail journeys. Give northern Mexico time for canyon-town stays, or build a Peru trip around Cusco, acclimatization and the approach to Machu Picchu.",routeSlugs:["el-chepe-express","hiram-bingham"],connectionNote:"Separate journeys in Mexico and Peru. Mountain health, attraction entry, transfers and operator tickets need independent planning; a train ticket does not imply admission to every attraction.",coverRouteSlug:"el-chepe-express",collectionSlugs:["mountain-journeys","gorge-and-valley-journeys"]},
+  {slug:"north-america-long-way",title:"North America, the long way",eyebrow:"A landscape-sized journey",description:"Choose the Pacific edge, the Rockies or a transcontinental crossing. Plan overnight comfort and daylight around the scenery that matters most, then leave recovery time at the far end.",routeSlugs:["coast-starlight","california-zephyr","the-canadian","first-passage-west"],connectionNote:"Compare these as distinct journeys, not guaranteed connections. Timetables, delays and daylight vary; allow buffer nights before flights and check accommodation and meal inclusions with each operator.",coverRouteSlug:"the-canadian",collectionSlugs:["multi-day-journeys","great-rail-crossings"]},
   {
     slug: "swiss-panoramic-railways",
     title: "Swiss Panoramic Railways",
@@ -57,7 +61,7 @@ export const journeyGuides: readonly JourneyGuide[] = [
     title: "Asian Rail Landscapes",
     eyebrow: "Four distinct mountain and coast journeys",
     description: "From the East Rift Valley to Himalayan foothills, these journeys show how railways meet forest, monsoon country, coast, and mountain terrain across Asia.",
-    routeSlugs: ["reunification-express", "east-rift-valley-railway", "kuranda-scenic-railway", "kalka-shimla-railway"],
+    routeSlugs: ["reunification-express", "east-rift-valley-railway", "kandy-ella-railway", "kalka-shimla-railway"],
     connectionNote: "This is an editorial grouping, not an itinerary. Each route has separate operators, seasons, and travel requirements; check current details independently.",
     coverRouteSlug: "kalka-shimla-railway",
     collectionSlugs: ["mountain-journeys", "heritage-lines"],

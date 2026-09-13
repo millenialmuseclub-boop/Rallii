@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { SnowPhoto, SnowCredit } from "@/snow/photo";
+import { MtbPhoto, MtbCredit } from "@/mtb/photo";
+import { snowDestinations } from "@/snow/data";
+import { mtbDestinations } from "@/mtb/data";
+export function GlobalDiscovery(){return <section className="rallii-container rallii-section"><div className="rallii-section-heading"><div><p className="rallii-kicker">Across the world</p><h2>Choose your next season.</h2></div><p>Three different ways to make a mountain trip.</p></div><div className="discovery-photo-grid">{[{mode:"snow",slug:"niseko-united",label:"Chase snow / Japan"},{mode:"mtb",slug:"blue-derby",label:"Ride it / Tasmania"},{mode:"snow",slug:"zermatt",label:"Mountains by rail / Switzerland"}].map(item=>{const place=item.mode==="snow"?snowDestinations.find(p=>p.slug===item.slug)!:mtbDestinations.find(p=>p.slug===item.slug)!;return <article key={item.slug}><Link className="discovery-photo" href={`/${item.mode}/${item.slug}/`}>{item.mode==="snow"?<SnowPhoto imageKey={place.imageKey}/>:<MtbPhoto imageKey={place.imageKey}/>}</Link>{item.mode==="snow"?<SnowCredit imageKey={place.imageKey}/>:<MtbCredit imageKey={place.imageKey}/>}<p className="rallii-kicker">{item.label}</p><h3><Link href={`/${item.mode}/${item.slug}/`}>{place.name}</Link></h3><p>{place.summary}</p></article>})}</div></section>;}

@@ -1,4 +1,5 @@
 import type { MtbDestination, MtbKind, MtbSkill } from "./types";
+import expanded from "./expanded.json" with { type: "json" };
 
 // Destination guides, not turn-by-turn routes. Route-dependent metrics stay null.
 type Seed = [string, string, string, string, MtbKind, MtbSkill[], string, string, string, string, string[], string, string, string, string];
@@ -35,11 +36,11 @@ const seeds: Seed[] = [
   ["maydena", "Maydena Bike Park", "Tasmania, Australia", "Australia", "Bike park", ["Intermediate", "Advanced"], "maydena", "A gravity-led visit to a steep forested mountain. Maydena is a place to arrive rested, choose progression carefully and give the descents your full attention.", "Long descending runs combine built features and natural technical terrain. Grade, fatigue and changing conditions all matter when linking sections.", "Uplift-assisted gravity riding", ["Mountain descent network", "Forest technical lines", "Progression options"], "Check the park’s operating calendar and mountain conditions.", "Maydena Bike Park base", "Confirm uplift, coaching and equipment requirements with the operator. Choose an appropriate first descent and leave room for breaks as fatigue builds.", "https://www.maydenabikepark.com/"],
 ];
 
-export const mtbDestinations: MtbDestination[] = seeds.map(([slug, name, location, region, kind, skills, imageKey, summary, terrain, character, sections, season, start, notes, sourceUrl]) => ({
+export const mtbDestinations: MtbDestination[] = [...seeds.map(([slug, name, location, region, kind, skills, imageKey, summary, terrain, character, sections, season, start, notes, sourceUrl]) => ({
   slug, name, location, region, kind, skills, imageKey, summary, terrain, character, sections, season, start, notes, sourceUrl,
   distanceKm: null, elevationGainM: null, time: kind === "Bike park" ? "Plan a half or full day of laps" : "Choose a loop to suit your day",
   bike: kind === "Bike park" ? "A park-appropriate full-suspension bike; confirm the operator’s equipment guidance." : "A trail mountain bike is a starting point; match suspension, tires and protection to the selected route.",
-}));
+})), ...expanded.map(item => ({...item, kind: item.kind as MtbKind, skills: item.skills as MtbSkill[]}))];
 export const findMtbDestination = (slug: string) => mtbDestinations.find(item => item.slug === slug);
 const normalize = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 export function filterMtb(query = "", skill = "All", region = "All", kind = "All") {

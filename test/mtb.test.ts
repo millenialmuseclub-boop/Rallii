@@ -6,10 +6,10 @@ import { parseMtbLibrary, updateMtbSave, MTB_LIBRARY_KEY } from "../src/mtb/libr
 import { activities, activityForPath, launchActivity, parseActivityPaths } from "../src/lib/activities.ts";
 import { parseCollections, updateCollection } from "../src/lib/pro-collections.ts";
 
-test("MTB has thirty independent, fully described destination guides and local credited photography", () => {
+test("MTB has forty-five independent, fully described destination guides and local credited photography", () => {
   const media = JSON.parse(readFileSync(new URL("../src/mtb/media.json", import.meta.url), "utf8"));
-  assert.equal(mtbDestinations.length, 30);
-  assert.equal(new Set(mtbDestinations.map(item => item.slug)).size, 30);
+  assert.equal(mtbDestinations.length, 45);
+  assert.equal(new Set(mtbDestinations.map(item => item.slug)).size, 45);
   for (const ride of mtbDestinations) {
     for (const field of [ride.summary, ride.terrain, ride.notes, ride.season, ride.start, ride.bike]) assert.ok(field.length > 20, ride.slug);
     assert.ok(ride.skills.length && ride.sections.length >= 3);
@@ -26,7 +26,7 @@ test("MTB search combines rider level, place and riding style without changing t
   assert.equal(filterMtb("Moab", "Beginner").length, 1);
   assert.equal(filterMtb("QueENStown").length, 1);
   assert.equal(filterMtb("nonexistent place").length, 0);
-  assert.equal(filterMtb().length, 30);
+  assert.equal(filterMtb().length, 45);
 });
 test("MTB Want to Ride, Ridden and Favorites round-trip without touching other libraries", () => {
   assert.equal(MTB_LIBRARY_KEY, "rallii:mtb-library:v1");

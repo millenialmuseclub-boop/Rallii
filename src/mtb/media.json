@@ -12,7 +12,8 @@
     "width": 1280,
     "height": 722,
     "fileSize": 224116,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/whistler.card.webp"
   },
   "squamish": {
     "src": "/images/mtb/squamish.webp",
@@ -28,7 +29,8 @@
     "height": 768,
     "fileSize": 72330,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/squamish.card.webp"
   },
   "moab": {
     "src": "/images/mtb/moab.webp",
@@ -43,7 +45,8 @@
     "width": 1600,
     "height": 900,
     "fileSize": 225172,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/moab.card.webp"
   },
   "sedona": {
     "src": "/images/mtb/sedona.webp",
@@ -59,7 +62,8 @@
     "height": 656,
     "fileSize": 293868,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/sedona.card.webp"
   },
   "bentonville": {
     "src": "/images/mtb/bentonville.webp",
@@ -75,7 +79,8 @@
     "height": 900,
     "fileSize": 399776,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/bentonville.card.webp"
   },
   "tahoe": {
     "src": "/images/mtb/tahoe.webp",
@@ -91,7 +96,8 @@
     "height": 847,
     "fileSize": 54770,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/tahoe.card.webp"
   },
   "crested-butte": {
     "src": "/images/mtb/crested-butte.webp",
@@ -106,7 +112,8 @@
     "width": 1529,
     "height": 1128,
     "fileSize": 302970,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/crested-butte.card.webp"
   },
   "park-city": {
     "src": "/images/mtb/park-city.webp",
@@ -122,7 +129,8 @@
     "height": 1200,
     "fileSize": 197134,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/park-city.card.webp"
   },
   "bellingham": {
     "src": "/images/mtb/bellingham.webp",
@@ -137,7 +145,8 @@
     "width": 1600,
     "height": 974,
     "fileSize": 172484,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/bellingham.card.webp"
   },
   "bend": {
     "src": "/images/mtb/bend.webp",
@@ -153,7 +162,8 @@
     "height": 1200,
     "fileSize": 294030,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/bend.card.webp"
   },
   "vermont": {
     "src": "/images/mtb/vermont.webp",
@@ -169,7 +179,8 @@
     "height": 294,
     "fileSize": 61922,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/vermont.card.webp"
   },
   "finale": {
     "src": "/images/mtb/finale.webp",
@@ -185,7 +196,8 @@
     "height": 1200,
     "fileSize": 268460,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/finale.card.webp"
   },
   "madeira": {
     "src": "/images/mtb/madeira.webp",
@@ -201,7 +213,8 @@
     "height": 1200,
     "fileSize": 107268,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/madeira.card.webp"
   },
   "queenstown": {
     "src": "/images/mtb/queenstown.webp",
@@ -217,7 +230,8 @@
     "height": 977,
     "fileSize": 340178,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/queenstown.card.webp"
   },
   "rotorua": {
     "src": "/images/mtb/rotorua.webp",
@@ -233,7 +247,8 @@
     "height": 1200,
     "fileSize": 326774,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/rotorua.card.webp"
   },
   "alps": {
     "src": "/images/mtb/alps.webp",
@@ -249,7 +264,8 @@
     "height": 1183,
     "fileSize": 403800,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/alps.card.webp"
   },
   "scotland": {
     "src": "/images/mtb/scotland.webp",
@@ -264,7 +280,8 @@
     "width": 800,
     "height": 530,
     "fileSize": 71812,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/scotland.card.webp"
   },
   "derby": {
     "src": "/images/mtb/derby.webp",
@@ -280,7 +297,8 @@
     "height": 1067,
     "fileSize": 426794,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/derby.card.webp"
   },
   "wales": {
     "src": "/images/mtb/wales.webp",
@@ -295,7 +313,8 @@
     "width": 1600,
     "height": 1200,
     "fileSize": 492168,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/wales.card.webp"
   },
   "maydena": {
     "src": "/images/mtb/maydena.webp",
@@ -311,7 +330,8 @@
     "height": 900,
     "fileSize": 318464,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/maydena.card.webp"
   },
   "northshore": {
     "src": "/images/mtb/northshore.webp",
@@ -326,7 +346,8 @@
     "width": 900,
     "height": 1200,
     "fileSize": 419334,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/northshore.card.webp"
   },
   "verbier": {
     "src": "/images/mtb/verbier.webp",
@@ -342,7 +363,8 @@
     "height": 1200,
     "fileSize": 376028,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/verbier.card.webp"
   },
   "lenzerheide": {
     "src": "/images/mtb/lenzerheide.webp",
@@ -358,7 +380,8 @@
     "height": 374,
     "fileSize": 35420,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/lenzerheide.card.webp"
   },
   "innsbruck": {
     "src": "/images/mtb/innsbruck.webp",
@@ -374,7 +397,8 @@
     "height": 603,
     "fileSize": 60432,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/innsbruck.card.webp"
   },
   "oakridge": {
     "src": "/images/mtb/oakridge.webp",
@@ -390,7 +414,8 @@
     "height": 298,
     "fileSize": 23508,
     "position": "50% 50%",
-    "representative": true
+    "representative": true,
+    "cardSrc": "/images/mtb/oakridge.card.webp"
   },
   "fruita": {
     "src": "/images/mtb/fruita.webp",
@@ -405,7 +430,8 @@
     "width": 800,
     "height": 571,
     "fileSize": 140236,
-    "position": "50% 50%"
+    "position": "50% 50%",
+    "cardSrc": "/images/mtb/fruita.card.webp"
   },
   "lost-lake": {
     "src": "/images/mtb/lost-lake.webp",
@@ -423,7 +449,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Lost Lake, Whistler B.C.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/mtb/lost-lake.card.webp"
   },
   "moab-brands": {
     "src": "/images/mtb/moab-brands.webp",
@@ -441,7 +468,8 @@
     "position": "50% 50%",
     "representative": false,
     "selectionTitle": "File:Mountain Biking- Moab Brands Trails (21066004768).jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/mtb/moab-brands.card.webp"
   },
   "morzine": {
     "src": "/images/mtb/morzine.webp",
@@ -459,7 +487,8 @@
     "position": "50% 50%",
     "representative": true,
     "selectionTitle": "File:Morzine summer.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/mtb/morzine.card.webp"
   },
   "slaughter-pen": {
     "src": "/images/mtb/slaughter-pen.webp",
@@ -477,6 +506,292 @@
     "position": "50% 50%",
     "representative": true,
     "selectionTitle": "File:Crystal Bridges Trail.jpg",
-    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained."
+    "reuseNotes": "Resized and encoded as WebP; no crop baked in. Original license retained.",
+    "cardSrc": "/images/mtb/slaughter-pen.card.webp"
+  },
+  "santa-cruz": {
+    "src": "/images/mtb/santa-cruz.webp",
+    "alt": "The beachside streets of Santa Cruz.",
+    "caption": "The beachside streets of Santa Cruz.",
+    "credit": "SnippyHolloW from New York, United States",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beach_Street,_Santa_Cruz.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Beach_Street%2C_Santa_Cruz.jpg/1280px-Beach_Street%2C_Santa_Cruz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 1280,
+    "height": 682,
+    "fileSize": 146000,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Beach Street, Santa Cruz.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/santa-cruz.card.webp"
+  },
+  "downieville": {
+    "src": "/images/mtb/downieville.webp",
+    "alt": "Historic wooden buildings in Downieville.",
+    "caption": "Historic wooden buildings in Downieville.",
+    "credit": "Frank Schulenburg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Downieville_(2024)-L1006460.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Downieville_%282024%29-L1006460.jpg/960px-Downieville_%282024%29-L1006460.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 768,
+    "fileSize": 219208,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Downieville (2024)-L1006460.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/downieville.card.webp"
+  },
+  "hood-river": {
+    "src": "/images/mtb/hood-river.webp",
+    "alt": "Mount Hood seen from the Hood River Fruit Loop.",
+    "caption": "Mount Hood seen from the Hood River Fruit Loop.",
+    "credit": "Rizka",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mt._Hood_from_the_Fruit_Loop.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Mt._Hood_from_the_Fruit_Loop.jpg/960px-Mt._Hood_from_the_Fruit_Loop.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 621,
+    "fileSize": 105462,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Mt. Hood from the Fruit Loop.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/hood-river.card.webp"
+  },
+  "rossland": {
+    "src": "/images/mtb/rossland.webp",
+    "alt": "Old-growth forest in the Rossland area.",
+    "caption": "Old-growth forest in the Rossland area.",
+    "credit": "Treefender K",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_Growth.jpg",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Old_Growth.jpg/960px-Old_Growth.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 1280,
+    "fileSize": 404930,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Old Growth.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/rossland.card.webp"
+  },
+  "canmore": {
+    "src": "/images/mtb/canmore.webp",
+    "alt": "A forest path near Quarry Lake, Canmore.",
+    "caption": "A forest path near Quarry Lake, Canmore.",
+    "credit": "Thank you for visiting my page from Canada",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Quarry_lake_Canmore_Alberta_Canada_(16341657849).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Quarry_lake_Canmore_Alberta_Canada_%2816341657849%29.jpg/960px-Quarry_lake_Canmore_Alberta_Canada_%2816341657849%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 640,
+    "fileSize": 188962,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Quarry lake Canmore Alberta Canada (16341657849).jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/canmore.card.webp"
+  },
+  "antioquia": {
+    "src": "/images/mtb/antioquia.webp",
+    "alt": "The church and village square in Santa Elena, Medellín.",
+    "caption": "The church and village square in Santa Elena, Medellín.",
+    "credit": "Andreasuescun",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Iglesia_Santa_Elena.JPG",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Iglesia_Santa_Elena.JPG/960px-Iglesia_Santa_Elena.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 720,
+    "fileSize": 165536,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Iglesia Santa Elena.JPG",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/antioquia.card.webp"
+  },
+  "mantiqueira": {
+    "src": "/images/mtb/mantiqueira.webp",
+    "alt": "The green mountain setting around Campos do Jordão.",
+    "caption": "The green mountain setting around Campos do Jordão.",
+    "credit": "Deni Williams from São Paulo, Brasil",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Campos_do_Jord%C3%A3o_-_Paisagem_-_Landscape_(8904153636).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Campos_do_Jord%C3%A3o_-_Paisagem_-_Landscape_%288904153636%29.jpg/960px-Campos_do_Jord%C3%A3o_-_Paisagem_-_Landscape_%288904153636%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 640,
+    "fileSize": 138372,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Campos do Jordão - Paisagem - Landscape (8904153636).jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/mantiqueira.card.webp"
+  },
+  "araucania": {
+    "src": "/images/mtb/araucania.webp",
+    "alt": "Lake Villarrica from the harbor at Pucón.",
+    "caption": "Lake Villarrica from the harbor at Pucón.",
+    "credit": "Falk2",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:J25_048_Lago_Villarrica,_Hafenbucht_Puc%C3%B3n.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/J25_048_Lago_Villarrica%2C_Hafenbucht_Puc%C3%B3n.jpg/960px-J25_048_Lago_Villarrica%2C_Hafenbucht_Puc%C3%B3n.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 640,
+    "fileSize": 128690,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:J25 048 Lago Villarrica, Hafenbucht Pucón.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/araucania.card.webp"
+  },
+  "bariloche-mtb": {
+    "src": "/images/mtb/bariloche-mtb.webp",
+    "alt": "Bariloche’s civic center and town square.",
+    "caption": "Bariloche’s civic center and town square.",
+    "credit": "Carlos Ravazzani",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:CENTRO_CIVICO_38.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/CENTRO_CIVICO_38.jpg/960px-CENTRO_CIVICO_38.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 1438,
+    "fileSize": 224276,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:CENTRO CIVICO 38.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/bariloche-mtb.card.webp"
+  },
+  "la-fortuna": {
+    "src": "/images/mtb/la-fortuna.webp",
+    "alt": "Arenal Volcano above tropical forest near La Fortuna.",
+    "caption": "Arenal Volcano above tropical forest near La Fortuna.",
+    "credit": "Rhododendrites",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p)_(cropped).jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Arenal_volcano_%2870785p%29_%28cropped%29.jpg/960px-Arenal_volcano_%2870785p%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 530,
+    "fileSize": 109532,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Arenal volcano (70785p) (cropped).jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/la-fortuna.card.webp"
+  },
+  "pisgah-brevard": {
+    "src": "/images/mtb/pisgah-brevard.webp",
+    "alt": "Looking Glass Rock and the forested Pisgah landscape.",
+    "caption": "Looking Glass Rock and the forested Pisgah landscape.",
+    "credit": "J. Passepartout",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Looking_Glass_Rock_as_seen_from_Johns_Rock.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Looking_Glass_Rock_as_seen_from_Johns_Rock.jpg/960px-Looking_Glass_Rock_as_seen_from_Johns_Rock.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 720,
+    "fileSize": 112674,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Looking Glass Rock as seen from Johns Rock.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/pisgah-brevard.card.webp"
+  },
+  "vancouver-island": {
+    "src": "/images/mtb/vancouver-island.webp",
+    "alt": "The town setting at Cumberland, Vancouver Island.",
+    "caption": "The town setting at Cumberland, Vancouver Island.",
+    "credit": "Mike from Vancouver, Canada",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cumberland_(04)_(9581826927).jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Cumberland_%2804%29_%289581826927%29.jpg/960px-Cumberland_%2804%29_%289581826927%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 720,
+    "fileSize": 67770,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Cumberland (04) (9581826927).jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/vancouver-island.card.webp"
+  },
+  "revelstoke-mtb": {
+    "src": "/images/mtb/revelstoke-mtb.webp",
+    "alt": "Boulder Mountain near Revelstoke in summer.",
+    "caption": "Boulder Mountain near Revelstoke in summer.",
+    "credit": "Dennis Cambly",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boulder_Mountain_2008_-_panoramio.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Boulder_Mountain_2008_-_panoramio.jpg/960px-Boulder_Mountain_2008_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 307,
+    "fileSize": 25162,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Boulder Mountain 2008 - panoramio.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/revelstoke-mtb.card.webp"
+  },
+  "dolomites-mtb": {
+    "src": "/images/mtb/dolomites-mtb.webp",
+    "alt": "The Alpe di Siusi landscape in the Dolomites.",
+    "caption": "The Alpe di Siusi landscape in the Dolomites.",
+    "credit": "Geir Hval (www.MacWhale.eu)",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seiser_Alm_Alpe_di_Siusi_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_(2017.09.21).jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Seiser_Alm_Alpe_di_Siusi_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282017.09.21%29.jpg/960px-Seiser_Alm_Alpe_di_Siusi_Val_Gardena_S%C3%BCdtirol_Alto_Adige_Italia_Italy_%282017.09.21%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 478,
+    "fileSize": 78580,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:Seiser Alm Alpe di Siusi Val Gardena Südtirol Alto Adige Italia Italy (2017.09.21).jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/dolomites-mtb.card.webp"
+  },
+  "oaxaca": {
+    "src": "/images/mtb/oaxaca.webp",
+    "alt": "Forest at dusk in the Sierra Norte of Oaxaca.",
+    "caption": "Forest at dusk in the Sierra Norte of Oaxaca.",
+    "credit": "ChavadorPaz",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:El_bosque_al_anochecer.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/El_bosque_al_anochecer.jpg/960px-El_bosque_al_anochecer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "width": 960,
+    "height": 720,
+    "fileSize": 107448,
+    "position": "50% 50%",
+    "accessedAt": "2026-09-13",
+    "representative": false,
+    "selectionTitle": "File:El bosque al anochecer.jpg",
+    "reuseNotes": "Resized and encoded as WebP. Original license retained.",
+    "cardSrc": "/images/mtb/oaxaca.card.webp"
   }
 }

@@ -8,10 +8,10 @@ import { parseCollections, updateCollection } from "../src/lib/pro-collections.t
 import { TRAVEL_LIBRARY_KEY, parseTravelLibrary } from "../src/lib/travel-library.ts";
 import { COURSE_LIBRARY_KEY, parseCourseLibrary } from "../src/green/lib/course-library.ts";
 
-test("Trail catalogue has 30 unique complete guides with licensed local media and no invented geometry", () => {
+test("Trail catalogue has 33 unique complete guides with licensed local media and no invented geometry", () => {
   const media = JSON.parse(readFileSync(new URL("../src/trail/media.json", import.meta.url), "utf8"));
-  assert.equal(trails.length, 30);
-  assert.equal(new Set(trails.map(trail => trail.slug)).size, 30);
+  assert.equal(trails.length, 33);
+  assert.equal(new Set(trails.map(trail => trail.slug)).size, 33);
   for (const trail of trails) {
     assert.ok(trail.distanceKm > 0);
     assert.ok(trail.elevationGainM === null || trail.elevationGainM >= 0);
@@ -29,7 +29,7 @@ test("discovery combines filters, matches scenery and handles diacritics and emp
   assert.ok(filterTrails("waterfalls", "Easy", "California").length > 0);
   assert.ok(filterTrails("waterfalls", "Easy", "California").every(trail => trail.difficulty === "Easy" && trail.region === "California"));
   assert.deepEqual(filterTrails("no-such-trail"), []);
-  assert.equal(filterTrails(" ").length, 30);
+  assert.equal(filterTrails(" ").length, 33);
 });
 test("Trail status updates persist, replace and remove without changing existing mode schemas", () => {
   const rail = '{"version":1,"routes":{"glacier-express":"want_to_go"}}';
