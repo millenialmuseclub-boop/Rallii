@@ -24,5 +24,5 @@ for (const [target, size] of outputs) {
 }
 const inset = await sharp(source).resize(400, 400).toBuffer();
 await sharp({ create: { width: 512, height: 512, channels: 3, background: "#0b4938" } })
-  .composite([{ input: inset, left: 56, top: 56 }]).png().toFile("public/rallii-icon-maskable.png");
+  .composite([{ input: inset, left: 56, top: 56 }]).removeAlpha().png().toFile("public/rallii-icon-maskable.png");
 console.log(`Prepared ${outputs.length} icons and the maskable variant.`);

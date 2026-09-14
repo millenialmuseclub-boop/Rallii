@@ -1,9 +1,9 @@
-# Rallii icon revision
+# Rallii mountain-R icon revision
 
-The small compass illustrations were replaced with a bold R monogram in the family green, cream and gold palette. The same source supplies the shared in-app mark, browser/Apple/PWA icons, legacy icon endpoint, and prepared iOS/Android assets. A separate maskable export keeps the mark within a circular crop.
+The approved enhanced mountain-R artwork replaces the previous R monogram. A cream R incorporates alpine peaks and a curved gold railway on forest green. Destination photography is unchanged.
 
-Source: `assets/branding/rallii-monogram.png`, generated with the built-in image tool. Prompt: replace the intricate five illustrations and compass with one bold cream capital R, a restrained gold diagonal route accent, full-bleed forest green background, readable at 24px and 40px, no tiny decoration. This is brand artwork; destination photography remains sourced photography.
+Source: `assets/branding/rallii-monogram.png`. Regenerate exports with `node scripts/prepare-brand-icons.mjs`.
 
-Regenerate size exports with `node scripts/prepare-brand-icons.mjs`. The size review shows 24, 40, 60 and 120px exports.
+The shared RalliiMark component supplies desktop and mobile headers across Rail, Trail, MTB, Snow and Green. Exports also cover browser, Apple touch, PWA, the legacy PWA endpoint, and iOS/Android launcher assets. The maskable export retains a safe inset.
 
-OTA includes the in-app/web icons. Installed native launcher icons require a future signed binary; no iOS build upload or App Store submission change is included in this release.
+Web-layer branding can ship through the existing OTA workflow. Native launcher and App Store icons require a new signed iOS build; an OTA cannot replace those icons. App Review submission and metadata changes are separate actions.
