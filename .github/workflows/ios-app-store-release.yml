@@ -6,11 +6,10 @@ on:
       version:
         description: App Store marketing version
         required: true
-        default: "1.2"
+        default: "1.4"
       build_number:
         description: Processed App Store Connect build number
         required: true
-        default: "12"
       submit_for_review:
         description: Submit after updating release metadata
         required: true
@@ -40,7 +39,7 @@ jobs:
           mkdir -p fastlane/metadata/en-US
           printf '%s\n' 'Rallii' > fastlane/metadata/en-US/name.txt
           cat > fastlane/metadata/en-US/release_notes.txt <<'NOTES'
-          Green, Trail, MTB, and Snow are four new ways to explore with Rallii. Browse golf, hiking, mountain biking, and winter destinations in compact, tap-to-open lists, with trip-planning links for stays, flights, activities, and car hire.
+          Plan your next mountain day with deeper Snow guides, named MTB ride options, a new Johnston Canyon Upper Falls hike, and a Swiss winter rail guide. Discover relevant gear picks with clear affiliate disclosures, compare snow destinations with shareable links, and find your Snow favorites in Saved. Includes improved mobile planning layouts and Rail comparison navigation.
           NOTES
           cat > fastlane/Fastfile <<'RUBY'
           default_platform(:ios)
