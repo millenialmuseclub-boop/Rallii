@@ -817,5 +817,25 @@
       "Nahuel Huapi views"
     ],
     "sourceUrl": "https://www.catedralaltapatagonia.com/"
+  },
+  {
+    "slug": "brevent-flegere",
+    "imageKey": "chamonix",
+    "name": "Brévent–Flégère",
+    "location": "Chamonix valley, France",
+    "country": "France",
+    "region": "Europe",
+    "kind": "Ski region",
+    "terrain": "South-facing ski areas above Chamonix and Les Praz, looking across to the Mont Blanc massif. Choose named pistes by their current grade; panorama access is not a beginner ski itinerary.",
+    "summary": "A focused Chamonix ski day facing Mont Blanc. Plan around Planpraz or Flégère rather than crossing the whole valley between separate resorts.",
+    "season": "January–March; subject to the official calendar",
+    "airport": "Geneva",
+    "lodging": "Chamonix town or Les Praz",
+    "highlights": [
+      "Planpraz panorama",
+      "Flégère slopes",
+      "Mont Blanc views"
+    ],
+    "sourceUrl": "https://www.chamonix.com/a-voir-a-faire/sports-et-outdoor/le-ski-dans-la-vallee-de-chamonix-mont-blanc/domaines-skiables/domaine-skiable-brevent-flegere"
   }
 ]

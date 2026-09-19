@@ -1,3 +1,4 @@
+import { experienceEvent } from "../lib/experience-events.ts";
 export type TrailStatus = "want_to_go" | "been";
 export interface TrailLibrary { version: 1; trails: Record<string, TrailStatus> }
 export const TRAIL_LIBRARY_KEY = "rallii:trail-library:v1";
@@ -23,6 +24,6 @@ export function subscribeToTrails(callback: () => void) {
 export function writeTrailStatus(slug: string, status?: TrailStatus): boolean {
   try {
     localStorage.setItem(TRAIL_LIBRARY_KEY, JSON.stringify(updateTrailStatus(parseTrailLibrary(trailSnapshot()), slug, status)));
-    window.dispatchEvent(new Event(TRAIL_LIBRARY_EVENT)); return true;
+    window.dispatchEvent(new Event(TRAIL_LIBRARY_EVENT));experienceEvent("save",{mode:"trail",route_id:slug,status:status ?? "removed"}); return true;
   } catch { return false; }
 }

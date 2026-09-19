@@ -1,3 +1,4 @@
+import { experienceEvent } from "../lib/experience-events.ts";
 export type MtbStatus = "want_to_ride" | "ridden";
 export interface MtbSave { status: MtbStatus; favorite: boolean }
 export interface MtbLibrary { version: 1; rides: Record<string, MtbSave> }
@@ -30,6 +31,6 @@ export function subscribeToMtb(callback: () => void) {
 export function writeMtbSave(slug: string, change: MtbStatus | "favorite") {
   try {
     localStorage.setItem(MTB_LIBRARY_KEY, JSON.stringify(updateMtbSave(parseMtbLibrary(mtbSnapshot()), slug, change)));
-    window.dispatchEvent(new Event(MTB_LIBRARY_EVENT)); return true;
+    window.dispatchEvent(new Event(MTB_LIBRARY_EVENT));experienceEvent("save",{mode:"mtb",route_id:slug,status:change}); return true;
   } catch { return false; }
 }

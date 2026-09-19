@@ -1,4 +1,5 @@
 import expanded from "./expanded.json" with { type: "json" };
+import { snowPlanning, type SnowPlanning } from "./planning.ts";
 export type SnowKind = "Resort" | "Ski region";
 export interface SnowDestination { slug: string; imageKey: string; name: string; location: string; region: string; kind: SnowKind; terrain: string; season: string; summary: string; sourceUrl: string }
 const originalDestinations: SnowDestination[] = [
@@ -31,6 +32,7 @@ const originalPlanning: Record<string, [string, string, string[]]> = {
   "falls-creek": ["Albury or Melbourne", "Falls Creek village", ["Village slopes", "Nordic trails", "Alpine village"]],
 };
 export interface SnowGuide extends SnowDestination {
+  planning?: SnowPlanning;
   id: string; mode: "snow"; country: string; airport: string; lodging: string;
   highlights: string[]; abilities: SnowAbility[]; bestMonths: number[];
   family: string; snowCharacter: string; transport: string; offMountain: string;
@@ -47,8 +49,9 @@ export const snowDestinations: SnowGuide[] = [...originalDestinations, ...expand
     snowCharacter: country === "Japan" ? "Cold midwinter storms are part of the appeal; powder is never guaranteed. Respect resort boundaries and local avalanche guidance." : southern ? "Southern winter brings variable mountain weather. Wind, freeze–thaw cycles and storms can affect lift access." : "Midwinter snow and spring freeze–thaw cycles offer different trips. Grooming, wind and recent weather matter more than a seasonal reputation.",
     transport: `Plan arrival through ${airport}. Compare a booked transfer with public connections to ${lodging}; confirm winter schedules and the last return before choosing flights.`,
     offMountain: `Leave an afternoon for ${lodging}: a slow lunch, village wandering and local food. Ask the visitor office which winter walks and sightseeing lifts are open to non-skiers.`,
-    perfectDay: [`Start near ${highlights[0]} with an open groomed run below your usual grade; use the current piste map.`, `Make ${highlights[1]} the focus of the day only if the terrain, links and conditions suit your group. Break for lunch before fatigue builds.`, `Finish with time for ${highlights[2]} and return to ${lodging} before the last required lift or transfer.`],
+    perfectDay: [`Start at your booked lesson or a suitable open piste using the current mountain map.`, `Explore one sector that suits the whole group, with time for lunch and a look at the scenery.`, `Return to ${lodging} before the last required lift or transfer; keep sightseeing separate from the ski route.`],
     conditions:{status:"not-connected"},
+    ...(snowPlanning[place.slug] ? { ...snowPlanning[place.slug], planning: snowPlanning[place.slug] } : {}),
   };
 });
 export function findSnow(slug: string) { return snowDestinations.find(item => item.slug === slug); }

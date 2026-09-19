@@ -29,7 +29,7 @@ const groups = [
 ];
 
 for (const {mode,records,media,key} of groups) {
-  test(`${mode}: every published record has distinct local photography and complete attribution`, async () => {
+  test(`${mode}: published records have attributed local photography; only documented same-place routes share`, async () => {
     assert.equal(new Set(records.map(r=>r.slug)).size,records.length);
     const identities = new Set<string>();
     for (const record of records) {
@@ -41,8 +41,11 @@ for (const {mode,records,media,key} of groups) {
       const root=resolve("public"),file=resolve(root,`.${m.src}`);
       assert.ok(file.startsWith(root+sep),`Unsafe asset path: ${m.src}`);
       const bytes=readFileSync(file),hash=createHash("sha256").update(bytes).digest("hex");
-      assert.ok(!identities.has(hash),`${mode}/${record.slug}: duplicated record photograph`);
-      identities.add(hash);
+      // A focused sector and a longer canyon walk intentionally share actual location photography.
+      const sharedKey = ({"snow:brevent-flegere":"chamonix","trail:johnston-upper-falls":"johnston-canyon"} as Record<string,string>)[`${mode}:${record.slug}`];
+      if(sharedKey) assert.equal(key(record),sharedKey);
+      else assert.ok(!identities.has(hash),`${mode}/${record.slug}: duplicated record photograph`);
+      if(!sharedKey) identities.add(hash);
       assert.equal(statSync(file).size,m.fileSize,`${m.src}: stale file size`);
       const dimensions=await sharp(bytes).metadata();
       assert.equal(dimensions.width,m.width,`${m.src}: stale width`);

@@ -6,8 +6,8 @@ import { parseSnowLibrary, writeSnowSave, SNOW_LIBRARY_KEY } from "../src/snow/l
 import { parseCollections, updateCollection } from "../src/lib/pro-collections.ts";
 
 test("Snow ships as a complete, independent destination mode", () => {
-  assert.equal(snowDestinations.length, 51);
-  assert.equal(new Set(snowDestinations.map(item => item.slug)).size, 51);
+  assert.equal(snowDestinations.length, 52);
+  assert.equal(new Set(snowDestinations.map(item => item.slug)).size, 52);
   for (const place of snowDestinations) {
     assert.ok(place.name && place.location && place.terrain.length > 20 && place.summary.length > 20);
     assert.ok(place.sourceUrl.startsWith("https://"));

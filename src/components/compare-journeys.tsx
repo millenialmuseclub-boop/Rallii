@@ -1,21 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { RouteMedia } from "@/components/route-media";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
 import { buildComparisonPath, formatDuration, formatExperienceTag, formatReservation, getBestSideSummary, getJourneyDurationCategory, parseComparisonRoutes } from "@/lib/journey-comparison";
+import { experienceEvent } from "@/lib/experience-events";
 import type { RailRoute } from "@/types/route";
 import { routePlanningHref, routeStaysHref } from "@/data/partner-placements";
 
 export function CompareJourneys({ routes, selected: initialSelected }: { routes: RailRoute[]; selected?: RailRoute[] }) {
   const router = useRouter();
-  const [selected, setSelected] = useState(initialSelected ?? []);
-  useEffect(() => {
-    const timeout = window.setTimeout(() => setSelected(parseComparisonRoutes(new URLSearchParams(window.location.search).get("routes") ?? undefined, routes)), 0);
-    return () => window.clearTimeout(timeout);
-  }, [routes]);
+  const params = useSearchParams();
+  const selection = params.get("routes");
+  const selected = selection ? parseComparisonRoutes(selection, routes) : initialSelected ?? [];
+  const comparisonKey = selected.map(route=>route.summary.slug).join(",");
+  useEffect(()=>{ const ids=comparisonKey.split(",").filter(Boolean); if(ids.length===2)experienceEvent("comparison",{mode:"rail",route_id:ids[0],comparison_ids:ids}); },[comparisonKey]);
   const { getStatus, setStatus } = useTravelLibrary();
   const slugs = selected.map((route) => route.summary.slug);
 

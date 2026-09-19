@@ -8,6 +8,7 @@ import { PwaRegistration } from "@/components/pwa-registration";
 import { ProProvider } from "@/components/pro-provider";
 import { FamilyShell } from "@/components/family-shell";
 import { NativeOtaUpdater } from "@/components/native-ota-updater";
+import { ExperienceAnalytics } from "@/components/experience-analytics";
 
 const sourceSans = localFont({
   src: "./fonts/SourceSans3-Upright.woff2",
@@ -51,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={sourceSans.variable} data-scroll-behavior="smooth">
-      <body><ProProvider><FamilyShell>{children}</FamilyShell></ProProvider><PwaRegistration /><NativeOtaUpdater /></body>
+      <body><ProProvider><FamilyShell>{children}</FamilyShell></ProProvider><PwaRegistration /><NativeOtaUpdater /><ExperienceAnalytics /></body>
     </html>
   );
 }

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { jordypopProjects } from "@/data/jordypop";
+import { jetsetConnections } from "@/data/jetset-connections";
+import type { AffiliateMode } from "@/data/affiliate-offers";
 
 export function JordypopCollection() {
   return <section className="jordypop-collection" aria-labelledby="jordypop-heading">
@@ -15,4 +17,4 @@ export function JordypopCollection() {
   </section>;
 }
 
-export function LatinAmericaContext(){const project=jordypopProjects.find(item=>item.id==="latam")!;return <p className="trail-fact-note">Beyond the ride: <a href={project.href} target="_blank" rel="noopener noreferrer">explore Latin America with Jet Set LatAm ↗</a>.</p>;}
+export function LatinAmericaContext({mode,slug}:{mode:AffiliateMode;slug:string}){const guide=jetsetConnections[`${mode}:${slug}`];if(!guide)return null;return <p className="trail-fact-note">{guide.context}: <a data-outbound="jetset_click" data-mode={mode} data-route-id={slug} href={guide.url} target="_blank" rel="noopener noreferrer">{guide.title} · Jet Set LatAM ↗</a>.</p>;}
