@@ -1,32 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Capacitor } from "@capacitor/core";
+import { useEffect, useRef, useState } from "react";
+import { partnerPlanning } from "@/data/partner-planning";
+import { createPartnerWidgetUrl, type PartnerWidgetKind } from "@/lib/partner-widget";
 
-export type PartnerWidgetKind = "stays" | "flights" | "cars" | "activities";
-
-const subscribe = () => () => {};
-const getNativePlatform = () => Capacitor.isNativePlatform();
-const getServerPlatform = (): boolean | null => null;
+export type { PartnerWidgetKind } from "@/lib/partner-widget";
 
 export function PartnerWidgetFrame({ kind, title }: { kind: PartnerWidgetKind; title: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(defaultWidgetHeights[kind]);
-  const native = useSyncExternalStore(subscribe, getNativePlatform, getServerPlatform);
-  // Capacitor serves the home page for extensionless iframe requests.
-  const widgetPath = native === null ? null : native ? "/partner-widget/index.html" : "/partner-widget";
+  const [reload, setReload] = useState(0);
+  const { trs, marker } = partnerPlanning.travelpayouts;
+  const widgetUrl = createPartnerWidgetUrl(kind, trs, marker);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent<unknown>) => {
       const data = event.data;
       if (!isWidgetHeightMessage(data) || data.kind !== kind || event.source !== iframeRef.current?.contentWindow) return;
-      setHeight(Math.min(Math.max(Math.ceil(data.height), 220), 620));
+      setHeight(Math.min(Math.max(Math.ceil(data.height), 220), 1200));
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, [kind]);
 
-  return <div className="partner-plan__widget">{widgetPath ? <iframe ref={iframeRef} title={title} className="partner-plan__partner-frame" data-kind={kind} style={{ height: `${height}px` }} loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" src={`${widgetPath}?kind=${kind}`} /> : <p>Loading partner search…</p>}<p className="partner-plan__widget-fallback">If the partner tool does not load, refresh the page or try again later.</p></div>;
+  return <div className="partner-plan__widget"><iframe key={`${kind}-${reload}`} ref={iframeRef} title={title} className="partner-plan__partner-frame" data-kind={kind} style={{ height: `${height}px` }} loading="lazy" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" src={widgetUrl} /><p className="partner-plan__widget-fallback">If the partner tool does not load, <button type="button" className="action-button focus-ring" onClick={() => setReload(value => value + 1)}>Reload search</button></p></div>;
 }
 
 const defaultWidgetHeights: Record<PartnerWidgetKind, number> = { stays: 360, flights: 300, cars: 320, activities: 360 };

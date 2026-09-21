@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Partner search</title>
+  <base href="https://tpwdgt.com/" target="_blank">
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; font-family: Arial, sans-serif; }
+    body { display: flow-root; }
+    #status { padding: 12px; }
+  </style>
+</head>
+<body>
+  <p id="status" role="status">Loading partner search…</p>
+  <script>
+    const parameters = new URLSearchParams(location.search);
+    const kind = parameters.get("kind");
+    const status = document.getElementById("status");
+    const reportHeight = () => parent.postMessage({
+      type: "rallii-partner-widget-height", kind, height: document.body.scrollHeight
+    }, "*");
+    new ResizeObserver(reportHeight).observe(document.body);
+    window.addEventListener("load", reportHeight);
+    if (!["stays", "flights", "cars", "activities"].includes(kind) || !parameters.get("trs") || !parameters.get("shmarker")) {
+      status.textContent = "Partner search is not configured.";
+    } else {
+      parameters.delete("kind");
+      const script = document.createElement("script");
+      script.async = true;
+      script.charset = "utf-8";
+      script.src = `https://tpwdgt.com/content?${parameters}`;
+      script.onload = () => { status.hidden = true; };
+      script.onerror = () => { status.textContent = "Partner search is unavailable. Use Reload search below to try again."; };
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>

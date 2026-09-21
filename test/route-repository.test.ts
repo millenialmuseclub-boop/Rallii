@@ -552,8 +552,8 @@ test("partner planning derives locations, stays opt-in, and preserves editorial 
   assert.equal(partnerPlanning.discoverCarsEnabled, true);
   assert.equal(isStay22Configured(), false);
   assert.equal(isGetYourGuideConfigured(), false);
-  assert.match(widgetFrame, /\/partner-widget\/index\.html/);
-  assert.match(widgetFrame, /\$\{widgetPath\}\?kind=/);
+  assert.match(widgetFrame, /src=\{widgetUrl\}/);
+  assert.doesNotMatch(widgetFrame, /srcDoc=/);
   assert.match(widgetFrame, /allow-same-origin/);
   assert.match(panel, /openSurfaces\.experiences/);
   assert.match(panel, /openSurfaces\.flights/);
