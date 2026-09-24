@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useTravelLibrary } from "@/hooks/use-travel-library";
 import type { JourneyDirection } from "@/types/route";
 
+import { ShareJourney } from "./share-journey";
+
 interface JourneyActionsProps {
   routeName: string;
   routeSlug: string;
@@ -27,6 +29,7 @@ export function JourneyActions({ routeName, routeSlug, rideModeAvailable, direct
     <div className="journey-actions" aria-label="Journey actions">
       <div className="journey-actions__personal"><button className="action-button action-button--primary focus-ring" type="button" aria-pressed={routeStatus === "want_to_go"} onClick={() => updateStatus("want_to_go")}>{routeStatus === "want_to_go" ? "Saved" : "Save journey"}</button></div>
       <div className="journey-actions__contextual"><Link className="action-button focus-ring" href={`/compare?routes=${routeSlug}`}>Compare</Link><Link className="action-button focus-ring" href={`/plan?route=${routeSlug}`}>Plan</Link>{rideModeAvailable ? <Link className="action-button focus-ring" href={`/ride/${routeSlug}${direction === "reverse" ? "?direction=reverse" : ""}`}>Start Ride Mode</Link> : null}</div>
+      <ShareJourney name={routeName} path={`/routes/${routeSlug}/`} mode="rail" slug={routeSlug} direction={direction} />
       <p className="journey-actions__status" role="status" aria-live="polite">{actionStatus}</p>
     </div>
   );

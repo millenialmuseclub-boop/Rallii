@@ -15,5 +15,5 @@ export function SeasonConnection({mode,slug}:{mode:"snow"|"mtb";slug:string}) {
   const item=connections[`${mode}:${slug}` as keyof typeof connections];
   if(!item)return null;
   const media=item.mode === "snow" ? snowMedia[item.image] : mtbMedia[item.image];
-  return <section className="rallii-section field-notes"><p className="rallii-kicker">Another season</p><h2>{item.title}</h2><div className="season-photo"><DestinationPhoto media={media}/></div><DestinationCredit media={media}/><p>{item.copy}</p><Link className="rallii-text-link" href={item.href}>Explore the {item.mode === "mtb" ? "riding" : "winter"} guide →</Link></section>;
+  return <section className="rallii-section field-notes" data-related-journeys><p className="rallii-kicker">Another season</p><h2>{item.title}</h2><div className="season-photo"><DestinationPhoto media={media}/></div><DestinationCredit media={media}/><p>{item.copy}</p><Link className="rallii-text-link" href={item.href}>Explore the {item.mode === "mtb" ? "riding" : "winter"} guide →</Link></section>;
 }

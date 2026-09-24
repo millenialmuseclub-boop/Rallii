@@ -32,3 +32,8 @@
   .jordypop-product-action>span:first-child { display:none; }
   .jordypop-collection h2 { font-size:30px; margin-bottom:18px; }
 }
+.journey-share { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-block: 1rem; }
+.journey-share [role="status"] { font-size: .85rem; }
+.journey-share label { display: grid; gap: .4rem; width: 100%; }
+.journey-share input { width: 100%; min-width: 0; padding: .75rem; border: 1px solid #a7b3a9; border-radius: .5rem; }
+.discovery-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }

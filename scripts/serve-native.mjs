@@ -14,5 +14,5 @@ createServer(async (request, response) => {
     response.writeHead(200, { "Content-Type": types[extname(file)] ?? "application/octet-stream", "Cache-Control": "no-store" });
     response.end(body);
   } catch { response.writeHead(404).end("Not found"); }
-}).listen(4173, "127.0.0.1", () => console.log("Native export: http://127.0.0.1:4173"));
+}).listen(Number(process.env.PORT || 4173), "127.0.0.1", () => console.log(`Native export: http://127.0.0.1:${process.env.PORT || 4173}`));
 

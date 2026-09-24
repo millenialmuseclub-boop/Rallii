@@ -748,7 +748,7 @@
 :where([data-experience="rail"]) .route-map-frame .maplibregl-ctrl button { width: 2.45rem; height: 2.45rem; background-color: rgb(250 248 242 / 94%); }
 :where([data-experience="rail"]) .route-map-frame .maplibregl-ctrl-attrib { max-width: calc(100% - 10.5rem); padding-right: 2.25rem; background: rgb(250 248 242 / 80%); font-size: .58rem; }
 :where([data-experience="rail"]) .route-map-frame .maplibregl-canvas { outline: 0; }
-:where([data-experience="rail"]) .route-map-frame .route-marker, :where([data-experience="rail"]) .route-map-frame .landmark-marker { position: relative; border-color: #faf8f2; }
+:where([data-experience="rail"]) .route-map-frame .route-marker, :where([data-experience="rail"]) .route-map-frame .landmark-marker { position: absolute; border-color: #faf8f2; }
 :where([data-experience="rail"]) .route-map-frame .route-marker { width: .78rem; height: .78rem; background: #3b6b58; box-shadow: 0 0 0 2px rgb(255 255 255 / 70%), 0 3px 8px rgb(16 39 29 / 30%); }
 :where([data-experience="rail"]) .route-map-frame .route-marker--endpoint { width: 1.1rem; height: 1.1rem; background: #174e3e; box-shadow: 0 0 0 4px rgb(217 240 224 / 85%), 0 3px 10px rgb(16 39 29 / 34%); }
 :where([data-experience="rail"]) .route-map-frame .route-marker--arrival { border-width: 3px; background: #faf8f2; box-shadow: 0 0 0 4px rgb(23 78 62 / 72%), 0 3px 10px rgb(16 39 29 / 34%); }
@@ -888,3 +888,5 @@
 [data-experience="rail"] :is(.home-feature--immersive,.home-visual-alternative,.home-action-tile,.category-grid--visual,.journey-guide-card,.guide-hero) .route-media__credit { top:0; bottom:auto; padding:8px 12px; background:rgba(14,24,19,.85); }
 [data-experience="rail"] :is(.home-feature--immersive,.guide-hero) .route-media__credit > span { display:none; }
 [data-experience="rail"] .screen-media-header figcaption small { font-size:13px; line-height:1.5; }
+/* Keep scenic information legible and consistent with the outdoor modes. */
+:where([data-experience="rail"]) .font-serif { font-family: var(--font-source-sans), Arial, sans-serif; }

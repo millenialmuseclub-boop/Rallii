@@ -59,11 +59,15 @@ export function RouteMap({
     let disposed = false;
     let markersAdded = false;
     const landmarkMarkers = landmarkMarkersRef.current;
-    const geometryPromise = fetch(geoJsonPath).then(async (response) => {
+    const controller = new AbortController();
+    const geometryPromise = fetch(geoJsonPath, { signal: controller.signal }).then(async (response) => {
       if (!response.ok) throw new Error(`Route geometry returned ${response.status}.`);
       return (await response.json()) as RouteGeoJson;
     });
-    const map = new maplibregl.Map({
+    // Attach a rejection handler immediately, even if the map style never loads.
+    void geometryPromise.catch(() => { if (!disposed) setError("The prepared route could not load. Reconnect and reopen Map."); });
+    let map: maplibregl.Map;
+    try { map = new maplibregl.Map({
       container: containerRef.current,
       style: "https://tiles.openfreemap.org/styles/liberty",
       center: [8.75, 46.5],
@@ -72,8 +76,9 @@ export function RouteMap({
       pitchWithRotate: false,
       renderWorldCopies: false,
       attributionControl: false,
-    });
+    }); } catch { void Promise.resolve().then(() => { if (!disposed) setError("This device could not start the map. The Timeline and Practical tabs remain available."); }); return () => { disposed = true; controller.abort(); }; }
     mapRef.current = map;
+    const timeout = window.setTimeout(() => { if (!disposed) setError("The map is taking too long. Reconnect and reopen Map, or use the Timeline tab."); }, 15000);
 
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     map.addControl(
@@ -163,8 +168,9 @@ export function RouteMap({
           landmarkMarkers.set(landmark.id, mapMarker);
         });
         setReady(true);
+        window.clearTimeout(timeout);
       } catch (caughtError) {
-        setError(caughtError instanceof Error ? caughtError.message : "The route map could not load.");
+        if (!disposed) setError(caughtError instanceof Error ? caughtError.message : "The route map could not load.");
       }
     };
 
@@ -177,6 +183,8 @@ export function RouteMap({
 
     return () => {
       disposed = true;
+      controller.abort();
+      window.clearTimeout(timeout);
       landmarkMarkers.clear();
       stopMarkersRef.current = [];
       routeBoundsRef.current = undefined;
@@ -201,7 +209,7 @@ export function RouteMap({
     }
     map.flyTo({ center: [landmark.longitude, landmark.latitude], zoom: Math.max(map.getZoom(), 9), duration: 800 });
     if (!marker.getPopup().isOpen()) marker.togglePopup();
-  }, [landmarks, selectedLandmarkId]);
+  }, [landmarks, selectedLandmarkId, ready]);
 
   return (
     <div className={`route-map-frame${showStations ? "" : " route-map-frame--hide-stations"}${showLandmarks ? "" : " route-map-frame--hide-landmarks"}`}>

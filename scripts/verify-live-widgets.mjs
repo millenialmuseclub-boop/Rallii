@@ -23,7 +23,7 @@ try {
       }
     });
     page.on('requestfailed', request => failures.push({ host: new URL(request.url()).hostname, error: request.failure()?.errorText }));
-    await page.goto('http://127.0.0.1:4190' + createPartnerWidgetUrl(kind, trs, marker));
+    await page.goto((process.env.WIDGET_CHECK_BASE ?? 'http://127.0.0.1:4190') + createPartnerWidgetUrl(kind, trs, marker));
     await page.locator('#status').waitFor({ state: 'hidden', timeout: 20000 });
     await page.waitForTimeout(4000);
     let controls = 0, focused = false;

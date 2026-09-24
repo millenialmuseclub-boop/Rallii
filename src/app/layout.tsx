@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: "Rallii — Go somewhere worth remembering",
     template: "%s | Rallii",
   },
-  description: "Know where to sit, what to see, and when to look on the world's great rail journeys.",
+  description: "Explore scenic rail journeys, hiking trails, mountain biking, snow destinations and memorable courses. Save ideas and plan your next trip with Rallii.",
   applicationName: "Rallii",
   openGraph: {
     title: "Rallii — One world, five ways outside",

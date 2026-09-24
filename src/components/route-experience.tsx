@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { BestSideToSit } from "@/components/best-side-to-sit";
 import { JourneyHighlights } from "@/components/journey-highlights";
-import { RouteMap } from "@/components/route-map";
+import dynamic from "next/dynamic";
 import { ScenicTimeline } from "@/components/scenic-timeline";
 import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalStops } from "@/lib/route-direction";
 import { getScenicMomentTimeline } from "@/lib/scenic-moment-direction";
@@ -13,9 +13,11 @@ interface RouteExperienceProps {
   route: RailRoute;
   direction: JourneyDirection;
   activeSurface?: string;
+  onShowMap?: () => void;
 }
+const RouteMap = dynamic(() => import("@/components/route-map").then(module => module.RouteMap), { ssr: false, loading: () => <p role="status">Preparing the map…</p> });
 
-export function RouteExperience({ route, direction, activeSurface }: RouteExperienceProps) {
+export function RouteExperience({ route, direction, activeSurface, onShowMap }: RouteExperienceProps) {
   const [selectedLandmarkId, setSelectedLandmarkId] = useState<string>();
   const selectLandmark = useCallback((landmarkId: string) => setSelectedLandmarkId(landmarkId), []);
   const endpoints = useMemo(() => getDirectionalEndpoints(route, direction), [route, direction]);
@@ -38,8 +40,8 @@ export function RouteExperience({ route, direction, activeSurface }: RouteExperi
           <p className="hidden text-xs text-stone-600 sm:block">Pan and zoom to explore</p>
         </div>
         <div className={`journey-explorer journey-explorer--${activeSurface ?? "map"}`}>
-          <div className="journey-explorer__map">{shouldRenderMap ? <RouteMap routeName={route.summary.name} originName={endpoints.origin} destinationName={endpoints.destination} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /> : null}<p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
-          <ScenicTimeline origin={endpoints.origin} destination={endpoints.destination} durationMinutes={route.summary.durationMinutes} entries={timeline} stops={stops} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} />
+          <div className="journey-explorer__map">{shouldRenderMap ? <RouteMap key={`${route.summary.slug}:${direction}`} routeName={route.summary.name} originName={endpoints.origin} destinationName={endpoints.destination} geoJsonPath={route.geoJsonPath} stops={stops} landmarks={landmarks} direction={direction} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={selectLandmark} /> : null}<p className="mt-3 text-sm leading-6 text-stone-600">From {endpoints.origin} to {endpoints.destination}, via {stops.slice(1, -1).map((stop) => stop.name).join(", ")}.</p></div>
+          <ScenicTimeline origin={endpoints.origin} destination={endpoints.destination} durationMinutes={route.summary.durationMinutes} entries={timeline} stops={stops} selectedLandmarkId={selectedLandmarkId} onSelectLandmark={id => { selectLandmark(id); if (isMobile) onShowMap?.(); }} />
         </div>
       </section>
 

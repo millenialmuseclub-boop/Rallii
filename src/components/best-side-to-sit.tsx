@@ -2,6 +2,7 @@
 
 import { getDirectionalEndpoints, getDirectionalLandmarks, getDirectionalSegments } from "@/lib/route-direction";
 import type { BestSideSegment, JourneyDirection, RailRoute, ViewSide } from "@/types/route";
+import { seatRecommendation } from "@/lib/seat-guidance";
 
 interface BestSideToSitProps { route: RailRoute; direction: JourneyDirection; }
 
@@ -9,7 +10,7 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
   const segments = getDirectionalSegments(route, direction);
   const landmarks = getDirectionalLandmarks(route, direction);
   const endpoints = getDirectionalEndpoints(route, direction);
-  const recommendation = deriveRecommendation(segments, direction);
+  const recommendation = seatRecommendation(segments, direction);
 
   return (
     <section className="signature-panel scroll-section" id="best-side" aria-labelledby="best-side-title">
@@ -33,6 +34,7 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
         </div>
         <div className="mt-8 sm:mt-0">
           <h3 className="text-sm font-semibold">It changes along the way</h3>
+          <p className="mt-2 text-sm text-stone-600">Left and right are relative to your direction of travel, not your seat number. Seat orientation and availability depend on the train.</p>
           <ul className="mt-3 divide-y divide-stone-300">
             {segments.map((segment) => {
               const landmark = landmarks.find(
@@ -41,7 +43,7 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
               const side = direction === "reverse" ? segment.reverseDirectionSide : segment.forwardDirectionSide;
               return (
                 <li className="best-side-segment" key={segment.id}>
-                  <span><b>{landmark?.name ?? segment.reason}</b><small>{Math.round(segment.startDistanceKm)}–{Math.round(segment.endDistanceKm)} km · {formatConfidenceLabel(segment.confidenceType)}</small></span>
+                  <span><b>{landmark?.name ?? "Scenic section"}</b><small>{segment.reason}</small><small>{Math.round(segment.startDistanceKm)}–{Math.round(segment.endDistanceKm)} km · {formatConfidenceLabel(segment.confidenceType)}</small></span>
                   <strong>{formatSide(side)}</strong>
                 </li>
               );
@@ -54,26 +56,6 @@ export function BestSideToSit({ route, direction }: BestSideToSitProps) {
       </div>
     </section>
   );
-}
-
-function deriveRecommendation(segments: BestSideSegment[], direction: JourneyDirection): { side: ViewSide; explanation: string } {
-  const totals: Record<ViewSide, number> = { left: 0, right: 0, both: 0, varies: 0, unknown: 0 };
-  for (const segment of segments) {
-    const side = direction === "reverse" ? segment.reverseDirectionSide : segment.forwardDirectionSide;
-    totals[side] += segment.endDistanceKm - segment.startDistanceKm;
-  }
-  const side = (Object.entries(totals) as Array<[ViewSide, number]>)
-    .filter(([candidate]) => candidate !== "unknown")
-    .sort((a, b) => b[1] - a[1])[0]?.[0] ?? (totals.both > 0 ? "both" : totals.varies > 0 ? "varies" : "unknown");
-
-  if (side === "both" || side === "varies" || side === "unknown") {
-    return { side, explanation: side === "both" ? "The strongest supported views are shared across both sides." : "The line curves repeatedly, so no single side is supported for the full journey." };
-  }
-
-  return {
-    side,
-    explanation: `Best for the greatest share of the prepared scenic sections, with important ${side === "right" ? "left-side" : "right-side"} and both-side moments noted below.`,
-  };
 }
 
 function formatSide(side: ViewSide): string {

@@ -24,7 +24,7 @@ export function ScenicTimeline({ entries, origin, destination, durationMinutes, 
       <p className="eyebrow">Scenic journey timeline</p>
       <h2 id="timeline-title" className="mt-2 font-serif text-4xl sm:text-5xl">Along the Journey</h2>
       <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
-        A calm guide to the moments worth looking up for, arranged from {origin} to {destination}.
+        A calm guide to the moments worth looking up for, arranged from {origin} to {destination}. Distances and elapsed times are approximate, not a timetable.
       </p>
 
       <ol className="timeline mt-9">
@@ -33,7 +33,7 @@ export function ScenicTimeline({ entries, origin, destination, durationMinutes, 
           return (
             <li className="timeline-item" key={moment.id}>
               <span className={`timeline-dot${selected ? " timeline-dot--selected" : ""}`} aria-hidden="true" />
-              {moment.kind === "landmark" ? (
+              {moment.kind === "landmark" && moment.landmarkId ? (
                 <button
                   className={`timeline-content focus-ring${selected ? " timeline-content--selected" : ""}`}
                   type="button"
@@ -43,12 +43,14 @@ export function ScenicTimeline({ entries, origin, destination, durationMinutes, 
                   <span className="timeline-label">{formatMomentLabel(moment)}</span>
                   <span className="mt-1 block font-serif text-2xl">{moment.title}</span>
                   <span className="mt-2 block text-sm leading-6 text-stone-600">{moment.description}</span>
-                  {moment.bestSide ? <span className="mt-3 block text-xs font-semibold text-accent">Look {moment.bestSide}</span> : null}
+                  {moment.bestSide ? <span className="mt-3 block text-xs font-semibold text-accent">{moment.bestSide === "both" ? "Views on both sides" : moment.bestSide === "varies" ? "Views vary along this section" : `Look ${moment.bestSide}`}</span> : null}
+                  <span className="mt-2 block text-xs">Show on map →</span>
                 </button>
               ) : (
                 <div className="timeline-content">
                   <span className="timeline-label">{formatMomentLabel(moment)}</span>
                   <span className="mt-1 block font-serif text-xl">{moment.title}</span>
+                  {moment.kind === "landmark" ? <span className="mt-2 block text-sm">{moment.description}</span> : null}
                 </div>
               )}
             </li>
@@ -68,7 +70,7 @@ export function buildMoments(entries: ScenicTimelineEntry[], stops: RouteStop[],
     distance: entry.distanceAlongRouteKm,
     minutes: entry.approximateJourneyMinutes,
     kind: "landmark",
-    title: entry.subtitle ?? entry.title,
+    title: entry.title,
     label: entry.importance === "dont-miss" ? "Don’t miss" : entry.type === "station" ? "Major stop" : entry.importance === "highlight" ? "Journey highlight" : "Scenic section",
     description: entry.shortDescription,
     landmarkId: entry.relatedLandmarkId ?? "",
