@@ -16,14 +16,14 @@ export function MobileShell() {
       ? [{ href: "/rail", label: "Rail home", icon: "home" }, { href: "/discover", label: "Discover", icon: "compass" }, { href: "/plan", label: "Plan", icon: "plan" }, { href: "/saved", label: "Saved", icon: "save" }]
       : activity === "green"
         ? [{ href: "/green", label: "Discover", icon: "compass" }, { href: "/green/map", label: "Map", icon: "map" }, { href: "/green/compare", label: "Compare", icon: "compare" }, { href: "/green/plan", label: "Plan", icon: "plan" }, { href: "/green/my-green", label: "Saved", icon: "save" }]
-        : [{ href: `/${activity}`, label: "Discover", icon: "compass" }, { href: "/my-rallii", label: "Saved", icon: "save" }, { href: "/", label: "All activities", icon: "home" }];
+        : [{ href: `/${activity}`, label: "Discover", icon: "compass" }, { href: `/${activity}/plan`, label: "Plan", icon: "plan" }, { href: "/my-rallii", label: "Saved", icon: "save" }, { href: "/", label: "All activities", icon: "home" }];
   return <>
     <header className="phone-header">
       <Link href="/" className="phone-brand" aria-label="Rallii home"><RalliiMark title="Rallii" /><strong>Rallii</strong></Link>
       <ActivitySwitcher compact />
     </header>
     <nav className="phone-nav" aria-label={family ? "Rallii navigation" : `${activity === "mtb" ? "MTB" : activity.charAt(0).toUpperCase() + activity.slice(1)} navigation`}><ul>{items.map(item => {
-      const active = path === item.href || (item.href === "/discover" && (path.startsWith("/routes/") || path.startsWith("/discover/"))) || (item.href === "/green" && /^\/green\/(courses|destinations|collections|trips)(\/|$)/.test(path)) || (item.href === `/${activity}` && !family && (activity === "trail" || activity === "mtb" || activity === "snow"));
+      const active = path === item.href || (item.href === "/discover" && (path.startsWith("/routes/") || path.startsWith("/discover/"))) || (item.href === "/green" && /^\/green\/(courses|destinations|collections|trips)(\/|$)/.test(path)) || (item.href === `/${activity}` && !family && !path.startsWith(`/${activity}/plan`) && (activity === "trail" || activity === "mtb" || activity === "snow"));
       return <li key={item.href}><Link href={item.href} aria-current={active ? "page" : undefined}><ShellIcon kind={item.icon} /><span>{item.label}</span></Link></li>;
     })}</ul></nav>
   </>;

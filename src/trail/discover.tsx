@@ -1,4 +1,6 @@
 "use client";
+import { OutdoorDiscovery } from "@/components/outdoor-discovery";
+import { trailCollections } from "./collections";
 import { DestinationBrowser } from "@/components/destination-browser";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -23,8 +25,9 @@ export function TrailDiscover() {
     router.replace(href, { scroll: false });
   }
   return <main className="rallii-editorial trail-discover">
-    <section className="trail-intro rallii-container"><div><p className="rallii-kicker">Rallii / Trail</p><h1>A little further.<br /><em>A little wilder.</em></h1><p>Waterfall mornings. Alpine afternoons. Thirty remarkable reasons to take the long way outside.</p><a className="rallii-button" href="#trail-catalogue">Find your trail ↓</a></div><div className="trail-intro-photo"><TrailPhoto imageKey="moss" priority /><span>Field notes / Hoh Rain Forest</span></div></section>
+    <section className="trail-intro rallii-container"><div><p className="rallii-kicker">Rallii / Trail</p><h1>A little further.<br /><em>A little wilder.</em></h1><p>Waterfall mornings. Alpine afternoons. {trails.length} remarkable reasons to take the long way outside.</p><a className="rallii-button" href="#trail-catalogue">Find your trail ↓</a></div><div className="trail-intro-photo"><TrailPhoto imageKey="moss" priority /><span>Field notes / Hoh Rain Forest</span></div></section>
     <div className="rallii-container"><TrailCredit imageKey="moss" /></div>
+    <OutdoorDiscovery mode="trail" collections={trailCollections} render={trail => <TrailCard trail={trail}/>} />
     <section id="trail-catalogue" className="rallii-container rallii-section"><div className="rallii-section-heading"><div><p className="rallii-kicker">The Trail collection</p><h2>Find your kind of outside.</h2></div><p>Curated routes, at your pace.</p></div>
       <form className="discovery-search" onSubmit={event => { event.preventDefault(); update({ q: query }); }}><label className="trail-search">Search trails<input type="search" placeholder="Try Yosemite, coast or waterfalls" value={query} onChange={event => setQuery(event.target.value)} /></label><button className="rallii-button" type="submit">Search</button></form>
       <details className="catalogue-filters"><summary>Filters <span>{[difficulty, region].filter(value => value !== "All").join(" · ") || "All destinations"}</span></summary><div className="trail-filters">

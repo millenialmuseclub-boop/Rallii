@@ -1,4 +1,6 @@
 "use client";
+import { OutdoorDiscovery } from "@/components/outdoor-discovery";
+import { mtbCollections } from "./collections";
 import { DestinationBrowser } from "@/components/destination-browser";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -22,6 +24,7 @@ export function MtbDiscover() {
   return <main className="rallii-editorial mtb-editorial">
     <section className="mtb-hero"><MtbPhoto imageKey="crested-butte" priority /><div className="rallii-hero-shade" /><div className="rallii-container mtb-hero-copy"><p className="rallii-kicker">Rallii / Mountain biking</p><h1>Find your line.<br />Make a day of it.</h1><p>Forest flow. Red rock. One more mountain descent.<br />{mtbDestinations.length} places worth bringing your bike.</p><a className="rallii-button rallii-button-light" href="#mtb-catalogue">Explore the riding ↓</a></div></section>
     <div className="rallii-container"><MtbCredit imageKey="crested-butte" /></div>
+    <OutdoorDiscovery mode="mtb" collections={mtbCollections} render={ride => <MtbCard ride={ride}/>} />
     <section id="mtb-catalogue" className="rallii-container rallii-section"><div className="rallii-section-heading"><div><p className="rallii-kicker">The MTB collection</p><h2>Choose your terrain.</h2></div><p>Trail systems, iconic regions and bike parks.</p></div>
     <form className="discovery-search" onSubmit={event => { event.preventDefault(); update({ q: query }); }}><label className="trail-search">Search MTB<input type="search" placeholder="Try Whistler, forest or desert" value={query} onChange={event => setQuery(event.target.value)} /></label><button className="rallii-button" type="submit">Search</button></form>
       <details className="catalogue-filters"><summary>Filters <span>{[skill, region, kind].filter(value => value !== "All").join(" · ") || "All destinations"}</span></summary><div className="trail-filters">
